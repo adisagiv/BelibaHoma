@@ -10,6 +10,7 @@ namespace BelibaHoma.Controllers
     {
         public ActionResult Index()
         {
+            // test
             return View();
         }
 
