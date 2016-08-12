@@ -4,43 +4,301 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BelibaHomaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Student">
+    <Schema Namespace="BelibaHomaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AcademicInstitution">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="InstitutionType" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="AcademicMajor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AcademicCluster" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trainee">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="AcademicYear" Type="int" Nullable="false" />
+          <Property Name="AcademicMajorId" Type="int" Nullable="false" />
+          <Property Name="AcademicMinorId" Type="int" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdNumber" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UserRole" Type="int" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Trainee_AcademicInstitution1">
+          <End Role="AcademicInstitution" Type="Self.AcademicInstitution" Multiplicity="1" />
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstitution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor2">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="1" />
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMajorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor3">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="0..1" />
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMinorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BelibaHomaDBModelStoreContainer">
-          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicInstitution" EntityType="Self.AcademicInstitution" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AcademicMajor" EntityType="Self.AcademicMajor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainee" EntityType="Self.Trainee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="Self.FK_Trainee_AcademicInstitution1">
+            <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor2" Association="Self.FK_Trainee_AcademicMajor2">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor3" Association="Self.FK_Trainee_AcademicMajor3">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_User1" Association="Self.FK_Trainee_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BelibaHomaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Student">
+        <EntityContainer Name="BelibaHomaDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AcademicInstitution" EntityType="BelibaHomaDBModel.AcademicInstitution" />
+          <EntitySet Name="AcademicMajor" EntityType="BelibaHomaDBModel.AcademicMajor" />
+          <EntitySet Name="Trainee" EntityType="BelibaHomaDBModel.Trainee" />
+          <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1">
+            <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor2" Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor2">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor3" Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor3">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="BelibaHomaDBModel.User" />
+          <AssociationSet Name="FK_Trainee_User1" Association="BelibaHomaDBModel.FK_Trainee_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AcademicInstitution">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="InstitutionType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="AcademicInstitution" ToRole="Trainee" />
         </EntityType>
-        <EntityContainer Name="BelibaHomaDBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Student" EntityType="Self.Student" />
-        </EntityContainer>
-      </Schema>
+        <EntityType Name="AcademicMajor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AcademicCluster" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="AcademicMajor" ToRole="Trainee" />
+          <NavigationProperty Name="Trainee1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="AcademicMajor" ToRole="Trainee" />
+        </EntityType>
+        <EntityType Name="Trainee">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AcademicYear" Type="Int32" Nullable="false" />
+          <Property Name="AcademicMajorId" Type="Int32" Nullable="false" />
+          <Property Name="AcademicMinorId" Type="Int32" />
+          <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="Trainee" ToRole="AcademicInstitution" />
+          <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="Trainee" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Trainee_AcademicInstitution1">
+          <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstitution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor2">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMajorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor3">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMinorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
+        </EntityType>
+        <Association Name="FK_Trainee_User1">
+          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="BelibaHomaDBModelStoreContainer" CdmEntityContainer="BelibaHomaDBEntities">
-          <EntitySetMapping Name="Student">
-            <EntityTypeMapping TypeName="BelibaHomaDBModel.Student">
-              <MappingFragment StoreEntitySet="Student">
+          <EntitySetMapping Name="AcademicInstitution">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.AcademicInstitution">
+              <MappingFragment StoreEntitySet="AcademicInstitution">
+                <ScalarProperty Name="InstitutionType" ColumnName="InstitutionType" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AcademicMajor">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.AcademicMajor">
+              <MappingFragment StoreEntitySet="AcademicMajor">
+                <ScalarProperty Name="AcademicCluster" ColumnName="AcademicCluster" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainee">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.Trainee">
+              <MappingFragment StoreEntitySet="Trainee">
+                <ScalarProperty Name="AcademicMinorId" ColumnName="AcademicMinorId" />
+                <ScalarProperty Name="AcademicMajorId" ColumnName="AcademicMajorId" />
+                <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="AcademicInstitutionId" ColumnName="AcademicInstitutionId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
                 <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

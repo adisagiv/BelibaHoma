@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BelibaHoma.BLL
+namespace Generic.Delegates
 {
-    public class Class1
-    {
-    }
+    public delegate void GenericEventHandler<in TResult>(object source,TResult result);
 }

@@ -5,7 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1">
-        <EntityTypeShape EntityType="BelibaHomaDBModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicInstitution" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicMajor" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.Trainee" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" />
+        <AssociationConnector Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" />
+        <AssociationConnector Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.User" Width="1.5" PointX="5.375" PointY="1" />
+        <AssociationConnector Association="BelibaHomaDBModel.FK_Trainee_User1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

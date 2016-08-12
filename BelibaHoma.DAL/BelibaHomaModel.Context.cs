@@ -25,6 +25,9 @@ namespace BelibaHoma.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Student> Student { get; set; }
+        public virtual DbSet<AcademicInstitution> AcademicInstitution { get; set; }
+        public virtual DbSet<AcademicMajor> AcademicMajor { get; set; }
+        public virtual DbSet<Trainee> Trainee { get; set; }
+        public virtual DbSet<User> User { get; set; }
     }
 }
