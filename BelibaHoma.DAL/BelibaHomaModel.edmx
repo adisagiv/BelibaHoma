@@ -22,18 +22,136 @@
           <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="AcademicCluster" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="TraineeId" />
+            <PropertyRef Name="SemesterNumber" />
+          </Key>
+          <Property Name="TraineeId" Type="int" Nullable="false" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
+          <Property Name="Grade" Type="int" Nullable="false" />
+          <Property Name="UpdateDate" Type="date" Nullable="false" />
+          <Property Name="SemesterType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="JobOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdateTime" Type="datetime" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+          <Property Name="JobArea" Type="int" Nullable="false" />
+          <Property Name="Requirements" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RelevantMajorId1" Type="int" Nullable="false" />
+          <Property Name="RelevantMajorId2" Type="int" />
+          <Property Name="RelevantMajorId3" Type="int" />
+          <Property Name="Organization" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="JobType" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NumEmployees" Type="int" />
+          <Property Name="ContactName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactJobPosition" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rackaz">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Area" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Trainee">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Gender" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="AcademicYear" Type="int" Nullable="false" />
           <Property Name="AcademicMajorId" Type="int" Nullable="false" />
           <Property Name="AcademicMinorId" Type="int" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MaritalStatus" Type="int" Nullable="false" />
+          <Property Name="EmploymentStatus" Type="int" />
+          <Property Name="TutorHoursBonding" Type="int" Nullable="false" />
+          <Property Name="TutorHours" Type="int" Nullable="false" />
+          <Property Name="NeededHelpDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhysicsLevel" Type="int" Nullable="false" />
+          <Property Name="MathLevel" Type="int" Nullable="false" />
+          <Property Name="EnglishLevel" Type="int" Nullable="false" />
+          <Property Name="AcademicMajorNeededHelpId" Type="int" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="AcademicYear" Type="int" Nullable="false" />
+          <Property Name="AcademicMajorId" Type="int" Nullable="false" />
+          <Property Name="AcademicMinorId" Type="int" />
+          <Property Name="Area" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TutorHoursBonding" Type="int" Nullable="false" />
+          <Property Name="TutorHours" Type="int" Nullable="false" />
+          <Property Name="PhysicsLevel" Type="int" Nullable="false" />
+          <Property Name="MathLevel" Type="int" Nullable="false" />
+          <Property Name="EnglishLevel" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TutorReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TutorTraineeId" Type="int" Nullable="false" />
+          <Property Name="TutorHours" Type="float" Nullable="false" />
+          <Property Name="TutorHoursBonding" Type="float" Nullable="false" />
+          <Property Name="MeetingsDescription" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsProblem" Type="bit" Nullable="false" />
+          <Property Name="CreationTime" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TutorSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MeetingDate" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+          <Property Name="NumBondingHours" Type="float" Nullable="false" />
+          <Property Name="TutorReportId" Type="int" Nullable="false" />
+          <Property Name="MeetingPlace" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TutorTrainee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TutorId" Type="int" Nullable="false" />
+          <Property Name="TraineeId" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="IsException" Type="bit" Nullable="false" />
+          <Property Name="Id" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -50,6 +168,66 @@
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Grade_Trainee">
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
+          <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="TraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="1" />
+          <End Role="JobOffer" Type="Self.JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor1">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="0..1" />
+          <End Role="JobOffer" Type="Self.JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor2">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="0..1" />
+          <End Role="JobOffer" Type="Self.JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rackaz_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Rackaz" Type="Self.Rackaz" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rackaz">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Trainee_AcademicInstitution1">
           <End Role="AcademicInstitution" Type="Self.AcademicInstitution" Multiplicity="1" />
           <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
@@ -59,6 +237,18 @@
             </Principal>
             <Dependent Role="Trainee">
               <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="0..1" />
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMajorNeededHelpId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -98,13 +288,141 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Tutor_AcademicInstitution">
+          <End Role="AcademicInstitution" Type="Self.AcademicInstitution" Multiplicity="1" />
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstitution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_AcademicMajor">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="1" />
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicMajorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_AcademicMajor1">
+          <End Role="AcademicMajor" Type="Self.AcademicMajor" Multiplicity="0..1" />
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicMinorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorReport_TutorTrainee">
+          <End Role="TutorTrainee" Type="Self.TutorTrainee" Multiplicity="1" />
+          <End Role="TutorReport" Type="Self.TutorReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorTrainee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorReport">
+              <PropertyRef Name="TutorTraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorSession_TutorReport">
+          <End Role="TutorReport" Type="Self.TutorReport" Multiplicity="1" />
+          <End Role="TutorSession" Type="Self.TutorSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorSession">
+              <PropertyRef Name="TutorReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorTrainee_Trainee">
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
+          <End Role="TutorTrainee" Type="Self.TutorTrainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TutorTrainee">
+              <PropertyRef Name="TraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorTrainee_Tutor">
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="1" />
+          <End Role="TutorTrainee" Type="Self.TutorTrainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TutorTrainee">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BelibaHomaDBModelStoreContainer">
           <EntitySet Name="AcademicInstitution" EntityType="Self.AcademicInstitution" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AcademicMajor" EntityType="Self.AcademicMajor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JobOffer" EntityType="Self.JobOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rackaz" EntityType="Self.Rackaz" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainee" EntityType="Self.Trainee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tutor" EntityType="Self.Tutor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TutorReport" EntityType="Self.TutorReport" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TutorSession" EntityType="Self.TutorSession" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TutorTrainee" EntityType="Self.TutorTrainee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Grade_Trainee" Association="Self.FK_Grade_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor" Association="Self.FK_JobOffer_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor1" Association="Self.FK_JobOffer_AcademicMajor1">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor2" Association="Self.FK_JobOffer_AcademicMajor2">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rackaz_User" Association="Self.FK_Rackaz_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rackaz" EntitySet="Rackaz" />
+          </AssociationSet>
           <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="Self.FK_Trainee_AcademicInstitution1">
             <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor" Association="Self.FK_Trainee_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
             <End Role="Trainee" EntitySet="Trainee" />
           </AssociationSet>
           <AssociationSet Name="FK_Trainee_AcademicMajor2" Association="Self.FK_Trainee_AcademicMajor2">
@@ -119,6 +437,38 @@
             <End Role="User" EntitySet="User" />
             <End Role="Trainee" EntitySet="Trainee" />
           </AssociationSet>
+          <AssociationSet Name="FK_Tutor_AcademicInstitution" Association="Self.FK_Tutor_AcademicInstitution">
+            <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_AcademicMajor" Association="Self.FK_Tutor_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_AcademicMajor1" Association="Self.FK_Tutor_AcademicMajor1">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_User" Association="Self.FK_Tutor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorReport_TutorTrainee" Association="Self.FK_TutorReport_TutorTrainee">
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+            <End Role="TutorReport" EntitySet="TutorReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorSession_TutorReport" Association="Self.FK_TutorSession_TutorReport">
+            <End Role="TutorReport" EntitySet="TutorReport" />
+            <End Role="TutorSession" EntitySet="TutorSession" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorTrainee_Trainee" Association="Self.FK_TutorTrainee_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorTrainee_Tutor" Association="Self.FK_TutorTrainee_Tutor">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -127,9 +477,38 @@
         <EntityContainer Name="BelibaHomaDBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="AcademicInstitution" EntityType="BelibaHomaDBModel.AcademicInstitution" />
           <EntitySet Name="AcademicMajor" EntityType="BelibaHomaDBModel.AcademicMajor" />
+          <EntitySet Name="Alert" EntityType="BelibaHomaDBModel.Alert" />
+          <EntitySet Name="Grade" EntityType="BelibaHomaDBModel.Grade" />
+          <EntitySet Name="JobOffer" EntityType="BelibaHomaDBModel.JobOffer" />
+          <EntitySet Name="Rackaz" EntityType="BelibaHomaDBModel.Rackaz" />
           <EntitySet Name="Trainee" EntityType="BelibaHomaDBModel.Trainee" />
+          <EntitySet Name="Tutor" EntityType="BelibaHomaDBModel.Tutor" />
+          <EntitySet Name="TutorReport" EntityType="BelibaHomaDBModel.TutorReport" />
+          <EntitySet Name="TutorSession" EntityType="BelibaHomaDBModel.TutorSession" />
+          <EntitySet Name="TutorTrainee" EntityType="BelibaHomaDBModel.TutorTrainee" />
+          <EntitySet Name="User" EntityType="BelibaHomaDBModel.User" />
           <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1">
             <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_AcademicInstitution" Association="BelibaHomaDBModel.FK_Tutor_AcademicInstitution">
+            <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor" Association="BelibaHomaDBModel.FK_JobOffer_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor1" Association="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobOffer_AcademicMajor2" Association="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="JobOffer" EntitySet="JobOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trainee_AcademicMajor" Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
             <End Role="Trainee" EntitySet="Trainee" />
           </AssociationSet>
           <AssociationSet Name="FK_Trainee_AcademicMajor2" Association="BelibaHomaDBModel.FK_Trainee_AcademicMajor2">
@@ -140,10 +519,45 @@
             <End Role="AcademicMajor" EntitySet="AcademicMajor" />
             <End Role="Trainee" EntitySet="Trainee" />
           </AssociationSet>
-          <EntitySet Name="User" EntityType="BelibaHomaDBModel.User" />
+          <AssociationSet Name="FK_Tutor_AcademicMajor" Association="BelibaHomaDBModel.FK_Tutor_AcademicMajor">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_AcademicMajor1" Association="BelibaHomaDBModel.FK_Tutor_AcademicMajor1">
+            <End Role="AcademicMajor" EntitySet="AcademicMajor" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grade_Trainee" Association="BelibaHomaDBModel.FK_Grade_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="Grade" EntitySet="Grade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rackaz_User" Association="BelibaHomaDBModel.FK_Rackaz_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rackaz" EntitySet="Rackaz" />
+          </AssociationSet>
           <AssociationSet Name="FK_Trainee_User1" Association="BelibaHomaDBModel.FK_Trainee_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorTrainee_Trainee" Association="BelibaHomaDBModel.FK_TutorTrainee_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_User" Association="BelibaHomaDBModel.FK_Tutor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Tutor" EntitySet="Tutor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorTrainee_Tutor" Association="BelibaHomaDBModel.FK_TutorTrainee_Tutor">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorReport_TutorTrainee" Association="BelibaHomaDBModel.FK_TutorReport_TutorTrainee">
+            <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+            <End Role="TutorReport" EntitySet="TutorReport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TutorSession_TutorReport" Association="BelibaHomaDBModel.FK_TutorSession_TutorReport">
+            <End Role="TutorReport" EntitySet="TutorReport" />
+            <End Role="TutorSession" EntitySet="TutorSession" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="AcademicInstitution">
@@ -155,6 +569,7 @@
           <Property Name="Area" Type="Int32" Nullable="false" />
           <Property Name="InstitutionType" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="AcademicInstitution" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="AcademicInstitution" ToRole="Tutor" />
         </EntityType>
         <EntityType Name="AcademicMajor">
           <Key>
@@ -163,8 +578,71 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AcademicCluster" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="AcademicMajor" ToRole="Trainee" />
-          <NavigationProperty Name="Trainee1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="AcademicMajor" ToRole="Trainee" />
+          <NavigationProperty Name="JobOffer" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor" FromRole="AcademicMajor" ToRole="JobOffer" />
+          <NavigationProperty Name="JobOffer1" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1" FromRole="AcademicMajor" ToRole="JobOffer" />
+          <NavigationProperty Name="JobOffer2" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2" FromRole="AcademicMajor" ToRole="JobOffer" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor" FromRole="AcademicMajor" ToRole="Trainee" />
+          <NavigationProperty Name="Trainee1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="AcademicMajor" ToRole="Trainee" />
+          <NavigationProperty Name="Trainee2" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="AcademicMajor" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="AcademicMajor" ToRole="Tutor" />
+          <NavigationProperty Name="Tutor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="AcademicMajor" ToRole="Tutor" />
+        </EntityType>
+        <EntityType Name="Alert">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Grade">
+          <Key>
+            <PropertyRef Name="TraineeId" />
+            <PropertyRef Name="SemesterNumber" />
+          </Key>
+          <Property Name="TraineeId" Type="Int32" Nullable="false" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
+          <Property Name="Grade1" Type="Int32" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SemesterType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Grade_Trainee" FromRole="Grade" ToRole="Trainee" />
+        </EntityType>
+        <EntityType Name="JobOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitle" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="JobArea" Type="Int32" Nullable="false" />
+          <Property Name="Requirements" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RelevantMajorId1" Type="Int32" Nullable="false" />
+          <Property Name="RelevantMajorId2" Type="Int32" />
+          <Property Name="RelevantMajorId3" Type="Int32" />
+          <Property Name="Organization" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="JobType" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumEmployees" Type="Int32" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactMail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContactJobPosition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor" FromRole="JobOffer" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1" FromRole="JobOffer" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2" FromRole="JobOffer" ToRole="AcademicMajor" />
+        </EntityType>
+        <EntityType Name="Rackaz">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Rackaz_User" FromRole="Rackaz" ToRole="User" />
         </EntityType>
         <EntityType Name="Trainee">
           <Key>
@@ -172,16 +650,114 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
           <Property Name="AcademicMajorId" Type="Int32" Nullable="false" />
           <Property Name="AcademicMinorId" Type="Int32" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="Int32" Nullable="false" />
+          <Property Name="EmploymentStatus" Type="Int32" />
+          <Property Name="TutorHoursBonding" Type="Int32" Nullable="false" />
+          <Property Name="TutorHours" Type="Int32" Nullable="false" />
+          <Property Name="NeededHelpDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhysicsLevel" Type="Int32" Nullable="false" />
+          <Property Name="MathLevel" Type="Int32" Nullable="false" />
+          <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
+          <Property Name="AcademicMajorNeededHelpId" Type="Int32" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="Trainee" ToRole="AcademicInstitution" />
-          <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
-          <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="Grade" Relationship="BelibaHomaDBModel.FK_Grade_Trainee" FromRole="Trainee" ToRole="Grade" />
           <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="Trainee" ToRole="User" />
+          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="Trainee" ToRole="TutorTrainee" />
+        </EntityType>
+        <EntityType Name="Tutor">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="AcademicYear" Type="Int32" Nullable="false" />
+          <Property Name="AcademicMajorId" Type="Int32" Nullable="false" />
+          <Property Name="AcademicMinorId" Type="Int32" />
+          <Property Name="Area" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TutorHoursBonding" Type="Int32" Nullable="false" />
+          <Property Name="TutorHours" Type="Int32" Nullable="false" />
+          <Property Name="PhysicsLevel" Type="Int32" Nullable="false" />
+          <Property Name="MathLevel" Type="Int32" Nullable="false" />
+          <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="Tutor" ToRole="AcademicInstitution" />
+          <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="Tutor" ToRole="AcademicMajor" />
+          <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="Tutor" ToRole="AcademicMajor" />
+          <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="Tutor" ToRole="User" />
+          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="Tutor" ToRole="TutorTrainee" />
+        </EntityType>
+        <EntityType Name="TutorReport">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TutorTraineeId" Type="Int32" Nullable="false" />
+          <Property Name="TutorHours" Type="Double" Nullable="false" />
+          <Property Name="TutorHoursBonding" Type="Double" Nullable="false" />
+          <Property Name="MeetingsDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsProblem" Type="Boolean" Nullable="false" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorReport_TutorTrainee" FromRole="TutorReport" ToRole="TutorTrainee" />
+          <NavigationProperty Name="TutorSession" Relationship="BelibaHomaDBModel.FK_TutorSession_TutorReport" FromRole="TutorReport" ToRole="TutorSession" />
+        </EntityType>
+        <EntityType Name="TutorSession">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MeetingDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="NumBondingHours" Type="Double" Nullable="false" />
+          <Property Name="TutorReportId" Type="Int32" Nullable="false" />
+          <Property Name="MeetingPlace" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TutorReport" Relationship="BelibaHomaDBModel.FK_TutorSession_TutorReport" FromRole="TutorSession" ToRole="TutorReport" />
+        </EntityType>
+        <EntityType Name="TutorTrainee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="TutorId" Type="Int32" Nullable="false" />
+          <Property Name="TraineeId" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="IsException" Type="Boolean" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="TutorTrainee" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="TutorTrainee" ToRole="Tutor" />
+          <NavigationProperty Name="TutorReport" Relationship="BelibaHomaDBModel.FK_TutorReport_TutorTrainee" FromRole="TutorTrainee" ToRole="TutorReport" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Rackaz" Relationship="BelibaHomaDBModel.FK_Rackaz_User" FromRole="User" ToRole="Rackaz" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
         </EntityType>
         <Association Name="FK_Trainee_AcademicInstitution1">
           <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
@@ -192,6 +768,66 @@
             </Principal>
             <Dependent Role="Trainee">
               <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_AcademicInstitution">
+          <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicInstitution">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicInstitutionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.JobOffer" Role="JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor1">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.JobOffer" Role="JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobOffer_AcademicMajor2">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.JobOffer" Role="JobOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="JobOffer">
+              <PropertyRef Name="RelevantMajorId3" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trainee_AcademicMajor">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="AcademicMajorNeededHelpId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -219,22 +855,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserRole" Type="Int32" Nullable="false" />
-          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
-        </EntityType>
+        <Association Name="FK_Tutor_AcademicMajor">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicMajorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_AcademicMajor1">
+          <End Type="BelibaHomaDBModel.AcademicMajor" Role="AcademicMajor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AcademicMajor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="AcademicMinorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grade_Trainee">
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Grade" Role="Grade" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Grade">
+              <PropertyRef Name="TraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rackaz_User">
+          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Rackaz" Role="Rackaz" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Rackaz">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Trainee_User1">
           <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
           <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="0..1" />
@@ -244,6 +912,66 @@
             </Principal>
             <Dependent Role="Trainee">
               <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorTrainee_Trainee">
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.TutorTrainee" Role="TutorTrainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TutorTrainee">
+              <PropertyRef Name="TraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_User">
+          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorTrainee_Tutor">
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.TutorTrainee" Role="TutorTrainee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TutorTrainee">
+              <PropertyRef Name="TutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorReport_TutorTrainee">
+          <End Type="BelibaHomaDBModel.TutorTrainee" Role="TutorTrainee" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.TutorReport" Role="TutorReport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorTrainee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorReport">
+              <PropertyRef Name="TutorTraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TutorSession_TutorReport">
+          <End Type="BelibaHomaDBModel.TutorReport" Role="TutorReport" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.TutorSession" Role="TutorSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TutorSession">
+              <PropertyRef Name="TutorReportId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -272,9 +1000,76 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Alert">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.Alert">
+              <MappingFragment StoreEntitySet="Alert">
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grade">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.Grade">
+              <MappingFragment StoreEntitySet="Grade">
+                <ScalarProperty Name="SemesterType" ColumnName="SemesterType" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="Grade1" ColumnName="Grade" />
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
+                <ScalarProperty Name="TraineeId" ColumnName="TraineeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JobOffer">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.JobOffer">
+              <MappingFragment StoreEntitySet="JobOffer">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ContactJobPosition" ColumnName="ContactJobPosition" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="NumEmployees" ColumnName="NumEmployees" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="JobType" ColumnName="JobType" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="RelevantMajorId3" ColumnName="RelevantMajorId3" />
+                <ScalarProperty Name="RelevantMajorId2" ColumnName="RelevantMajorId2" />
+                <ScalarProperty Name="RelevantMajorId1" ColumnName="RelevantMajorId1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Requirements" ColumnName="Requirements" />
+                <ScalarProperty Name="JobArea" ColumnName="JobArea" />
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rackaz">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.Rackaz">
+              <MappingFragment StoreEntitySet="Rackaz">
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Trainee">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Trainee">
               <MappingFragment StoreEntitySet="Trainee">
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
+                <ScalarProperty Name="AcademicMajorNeededHelpId" ColumnName="AcademicMajorNeededHelpId" />
+                <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
+                <ScalarProperty Name="MathLevel" ColumnName="MathLevel" />
+                <ScalarProperty Name="PhysicsLevel" ColumnName="PhysicsLevel" />
+                <ScalarProperty Name="NeededHelpDescription" ColumnName="NeededHelpDescription" />
+                <ScalarProperty Name="TutorHours" ColumnName="TutorHours" />
+                <ScalarProperty Name="TutorHoursBonding" ColumnName="TutorHoursBonding" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="AcademicMinorId" ColumnName="AcademicMinorId" />
                 <ScalarProperty Name="AcademicMajorId" ColumnName="AcademicMajorId" />
                 <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
@@ -283,6 +1078,64 @@
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tutor">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.Tutor">
+              <MappingFragment StoreEntitySet="Tutor">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
+                <ScalarProperty Name="MathLevel" ColumnName="MathLevel" />
+                <ScalarProperty Name="PhysicsLevel" ColumnName="PhysicsLevel" />
+                <ScalarProperty Name="TutorHours" ColumnName="TutorHours" />
+                <ScalarProperty Name="TutorHoursBonding" ColumnName="TutorHoursBonding" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="AcademicMinorId" ColumnName="AcademicMinorId" />
+                <ScalarProperty Name="AcademicMajorId" ColumnName="AcademicMajorId" />
+                <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="AcademicInstitutionId" ColumnName="AcademicInstitutionId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorReport">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.TutorReport">
+              <MappingFragment StoreEntitySet="TutorReport">
+                <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
+                <ScalarProperty Name="IsProblem" ColumnName="IsProblem" />
+                <ScalarProperty Name="MeetingsDescription" ColumnName="MeetingsDescription" />
+                <ScalarProperty Name="TutorHoursBonding" ColumnName="TutorHoursBonding" />
+                <ScalarProperty Name="TutorHours" ColumnName="TutorHours" />
+                <ScalarProperty Name="TutorTraineeId" ColumnName="TutorTraineeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorSession">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.TutorSession">
+              <MappingFragment StoreEntitySet="TutorSession">
+                <ScalarProperty Name="MeetingPlace" ColumnName="MeetingPlace" />
+                <ScalarProperty Name="TutorReportId" ColumnName="TutorReportId" />
+                <ScalarProperty Name="NumBondingHours" ColumnName="NumBondingHours" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="MeetingDate" ColumnName="MeetingDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TutorTrainee">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.TutorTrainee">
+              <MappingFragment StoreEntitySet="TutorTrainee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IsException" ColumnName="IsException" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TraineeId" ColumnName="TraineeId" />
+                <ScalarProperty Name="TutorId" ColumnName="TutorId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

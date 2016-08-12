@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Generic.Models;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
     public class AcademicInstitutionController : Controller
     {
-        private IAcademicInstitutionService _academicInstitutionService;
+        private readonly IAcademicInstitutionService _academicInstitutionService;
 
         public AcademicInstitutionController(IAcademicInstitutionService academicInstitutionService)
         {
@@ -21,9 +22,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         // GET: Rackaz/AcademicInstitution
         public ActionResult Index(int? area = null)
         {
+            
             var result = _academicInstitutionService.Get((Area?)area);
-
             return View(result);
         }
+
+
     }
 }

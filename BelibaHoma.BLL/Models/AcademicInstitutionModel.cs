@@ -21,6 +21,11 @@ namespace BelibaHoma.BLL.Interfaces
         {
 
         }
+
+        public AcademicInstitutionModel()
+        {
+
+        }
     }
 }
  

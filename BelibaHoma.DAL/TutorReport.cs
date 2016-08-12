@@ -12,23 +12,24 @@ namespace BelibaHoma.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class AcademicInstitution
+    public partial class TutorReport
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AcademicInstitution()
+        public TutorReport()
         {
-            this.Trainee = new HashSet<Trainee>();
-            this.Tutor = new HashSet<Tutor>();
+            this.TutorSession = new HashSet<TutorSession>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public int Area { get; set; }
-        public int InstitutionType { get; set; }
+        public int TutorTraineeId { get; set; }
+        public double TutorHours { get; set; }
+        public double TutorHoursBonding { get; set; }
+        public string MeetingsDescription { get; set; }
+        public bool IsProblem { get; set; }
+        public System.DateTime CreationTime { get; set; }
     
+        public virtual TutorTrainee TutorTrainee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Trainee> Trainee { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Tutor> Tutor { get; set; }
+        public virtual ICollection<TutorSession> TutorSession { get; set; }
     }
 }

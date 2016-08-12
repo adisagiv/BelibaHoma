@@ -17,8 +17,14 @@ namespace BelibaHoma.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AcademicMajor()
         {
+            this.JobOffer = new HashSet<JobOffer>();
+            this.JobOffer1 = new HashSet<JobOffer>();
+            this.JobOffer2 = new HashSet<JobOffer>();
             this.Trainee = new HashSet<Trainee>();
             this.Trainee1 = new HashSet<Trainee>();
+            this.Trainee2 = new HashSet<Trainee>();
+            this.Tutor = new HashSet<Tutor>();
+            this.Tutor1 = new HashSet<Tutor>();
         }
     
         public int Id { get; set; }
@@ -26,8 +32,20 @@ namespace BelibaHoma.DAL
         public int AcademicCluster { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JobOffer> JobOffer { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JobOffer> JobOffer1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<JobOffer> JobOffer2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trainee> Trainee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Trainee> Trainee1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Trainee> Trainee2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tutor> Tutor { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tutor> Tutor1 { get; set; }
     }
 }
