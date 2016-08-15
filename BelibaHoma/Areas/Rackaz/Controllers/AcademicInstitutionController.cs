@@ -27,6 +27,31 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             return View(result);
         }
 
+        public ActionResult Create()
+        {
+            // TODO: Add the user area incase of him being a Rackz
+            var model = new AcademicInstitutionModel();
+            return View();
+        }
 
+        [HttpPost]
+        public ActionResult Create(AcademicInstitutionModel model)
+        {
+            var result =_academicInstitutionService.Add(model);
+
+            if (result.Success)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return null;
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var result = _academicInstitutionService.Get(id);
+
+            return View(result.Data);
+        }
     }
 }

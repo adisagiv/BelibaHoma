@@ -102,5 +102,22 @@ namespace BelibaHoma.BLL.Services
 
             return status;
         }
+
+
+        // TODO: refactor function add all missing parts like try, catch etc.... 
+        public StatusModel<AcademicInstitutionModel> Get(int id)
+        {
+            var status = new StatusModel<AcademicInstitutionModel>();
+            using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+            {
+                var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
+
+                var academicInstitution = academicInstitutionRepository.GetByKey(id);
+
+                status.Data = new AcademicInstitutionModel(academicInstitution); 
+            }
+
+            return status;
+        }
     }
 }

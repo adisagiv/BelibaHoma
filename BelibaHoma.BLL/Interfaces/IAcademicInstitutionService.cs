@@ -30,5 +30,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="updatedModel"></param>
         /// <returns></returns>
         StatusModel Update(int id, AcademicInstitutionModel updatedModel);
+
+        /// <summary>
+        /// Get the AcademicInstitutionModel according to the given id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<AcademicInstitutionModel> Get(int id);
     }
 }

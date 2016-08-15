@@ -1,0 +1,18 @@
+﻿@model BelibaHoma.BLL.Interfaces.AcademicInstitutionModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<h2>הוסף מוסד אקדמי חדש</h2>
+
+
+@Html.Partial("_AcademicInstitutionForm", Model)
+
+
+
