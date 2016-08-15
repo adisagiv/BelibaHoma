@@ -88,11 +88,6 @@ namespace BelibaHoma.BLL.Services
                         academicInstitution.Name = updatedModel.Name;
                         academicInstitution.InstitutionType = (int)updatedModel.InstitutionType;
 
-                        //academicInstitutionRepository.Update();
-
-                        //var entity = model.MapTo<AcademicInstitution>();
-                        //academicInstitutionRepository.Add(entity);
-
                         unitOfWork.SaveChanges();
 
                         status.Success = true;
