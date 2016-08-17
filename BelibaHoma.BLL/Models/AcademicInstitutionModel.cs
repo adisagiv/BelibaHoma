@@ -1,13 +1,9 @@
-﻿using BelibaHoma.BLL.Enums;
+﻿using System.ComponentModel.DataAnnotations;
+using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
 using Generic.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 
-namespace BelibaHoma.BLL.Interfaces
+namespace BelibaHoma.BLL.Models
 {
     public class AcademicInstitutionModel : GenericModel<AcademicInstitutionModel>
     {

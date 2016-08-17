@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BelibaHoma.BLL.Models;
 using Generic.Models;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
@@ -30,8 +31,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Create()
         {
             // TODO: Add the user area incase of him being a Rackz
-            var model = new AcademicInstitutionModel();
-            return View();
+            var model = new AcademicInstitutionModel { Area = Area.Jerusalem };
+            ViewBag.IsRackaz = true;
+            return View(model);
         }
 
         [HttpPost]
@@ -48,6 +50,26 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         }
 
         public ActionResult Edit(int id)
+        {
+            var result = _academicInstitutionService.Get(id);
+
+            return View(result.Data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, AcademicInstitutionModel model)
+        {
+            var result = _academicInstitutionService.Update(id,model);
+
+            if (result.Success)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return null;
+        }
+
+        public ActionResult Details(int id)
         {
             var result = _academicInstitutionService.Get(id);
 
