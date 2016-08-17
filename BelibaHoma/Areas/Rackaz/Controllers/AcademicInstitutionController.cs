@@ -32,6 +32,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         {
             // TODO: Add the user area incase of him being a Rackz
             var model = new AcademicInstitutionModel { Area = Area.Jerusalem };
+
+            // TODO: change the viewbag to AcademicInstitutionVM to transfer area
             ViewBag.IsRackaz = true;
             return View(model);
         }
