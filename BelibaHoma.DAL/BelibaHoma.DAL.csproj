@@ -96,6 +96,7 @@
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IAcademicInstitutionRepository.cs" />
+    <Compile Include="Interfaces\IAcademicMajorRepository.cs" />
     <Compile Include="JobOffer.cs">
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>
@@ -105,6 +106,7 @@
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Repositories\AcademicInstitutionRepository.cs" />
+    <Compile Include="Repositories\AcademicMajorRepository.cs" />
     <Compile Include="Trainee.cs">
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>

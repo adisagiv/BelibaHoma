@@ -20,6 +20,7 @@ namespace BelibaHoma.DAL.Modules
 
             var serviceLocator = Kernel.GetServiceLocator();
             serviceLocator.RegisterType<IAcademicInstitutionRepository, AcademicInstitutionRepository>();
+            serviceLocator.RegisterType<IAcademicMajorRepository, AcademicMajorRepository>();
 
         }
     }

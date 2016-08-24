@@ -67,11 +67,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Interfaces\IAcademicMajorService.cs" />
     <Compile Include="Models\AcademicInstitutionModel.cs" />
     <Compile Include="Interfaces\IAcademicInstitutionService.cs" />
+    <Compile Include="Models\AcademicMajorModel.cs" />
     <Compile Include="Modules\BelibahomaBLLModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AcademicInstitutionService.cs" />
+    <Compile Include="Services\AcademicMajorService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
