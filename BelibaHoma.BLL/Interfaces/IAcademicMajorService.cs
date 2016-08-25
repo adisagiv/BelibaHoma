@@ -11,13 +11,12 @@ namespace BelibaHoma.BLL.Interfaces
 {
     public interface IAcademicMajorService
     {
-        //TODO:consider not sending Area
         /// <summary>
         /// Get all AcademicMajor from the db
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        List<AcademicMajorModel> Get(Area? area);
+        List<AcademicMajorModel> Get();
 
         /// <summary>
         /// Add new AcademicMajor to db
@@ -31,7 +30,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        StatusModel<AcademicInstitutionModel> Get(int id);
+        StatusModel<AcademicMajorModel> Get(int id);
 
         /// <summary>
         /// Update AcademicMajor in db

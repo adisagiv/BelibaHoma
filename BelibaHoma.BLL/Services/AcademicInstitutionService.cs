@@ -105,19 +105,31 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        // TODO: refactor function add all missing parts like try, catch etc.... 
         public StatusModel<AcademicInstitutionModel> Get(int id)
         {
             var status = new StatusModel<AcademicInstitutionModel>();
-            using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+
+            try
             {
-                var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
+                status.Message = String.Empty;
+                status.Success = false;
 
-                var academicInstitution = academicInstitutionRepository.GetByKey(id);
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
 
-                status.Data = new AcademicInstitutionModel(academicInstitution); 
+                    var academicInstitution = academicInstitutionRepository.GetByKey(id);
+
+                    status.Data = new AcademicInstitutionModel(academicInstitution);
+
+                    status.Success = true;
+                }
             }
-
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה. לא נמצא מוסד הלימוד המבוקש.");
+            }
+            
             return status;
         }
     }

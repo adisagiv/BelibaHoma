@@ -9,11 +9,13 @@ namespace BelibaHoma.BLL.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "שם המסלול")]
         [Required(ErrorMessage = "שם מסלול הלימודים זהו שדה חובה")]
         public string Name { get; set; }
 
+        [Display(Name = "אשכול לימוד")]
         [Required]
-        public AcademicCluster Cluster { get; set; }
+        public AcademicCluster AcademicCluster { get; set; }
 
         public AcademicMajorModel(AcademicMajor entity)
             :base(entity)

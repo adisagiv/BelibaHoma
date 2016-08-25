@@ -1,0 +1,16 @@
+﻿@model BelibaHoma.BLL.Models.AcademicMajorModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<h2>ערוך מסלול לימודים</h2>
+
+
+@Html.Partial("_AcademicMajorForm", Model)
