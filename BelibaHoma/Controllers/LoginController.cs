@@ -14,7 +14,7 @@ namespace BelibaHoma.Controllers
     {
         private readonly IAuthenticationService _authenticationService;
 
-        public LoginController(IAuthenticationService authenticationService,ILogService logService)
+        public LoginController(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
         }
