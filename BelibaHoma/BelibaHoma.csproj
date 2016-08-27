@@ -41,6 +41,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
@@ -139,7 +143,10 @@
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
     <Compile Include="Areas\Rackaz\Models\AcademicInstitutionVM.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="CustomAuthorization.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -193,6 +200,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\login.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popover.js" />
@@ -218,6 +226,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -225,6 +234,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -234,6 +244,10 @@
     <ProjectReference Include="..\BelibaHoma.BLL\BelibaHoma.BLL.csproj">
       <Project>{bcb5ef31-b82d-4b5c-8aca-deed10703572}</Project>
       <Name>BelibaHoma.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BelibaHoma.DAL\BelibaHoma.DAL.csproj">
+      <Project>{a22e56a7-7da3-4c2f-85e2-d9cb12200cfc}</Project>
+      <Name>BelibaHoma.DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\Generic\Generic.csproj">
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>

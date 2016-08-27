@@ -24,6 +24,7 @@ namespace BelibaHoma.DAL
         public System.DateTime UpdateTime { get; set; }
         public string Email { get; set; }
         public bool IsActive { get; set; }
+        public Nullable<int> Area { get; set; }
     
         public virtual Rackaz Rackaz { get; set; }
         public virtual Trainee Trainee { get; set; }

@@ -6,11 +6,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BelibaHoma.BLL.Models;
+using BelibaHoma.Controllers;
 using Generic.Models;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
-    public class AcademicInstitutionController : Controller
+    [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz})]
+    public class AcademicInstitutionController : BaseController
     {
         private readonly IAcademicInstitutionService _academicInstitutionService;
 
@@ -29,11 +31,21 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Create()
         {
+            var model = new AcademicInstitutionModel();
+            if (CurrentUser.UserRole == UserRole.Admin)
+            {
+                ViewBag.IsRackaz = false;
+            }
+            else
+            {
+                 model.Area = CurrentUser.Area.Value;
+                ViewBag.IsRackaz = true;
+            }
             // TODO: Add the user area incase of him being a Rackz
-            var model = new AcademicInstitutionModel { Area = Area.Jerusalem };
+            
 
             // TODO: change the viewbag to AcademicInstitutionVM to transfer area
-            ViewBag.IsRackaz = true;
+            
             return View(model);
         }
 

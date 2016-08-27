@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using BelibaHoma.BLL.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -6,6 +7,9 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @{
+        UserModel user = ViewBag.CurrentUser;
+    }
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -24,8 +28,21 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new {Area = "Rackaz"}, new object {})</li>
-                    <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new { Area = "Rackaz" }, new object { })</li>
+                    <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new {Area = "Rackaz"}, new object {})</li>
                 </ul>
+            </div>
+            <div class="pull-left">
+                @if (user != null)
+                {
+                    <span class="label label-inverse">@String.Format("שלום {0}", user.FullName)</span>
+                    <a href="/Login/Logout">התנתק</a>
+                   // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
+                }
+                else
+                {
+                    @Html.ActionLink("התחבר", "Login", "Login")
+                }
+                
             </div>
         </div>
     </div>

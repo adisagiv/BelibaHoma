@@ -167,6 +167,7 @@
           <Property Name="UpdateTime" Type="datetime" Nullable="false" />
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="Area" Type="int" />
         </EntityType>
         <Association Name="FK_Grade_Trainee">
           <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
@@ -758,6 +759,7 @@
           <NavigationProperty Name="Rackaz" Relationship="BelibaHomaDBModel.FK_Rackaz_User" FromRole="User" ToRole="Rackaz" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
+          <Property Name="Area" Type="Int32" />
         </EntityType>
         <Association Name="FK_Trainee_AcademicInstitution1">
           <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
@@ -1142,6 +1144,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
