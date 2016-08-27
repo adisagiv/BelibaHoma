@@ -23,7 +23,6 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         // GET: Rackaz/AcademicInstitution
         public ActionResult Index(int? area = null)
         {
-            
             var result = _academicInstitutionService.Get((Area?)area);
             return View(result);
         }
@@ -53,6 +52,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Edit(int id)
         {
+            ViewBag.IsRackaz = true;
             var result = _academicInstitutionService.Get(id);
 
             return View(result.Data);
