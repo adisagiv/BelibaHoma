@@ -10,11 +10,19 @@ using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
 using Generic.Models;
+using Services.Log;
 
 namespace BelibaHoma.BLL.Services
 {
     public class AcademicMajorService : IAcademicMajorService
     {
+        private readonly ILogService _logService;
+
+        public AcademicMajorService(ILogService logService)
+        {
+            _logService = logService;
+        }
+
         /// <summary>
         /// Get all AcademicMajor from the db
         /// </summary>
@@ -29,13 +37,13 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
-
                     result = academicMajorRepository.GetAll().Where(am => true).ToList().Select(am => new AcademicMajorModel(am)).ToList();
                 }
             }
             catch (Exception ex)
             {
-
+                var message = String.Format("Error getting academic majors");
+                _logService.Logger.Error(message, ex);
             }
 
             return result;

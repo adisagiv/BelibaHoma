@@ -253,6 +253,10 @@
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>
       <Name>Generic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{13F45A22-A0CF-4773-A668-DEEAA1AD4144}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

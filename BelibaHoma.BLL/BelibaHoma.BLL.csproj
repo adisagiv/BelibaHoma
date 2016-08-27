@@ -126,6 +126,10 @@
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>
       <Name>Generic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{13f45a22-a0cf-4773-a668-deeaa1ad4144}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

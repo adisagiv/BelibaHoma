@@ -1,3 +1,5 @@
+using Services.Modules;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(BelibaHoma.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(BelibaHoma.App_Start.NinjectWebCommon), "Stop")]
 
@@ -66,7 +68,8 @@ namespace BelibaHoma.App_Start
         {
             var modules = new List<INinjectModule>
             {
-                new BelibaHomaBLLModule()
+                new BelibaHomaBLLModule(),
+                new LogModule()
             };
 
             kernel.Load(modules);

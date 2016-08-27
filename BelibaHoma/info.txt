@@ -1,0 +1,8 @@
+2016-08-27 15:20:25,292 [16] INFO Services.Log.LogService - tese
+2016-08-27 15:20:25,301 [16] ERROR Services.Log.LogService - error test
+2016-08-27 15:24:59,596 [7] ERROR Services.Log.LogService - Error getting academic majors
+System.ArgumentNullException: Argument 'repository' cannot be null
+Parameter name: repository
+   at Catel.Argument.IsNotNull(String paramName, Object paramValue) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Core\Catel.Core.Shared\Argument.cs:line 49
+   at Catel.Data.IEntityRepositoryExtensions.GetAll[TEntity](IEntityRepository`1 repository) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Repositories\Extensions\IEntityRepositoryExtensions.cs:line 243
+   at BelibaHoma.BLL.Services.AcademicMajorService.Get() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AcademicMajorService.cs:line 41
