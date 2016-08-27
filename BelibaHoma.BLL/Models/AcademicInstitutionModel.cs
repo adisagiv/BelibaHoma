@@ -9,12 +9,15 @@ namespace BelibaHoma.BLL.Models
     {
         public int Id { get; set; }
 
+        [Display(Name = "שם מוסד אקדמי")]
         [Required(ErrorMessage = "שם מוסד זה שדה חובה")]
         public string Name { get; set; }
 
+        [Display(Name = "אזור פעילות")]
         [Required]
         public Area Area { get; set; }
 
+        [Display(Name = "סוג מוסד אקדמי")]
         [Required]
         public InstitutionType InstitutionType { get; set; }
 

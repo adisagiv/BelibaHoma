@@ -13,14 +13,14 @@ using Generic.Models;
 
 namespace BelibaHoma.BLL.Services
 {
-    public class AcademicMajorService
+    public class AcademicMajorService : IAcademicMajorService
     {
         /// <summary>
         /// Get all AcademicMajor from the db
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        public List<AcademicMajorModel> Get(Area? area)
+        public List<AcademicMajorModel> Get()
         {
             var result = new List<AcademicMajorModel>();
 
@@ -30,7 +30,7 @@ namespace BelibaHoma.BLL.Services
                 {
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
 
-                    result = academicMajorRepository.GetAll().Select(am => new AcademicMajorModel(am)).ToList();
+                    result = academicMajorRepository.GetAll().Where(am => true).ToList().Select(am => new AcademicMajorModel(am)).ToList();
                 }
             }
             catch (Exception ex)
@@ -38,15 +38,14 @@ namespace BelibaHoma.BLL.Services
 
             }
 
-
             return result;
         }
+
        /// <summary>
        /// Add new Academic Major
        /// </summary>
        /// <param name="model"></param>
        /// <returns></returns>
- 
         public StatusModel Add(AcademicMajorModel model)
         {
             var status = new StatusModel(false, String.Empty);
@@ -74,25 +73,37 @@ namespace BelibaHoma.BLL.Services
         }
 
         /// <summary>
-        /// Get Major by id.Same as AcademicInstitution-Update but it made more sense to place before the func that calls it.  
+        /// Get Major by id.
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         public StatusModel<AcademicMajorModel> Get(int id)
         {
             var status = new StatusModel<AcademicMajorModel>();
-            using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+
+            try
             {
-                var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
+                status.Message = String.Empty;
+                status.Success = false;
 
-                var academicMajor = academicMajorRepository.GetByKey(id);
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
 
-                status.Data = new AcademicMajorModel(academicMajor);
+                    var academicMajor = academicMajorRepository.GetByKey(id);
+
+                    status.Data = new AcademicMajorModel(academicMajor);
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה. לא נמצא מסלול הלימוד המבוקש.");
             }
 
             return status;
         }
-
 
         /// <summary>
         /// Update AcademicMajor in db
@@ -113,10 +124,8 @@ namespace BelibaHoma.BLL.Services
                     var academicMajor = academicMajorRepository.GetByKey(id);
                     if (academicMajor != null)
                     {
-                        //academicMajor.AcademicCluster = (int)updatedModel.Area;
                         academicMajor.Name = updatedModel.Name;
-                        //double check the following line - "AcademicCluster to Cluster"
-                        academicMajor.AcademicCluster = (int)updatedModel.Cluster;
+                        academicMajor.AcademicCluster = (int)updatedModel.AcademicCluster;
 
                         unitOfWork.SaveChanges();
 
