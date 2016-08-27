@@ -8,11 +8,14 @@ using BelibaHoma.DAL;
 using BelibaHoma.DAL.Interfaces;
 using Catel.Data;
 using Generic.Models;
+using log4net;
+using Services.Log;
 
 namespace BelibaHoma.BLL.Services
 {
     public class AuthenticationService : IAuthenticationService
     {
+
         public StatusModel<UserModel> Authenticate(LoginModel model)
         {
             var result = new StatusModel<UserModel>(false, "שם משתמש או סיסמא לא נכונים", null);
@@ -37,7 +40,7 @@ namespace BelibaHoma.BLL.Services
             {
                 //  TODO : Handle exception
                 result.Success = false;
-                result.Message = "";
+                LogService.Logger.Error(result.Message, ex);
             }
             
 
@@ -69,6 +72,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
+                LogService.Logger.Error(String.Format("Unable to create authentication cookie"), ex);
                 return null;
             }
         }
@@ -93,7 +97,8 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                //_logger.Error("error getting authentication ticket from request: {0}.", ex);
+                ILog logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                logger.Error(string.Format("Error getting authentication ticket: {0}", ex));
                 return null;
             }
 

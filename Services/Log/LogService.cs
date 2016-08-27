@@ -2,15 +2,15 @@ using log4net;
 
 namespace Services.Log
 {
-    public class LogService : ILogService
+    public static class LogService
     {
-        private readonly ILog _logger;
+        private static readonly ILog _logger;
 
-        public ILog Logger {
+        public static ILog Logger {
             get { return _logger; } 
         }
 
-        public LogService()
+        static LogService()
         {
             _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         }

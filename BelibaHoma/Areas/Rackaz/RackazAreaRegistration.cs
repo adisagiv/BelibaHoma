@@ -17,7 +17,9 @@ namespace BelibaHoma.Areas.Rackaz
             context.MapRoute(
                 "Rackaz_default",
                 "Rackaz/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { action = "Index", id = UrlParameter.Optional },
+                new[] { "BelibaHoma.Areas.Rackaz.Controllers" }
+
             );
         }
     }

@@ -26,7 +26,6 @@ namespace BelibaHoma.DAL
         public bool IsActive { get; set; }
         public Nullable<int> Area { get; set; }
     
-        public virtual Rackaz Rackaz { get; set; }
         public virtual Trainee Trainee { get; set; }
         public virtual Tutor Tutor { get; set; }
     }

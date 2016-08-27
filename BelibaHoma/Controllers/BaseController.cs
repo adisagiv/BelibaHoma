@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Ninject;
 
 namespace BelibaHoma.Controllers
 {

@@ -10,11 +10,13 @@ using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
 using Generic.Models;
+using Services.Log;
 
 namespace BelibaHoma.BLL.Services
 {
     public class AcademicInstitutionService : IAcademicInstitutionService
     {
+
         /// <summary>
         /// Get all AcademicInstitution from the db
         /// </summary>
@@ -37,7 +39,8 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-
+                var message = String.Format("Error getting Academic Institutions from DB");
+                LogService.Logger.Error(message, ex);
             }
 
 
@@ -66,6 +69,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך הזנת מוסד הלימוד");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
@@ -99,6 +103,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך עדכון מוסד הלימוד");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
@@ -128,6 +133,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה. לא נמצא מוסד הלימוד המבוקש.");
+                LogService.Logger.Error(status.Message, ex);
             }
             
             return status;

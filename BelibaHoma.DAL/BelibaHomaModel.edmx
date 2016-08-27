@@ -67,13 +67,6 @@
           <Property Name="ContactJobPosition" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="Rackaz">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Area" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="Trainee">
           <Key>
             <PropertyRef Name="UserId" />
@@ -86,7 +79,6 @@
           <Property Name="AcademicYear" Type="int" Nullable="false" />
           <Property Name="AcademicMajorId" Type="int" Nullable="false" />
           <Property Name="AcademicMinorId" Type="int" />
-          <Property Name="Area" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="MaritalStatus" Type="int" Nullable="false" />
           <Property Name="EmploymentStatus" Type="int" />
@@ -110,7 +102,6 @@
           <Property Name="AcademicYear" Type="int" Nullable="false" />
           <Property Name="AcademicMajorId" Type="int" Nullable="false" />
           <Property Name="AcademicMinorId" Type="int" />
-          <Property Name="Area" Type="int" Nullable="false" />
           <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TutorHoursBonding" Type="int" Nullable="false" />
           <Property Name="TutorHours" Type="int" Nullable="false" />
@@ -214,18 +205,6 @@
             </Principal>
             <Dependent Role="JobOffer">
               <PropertyRef Name="RelevantMajorId3" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Rackaz_User">
-          <End Role="User" Type="Self.User" Multiplicity="1" />
-          <End Role="Rackaz" Type="Self.Rackaz" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rackaz">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -391,7 +370,6 @@
           <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobOffer" EntityType="Self.JobOffer" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Rackaz" EntityType="Self.Rackaz" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainee" EntityType="Self.Trainee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tutor" EntityType="Self.Tutor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorReport" EntityType="Self.TutorReport" Schema="dbo" store:Type="Tables" />
@@ -413,10 +391,6 @@
           <AssociationSet Name="FK_JobOffer_AcademicMajor2" Association="Self.FK_JobOffer_AcademicMajor2">
             <End Role="AcademicMajor" EntitySet="AcademicMajor" />
             <End Role="JobOffer" EntitySet="JobOffer" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rackaz_User" Association="Self.FK_Rackaz_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Rackaz" EntitySet="Rackaz" />
           </AssociationSet>
           <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="Self.FK_Trainee_AcademicInstitution1">
             <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
@@ -481,7 +455,6 @@
           <EntitySet Name="Alert" EntityType="BelibaHomaDBModel.Alert" />
           <EntitySet Name="Grade" EntityType="BelibaHomaDBModel.Grade" />
           <EntitySet Name="JobOffer" EntityType="BelibaHomaDBModel.JobOffer" />
-          <EntitySet Name="Rackaz" EntityType="BelibaHomaDBModel.Rackaz" />
           <EntitySet Name="Trainee" EntityType="BelibaHomaDBModel.Trainee" />
           <EntitySet Name="Tutor" EntityType="BelibaHomaDBModel.Tutor" />
           <EntitySet Name="TutorReport" EntityType="BelibaHomaDBModel.TutorReport" />
@@ -531,10 +504,6 @@
           <AssociationSet Name="FK_Grade_Trainee" Association="BelibaHomaDBModel.FK_Grade_Trainee">
             <End Role="Trainee" EntitySet="Trainee" />
             <End Role="Grade" EntitySet="Grade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rackaz_User" Association="BelibaHomaDBModel.FK_Rackaz_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Rackaz" EntitySet="Rackaz" />
           </AssociationSet>
           <AssociationSet Name="FK_Trainee_User1" Association="BelibaHomaDBModel.FK_Trainee_User1">
             <End Role="User" EntitySet="User" />
@@ -637,14 +606,6 @@
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1" FromRole="JobOffer" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2" FromRole="JobOffer" ToRole="AcademicMajor" />
         </EntityType>
-        <EntityType Name="Rackaz">
-          <Key>
-            <PropertyRef Name="UserId" />
-          </Key>
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Area" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Rackaz_User" FromRole="Rackaz" ToRole="User" />
-        </EntityType>
         <EntityType Name="Trainee">
           <Key>
             <PropertyRef Name="UserId" />
@@ -657,7 +618,6 @@
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
           <Property Name="AcademicMajorId" Type="Int32" Nullable="false" />
           <Property Name="AcademicMinorId" Type="Int32" />
-          <Property Name="Area" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="MaritalStatus" Type="Int32" Nullable="false" />
           <Property Name="EmploymentStatus" Type="Int32" />
@@ -688,7 +648,6 @@
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
           <Property Name="AcademicMajorId" Type="Int32" Nullable="false" />
           <Property Name="AcademicMinorId" Type="Int32" />
-          <Property Name="Area" Type="Int32" Nullable="false" />
           <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TutorHoursBonding" Type="Int32" Nullable="false" />
           <Property Name="TutorHours" Type="Int32" Nullable="false" />
@@ -756,10 +715,9 @@
           <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="Rackaz" Relationship="BelibaHomaDBModel.FK_Rackaz_User" FromRole="User" ToRole="Rackaz" />
+          <Property Name="Area" Type="Int32" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
-          <Property Name="Area" Type="Int32" />
         </EntityType>
         <Association Name="FK_Trainee_AcademicInstitution1">
           <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
@@ -890,18 +848,6 @@
             </Principal>
             <Dependent Role="Grade">
               <PropertyRef Name="TraineeId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Rackaz_User">
-          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="BelibaHomaDBModel.Rackaz" Role="Rackaz" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Rackaz">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1049,14 +995,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Rackaz">
-            <EntityTypeMapping TypeName="BelibaHomaDBModel.Rackaz">
-              <MappingFragment StoreEntitySet="Rackaz">
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Trainee">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Trainee">
               <MappingFragment StoreEntitySet="Trainee">
@@ -1071,7 +1009,6 @@
                 <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
                 <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="AcademicMinorId" ColumnName="AcademicMinorId" />
                 <ScalarProperty Name="AcademicMajorId" ColumnName="AcademicMajorId" />
                 <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />
@@ -1093,7 +1030,6 @@
                 <ScalarProperty Name="TutorHours" ColumnName="TutorHours" />
                 <ScalarProperty Name="TutorHoursBonding" ColumnName="TutorHoursBonding" />
                 <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="AcademicMinorId" ColumnName="AcademicMinorId" />
                 <ScalarProperty Name="AcademicMajorId" ColumnName="AcademicMajorId" />
                 <ScalarProperty Name="AcademicYear" ColumnName="AcademicYear" />

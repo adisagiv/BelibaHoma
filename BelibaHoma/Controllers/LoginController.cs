@@ -10,22 +10,18 @@ using Services.Log;
 
 namespace BelibaHoma.Controllers
 {
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly ILogService _logService;
 
         public LoginController(IAuthenticationService authenticationService,ILogService logService)
         {
             _authenticationService = authenticationService;
-            _logService = logService;
         }
 
         // GET: Login
         public ActionResult Index(string urlRedirect)
         {
-            _logService.Logger.Info("tese");
-            _logService.Logger.Error("error test");
             var model = new LoginModel {UrlRedirect = urlRedirect};
 
             return View(model);

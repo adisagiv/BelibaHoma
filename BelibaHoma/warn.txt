@@ -5,3 +5,9 @@ Parameter name: repository
    at Catel.Argument.IsNotNull(String paramName, Object paramValue) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Core\Catel.Core.Shared\Argument.cs:line 49
    at Catel.Data.IEntityRepositoryExtensions.GetAll[TEntity](IEntityRepository`1 repository) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Repositories\Extensions\IEntityRepositoryExtensions.cs:line 243
    at BelibaHoma.BLL.Services.AcademicMajorService.Get() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AcademicMajorService.cs:line 41
+2016-08-27 16:08:06,562 [7] ERROR Services.Log.LogService - error test
+2016-08-27 16:31:53,069 [7] ERROR Services.Log.LogService - error test
+2016-08-27 16:32:43,657 [8] ERROR Services.Log.LogService - error test
+2016-08-27 16:33:44,308 [7] ERROR Services.Log.LogService - error test
+2016-08-27 16:57:17,380 [6] ERROR Services.Log.LogService - error test
+2016-08-27 17:01:33,009 [7] ERROR Services.Log.LogService - error test

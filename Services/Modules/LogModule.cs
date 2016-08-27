@@ -7,7 +7,7 @@ namespace Services.Modules
     {
         public override void Load()
         {
-            Bind<ILogService>().To<LogService>().InSingletonScope();
+            //Bind<ILogService>().To<LogService>().InSingletonScope();
 
             
         }

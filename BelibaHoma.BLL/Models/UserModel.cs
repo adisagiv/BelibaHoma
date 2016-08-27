@@ -2,12 +2,12 @@
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
 using Generic.Models;
+using log4net;
 
 namespace BelibaHoma.BLL.Models
 {
     public class UserModel : GenericModel<UserModel>
     {
-        private System.Web.Security.FormsAuthenticationTicket authenticationLevel;
 
         public int Id { get; set; }
         public string IdNumber { get; set; }
@@ -54,8 +54,9 @@ namespace BelibaHoma.BLL.Models
             }
             catch (Exception ex)
             {
-                // ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-                // _logger.Error(string.Format("error creating login details model from authentication ticket: {0}", ex));
+                ILog _logger = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+                _logger.Error(string.Format("error creating login details model from authentication ticket: {0}", ex));
+
                 Id = -1;
             }
         }

@@ -25,8 +25,8 @@
             <div class="col-md-10">
 
                 @{
+                    //if is rackaz - cannot select area for the academic institution
                     object attr;
-                
                     if (isRackaz)
                     {
                          attr = new { @class = "form-control", @disabled = "disabled" };

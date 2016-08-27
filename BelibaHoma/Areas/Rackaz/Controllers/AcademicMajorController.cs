@@ -7,10 +7,12 @@ using System.Web;
 using System.Web.Mvc;
 using BelibaHoma.BLL.Models;
 using Generic.Models;
+using BelibaHoma.Controllers;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
-    public class AcademicMajorController : Controller
+    [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz })]
+    public class AcademicMajorController : BaseController
     {
         private readonly IAcademicMajorService _academicMajorService;
 

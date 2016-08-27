@@ -1,24 +1,24 @@
 ﻿using System.Web.Mvc;
 
-namespace BelibaHoma.Areas.Admin
+namespace BelibaHoma.Areas.Tutor
 {
-    public class AdminAreaRegistration : AreaRegistration 
+    public class TutorAreaRegistration : AreaRegistration 
     {
         public override string AreaName 
         {
             get 
             {
-                return "Admin";
+                return "Tutor";
             }
         }
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
-                "Admin_default",
-                "Admin/{controller}/{action}/{id}",
+                "Tutor_default",
+                "Tutor/{controller}/{action}/{id}",
                 new { action = "Index", id = UrlParameter.Optional },
-                new[] { "BelibaHoma.Areas.Admin.Controllers" }
+                new[] { "BelibaHoma.Areas.Tutor.Controllers" }
             );
         }
     }

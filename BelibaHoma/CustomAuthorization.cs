@@ -6,6 +6,7 @@ using BelibaHoma.BLL.Enums;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Ninject;
 using WebGrease;
 
 namespace BelibaHoma

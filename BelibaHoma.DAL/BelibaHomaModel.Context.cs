@@ -30,7 +30,6 @@ namespace BelibaHoma.DAL
         public virtual DbSet<Alert> Alert { get; set; }
         public virtual DbSet<Grade> Grade { get; set; }
         public virtual DbSet<JobOffer> JobOffer { get; set; }
-        public virtual DbSet<Rackaz> Rackaz { get; set; }
         public virtual DbSet<Trainee> Trainee { get; set; }
         public virtual DbSet<Tutor> Tutor { get; set; }
         public virtual DbSet<TutorReport> TutorReport { get; set; }

@@ -29,7 +29,6 @@ namespace BelibaHoma.DAL
         public int AcademicYear { get; set; }
         public int AcademicMajorId { get; set; }
         public Nullable<int> AcademicMinorId { get; set; }
-        public int Area { get; set; }
         public string PhoneNumber { get; set; }
         public int MaritalStatus { get; set; }
         public Nullable<int> EmploymentStatus { get; set; }

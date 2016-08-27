@@ -16,13 +16,6 @@ namespace BelibaHoma.BLL.Services
 {
     public class AcademicMajorService : IAcademicMajorService
     {
-        private readonly ILogService _logService;
-
-        public AcademicMajorService(ILogService logService)
-        {
-            _logService = logService;
-        }
-
         /// <summary>
         /// Get all AcademicMajor from the db
         /// </summary>
@@ -42,8 +35,8 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting academic majors");
-                _logService.Logger.Error(message, ex);
+                var message = String.Format("Error getting Academic Majors from DB");
+                LogService.Logger.Error(message, ex);
             }
 
             return result;
@@ -75,6 +68,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך הזנת מסלול לימוד");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
@@ -108,6 +102,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה. לא נמצא מסלול הלימוד המבוקש.");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
@@ -145,6 +140,7 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך עדכון מסלול הלימוד");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;

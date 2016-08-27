@@ -64,7 +64,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.IsRackaz = true;
+            if (CurrentUser.UserRole == UserRole.Admin)
+            {
+                ViewBag.IsRackaz = false;
+            }
+            else
+            {
+                ViewBag.IsRackaz = true;
+            }
             var result = _academicInstitutionService.Get(id);
 
             return View(result.Data);

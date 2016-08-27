@@ -1,0 +1,40 @@
+﻿@model BelibaHoma.BLL.Models.UserModel
+@{
+    Layout = null;
+}
+<div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav">
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        @if (Model != null)
+        {
+            // Add Admin related links here
+            if (Model.UserRole.ToString() == "Admin")
+            {
+                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new { Area = "Rackaz" }, new object { })</li>
+                <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new { Area = "Rackaz" }, new object { })</li>
+            }
+
+            // Add Rackaz related links here
+            if (Model.UserRole.ToString() == "Rackaz")
+            {
+                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new { Area = "Rackaz" }, new object { })</li>
+                <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new { Area = "Rackaz" }, new object { })</li>
+            }
+
+            // Add Tutor related links here
+            if (Model.UserRole.ToString() == "Tutor")
+            {
+
+            }
+
+            // Add Trainee related links here
+            if (Model.UserRole.ToString() == "Trainee")
+            {
+
+            }
+        }
+    </ul>
+</div>
+

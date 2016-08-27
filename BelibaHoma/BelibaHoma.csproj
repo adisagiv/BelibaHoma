@@ -138,14 +138,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
-    <Compile Include="Areas\Rackaz\Models\AcademicInstitutionVM.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
+    <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
+    <Compile Include="Areas\Tutor\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="CustomAuthorization.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -188,6 +194,9 @@
     <Content Include="Areas\Rackaz\Views\AcademicMajor\Create.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicMajor\_AcademicMajorForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicMajor\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Tutor\Views\web.config" />
+    <Content Include="Areas\Trainee\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -227,12 +236,20 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Rackaz\Models\" />
+    <Folder Include="Areas\Rackaz\Views\Home\" />
+    <Folder Include="Areas\Trainee\Models\" />
+    <Folder Include="Areas\Trainee\Views\Home\" />
+    <Folder Include="Areas\Trainee\Views\Shared\" />
+    <Folder Include="Areas\Tutor\Models\" />
+    <Folder Include="Areas\Tutor\Views\Home\" />
+    <Folder Include="Areas\Tutor\Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
