@@ -143,6 +143,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
@@ -197,6 +198,7 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Tutor\Views\web.config" />
     <Content Include="Areas\Trainee\Views\web.config" />
+    <Content Include="Areas\Rackaz\Views\User\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
