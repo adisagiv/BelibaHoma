@@ -77,6 +77,11 @@ namespace BelibaHoma.BLL.Models
                 Id = -1;
             }
         }
+
+        public UserModel()
+        {
+            // TODO: Complete member initialization
+        }
     }
 }
 

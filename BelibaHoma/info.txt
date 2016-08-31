@@ -560,3 +560,7 @@ System.InvalidCastException: Invalid cast from 'System.Int32' to 'BelibaHoma.BLL
    at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
    at BelibaHoma.BLL.Services.UserService.GetAdminAndRackaz() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 29
+2016-08-31 21:59:54,115 [6] ERROR Services.Log.LogService - שגיאה במהלך הוספת המשתמש
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Add(UserModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 61

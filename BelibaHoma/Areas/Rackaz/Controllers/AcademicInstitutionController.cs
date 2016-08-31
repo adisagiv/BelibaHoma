@@ -38,7 +38,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             else
             {
-                 model.Area = CurrentUser.Area.Value;
+                model.Area = CurrentUser.Area.Value;
                 ViewBag.IsRackaz = true;
             }
             // TODO: Add the user area incase of him being a Rackz

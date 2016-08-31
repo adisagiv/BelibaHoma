@@ -16,5 +16,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <returns></returns>
         List<UserModel> GetAdminAndRackaz();
+
+        /// <summary>
+        /// Add new User to db
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        StatusModel Add(UserModel model);
     }
 }

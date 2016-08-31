@@ -24,8 +24,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         // GET: Rackaz/User
         public ActionResult Index()
         {
-            
-            
+            if (CurrentUser.UserRole.ToString() == "Rackaz")
+            {
+                ViewBag.IsRackaz = true;
+            }
+            else
+            {
+                ViewBag.IsRackaz = false;
+            }
             var result = _userService.GetAdminAndRackaz();
             return View(result);
         }

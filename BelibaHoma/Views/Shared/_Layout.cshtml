@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @RenderSection("styles", false)
     @Scripts.Render("~/bundles/modernizr")
     @{
         UserModel user = ViewBag.CurrentUser;
@@ -22,6 +23,7 @@
                 </button>
                 @Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
             </div>
+            @* This is the menu per user role below.. *@
             @Html.Action("Index",new { controller = "Menu" , area = "" });
 
             <div class="pull-left">

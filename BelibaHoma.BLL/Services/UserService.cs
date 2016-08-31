@@ -30,7 +30,7 @@ namespace BelibaHoma.BLL.Services
                 {
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     
-                    result = userRepository.GetAll().Where(u => u.IsActive && u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    result = userRepository.GetAll().Where(u => u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
                 }
             }
             catch (Exception ex)
@@ -41,6 +41,49 @@ namespace BelibaHoma.BLL.Services
 
 
             return result;
+        }
+
+
+        public StatusModel Add(UserModel model)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    if (model.UserRole.ToString() == "Rackaz" && model.Area == null)
+                    {
+                        throw new System.ArgumentException("User is Rackaz but Area is not initialized", "model");
+                    }
+                    if (model.UserRole.ToString() == "Admin" && model.Area != null)
+                    {
+                        throw new System.ArgumentException("User is Admin but Area is initialized", "model");
+                    }
+                    if (model.IdNumber.Length != 9)
+                    {
+                        throw new System.ArgumentException("User Id Number is invalid", "model");
+                    }
+                    model.CreationTime = DateTime.Now;
+                    model.UpdateTime = DateTime.Now;
+                    model.IsActive = true;
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+                    var entity = model.MapTo<User>();
+                    userRepository.Add(entity);
+
+                    unitOfWork.SaveChanges();
+
+                    status.Success = true;
+                    status.Message = String.Format("המשתמש {0} הוזן בהצלחה", model.FullName);
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הוספת המשתמש");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
         }
     }
 }

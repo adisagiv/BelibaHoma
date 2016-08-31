@@ -1,0 +1,21 @@
+﻿@model BelibaHoma.BLL.Models.UserModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+
+
+<h2>הוסף משתמש</h2>
+
+
+@Html.Partial("_UserForm", Model)
+
+
+

@@ -1,0 +1,95 @@
+﻿@using System.Web.Mvc.Html
+@using BelibaHoma.BLL.Enums
+@model BelibaHoma.BLL.Models.UserModel
+
+@{
+    Layout = null;
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="direction: rtl">
+        <form autocomplete="off">
+            <h4>משתמש</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">תעודת זהות :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.IdNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">שם פרטי :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">שם משפחה :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">כתובת מייל :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">סוג משתמש :</label>
+                <div class="col-md-10">
+                    <select class="form-control" data-val="true" data-val-required="נא לבחור את סוג המשתמש" id="UserRole" name="UserRole">
+                        <option selected="selected" value="0">אדמין</option>
+                        <option value="1">רכז אזורי</option>
+                    </select>
+                    <span class="field-validation-valid text-danger" data-valmsg-for="UserRole" data-valmsg-replace="true"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">אזור :</label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Area, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">סיסמא :</label>
+                <div class="col-md-10">
+                    @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
+                    @*@Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})*@
+                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            @{
+                if (ViewBag.IsCreate != true)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
+        </form>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="שמור" class="btn btn-default"/>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
