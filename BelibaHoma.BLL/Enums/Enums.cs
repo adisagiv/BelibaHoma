@@ -39,6 +39,8 @@ namespace BelibaHoma.BLL.Enums
 
     public enum UserRole
     {
+        [Description("אדמין")]
+        [Display(Name = "אדמין")]
         Admin = 0,
         [Description("רכז אזורי")]
         [Display(Name = "רכז אזורי")]

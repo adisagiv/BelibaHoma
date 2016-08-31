@@ -128,6 +128,24 @@ namespace Generic.Models
                         
                     }
 
+                    
+
+                    if (result != null 
+                        && destinationModelProp.PropertyType.IsGenericType 
+                        && destinationModelProp.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        var destinationModelPropUnderlyingType =
+                            Nullable.GetUnderlyingType(destinationModelProp.PropertyType);
+
+                        var sourceModelPropUnderlyingType = Nullable.GetUnderlyingType(sourceModelProp.PropertyType) ??
+                                                            sourceModelProp.PropertyType;
+
+                        if (destinationModelPropUnderlyingType.IsEnum)
+                        {
+                            result = Enum.ToObject(destinationModelPropUnderlyingType, result);
+                        }
+                    } 
+
                     destinationModelProp.SetValue(destinationModel, result, null);
                 }
             }

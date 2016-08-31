@@ -16,6 +16,10 @@ namespace BelibaHoma.BLL.Services
 {
     public class UserService : IUserService
     {
+        /// <summary>
+        /// Get a list of all admins and Rackaz
+        /// </summary>
+        /// <returns></returns>
         public List<UserModel> GetAdminAndRackaz()
         {
             var result = new List<UserModel>();
@@ -25,8 +29,8 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
-                    //TODO: לוודא שזה מציג רק רכזים ואדמינים
-                   result = userRepository.GetAll().Where(u => u.IsActive).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    
+                    result = userRepository.GetAll().Where(u => u.IsActive && u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
                 }
             }
             catch (Exception ex)
