@@ -85,5 +85,84 @@ namespace BelibaHoma.BLL.Services
 
             return status;
         }
+
+        /// <summary>
+        /// Update a User in db
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        public StatusModel Update(int id, UserModel updatedModel)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var user = userRepository.GetByKey(id);
+                    if (user != null)
+                    {
+                        user.FirstName = updatedModel.FirstName;
+                        user.LastName = updatedModel.LastName;
+                        //TODO: ask Roey if needed here - user.Password = updatedModel.Password;
+                        user.UserRole = (int)updatedModel.UserRole;
+                        user.Email = updatedModel.Email;
+                        user.IdNumber = user.IdNumber;
+                        user.IsActive = updatedModel.IsActive;
+                        user.UpdateTime = DateTime.Now;
+                        user.Area = (int)updatedModel.Area;
+
+                        unitOfWork.SaveChanges();
+
+                        status.Success = true;
+                        status.Message = String.Format("פרטי המתשמש {0} עודכנו בהצלחה", updatedModel.FullName);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך עדכון פרטי המתשתמש");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Get User by ID (index/key) from db
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public StatusModel<UserModel> Get(int id)
+        {
+            var status = new StatusModel<UserModel>();
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var user = userRepository.GetByKey(id);
+
+                    status.Data = new UserModel(user);
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה. המשתמש אינו קיים במערכת.");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
     }
 }

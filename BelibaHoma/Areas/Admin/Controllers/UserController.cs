@@ -45,5 +45,26 @@ namespace BelibaHoma.Areas.Admin.Controllers
 
             return null;
         }
+
+        public ActionResult Edit(int id)
+        {
+            ViewBag.IsCreate = false;
+            var result = _userService.Get(id);
+
+            return View(result.Data);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, UserModel model)
+        {
+            var result = _userService.Update(id, model);
+
+            if (result.Success)
+            {
+                return RedirectToAction("Index", "User", new { Area = "Rackaz" });
+            }
+
+            return null;
+        }
     }
 }

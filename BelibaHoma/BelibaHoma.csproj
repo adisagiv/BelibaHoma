@@ -212,6 +212,7 @@
     <Content Include="Scripts\datatable\language\hebrew.json" />
     <Content Include="Areas\Admin\Views\User\_UserForm.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />

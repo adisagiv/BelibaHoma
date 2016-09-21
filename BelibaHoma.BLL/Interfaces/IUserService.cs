@@ -23,5 +23,20 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="model"></param>
         /// <returns></returns>
         StatusModel Add(UserModel model);
+        
+        /// <summary>
+        /// Update a User in db
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        StatusModel Update(int id, UserModel updatedModel);
+
+        /// <summary>
+        /// Get User by ID (index/key) from db
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<UserModel> Get(int id);
     }
 }
