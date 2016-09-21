@@ -7,7 +7,7 @@ using log4net;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class UserModel : GenericModel
+    public class UserModel : GenericModel<UserModel>
     {
         public int Id { get; set; }
 

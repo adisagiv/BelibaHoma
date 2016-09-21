@@ -1,10 +1,11 @@
-﻿using System;
+﻿﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.WebPages;
 
-namespace Extensions
+namespace Extensions.Html
 {
     public static class HtmlExtensions
     {
@@ -73,7 +74,7 @@ namespace Extensions
         {
             foreach (var template in templates)
             {
-                Script(htmlHelper, template);
+                Style(htmlHelper, template);
             }
             return MvcHtmlString.Empty;
         }

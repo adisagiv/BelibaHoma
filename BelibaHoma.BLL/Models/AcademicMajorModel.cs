@@ -5,7 +5,7 @@ using Generic.Models;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class AcademicMajorModel : GenericModel
+    public class AcademicMajorModel : GenericModel<AcademicMajorModel>
     {
         public int Id { get; set; }
 

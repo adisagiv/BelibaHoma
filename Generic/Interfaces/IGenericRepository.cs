@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Generic.Interfaces
 {
-    public interface IGenericRepository<T,TKey> : IDisposable
+    public interface IGenericRepository<T, in TKey> : IDisposable
     {
         void Insert(T entity);
         void Delete(T entity);
