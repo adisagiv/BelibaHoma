@@ -8,6 +8,7 @@ using BelibaHoma.BLL.Enums;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Generic.GenericModel.Models;
 using Generic.Models;
 
 namespace ConsoleApplication1

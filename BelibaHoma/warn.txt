@@ -557,3 +557,291 @@ System.InvalidCastException: Invalid cast from 'System.Int32' to 'BelibaHoma.BLL
 System.ArgumentException: User is Admin but Area is initialized
 Parameter name: model
    at BelibaHoma.BLL.Services.UserService.Add(UserModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 61
+2016-08-31 22:27:13,470 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-08-31 22:27:13,583 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-08-31 22:27:16,054 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-20 17:11:08,296 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-20 17:11:08,809 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-20 17:11:27,296 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:39:12,114 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:39:20,172 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:39:27,722 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:39:27,995 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:41:16,330 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:41:16,461 [7] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:41:17,107 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:41:20,104 [7] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:45:59,449 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:46:09,195 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:46:14,771 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:46:15,055 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:48:43,918 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:48:46,989 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:48:47,255 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:48:56,387 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:49:02,240 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:49:02,343 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:50:06,369 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:50:06,370 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:50:06,975 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:50:18,498 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:51:52,055 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:51:52,055 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:51:52,486 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:51:52,486 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:52:24,510 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:52:24,628 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:53:25,338 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:53:25,483 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:12,659 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:13,045 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:28,186 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:32,829 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:32,956 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:35,504 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:39,967 [7] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:40,082 [7] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:40,283 [7] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:42,020 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:42,111 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62
+2016-09-21 20:54:42,294 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'שגיב' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 62

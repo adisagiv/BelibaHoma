@@ -41,6 +41,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -267,7 +275,9 @@
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -312,6 +322,10 @@
     <ProjectReference Include="..\BelibaHoma.DAL\BelibaHoma.DAL.csproj">
       <Project>{a22e56a7-7da3-4c2f-85e2-d9cb12200cfc}</Project>
       <Name>BelibaHoma.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{60797012-0d76-45cf-ac74-6372f8fc7857}</Project>
+      <Name>Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Generic\Generic.csproj">
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>

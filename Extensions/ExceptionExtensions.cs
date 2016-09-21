@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-namespace Extensions.Exception
+namespace Extensions
 {
     public static class ExceptionExtensions
     {
@@ -16,9 +13,9 @@ namespace Extensions.Exception
         }
 
         private static IEnumerable<TSource> FromHierarchy<TSource>(
-            this TSource source,
-            Func<TSource, TSource> nextItem,
-            Func<TSource, bool> canContinue)
+    this TSource source,
+    Func<TSource, TSource> nextItem,
+    Func<TSource, bool> canContinue)
         {
             for (var current = source; canContinue(current); current = nextItem(current))
             {
