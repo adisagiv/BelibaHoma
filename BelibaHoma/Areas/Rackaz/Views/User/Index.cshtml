@@ -58,7 +58,7 @@
                             
                         });
                     var val = 'פעיל';
-                    this.api().columns(3).search('^' + val + '$', true, false)
+                    this.api().columns(5).search('^' + val + '$', true, false)
                                             .draw();
                 }
             });
@@ -83,10 +83,16 @@
             @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.IdNumber)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.UserRole)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Area)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
         </th>
         <th id="is-active">
             @Html.DisplayNameFor(model => model.IsActive)
@@ -98,6 +104,9 @@
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNumber)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UserRole)
@@ -118,6 +127,9 @@
                     @Html.DisplayFor(modelItem => item.FullName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.IdNumber)
+                </td>
+                <td>
                     @item.UserRole.ToDescription()
                 </td>
                 <td>
@@ -127,6 +139,9 @@
                             @item.Area.ToDescription()
                         }
                     }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
                     @{
@@ -141,9 +156,12 @@
                     }
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @{
+                        if(ViewBag.IsRackaz != true)
+                        {
+                            @Html.ActionLink("ערוך פרטי משתמש", "Edit", new { Area = "Admin", id = item.Id })
+                        }
+                    }
                 </td>
             </tr>
         }

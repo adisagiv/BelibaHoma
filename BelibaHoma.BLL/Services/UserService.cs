@@ -105,6 +105,18 @@ namespace BelibaHoma.BLL.Services
                     var user = userRepository.GetByKey(id);
                     if (user != null)
                     {
+                        if (updatedModel.UserRole.ToString() == "Rackaz" && updatedModel.Area == null)
+                        {
+                            throw new System.ArgumentException("User is Rackaz but Area is not initialized", "model");
+                        }
+                        if (updatedModel.UserRole.ToString() == "Admin" && updatedModel.Area != null)
+                        {
+                            throw new System.ArgumentException("User is Admin but Area is initialized", "model");
+                        }
+                        if (updatedModel.IdNumber.Length != 9)
+                        {
+                            throw new System.ArgumentException("User Id Number is invalid", "model");
+                        }
                         user.FirstName = updatedModel.FirstName;
                         user.LastName = updatedModel.LastName;
                         //TODO: ask Roey if needed here - user.Password = updatedModel.Password;

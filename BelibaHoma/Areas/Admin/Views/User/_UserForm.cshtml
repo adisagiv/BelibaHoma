@@ -6,6 +6,8 @@
     Layout = null;
 }
 
+
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
@@ -39,8 +41,8 @@
             <div class="form-group">
                 <label class="control-label col-md-2">כתובת מייל :</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
@@ -53,21 +55,26 @@
                     <span class="field-validation-valid text-danger" data-valmsg-for="UserRole" data-valmsg-replace="true"></span>
                 </div>
             </div>
-            <div class="form-group">
+            <div id="SelectArea" class="form-group @(Model.UserRole ==  UserRole.Admin ? "hidden" : "")">
                 <label class="control-label col-md-2">אזור :</label>
                 <div class="col-md-10">
                     @Html.EnumDropDownListFor(model => model.Area, new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Area, "", new { @class = "text-danger" })
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">סיסמא :</label>
-                <div class="col-md-10">
-                    @Html.PasswordFor(model => model.Password, new {@class = "form-control"})
-                    @*@Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})*@
-                    @Html.ValidationMessageFor(model => model.Password, "", new {@class = "text-danger"})
-                </div>
-            </div>
+            @{
+                if (ViewBag.IsCreate == true)
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2">סיסמא :</label>
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @*@Html.EditorFor(model => model.Password, new {htmlAttributes = new {@class = "form-control"}})*@
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
             @{
                 if (ViewBag.IsCreate != true)
                 {

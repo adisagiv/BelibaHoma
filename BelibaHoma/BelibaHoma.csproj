@@ -267,6 +267,7 @@
     <Content Include="Scripts\tab.js" />
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\transition.js" />
+    <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -292,6 +293,7 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Rackaz\Models\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
+    <Folder Include="Areas\Rackaz\Views\Trainee\" />
     <Folder Include="Areas\Trainee\Models\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
     <Folder Include="Areas\Trainee\Views\Shared\" />

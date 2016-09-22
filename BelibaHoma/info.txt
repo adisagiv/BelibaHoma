@@ -564,3 +564,21 @@ System.InvalidCastException: Invalid cast from 'System.Int32' to 'BelibaHoma.BLL
 System.ArgumentException: User is Admin but Area is initialized
 Parameter name: model
    at BelibaHoma.BLL.Services.UserService.Add(UserModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 61
+2016-09-22 20:33:50,145 [12] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'Sagiv' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 67
+2016-09-22 20:33:50,205 [12] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'Sagiv' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 67
+2016-09-22 20:33:50,315 [12] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.ArgumentException: Requested value 'Sagiv' was not found.
+   at System.Enum.EnumResult.SetFailure(ParseFailureKind failure, String failureMessageID, Object failureMessageFormatArgument)
+   at System.Enum.TryParseEnum(Type enumType, String value, Boolean ignoreCase, EnumResult& parseResult)
+   at System.Enum.Parse(Type enumType, String value, Boolean ignoreCase)
+   at System.Enum.Parse(Type enumType, String value)
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 67
