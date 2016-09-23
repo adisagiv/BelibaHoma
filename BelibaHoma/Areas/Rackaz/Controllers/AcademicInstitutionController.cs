@@ -21,11 +21,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             this._academicInstitutionService = academicInstitutionService;
         }
 
-        // TODO: /remove area int? from action only for testing replace with nothing
         // GET: Rackaz/AcademicInstitution
-        public ActionResult Index(int? area = null)
+        public ActionResult Index()
         {
-            var result = _academicInstitutionService.Get((Area?)area);
+            var result = _academicInstitutionService.Get(CurrentUser.Area);
             return View(result);
         }
 

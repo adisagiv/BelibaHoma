@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1" ZoomLevel="13">
+      <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1" ZoomLevel="72">
         <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicInstitution" Width="1.5" PointX="0.75" PointY="5.25" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicMajor" Width="1.5" PointX="0.75" PointY="8.875" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Alert" Width="1.5" PointX="0.75" PointY="0.75" />
