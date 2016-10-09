@@ -124,7 +124,6 @@ namespace Generic.GenericModel.Models.Old
                     var generic = method.MakeGenericMethod(targetType);
                     result = generic.Invoke(null, new[] { value });
 
-
                     return result;
                 }
             }
@@ -153,7 +152,7 @@ namespace Generic.GenericModel.Models.Old
 
                 var methodType = method.MakeGenericMethod(targetResolve.PropertyType);
 
-                result = methodType.Invoke(null, new[] {value});
+                result = methodType.Invoke(value , new object[] { null });
             }
             else if (targetResolve.IsEnum || sourceResolve.IsEnum)
             {

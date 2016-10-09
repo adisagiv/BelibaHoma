@@ -125,7 +125,7 @@ namespace BelibaHoma.BLL.Services
                         user.IdNumber = user.IdNumber;
                         user.IsActive = updatedModel.IsActive;
                         user.UpdateTime = DateTime.Now;
-                        user.Area = (int)updatedModel.Area;
+                        user.Area = (int?)updatedModel.Area;
 
                         unitOfWork.SaveChanges();
 

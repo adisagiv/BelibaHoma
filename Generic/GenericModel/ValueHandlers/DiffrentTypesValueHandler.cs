@@ -22,7 +22,7 @@ namespace Generic.GenericModel.ValueHandlers
 
                 var methodType = method.MakeGenericMethod(targetResolve.PropertyType);
 
-                result = methodType.Invoke(null, new[] { value });
+                result = methodType.Invoke(value, null);
             }
             else if (targetResolve.IsEnum || sourceResolve.IsEnum)
             {

@@ -58,8 +58,7 @@ namespace BelibaHoma.BLL.Models
         public MaritalStatus MaritalStatus { get; set; }
         
         [Display(Name = "סטטוס תעסוקתי")]
-        [Required(ErrorMessage = "זהו שדה חובה")]
-        public EmploymentStatus EmploymentStatus { get; set; }
+        public EmploymentStatus? EmploymentStatus { get; set; }
         
         [Display(Name = "שעות חברותא (השנה)")]
         public int TutorHoursBonding { get; set; }

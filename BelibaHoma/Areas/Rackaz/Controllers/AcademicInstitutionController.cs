@@ -83,6 +83,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult Edit(int id, AcademicInstitutionModel model)
         {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                model.Area = CurrentUser.Area.Value;
+            }
             var result = _academicInstitutionService.Update(id,model);
 
             if (result.Success)

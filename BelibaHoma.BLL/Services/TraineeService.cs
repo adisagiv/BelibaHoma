@@ -64,6 +64,9 @@ namespace BelibaHoma.BLL.Services
 
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
                     var entity = model.MapTo<Trainee>();
+
+                    // TODO : Retrive each linked entity which is represented by a complex object (class) on the TraineeModel class 
+
                     traineeRepository.Add(entity);
 
                     unitOfWork.SaveChanges();
