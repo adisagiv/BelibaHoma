@@ -1,0 +1,229 @@
+﻿@using System.Web.Mvc.Html
+@using BelibaHoma.BLL.Enums
+@using BelibaHoma.Areas.Rackaz.Models
+@model BelibaHoma.Areas.Rackaz.Models.TraineeViewModel
+
+@{
+    Layout = null;
+}
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="direction: rtl">
+        <form autocomplete="off">
+            <h4>חניך</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">תעודת זהות :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.User.IdNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.User.IdNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">שם פרטי :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.User.FirstName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">שם משפחה :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.User.LastName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">מגדר : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.Gender, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.Gender, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">מצב משפחתי : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.MaritalStatus, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.MaritalStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">מצב תעסוקתי : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.EmploymentStatus, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.EmploymentStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">אזור :</label>
+                <div class="col-md-10">
+                    @{
+                        //if is rackaz - cannot select area for the academic institution
+                        //The area is set in the controller based on CurrentUser's area
+                        object attr;
+                        if (ViewBag.IsRackaz)
+                        {
+                            attr = new {@class = "form-control", @disabled = "disabled"};
+                        }
+                        else
+                        {
+                            attr = new {@class = "form-control"};
+                        }
+                    }
+                    @Html.EnumDropDownListFor(model => model.Trainee.User.Area, attr)
+                    @Html.ValidationMessageFor(model => model.Trainee.User.Area, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">כתובת :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.Address, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @{
+                if (ViewBag.IsCreate == true)
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-2">סיסמא :</label>
+                        <div class="col-md-10">
+                            @Html.PasswordFor(model => model.Trainee.User.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Trainee.User.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
+
+            @{
+                if (ViewBag.IsCreate != true)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Trainee.User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.CheckBoxFor(model => model.Trainee.User.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Trainee.User.IsActive, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            }
+            <div class="form-group">
+                <label class="control-label col-md-2">כתובת מייל :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.User.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">תאריך לידה :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.Birthday, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.Birthday, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">מספר טלפון :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מוסד אקדמי : </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Trainee.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name"), new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicInstitution, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מסלול לימוד ראשי : </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor, new SelectList(Model.AcademicMajorList, "Id", "Name"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מסלול לימוד משני : </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name"), new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor1, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מסלול לימוד נוסף בו נדרשת חניכה : </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor2, new SelectList(Model.AcademicMajorList, "Id", "Name"), new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor2, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">תיאור מילולי למקצוע בו נדרשת עזרה :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.NeededHelpDescription, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Trainee.NeededHelpDescription, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">רמת חניכה נדרשת בפיזיקה : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.PhysicsLevel, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.PhysicsLevel, "", new {@class = "text-danger"})
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2">רמת חניכה נדרשת במתמטיקה : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.MathLevel, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.MathLevel, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">רמת חניכה נדרשת באנגלית : </label>
+                <div class="col-md-10">
+                    @Html.EnumDropDownListFor(model => model.Trainee.EnglishLevel, new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Trainee.EnglishLevel, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">שנה בתואר מבחינת התקדמות בקורסים :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.AcademicYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מספר סמסטרים מתחילת התואר (ותק) :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Trainee.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.SemesterNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </form>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="trainee-submit" type="submit" value="שמור" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

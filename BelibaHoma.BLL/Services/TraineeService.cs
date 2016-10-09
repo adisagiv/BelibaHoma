@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.ModelBinding;
 using BelibaHoma.BLL.Models;
 using Generic.Models;
 using Services.Log;
@@ -41,6 +42,43 @@ namespace BelibaHoma.BLL.Services
 
 
             return result;
+        }
+
+        /// <summary>
+        /// Add new Trainee
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public StatusModel Add(TraineeModel model)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+
+                    model.TutorHours = 0;
+                    model.TutorHoursBonding = 0;
+                    model.User.UserRole = UserRole.Trainee;
+
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var entity = model.MapTo<Trainee>();
+                    traineeRepository.Add(entity);
+
+                    unitOfWork.SaveChanges();
+
+                    status.Success = true;
+                    status.Message = String.Format("חניך {0} הוזן בהצלחה", model.User.FullName);
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הוספת חניך");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
         }
     }
 }

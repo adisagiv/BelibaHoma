@@ -14,6 +14,7 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "תעודת זהות")]
         [Required(ErrorMessage = "נא להזין מספר תעודת זהות כולל ספרת ביקורת")]
         [StringLength(9, MinimumLength = 9, ErrorMessage = "נא להזין ת.ז. כולל ספרת ביקורת")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public string IdNumber { get; set; }
         [Display(Name = "שם פרטי")]
         [Required(ErrorMessage = "שם פרטי זהו שדה חובה")]
@@ -64,7 +65,7 @@ namespace BelibaHoma.BLL.Models
 
                 if (userDetails.Length > 3)
                 {
-                    Area = (Area) Enum.Parse(typeof(Area), userDetails[1]);
+                    Area = (Area) Enum.Parse(typeof(Area), userDetails[3]);
                 }
                 else
                 {
