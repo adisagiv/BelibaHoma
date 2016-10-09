@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
-using Generic.Models;
+using Generic.GenericModel.Models;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class AcademicMajorModel : GenericModel<AcademicMajorModel>
+    public class AcademicMajorModel : GenericModel
     {
         public int Id { get; set; }
 

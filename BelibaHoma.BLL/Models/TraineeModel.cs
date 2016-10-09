@@ -2,13 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
+using Generic.GenericModel.Models;
 using Generic.Models;
 using log4net;
 using Ninject.Planning.Bindings;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class TraineeModel : GenericModel<TraineeModel>
+    public class TraineeModel : GenericModel
     {
         public int UserId { get; set; }
 

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 
-namespace Extensions.Numeric
+namespace Extensions
 {
-    public static class NumericExtentions
+    public static class NumericExtensions
     {
 
         public static string ToCommaSeparated(this int number)

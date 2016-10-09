@@ -2,12 +2,13 @@
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
+using Generic.GenericModel.Models;
 using Generic.Models;
 using log4net;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class UserModel : GenericModel<UserModel>
+    public class UserModel : GenericModel
     {
         public int Id { get; set; }
 

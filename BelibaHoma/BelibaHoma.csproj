@@ -317,6 +317,10 @@
       <Project>{a22e56a7-7da3-4c2f-85e2-d9cb12200cfc}</Project>
       <Name>BelibaHoma.DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{60797012-0d76-45cf-ac74-6372f8fc7857}</Project>
+      <Name>Extensions</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Generic\Generic.csproj">
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>
       <Name>Generic</Name>
