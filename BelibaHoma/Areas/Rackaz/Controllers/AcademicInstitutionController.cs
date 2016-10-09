@@ -51,6 +51,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult Create(AcademicInstitutionModel model)
         {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                model.Area = CurrentUser.Area.Value;   
+            }
             var result =_academicInstitutionService.Add(model);
 
             if (result.Success)

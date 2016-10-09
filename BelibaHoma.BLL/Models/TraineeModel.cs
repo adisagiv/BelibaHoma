@@ -28,11 +28,16 @@ namespace BelibaHoma.BLL.Models
         public AcademicInstitutionModel AcademicInstitution { get; set; }
 
         [Display(Name = "תאריך לידה")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public System.DateTime Birthday { get; set; }
 
         [Display(Name = "שנה בתואר מבחינת התקדמות בקורסים")]
         [Required(ErrorMessage = "זהו שדה חובה")]
+        [Range(0, 8, ErrorMessage = "Can only be between 0 .. 8")]
+        //[StringLength(2, MinimumLength = 1, ErrorMessage = "נא להזין מספר תקין)")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public int AcademicYear { get; set; }
 
         [Display(Name = "מסלול לימוד ראשי")]
@@ -83,6 +88,9 @@ namespace BelibaHoma.BLL.Models
         
         [Display(Name = "מספר סמסטרים מתחילת התואר (ותק)")]
         [Required(ErrorMessage = "זהו שדה חובה")]
+        [Range(0, 16, ErrorMessage = "Can only be between 0 .. 16")]
+        //[StringLength(2, MinimumLength = 1, ErrorMessage = "נא להזין מספר תקין)")]
+        //[RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public int SemesterNumber { get; set; }
         
         [Display(Name = "משתמש")]
