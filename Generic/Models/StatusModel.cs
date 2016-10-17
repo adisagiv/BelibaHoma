@@ -1,4 +1,9 @@
-﻿using Generic.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Generic.Interfaces;
 
 namespace Generic.Models
 {
@@ -33,12 +38,16 @@ namespace Generic.Models
         public T Data { get; set; }
 
         public StatusModel(): base()
-        { }
+        {
 
-        public StatusModel(bool success, string message, T data): base(success,message)
+        }
+
+        public StatusModel(bool success,string message,T data)
+            :base(success,message)
         {
             this.Data = data;
         }
+
         
     }
 }

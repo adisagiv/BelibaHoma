@@ -6,7 +6,7 @@ using Generic.Models;
 
 namespace BelibaHoma.BLL.Models
 {
-    public class AcademicInstitutionModel : GenericModel<AcademicInstitutionModel>
+    public class AcademicInstitutionModel : GenericModel
     {
         public int Id { get; set; }
 

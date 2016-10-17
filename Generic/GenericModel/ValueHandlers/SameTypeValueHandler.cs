@@ -6,12 +6,10 @@ namespace Generic.GenericModel.ValueHandlers
 {
     internal class SameTypeValueHandler : IValueHandler
     {
-            HashAlgorithm hashAlgorithm = new SHA256CryptoServiceProvider();
 
         public object ConvertValue(TypeEquality typeEquality, object value)
         {
             return value;
         }
-         
     }
 }

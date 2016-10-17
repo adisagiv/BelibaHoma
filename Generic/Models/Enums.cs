@@ -11,10 +11,4 @@ namespace Generic.Models
         Connected = 0,
         Diconnected = 1
     }
-
-    public enum ApplicationTypes
-    {
-        JavaScript = 0,
-        NativeConfidential = 1
-    };
 }

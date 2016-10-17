@@ -93,13 +93,14 @@
     <Compile Include="ClaimsExtensions.cs" />
     <Compile Include="DataTables\DataTablesEFSQL.cs" />
     <Compile Include="DateTimeExtensions.cs" />
-    <Compile Include="DbDateHelper.cs" />
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="Html.cs" />
     <Compile Include="HtmlExtensions.cs" />
-    <Compile Include="NumericExtentions.cs" />
-    <Compile Include="ObservableCollectionExtentions.cs" />
+    <Compile Include="NumericExtensions.cs" />
+    <Compile Include="ObservableCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TypeExtensions.cs" />
   </ItemGroup>
