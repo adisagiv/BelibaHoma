@@ -100,7 +100,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Interfaces\ITraineeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\TraineeModel.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Interfaces\IAcademicMajorService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Services\AcademicInstitutionService.cs" />
     <Compile Include="Services\AcademicMajorService.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Services\TraineeService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

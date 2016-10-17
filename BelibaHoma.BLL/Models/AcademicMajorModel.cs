@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
-using Generic.Models;
+using Generic.GenericModel.Models;
 
 namespace BelibaHoma.BLL.Models
 {

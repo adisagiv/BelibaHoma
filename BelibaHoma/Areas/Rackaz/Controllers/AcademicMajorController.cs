@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BelibaHoma.BLL.Models;
-using Generic.Models;
+using Generic.GenericModel.Models;
 using BelibaHoma.Controllers;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers

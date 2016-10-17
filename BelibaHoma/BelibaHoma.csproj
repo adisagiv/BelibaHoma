@@ -144,7 +144,9 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
+    <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
@@ -204,6 +206,10 @@
     <Content Include="Scripts\datatable\language\hebrew.json" />
     <Content Include="Areas\Admin\Views\User\_UserForm.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Edit.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Trainee\Index.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Trainee\Create.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Trainee\_TraineeForm.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -265,7 +271,9 @@
     <Content Include="Scripts\scrollspy.js" />
     <Content Include="Scripts\tab.js" />
     <Content Include="Scripts\tooltip.js" />
+    <Content Include="Scripts\trainee.js" />
     <Content Include="Scripts\transition.js" />
+    <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -289,7 +297,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Rackaz\Models\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
     <Folder Include="Areas\Trainee\Models\" />
     <Folder Include="Areas\Trainee\Views\Home\" />

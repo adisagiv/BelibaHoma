@@ -22,6 +22,7 @@ namespace BelibaHoma.DAL.Modules
             serviceLocator.RegisterType<IAcademicInstitutionRepository, AcademicInstitutionRepository>();
             serviceLocator.RegisterType<IAcademicMajorRepository, AcademicMajorRepository>();
             serviceLocator.RegisterType<IUserRepository,UserRepository>();
+            serviceLocator.RegisterType<ITraineeRepository, TraineeRepository>();
 
         }
     }

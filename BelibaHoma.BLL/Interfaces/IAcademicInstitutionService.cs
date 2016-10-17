@@ -1,11 +1,11 @@
 ﻿using BelibaHoma.BLL.Enums;
-using Generic.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using Generic.Models;
 
 namespace BelibaHoma.BLL.Interfaces
 {

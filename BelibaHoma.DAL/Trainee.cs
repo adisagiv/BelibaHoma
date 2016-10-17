@@ -23,7 +23,7 @@ namespace BelibaHoma.DAL
     
         public int UserId { get; set; }
         public string Address { get; set; }
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
         public int AcademicInstitutionId { get; set; }
         public System.DateTime Birthday { get; set; }
         public int AcademicYear { get; set; }

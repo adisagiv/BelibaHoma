@@ -21,11 +21,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             this._academicInstitutionService = academicInstitutionService;
         }
 
-        // TODO: /remove area int? from action only for testing replace with nothing
         // GET: Rackaz/AcademicInstitution
-        public ActionResult Index(int? area = null)
+        public ActionResult Index()
         {
-            var result = _academicInstitutionService.Get((Area?)area);
+            var result = _academicInstitutionService.Get(CurrentUser.Area);
             return View(result);
         }
 
@@ -52,6 +51,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult Create(AcademicInstitutionModel model)
         {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                model.Area = CurrentUser.Area.Value;   
+            }
             var result =_academicInstitutionService.Add(model);
 
             if (result.Success)
@@ -80,6 +83,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult Edit(int id, AcademicInstitutionModel model)
         {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                model.Area = CurrentUser.Area.Value;
+            }
             var result = _academicInstitutionService.Update(id,model);
 
             if (result.Success)

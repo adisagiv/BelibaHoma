@@ -32,7 +32,7 @@ namespace BelibaHoma.DAL
         public string ContactMail { get; set; }
         public string ContactPhone { get; set; }
         public string ContactJobPosition { get; set; }
-        public int Status { get; set; }
+        public int JobStatus { get; set; }
     
         public virtual AcademicMajor AcademicMajor { get; set; }
         public virtual AcademicMajor AcademicMajor1 { get; set; }

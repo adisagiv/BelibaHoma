@@ -89,7 +89,7 @@ namespace Generic.Models
 
                         var methodType = method.MakeGenericMethod(destinationModelProp.PropertyType);
 
-                        result = methodType.Invoke(null, new object[] { modelValue });
+                        result = methodType.Invoke(modelValue,new object[]{null});
                     }
                     else if ((sourceModelProp.PropertyType.Name.Contains("Collection") || sourceModelProp.PropertyType.Name.Contains("List")) && modelValue != null)
                     {

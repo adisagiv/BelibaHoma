@@ -1,5 +1,4 @@
-﻿@model IEnumerable<BelibaHoma.BLL.Models.UserModel>
-@using System.Configuration
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +14,7 @@
 {
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script>
-        $('#users-table')
+        $('#trainee-table')
             .DataTable({
                 language: {
                     url: "/Scripts/datatable/language/hebrew.json"
@@ -45,7 +44,7 @@
                             column.data()
                                 .unique()
                                 .sort()
-                                .each(function (d, j) {
+                                .each(function(d, j) {
                                     var option = '<option ';
                                     if (isActiveSelect && d === "פעיל") {
                                         option += ' selected="selected" ';
@@ -54,50 +53,59 @@
                                     select.append(option);
                                 });
 
-                            
+
                         });
+                    //if (ViewBag.IsRackaz != true)
+                    //var isAdmin = 6;
+                    //if ($(this.api().columns().header()).attr('id') === "is-area") {
+                    //    isAdmin = 5;
+                    //}
                     var val = 'פעיל';
-                    this.api().columns(5).search('^' + val + '$', true, false)
-                                            .draw();
+                    var column = $("#column-value").val();
+                    this.api().columns(column).search('^' + val + '$', true, false)
+                        .draw();
                 }
             });
     </script>
 }
 
-<h2>משתמשי אדמין ורכזים</h2>
+<h2>חניכים</h2>
 
-@{
-    if (ViewBag.IsRackaz == false)
-    {
-        <p>
-            @Html.ActionLink("הוסף משתמש", "Create", "User", new { Area = "Admin" }, new object { })
-        </p>
-    }
-}
-
-<table class="table" id="users-table">
+<p>
+    @Html.ActionLink("הוסף משתמש", "Create", "Trainee", new { Area = "Rackaz" }, new object { })
+</p>
+<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)"/>
+<table class="table" id="trainee-table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserRole)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th id="is-active">
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            @{
+                if (ViewBag.IsRackaz != true)
+                {
+                    <th id="is-area">
+                        @Html.DisplayNameFor(model => model.User.Area)
+                    </th>
+                }
+            }
+            <th id="is-active">
+                @Html.DisplayNameFor(model => model.User.IsActive)
+            </th>
+            <th></th>
+        </tr>
     </thead>
     <tfoot>
         <tr>
@@ -105,16 +113,27 @@
                 @Html.DisplayNameFor(model => model.FullName)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IdNumber)
+                @Html.DisplayNameFor(model => model.User.IdNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UserRole)
+                @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Area)
+                @Html.DisplayNameFor(model => model.PhoneNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            @{
+                if (ViewBag.IsRackaz != true)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Area)
+                    </th>
+                }
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.User.IsActive)
             </th>
         </tr>
     </tfoot>
@@ -126,25 +145,28 @@
                     @Html.DisplayFor(modelItem => item.FullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IdNumber)
+                    @Html.DisplayFor(modelItem => item.User.IdNumber)
                 </td>
                 <td>
-                    @item.UserRole.ToDescription()
+                    @Html.DisplayFor(modelItem => item.AcademicInstitution.Name)
                 </td>
                 <td>
-                    @{
-                        if (item.Area != null)
-                        {
-                            @item.Area.ToDescription()
-                        }
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+                @{
+                    if (ViewBag.IsRackaz != true && item.User.Area != null)
+                    {
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.Area)
+                        </td>
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
+                }
                 <td>
                     @{
-                        if(item.IsActive == true)
+                        if (item.User.IsActive == true)
                         {
                             @String.Format("פעיל");
                         }
@@ -154,13 +176,9 @@
                         }
                     }
                 </td>
-                <td>
-                    @{
-                        if(ViewBag.IsRackaz != true)
-                        {
-                            @Html.ActionLink("ערוך פרטי משתמש", "Edit", new { Area = "Admin", id = item.Id })
-                        }
-                    }
+                <td>    
+                    @Html.ActionLink("ערוך פרטי חניך", "Edit", new { Area = "Rackaz", id = item.User.Id }) |
+                    @Html.ActionLink("פרטים", "Details", new { Area = "Rackaz", id = item.User.Id })
                 </td>
             </tr>
         }

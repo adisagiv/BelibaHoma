@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
+using Generic.GenericModel.Models;
 using Generic.Models;
 using log4net;
 
@@ -13,6 +14,8 @@ namespace BelibaHoma.BLL.Models
 
         [Display(Name = "תעודת זהות")]
         [Required(ErrorMessage = "נא להזין מספר תעודת זהות כולל ספרת ביקורת")]
+        [StringLength(9, MinimumLength = 9, ErrorMessage = "נא להזין ת.ז. כולל ספרת ביקורת")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public string IdNumber { get; set; }
         [Display(Name = "שם פרטי")]
         [Required(ErrorMessage = "שם פרטי זהו שדה חובה")]
@@ -22,6 +25,9 @@ namespace BelibaHoma.BLL.Models
         public string LastName { get; set; }
         [Display(Name = "סיסמא")]
         [Required(ErrorMessage = "נא להזין סיסמא")]
+        [DataType(DataType.Password)]
+        [MinLength(6)]
+        [MaxLength(20)]
         public string Password { get; set; }
         [Display(Name = "זמן יצירה")]
         public DateTime CreationTime { get; set; }
@@ -31,8 +37,9 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "זמן עדכון")]
         public DateTime UpdateTime { get; set; }
         [Display(Name = "כתובת מייל")]
+        [EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
         public string Email { get; set; }
-        [Display(Name = "סטטוס במערכת")]
+        [Display(Name = "משתמש פעיל")]
         public bool IsActive { get; set; }
         [Display(Name = "אזור פעילות")]
         public Area? Area { get; set; }
@@ -59,7 +66,7 @@ namespace BelibaHoma.BLL.Models
 
                 if (userDetails.Length > 3)
                 {
-                    Area = (Area) Enum.Parse(typeof(Area), userDetails[1]);
+                    Area = (Area) Enum.Parse(typeof(Area), userDetails[3]);
                 }
                 else
                 {

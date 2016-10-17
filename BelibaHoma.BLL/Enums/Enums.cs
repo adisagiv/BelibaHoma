@@ -67,5 +67,60 @@ namespace BelibaHoma.BLL.Enums
         [Description("מדעי החברה והרוח")]
         [Display(Name = "מדעי החברה והרוח")]
         SocialSciences = 3
-    }    
+    }
+
+    public enum MaritalStatus
+    {
+        [Description("רווק/ה")]
+        [Display(Name = "רווק/ה")]
+        Single = 0,
+        [Description("נשוי/אה")]
+        [Display(Name = "נשוי/אה")]
+        Married = 1,
+        [Description("גרוש/ה")]
+        [Display(Name = "גרוש/ה")]
+        Divorced = 2,
+        [Description("אלמן/ה")]
+        [Display(Name = "אלמן/ה")]
+        Widowed = 3
+    }
+
+    public enum EmploymentStatus
+    {
+        [Description("מובטל")]
+        [Display(Name = "מובטל")]
+        Unemployed = 0,
+        [Description("מועסק אך לא במקצוע הלימוד")]
+        [Display(Name = "מועסק אך לא במקצוע הלימוד")]
+        TempJob = 1,
+        [Description("מועסק במקצוע הלימוד")]
+        [Display(Name = "מועסק במקצוע הלימוד")]
+        Employed = 2
+    }
+
+    public enum LevelsCoreClasses
+    {
+        [Description("לא רלוונטי")]
+        [Display(Name = "לא רלוונטי")]
+        Irrelevant = 0,
+        [Description("3 יחידות")]
+        [Display(Name = "3 יחידות")]
+        Three = 3,
+        [Description("4 יחידות")]
+        [Display(Name = "4 יחידות")]
+        Four = 4,
+        [Description("5 יחידות")]
+        [Display(Name = "5 יחידות")]
+        Five = 5
+    }
+
+    public enum Gender
+    {
+        [Description("זכר")]
+        [Display(Name = "זכר")]
+        Boy = 0,
+        [Description("נקבה")]
+        [Display(Name = "נקבה")]
+        Girl = 1
+    }
 }
