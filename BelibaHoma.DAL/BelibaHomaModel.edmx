@@ -65,7 +65,7 @@
           <Property Name="ContactMail" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactPhone" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="ContactJobPosition" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="JobStatus" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Trainee">
           <Key>
@@ -73,7 +73,7 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="AcademicYear" Type="int" Nullable="false" />
@@ -96,7 +96,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="AcademicYear" Type="int" Nullable="false" />
@@ -601,7 +601,7 @@
           <Property Name="ContactMail" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactPhone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ContactJobPosition" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="JobStatus" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor" FromRole="JobOffer" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1" FromRole="JobOffer" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2" FromRole="JobOffer" ToRole="AcademicMajor" />
@@ -612,7 +612,7 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
@@ -642,7 +642,7 @@
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
@@ -973,7 +973,7 @@
           <EntitySetMapping Name="JobOffer">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.JobOffer">
               <MappingFragment StoreEntitySet="JobOffer">
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="JobStatus" ColumnName="JobStatus" />
                 <ScalarProperty Name="ContactJobPosition" ColumnName="ContactJobPosition" />
                 <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
                 <ScalarProperty Name="ContactMail" ColumnName="ContactMail" />
