@@ -9,6 +9,7 @@ namespace BelibaHoma.Controllers
 {
     public class HomeController : BaseController
     {
+        // test
         public ActionResult Index()
         {
             // test
