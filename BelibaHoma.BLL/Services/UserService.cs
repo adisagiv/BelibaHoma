@@ -5,6 +5,7 @@ using BelibaHoma.DAL.Interfaces;
 using Catel.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,9 +45,9 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel Add(UserModel model)
+        public StatusModel<int> Add(UserModel model)
         {
-            var status = new StatusModel(false, String.Empty);
+            var status = new StatusModel<int>(false, String.Empty, 0);
 
             try
             {
@@ -66,6 +67,7 @@ namespace BelibaHoma.BLL.Services
                     }
                     model.CreationTime = DateTime.Now;
                     model.UpdateTime = DateTime.Now;
+                    model.LastPasswordUpdate = DateTime.Now;
                     model.IsActive = true;
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     var entity = model.MapTo<User>();
@@ -75,6 +77,7 @@ namespace BelibaHoma.BLL.Services
 
                     status.Success = true;
                     status.Message = String.Format("המשתמש {0} הוזן בהצלחה", model.FullName);
+                    status.Data = entity.Id;
                 }
             }
             catch (Exception ex)

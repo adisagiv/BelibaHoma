@@ -76,12 +76,22 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             var result = _traineeService.Add(model);
 
+            //if (result.Success)
+            //{
+            //    return RedirectToAction("Index", "Trainee", new { Area = "Rackaz" });
+            //}
+
+            return Json(result);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var result = _traineeService.Get(id);
             if (result.Success)
             {
-                return RedirectToAction("Index", "Trainee", new { Area = "Rackaz" });
+                return View(result.Data);
             }
-
-            return Json(new StatusModel(true,"יאי שמרתי"));
+            return null;
         }
     }
 }

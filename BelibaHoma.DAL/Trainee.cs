@@ -40,6 +40,7 @@ namespace BelibaHoma.DAL
         public int EnglishLevel { get; set; }
         public Nullable<int> AcademicMajorNeededHelpId { get; set; }
         public int SemesterNumber { get; set; }
+        public bool DroppedOut { get; set; }
     
         public virtual AcademicInstitution AcademicInstitution { get; set; }
         public virtual AcademicMajor AcademicMajor { get; set; }

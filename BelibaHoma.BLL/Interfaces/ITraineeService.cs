@@ -25,5 +25,11 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel Add(TraineeModel model);
 
+        /// <summary>
+        /// Get Trainee by the User Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<TraineeModel> Get(int id);
     }
 }

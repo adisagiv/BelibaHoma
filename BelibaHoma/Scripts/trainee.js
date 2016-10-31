@@ -72,8 +72,12 @@
         model.AcademicYear = $('#Trainee_AcademicYear').val();
         model.SemesterNumber = $('#Trainee_SemesterNumber').val();
 
-        $.post('/Rackaz/Trainee/Create', model, function(data) {
-            alert();
+        $.post('/Rackaz/Trainee/Create', model, function (data) {
+
+            alert(data.Message);
+            if (data.Success) {  
+                window.location.href = "/Rackaz/Trainee";
+            } 
         });
     });
 });

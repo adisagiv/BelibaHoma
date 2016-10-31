@@ -222,6 +222,7 @@
     <Content Include="Areas\Admin\Views\JobOffer\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\JobOffer\Index.cshtml" />
     <Content Include="Areas\Admin\Views\JobOffer\_JobOfferForm.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Trainee\Details.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
