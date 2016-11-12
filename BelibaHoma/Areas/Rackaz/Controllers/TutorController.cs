@@ -47,10 +47,22 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Create()
         {
             ViewBag.IsCreate = true;
+            var academicMajorResult = _academicMajorService.Get();
+            if (!academicMajorResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
+            //var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
+            //if (!academicInstitutionResult.Success)
+            //{
+            //    var status = new StatusModel(false, academicMajorResult.Message);
+            //    return Error(status)
+            //}
             TutorViewModel model = new TutorViewModel
             {
                 AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
-                AcademicMajorList = _academicMajorService.Get(),
+                AcademicMajorList = academicMajorResult.Data,
                 Tutor = new TutorModel(),
             };
             model.Tutor.User = new UserModel();
