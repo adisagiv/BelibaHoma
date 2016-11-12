@@ -28,7 +28,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             var result = _academicMajorService.Get();
             if (result.Success)
             {
-                return View(result);
+                return View(result.Data);
             }
             var status = new StatusModel(false, result.Message);
             return Error(status);

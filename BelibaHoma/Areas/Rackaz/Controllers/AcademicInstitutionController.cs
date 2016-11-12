@@ -25,7 +25,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Index()
         {
             var result = _academicInstitutionService.Get(CurrentUser.Area);
-            return View(result);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
 
         public ActionResult Create()
@@ -76,6 +81,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = true;
             }
             var result = _academicInstitutionService.Get(id);
+            if (!result.Success)
+            {
+                return Error(new StatusModel(false, result.Message));
+            }
 
             return View(result.Data);
         }
@@ -100,6 +109,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Details(int id)
         {
             var result = _academicInstitutionService.Get(id);
+            if (!result.Success)
+            {
+                return Error(new StatusModel(false,result.Message));
+            }
 
             return View(result.Data);
         }
