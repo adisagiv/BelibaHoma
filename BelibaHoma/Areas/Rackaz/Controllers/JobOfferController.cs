@@ -56,16 +56,20 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
 
             // TODO: change the viewbag to AcademicInstitutionVM to transfer area
-            model.AcademicMajors = _academicMajorService.Get();
+            var academicM = _academicMajorService.Get();
+            if (academicM.Success)
+            {
+                model.AcademicMajors = academicM.Data;
+                return View(model);
+            }
+            return Error(academicM);
+            //model.AcademicMajors = _academicMajorService.Get();
 
-            //TODO: after Adi's changes to academic major that returns status model object!
+            //TODO: Done! after Adi's changes to academic major that returns status model object!
             //if (model.AcademicMajors.Success) 
-            //{
-            //    return View(model);
-            //}
+            //{return View(model);}
             //return Error(result);
-            
-            return View(model);
+            //return View(model);
         }
 
         [HttpPost]
@@ -93,20 +97,21 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = true;
             }
             var result1 = _JobofferService.Get(id);
-            //var result2 = _academicMajorService.Get();
-
-            //  Validate that the requierd job offer was pulled from the DB (result.Success)
-            //we think it should be that way: is it correct?
-
-            if (result1.Success)//TODO: && resul2.Sucess)
+            if (!result1.Success)
             {
-              model.JobOffer = result1.Data;
-              model.AcademicMajors = _academicMajorService.Get(); //TODO: Adi needs to ensoure that data is good to go! model.succes to AM
-              return View(model);
+                return Error(result1);
             }
+            
+            var result2 = _academicMajorService.Get();
+            if (!result2.Success)
+            {
+                return Error(result2); //this is an example for redirect to error page!
+            }
+            //  Validate that the requierd job offer was pulled from the DB (result.Success)
+              model.JobOffer = result1.Data;
+              model.AcademicMajors = result2.Data; 
+              return View(model);
 
-            var result = new StatusModel(result1.Success, result1.Message); //TODO: this is an example for redirect to error page!
-            return Error(result);
         }
 
         [HttpPost]

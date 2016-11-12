@@ -51,7 +51,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             if (!academicMajorResult.Success)
             {
                 var status = new StatusModel(false, academicMajorResult.Message);
-                return Error(status)
+                return Error(status);
             }
             //var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
             //if (!academicInstitutionResult.Success)
@@ -112,7 +112,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             TraineeViewModel model = new TraineeViewModel
             {
                 AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
-                AcademicMajorList = _academicMajorService.Get(),
+                AcademicMajorList = _academicMajorService.Get().Data,
                 Trainee = new TraineeModel()
             };
             ViewBag.IsRackaz = CurrentUser.UserRole == UserRole.Rackaz;

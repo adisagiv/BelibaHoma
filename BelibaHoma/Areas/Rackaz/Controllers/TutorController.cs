@@ -97,7 +97,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             TutorViewModel model = new TutorViewModel
             {
                 AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
-                AcademicMajorList = _academicMajorService.Get(),
+                AcademicMajorList = _academicMajorService.Get().Data,
                 Tutor = new TutorModel()
             };
             ViewBag.IsRackaz = CurrentUser.UserRole == UserRole.Rackaz;
