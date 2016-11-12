@@ -114,8 +114,6 @@ namespace BelibaHoma.BLL.Services
                     var JobOfferRepository = unitOfWork.GetRepository<IJobOfferRepository>();
                     var entity = updatedModel.MapTo<JobOffer>();
 
-
-
                     var joboffer = JobOfferRepository.GetByKey(id);
                     if (joboffer != null)
                     {
