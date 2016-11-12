@@ -30,7 +30,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Index()
         {
             var result = _JobofferService.Get();
-            return View(result.Data);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+
+            return Error(result);
+        
+            //return View(result.Data);
         }
 
         public ActionResult Create()
@@ -51,7 +58,13 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             // TODO: change the viewbag to AcademicInstitutionVM to transfer area
             model.AcademicMajors = _academicMajorService.Get();
 
-
+            //TODO: after Adi's changes to academic major that returns status model object!
+            //if (model.AcademicMajors.Success) 
+            //{
+            //    return View(model);
+            //}
+            //return Error(result);
+            
             return View(model);
         }
 
@@ -65,7 +78,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return RedirectToAction("Index", "JobOffer", new { area = "Trainee" });
             }
 
-            return null;
+            return Error(result);
         }
 
         public ActionResult Edit(int id)
@@ -106,14 +119,18 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return RedirectToAction("Index", "JobOffer", new { area ="Trainee" });
             }
 
-            return null;
+            return Error(result);
         }
 
         public ActionResult Details(int id)
         {
             var result = _JobofferService.Get(id);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
 
-            return View(result.Data);
+            return Error(result);
         }
     }
 }
