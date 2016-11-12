@@ -125,7 +125,7 @@ namespace BelibaHoma.BLL.Services
                         //TODO: ask Roey if needed here - user.Password = updatedModel.Password;
                         user.UserRole = (int)updatedModel.UserRole;
                         user.Email = updatedModel.Email;
-                        user.IdNumber = user.IdNumber;
+                        user.IdNumber = updatedModel.IdNumber;
                         user.IsActive = updatedModel.IsActive;
                         user.UpdateTime = DateTime.Now;
                         user.Area = (int?)updatedModel.Area;

@@ -16,49 +16,55 @@ using Services.Log;
 
 namespace BelibaHoma.BLL.Services
 {
-    public class TraineeService : ITraineeService
+    public class TutorService : ITutorService
     {
         private readonly IUserService _userService;
 
-        public TraineeService(IUserService userService)
+        public TutorService(IUserService userService)
         {
             _userService = userService;
         }
 
-
         /// <summary>
-        /// Get list of all trainees from db
+        /// Get list of all tutors from db
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        public List<TraineeModel> GetTrainees(Area? area)
+        public List<TutorModel> GetTutors(Area? area)
         {
-            var result = new List<TraineeModel>();
+            var result = new List<TutorModel>();
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
-                    result = traineeRepository.GetAll().Where(t => (!area.HasValue || t.User.Area == (int)area.Value) && t.User.UserRole == 3).OrderBy(t => t.User.Area).ThenBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList().Select(t => new TraineeModel(t)).ToList();
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    result =
+                        tutorRepository.GetAll()
+                            .Where(t => (!area.HasValue || t.User.Area == (int) area.Value) && t.User.UserRole == 2)
+                            .OrderBy(t => t.User.Area)
+                            .ThenBy(t => t.User.LastName)
+                            .ThenBy(t => t.User.FirstName)
+                            .ToList()
+                            .Select(t => new TutorModel(t))
+                            .ToList();
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Trainees from DB");
+                var message = String.Format("Error getting Tutors from DB");
                 LogService.Logger.Error(message, ex);
             }
-
 
             return result;
         }
 
         /// <summary>
-        /// Add new Trainee
+        /// Add new Tutor
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public StatusModel Add(TraineeModel model)
+        public StatusModel Add(TutorModel model)
         {
             var status = new StatusModel(false, String.Empty);
 
@@ -67,7 +73,7 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     //Updating the User Role in the model
-                    model.User.UserRole = UserRole.Trainee;
+                    model.User.UserRole = UserRole.Tutor;
 
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
@@ -76,18 +82,17 @@ namespace BelibaHoma.BLL.Services
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
                     var academicMajor = academicMajorRepository.GetByKey(model.AcademicMajor.Id);
                     var academicMajor1 = academicMajorRepository.GetByKey(model.AcademicMajor1.Id);
-                    var academicMajor2 = academicMajorRepository.GetByKey(model.AcademicMajor2.Id);
 
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
 
                     //Running some server side validations
                     if (model.Birthday > DateTime.Now.AddYears(-15))
                     {
-                        throw new System.ArgumentException("Trainee Birthday doesn't make sense", "model");
+                        throw new System.ArgumentException("Tutor Birthday doesn't make sense", "model");
                     }
-                    if (academicInstitution.InstitutionType == (int) InstitutionType.Mechina && model.AcademicYear != 0 && model.SemesterNumber != 0)
+                    if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && model.AcademicYear != 0 && model.SemesterNumber != 0)
                     {
-                        throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
+                        throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "model");
                     }
                     if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (model.AcademicYear == 0 || model.SemesterNumber == 0))
                     {
@@ -98,44 +103,41 @@ namespace BelibaHoma.BLL.Services
                     var userStatus = _userService.Add(model.User);
                     if (userStatus.Success)
                     {
-                        //Get the new user entity from DB (also linked to Trainee)
+                        //Get the new user entity from DB (also linked to Tutor)
                         var user = userRepository.GetByKey(userStatus.Data);
 
-                        //Updating "not input" fields in Trainee model
+                        //Updating "not input" fields in Tutor model
                         model.TutorHours = 0;
                         model.TutorHoursBonding = 0;
-                        model.DroppedOut = false;
 
-                        //Mapping the model into Trainee Entity
-                        var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
-                        var entity = model.MapTo<Trainee>();
+                        //Mapping the model into Tutor Entity
+                        var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                        var entity = model.MapTo<Tutor>();
 
                         //Linking the Complexed entities to the retrieved ones
                         entity.AcademicInstitution = academicInstitution;
                         entity.AcademicMajor = academicMajor;
                         entity.AcademicMajor1 = academicMajor1;
-                        entity.AcademicMajor2 = academicMajor2;
                         entity.User = user;
 
                         entity.AcademicInstitutionId = academicInstitution.Id;
                         entity.AcademicMajorId = academicMajor.Id;
                         entity.AcademicMinorId = academicMajor1.Id;
-                        entity.AcademicMajorNeededHelpId = academicMajor2.Id;
                         entity.UserId = user.Id;
 
                         //Finally Adding the entity to DB
-                        traineeRepository.Add(entity);
+                        tutorRepository.Add(entity);
                         unitOfWork.SaveChanges();
 
                         //If we got here - Yay! :)
                         status.Success = true;
-                        status.Message = String.Format("חניך {0} הוזן בהצלחה", model.User.FullName);
+                        status.Message = String.Format("חונך {0} הוזן בהצלחה", model.User.FullName);
                     }
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הוספת חניך");
+                status.Message = String.Format("שגיאה במהלך הוספת החונך");
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -143,13 +145,13 @@ namespace BelibaHoma.BLL.Services
         }
 
         /// <summary>
-        /// Get Trainee by the User Id
+        /// Get Tutor by the User Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public StatusModel<TraineeModel> Get(int id)
+        public StatusModel<TutorModel> Get(int id)
         {
-            var status = new StatusModel<TraineeModel>();
+            var status = new StatusModel<TutorModel>();
 
             try
             {
@@ -158,18 +160,18 @@ namespace BelibaHoma.BLL.Services
 
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
 
-                    var trainee = traineeRepository.GetByKey(id);
+                    var tutor = tutorRepository.GetByKey(id);
 
-                    status.Data = new TraineeModel(trainee);
+                    status.Data = new TutorModel(tutor);
 
                     status.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה. לא נמצא החניך המבוקש.");
+                status.Message = String.Format("שגיאה. לא נמצא החונך המבוקש.");
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -177,12 +179,12 @@ namespace BelibaHoma.BLL.Services
         }
 
         /// <summary>
-        /// Update trainee in DB
+        /// Update tutor in DB
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
         /// <returns></returns>
-        public StatusModel Update(int id, TraineeModel updatedModel)
+        public StatusModel Update(int id, TutorModel updatedModel)
         {
             var status = new StatusModel(false, String.Empty);
 
@@ -190,7 +192,7 @@ namespace BelibaHoma.BLL.Services
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
 
@@ -198,10 +200,10 @@ namespace BelibaHoma.BLL.Services
                         academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
                     var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
                     var academicMajor1 = academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id);
-                    var academicMajor2 = academicMajorRepository.GetByKey(updatedModel.AcademicMajor2.Id);
+                   
 
-                    var trainee = traineeRepository.GetByKey(id);
-                    if (trainee != null)
+                    var tutor = tutorRepository.GetByKey(id);
+                    if (tutor != null)
                     {
                         //Running some server side validations
                         if (updatedModel.User.IdNumber.Length != 9)
@@ -210,70 +212,63 @@ namespace BelibaHoma.BLL.Services
                         }
                         if (updatedModel.Birthday > DateTime.Now.AddYears(-15))
                         {
-                            throw new System.ArgumentException("Trainee Birthday doesn't make sense", "updatedModel");
+                            throw new System.ArgumentException("Tutor Birthday doesn't make sense", "updatedModel");
                         }
                         if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && updatedModel.AcademicYear != 0 && updatedModel.SemesterNumber != 0)
                         {
-                            throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "updatedModel");
                         }
                         if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (updatedModel.AcademicYear == 0 || updatedModel.SemesterNumber == 0))
                         {
-                            throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "updatedModel");
                         }
-                        if (updatedModel.User.IsActive != false && updatedModel.DroppedOut == true)
-                        {
-                            throw new System.ArgumentException("Trainee dropped out so he is no longer updated", "updatedModel");
-                        }
+                   
 
                         //Updating the entity from the model received by the form
-                        trainee.User.FirstName = updatedModel.User.FirstName;
-                        trainee.User.LastName = updatedModel.User.LastName;
-                        trainee.User.Email = updatedModel.User.Email;
-                        trainee.User.IdNumber = updatedModel.User.IdNumber;
-                        trainee.User.IsActive = updatedModel.User.IsActive;
-                        trainee.User.UpdateTime = DateTime.Now;
+                        tutor.User.FirstName = updatedModel.User.FirstName;
+                        tutor.User.LastName = updatedModel.User.LastName;
+                        tutor.User.Email = updatedModel.User.Email;
+                        tutor.User.IdNumber = updatedModel.User.IdNumber;
+                        tutor.User.IsActive = updatedModel.User.IsActive;
+                        tutor.User.UpdateTime = DateTime.Now;
                         if (updatedModel.User.Area != null)
                         {
-                            trainee.User.Area = (int?)updatedModel.User.Area;
+                            tutor.User.Area = (int?)updatedModel.User.Area;
                         }
-                        trainee.Address = updatedModel.Address;
-                        trainee.Gender = (int)updatedModel.Gender;
-                        trainee.Birthday = updatedModel.Birthday;
-                        trainee.AcademicYear = updatedModel.AcademicYear;
-                        trainee.SemesterNumber = updatedModel.SemesterNumber;
-                        trainee.PhoneNumber = updatedModel.PhoneNumber;
-                        trainee.MaritalStatus = (int) updatedModel.MaritalStatus;
-                        trainee.EmploymentStatus = (int?) updatedModel.EmploymentStatus;
-                        trainee.NeededHelpDescription = updatedModel.NeededHelpDescription;
-                        trainee.PhysicsLevel = (int) updatedModel.PhysicsLevel;
-                        trainee.MathLevel = (int) updatedModel.MathLevel;
-                        trainee.EnglishLevel = (int) updatedModel.EnglishLevel;
-                        trainee.DroppedOut = updatedModel.DroppedOut;
-                        
-                        //Linked Entities - need to verify Academic Institutions and Majors
-                        trainee.AcademicInstitution = academicInstitution;
-                        trainee.AcademicInstitutionId = academicInstitution.Id;
-                        trainee.AcademicMajor = academicMajor;
-                        trainee.AcademicMajorId = academicMajor.Id;
-                        trainee.AcademicMajor1 = academicMajor1;
-                        trainee.AcademicMinorId = academicMajor1.Id;
-                        trainee.AcademicMajor2 = academicMajor;
-                        trainee.AcademicMajorNeededHelpId = academicMajor2.Id;
+                        tutor.Address = updatedModel.Address;
+                        tutor.Gender = (int)updatedModel.Gender;
+                        tutor.Birthday = updatedModel.Birthday;
+                        tutor.AcademicYear = updatedModel.AcademicYear;
+                        tutor.SemesterNumber = updatedModel.SemesterNumber;
+                        tutor.PhoneNumber = updatedModel.PhoneNumber;
+                        tutor.PhysicsLevel = (int)updatedModel.PhysicsLevel;
+                        tutor.MathLevel = (int)updatedModel.MathLevel;
+                        tutor.EnglishLevel = (int)updatedModel.EnglishLevel;
+                       
 
+                        //Linked Entities - need to verify Academic Institutions and Majors
+                        tutor.AcademicInstitution = academicInstitution;
+                        tutor.AcademicInstitutionId = academicInstitution.Id;
+                        tutor.AcademicMajor = academicMajor;
+                        tutor.AcademicMajorId = academicMajor.Id;
+                        tutor.AcademicMajor1 = academicMajor1;
+                        tutor.AcademicMinorId = academicMajor1.Id;
+                     
                         unitOfWork.SaveChanges();
 
                         status.Success = true;
-                        status.Message = String.Format("פרטי החניך {0} עודכנו בהצלחה", updatedModel.FullName);
+                        status.Message = String.Format("פרטי החונך {0} עודכנו בהצלחה", updatedModel.FullName);
                     }
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך עדכון פרטי החניך");
+                status.Message = String.Format("שגיאה במהלך עדכון פרטי החונך");
                 LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
         }
+
     }
 }

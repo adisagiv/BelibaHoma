@@ -110,6 +110,7 @@
           <Property Name="MathLevel" Type="int" Nullable="false" />
           <Property Name="EnglishLevel" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TutorReport">
           <Key>
@@ -658,6 +659,7 @@
           <Property Name="MathLevel" Type="Int32" Nullable="false" />
           <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="Tutor" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="Tutor" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="Tutor" ToRole="AcademicMajor" />
@@ -1028,6 +1030,7 @@
           <EntitySetMapping Name="Tutor">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Tutor">
               <MappingFragment StoreEntitySet="Tutor">
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
                 <ScalarProperty Name="MathLevel" ColumnName="MathLevel" />

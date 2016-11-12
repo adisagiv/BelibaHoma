@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorModel>
 
 @{
     ViewBag.Title = "Index";
@@ -14,7 +14,7 @@
 {
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script>
-        $('#trainee-table')
+        $('#tutor-table')
             .DataTable({
                 language: {
                     url: "/Scripts/datatable/language/hebrew.json"
@@ -69,13 +69,13 @@
     </script>
 }
 
-<h2>חניכים</h2>
+<h2>חונכים</h2>
 
 <p>
-    @Html.ActionLink("הוסף משתמש", "Create", "Trainee", new { Area = "Rackaz" }, new object { })
+    @Html.ActionLink("הוסף חונך", "Create", "Tutor", new { Area = "Rackaz" }, new object { })
 </p>
-<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)"/>
-<table class="table" id="trainee-table">
+<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
+<table class="table" id="tutor-table">
     <thead>
         <tr>
             <th>
@@ -157,28 +157,28 @@
                     @Html.DisplayFor(modelItem => item.User.Email)
                 </td>
                 @{
-                    if (ViewBag.IsRackaz != true && item.User.Area != null)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.User.Area)
-                        </td>
-                    }
+            if (ViewBag.IsRackaz != true && item.User.Area != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Area)
+                </td>
+            }
                 }
                 <td>
                     @{
-                        if (item.User.IsActive == true)
-                        {
-                            @String.Format("פעיל");
-                        }
-                        else
-                        {
-                            @String.Format("לא פעיל");
-                        }
+            if (item.User.IsActive == true)
+            {
+                @String.Format("פעיל");
+            }
+            else
+            {
+                @String.Format("לא פעיל");
+            }
                     }
                 </td>
-                <td>    
-                    @Html.ActionLink("ערוך פרטי חניך", "Edit", new { Area = "Rackaz", id = item.User.Id }) |
-                    @Html.ActionLink("פרטים", "Details", new { Area = "Trainee", id = item.User.Id })
+                <td>
+                    @Html.ActionLink("ערוך פרטי חונך", "Edit", new { Area = "Rackaz", id = item.User.Id }) |
+                    @Html.ActionLink("פרטים", "Details", new { Area = "Tutor", id = item.User.Id })
                 </td>
             </tr>
         }

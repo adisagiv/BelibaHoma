@@ -102,9 +102,13 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interfaces\IJobOfferService.cs" />
     <Compile Include="Interfaces\ITraineeService.cs" />
+    <Compile Include="Interfaces\ITutorService.cs" />
+    <Compile Include="Interfaces\ITutorTraineeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\JobOfferModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
+    <Compile Include="Models\TutorModel.cs" />
+    <Compile Include="Models\TutorTraineeModel.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Interfaces\IAcademicMajorService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />
@@ -119,6 +123,8 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\JobOfferService.cs" />
     <Compile Include="Services\TraineeService.cs" />
+    <Compile Include="Services\TutorService.cs" />
+    <Compile Include="Services\TutorTraineeService.cs" />
     <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,19 +1,19 @@
 ﻿@using BelibaHoma.BLL.Enums
-@model BelibaHoma.BLL.Models.TraineeModel
+@model BelibaHoma.BLL.Models.TutorModel
 
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>פרטי החניך</h2>
+<h2>פרטי החונך</h2>
 
 <div>
 
     <hr />
     <dl class="dl-horizontal">
         <dd>
-            <h3>פרטים אישיים</h3>  
+            <h3>פרטים אישיים</h3>
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.User.IdNumber)
@@ -44,26 +44,6 @@
         </dt>
         <dd>
             @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaritalStatus)
-        </dt>
-        <dd>
-            @Model.MaritalStatus.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EmploymentStatus)
-        </dt>
-        <dd>
-            @{
-                EmploymentStatus empstat;
-                empstat = Model.EmploymentStatus.Value;
-                if (empstat != null)
-                {
-                    @empstat.ToDescription()
-                    ;
-                }
-            }
         </dd>
         <dd>
             <h3>פרטי התקשרות</h3>
@@ -145,18 +125,6 @@
             @Model.PhysicsLevel.ToDescription()
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.AcademicMajor2)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicMajor2.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NeededHelpDescription)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NeededHelpDescription)
-        </dd>
-        <dt>
             @Html.DisplayNameFor(model => model.TutorHours)
         </dt>
         <dd>
@@ -168,15 +136,19 @@
         <dd>
             @Html.DisplayFor(model => model.TutorHoursBonding)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DroppedOut)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DroppedOut)
-        </dd>
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.UserId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @*//TODO: verify how to route this only if Rackaz / Admin*@
+    @{
+        if (ViewBag.IsTutor == false)
+        {
+            var id = Model.UserId;
+            var action = "Edit/" + id;
+            @Html.ActionLink("Edit", action, new {Area = "Rackaz"})
+            <br>
+            @Html.ActionLink("Back to List", "Index", new {Area = "Rackaz"})
+}
+        
+    }
 </p>
