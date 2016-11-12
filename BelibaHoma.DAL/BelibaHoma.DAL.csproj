@@ -102,6 +102,8 @@
     <Compile Include="Interfaces\IAcademicInstitutionRepository.cs" />
     <Compile Include="Interfaces\IAcademicMajorRepository.cs" />
     <Compile Include="Interfaces\IJobOfferRepository.cs" />
+    <Compile Include="Interfaces\ITutorRepository.cs" />
+    <Compile Include="Interfaces\ITutorTraineeRepository.cs" />
     <Compile Include="JobOffer.cs">
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>
@@ -111,6 +113,8 @@
     <Compile Include="Interfaces\ITraineeRepository.cs" />
     <Compile Include="Repositories\JobOfferRepository.cs" />
     <Compile Include="Repositories\TraineeRepository.cs" />
+    <Compile Include="Repositories\TutorRepository.cs" />
+    <Compile Include="Repositories\TutorTraineeRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\AcademicInstitutionRepository.cs" />
     <Compile Include="Repositories\AcademicMajorRepository.cs" />

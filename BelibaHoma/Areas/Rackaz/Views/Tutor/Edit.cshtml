@@ -1,0 +1,17 @@
+﻿@model BelibaHoma.Areas.Rackaz.Models.TutorViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/tutor.js"></script>
+}
+
+
+<h2>ערוך פרטי חונך</h2>
+
+
+@Html.Partial("_TutorForm", Model)

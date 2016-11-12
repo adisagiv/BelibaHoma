@@ -15,21 +15,21 @@ using Generic.Models;
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
     [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz })]
-    public class TraineeController : BaseController
+    public class TutorController : BaseController
     {
-        private readonly ITraineeService _traineeService;
+        private readonly ITutorService _tutorService;
         private readonly IAcademicInstitutionService _academicInstitutionService;
         private readonly IAcademicMajorService _academicMajorService;
 
-        public TraineeController(ITraineeService traineeService, IAcademicInstitutionService academicInstitutionService,
+        public TutorController(ITutorService tutorService, IAcademicInstitutionService academicInstitutionService,
             IAcademicMajorService academicMajorService)
         {
-            this._traineeService = traineeService;
+            this._tutorService = tutorService;
             this._academicInstitutionService = academicInstitutionService;
             this._academicMajorService = academicMajorService;
         }
 
-        // GET: Rackaz/User
+        // GET: Rackaz/Tutor
         public ActionResult Index()
         {
             if (CurrentUser.UserRole.ToString() == "Rackaz")
@@ -40,27 +40,27 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 ViewBag.IsRackaz = false;
             }
-            var result = _traineeService.GetTrainees(CurrentUser.Area);
+            var result = _tutorService.GetTutors(CurrentUser.Area);
             return View(result);
         }
 
         public ActionResult Create()
         {
             ViewBag.IsCreate = true;
-            TraineeViewModel model = new TraineeViewModel
+            TutorViewModel model = new TutorViewModel
             {
                 AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
                 AcademicMajorList = _academicMajorService.Get(),
-                Trainee = new TraineeModel(),
+                Tutor = new TutorModel(),
             };
-            model.Trainee.User = new UserModel();
+            model.Tutor.User = new UserModel();
             if (CurrentUser.UserRole == UserRole.Admin)
             {
                 ViewBag.IsRackaz = false;
             }
             else
             {
-                model.Trainee.User.Area = CurrentUser.Area;
+                model.Tutor.User.Area = CurrentUser.Area;
                 ViewBag.IsRackaz = true;
             }
 
@@ -68,57 +68,53 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(TraineeModel model)
+        public ActionResult Create(TutorModel model)
         {
             if (CurrentUser.UserRole == UserRole.Rackaz)
             {
                 model.User.Area = CurrentUser.Area;
             }
-            var result = _traineeService.Add(model);
-
-            //if (result.Success)
-            //{
-            //    return RedirectToAction("Index", "Trainee", new { Area = "Rackaz" });
-            //}
+            var result = _tutorService.Add(model);
 
             return Json(result);
         }
 
-        public ActionResult Details(int id)
-        {
-            var result = _traineeService.Get(id);
-            if (result.Success)
-            {
-                return View(result.Data);
-            }
-            return null;
-        }
 
         public ActionResult Edit(int id)
         {
-            TraineeViewModel model = new TraineeViewModel
+            TutorViewModel model = new TutorViewModel
             {
                 AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
                 AcademicMajorList = _academicMajorService.Get(),
-                Trainee = new TraineeModel()
+                Tutor = new TutorModel()
             };
             ViewBag.IsRackaz = CurrentUser.UserRole == UserRole.Rackaz;
             ViewBag.IsCreate = false;
-            var result = _traineeService.Get(id);
+            var result = _tutorService.Get(id);
             if (result.Success)
             {
-                model.Trainee = result.Data;
+                model.Tutor = result.Data;
             }
 
             return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, TraineeModel model)
+        public ActionResult Edit(int id, TutorModel model)
         {
-            var result = _traineeService.Update(id, model);
+            var result = _tutorService.Update(id, model);
 
             return Json(result);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var result = _tutorService.Get(id);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            return null;
         }
     }
 }

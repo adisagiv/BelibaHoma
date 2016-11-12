@@ -36,6 +36,8 @@ namespace BelibaHoma.BLL.Models
         public UserRole UserRole { get; set; }
         [Display(Name = "זמן עדכון")]
         public DateTime UpdateTime { get; set; }
+        [Display(Name = "זמן עדכון סיסמא")]
+        public DateTime LastPasswordUpdate { get; set; }
         [Display(Name = "כתובת מייל")]
         [EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
         public string Email { get; set; }

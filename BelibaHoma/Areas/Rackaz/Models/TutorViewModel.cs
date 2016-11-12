@@ -10,13 +10,13 @@ using Ninject.Planning.Bindings;
 
 namespace BelibaHoma.Areas.Rackaz.Models
 {
-    public class TraineeViewModel
+    public class TutorViewModel
     {
-        public TraineeModel Trainee;
+        public TutorModel Tutor;
         public List<AcademicInstitutionModel> AcademicInstitutionList;
         public List<AcademicMajorModel> AcademicMajorList;
 
-        public TraineeViewModel()
+        public TutorViewModel()
         {
 
         }

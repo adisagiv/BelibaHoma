@@ -1,4 +1,10 @@
-﻿$(function() {
+﻿$(function () {
+    //Create a new academic inst. from form
+    //$('#create-new-academic').click(function (ac) {
+    //    ac.preventDefault();
+    //    $('#academmic-institution-modal').modal();
+    //});
+
     $('#trainee-submit').click(function(e) {
         e.preventDefault();
 
@@ -71,9 +77,20 @@
         model.EnglishLevel = $('#Trainee_EnglishLevel').val();
         model.AcademicYear = $('#Trainee_AcademicYear').val();
         model.SemesterNumber = $('#Trainee_SemesterNumber').val();
+        var isCreate = $('#is-create').val();
+        var url = '';
+        if (isCreate == "true") {
+            url = '/Rackaz/Trainee/Create';
+        } else {
+            url = '/Rackaz/Trainee/Edit/' + $('#UserId').val();
+        }
+        
 
-        $.post('/Rackaz/Trainee/Create', model, function(data) {
-            alert();
+        $.post(url, model, function (data) {
+            alert(data.Message);
+            if (data.Success) {  
+                window.location.href = "/Rackaz/Trainee";
+            } 
         });
     });
 });

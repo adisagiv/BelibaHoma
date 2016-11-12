@@ -22,7 +22,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        StatusModel Add(UserModel model);
+        StatusModel<int> Add(UserModel model);
         
         /// <summary>
         /// Update a User in db

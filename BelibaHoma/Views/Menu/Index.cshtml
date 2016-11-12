@@ -29,12 +29,17 @@
             // Add Tutor related links here
             if (Model.UserRole.ToString() == "Tutor")
             {
-
+                var id = Model.Id;
+                var action = "Details/" + id;
+                <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Tutor", new { Area = "Tutor" }, new object { })</li>
             }
 
             // Add Trainee related links here
             if (Model.UserRole.ToString() == "Trainee")
             {
+                var id = Model.Id;
+                var action = "Details/" + id;
+                <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Trainee", new {Area = "Trainee"}, new object {})</li>
                 <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>
             }
         }

@@ -90,6 +90,7 @@
           <Property Name="EnglishLevel" Type="int" Nullable="false" />
           <Property Name="AcademicMajorNeededHelpId" Type="int" />
           <Property Name="SemesterNumber" Type="int" Nullable="false" />
+          <Property Name="DroppedOut" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tutor">
           <Key>
@@ -109,6 +110,7 @@
           <Property Name="MathLevel" Type="int" Nullable="false" />
           <Property Name="EnglishLevel" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TutorReport">
           <Key>
@@ -159,6 +161,7 @@
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Area" Type="int" />
+          <Property Name="LastPasswordUpdate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK_Grade_Trainee">
           <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
@@ -629,6 +632,7 @@
           <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
           <Property Name="AcademicMajorNeededHelpId" Type="Int32" />
           <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
+          <Property Name="DroppedOut" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="Trainee" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
@@ -655,6 +659,7 @@
           <Property Name="MathLevel" Type="Int32" Nullable="false" />
           <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="Tutor" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="Tutor" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="Tutor" ToRole="AcademicMajor" />
@@ -716,6 +721,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Area" Type="Int32" />
+          <Property Name="LastPasswordUpdate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
         </EntityType>
@@ -998,6 +1004,7 @@
           <EntitySetMapping Name="Trainee">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Trainee">
               <MappingFragment StoreEntitySet="Trainee">
+                <ScalarProperty Name="DroppedOut" ColumnName="DroppedOut" />
                 <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
                 <ScalarProperty Name="AcademicMajorNeededHelpId" ColumnName="AcademicMajorNeededHelpId" />
                 <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
@@ -1023,6 +1030,7 @@
           <EntitySetMapping Name="Tutor">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Tutor">
               <MappingFragment StoreEntitySet="Tutor">
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
                 <ScalarProperty Name="MathLevel" ColumnName="MathLevel" />
@@ -1080,6 +1088,7 @@
           <EntitySetMapping Name="User">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="LastPasswordUpdate" ColumnName="LastPasswordUpdate" />
                 <ScalarProperty Name="Area" ColumnName="Area" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

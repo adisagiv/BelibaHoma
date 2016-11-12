@@ -9,35 +9,38 @@ using BelibaHoma.BLL.Models;
 
 namespace BelibaHoma.BLL.Interfaces
 {
-    public interface ITraineeService
+    public interface ITutorService
     {
         /// <summary>
-        /// Get list of all trainees from db
+        /// Get list of all Tutors from db
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        List<TraineeModel> GetTrainees(Area? area);
+        List<TutorModel> GetTutors(Area? area);
 
         /// <summary>
-        /// Add new Trainee
+        /// Add new Tutor
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        StatusModel Add(TraineeModel model);
+        StatusModel Add(TutorModel model);
 
+            
         /// <summary>
-        /// Get Trainee by the User Id
+        /// Get Tutor by the User Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        StatusModel<TraineeModel> Get(int id);
+        StatusModel<TutorModel> Get(int id);
 
         /// <summary>
-        /// Update trainee in DB
+        /// Update tutor in DB
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
         /// <returns></returns>
-        StatusModel Update(int id, TraineeModel updatedModel);
+        StatusModel Update(int id, TutorModel updatedModel);
     }
-}
+
+    }
+
