@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using BelibaHoma.BLL.Models;
 using Generic.GenericModel.Models;
 using BelibaHoma.Controllers;
+using Generic.Models;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
@@ -25,7 +26,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Index()
         {
             var result = _academicMajorService.Get();
-            return View(result);
+            if (result.Success)
+            {
+                return View(result);
+            }
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
 
         public ActionResult Create()

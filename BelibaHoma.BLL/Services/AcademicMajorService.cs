@@ -19,24 +19,24 @@ namespace BelibaHoma.BLL.Services
         /// <summary>
         /// Get all AcademicMajor from the db
         /// </summary>
-        /// <param name="area"></param>
         /// <returns></returns>
-        public List<AcademicMajorModel> Get()
+        public StatusModel<List<AcademicMajorModel>> Get()
         {
-            var result = new List<AcademicMajorModel>();
+            var result = new StatusModel<List<AcademicMajorModel>>(false,String.Empty,new List<AcademicMajorModel>());
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
-                    result = academicMajorRepository.GetAll().Where(am => true).ToList().Select(am => new AcademicMajorModel(am)).ToList();
+                    result.Data = academicMajorRepository.GetAll().Where(am => true).ToList().Select(am => new AcademicMajorModel(am)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Academic Majors from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת מוסדות הלימוד ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
             }
 
             return result;

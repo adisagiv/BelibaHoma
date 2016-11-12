@@ -16,7 +16,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        List<AcademicMajorModel> Get();
+        StatusModel<List<AcademicMajorModel>> Get();
 
         /// <summary>
         /// Add new AcademicMajor to db
