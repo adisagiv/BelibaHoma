@@ -47,8 +47,8 @@ namespace BelibaHoma.BLL.Models
         //public AcademicMajorModel AcademicMajorModel { get; set; }
 
         public int RelevantMajorId1 { get; set; }
-        public Nullable<int> RelevantMajorId2 { get; set; }
-        public Nullable<int> RelevantMajorId3 { get; set; }
+        public int? RelevantMajorId2 { get; set; }
+        public int? RelevantMajorId3 { get; set; }
 
         public AcademicMajorModel AcademicMajor { get; set; }
         public AcademicMajorModel AcademicMajor1 { get; set; }
@@ -75,8 +75,8 @@ namespace BelibaHoma.BLL.Models
         public string Address { get; set; }
 
         [Display(Name = "מספר עובדים הנדרשים למשרה")]
-        [Required]
-        public int NumEmployees { get; set; }
+        //[Required]
+        public int? NumEmployees { get; set; }
 
         [Display(Name = "שם איש הקשר")]
         [Required(ErrorMessage = "שם איש הקשר זהו שדה חובה")]
@@ -113,6 +113,27 @@ namespace BelibaHoma.BLL.Models
 
         public JobOfferModel()
         {
+            Id = 0;
+            AcademicMajor = new AcademicMajorModel();
+            AcademicMajor1 = new AcademicMajorModel();
+            AcademicMajor2 = new AcademicMajorModel();
+            JobArea = 0;
+            JobTitle = "";
+            CreationTime = DateTime.Now;
+            UpdateTime = DateTime.Now;
+            JobStatus = 0;
+            ContactJobPosition = "";
+            ContactMail = "";
+            ContactName = "";
+            ContactPhone = "";
+            NumEmployees = 0;
+            Address = "";
+            Organization = "";
+            Requirements = "";
+            Description = "";
+            RelevantMajorId1 = 0;
+            RelevantMajorId2 = 0;
+            RelevantMajorId3 = 0;
 
         }
     }

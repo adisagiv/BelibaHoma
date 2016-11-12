@@ -1,0 +1,200 @@
+﻿@model BelibaHoma.BLL.Models.JobOfferModel
+@using BelibaHoma.BLL.Enums
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>פירוט משרה</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.JobTitle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UpdateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobArea)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Requirements)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademicMajor.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
+            @*@Html.DisplayNameFor(model => model.RelevantMajorId2)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
+            @*@Html.DisplayNameFor(model => model.RelevantMajorId3)*@
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Organization)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumEmployees)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactMail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactJobPosition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JobStatus)
+        </th>
+
+        <th></th>
+
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.JobTitle)
+        </td>
+        <td>
+            @Model.UpdateTime.ToLongDateString()
+        </td>
+        <td>
+            @Model.CreationTime.ToLongDateString()
+        </td>
+        <td>
+            @Model.JobArea.ToDescription()
+        </td>
+        <td>
+            @Model.Requirements.ToString()
+        </td>
+        <td>
+            @Model.Description.ToString()
+        </td>
+        <td>
+            @Model.AcademicMajor.Name
+        </td>
+        <td>
+            @Model.RelevantMajorId2.ToString()
+        </td>
+        <td>
+            @Model.RelevantMajorId3.ToString()
+        </td>
+        <td>
+            @Model.Organization.ToString()
+        </td>
+        <td>
+            @Model.JobType.ToDescription()
+        </td>
+        <td>
+            @Model.Address.ToString()
+        </td>
+        <td>
+            @Model.NumEmployees.ToString()
+        </td>
+        <td>
+            @Model.ContactName.ToString()
+        </td>
+        <td>
+            @Model.ContactMail.ToString()
+        </td>
+        <td>
+            @Model.ContactPhone.ToString()
+        </td>
+        <td>
+            @Model.ContactJobPosition.ToString()
+        </td>
+        <td>
+            @Model.JobStatus.ToDescription()
+        </td>
+        <td>
+            @Html.ActionLink("Back to List", "Index") 
+
+        </td>
+    </tr>
+
+
+    @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @item.UpdateTime.ToLongDateString()
+                </td>
+                <td>
+                    @item.CreationTime.ToLongDateString()
+                </td>
+                <td>
+                    @item.JobArea.ToDescription()
+                </td>
+                <td>
+                    @item.Requirements.ToString()
+                </td>
+                <td>
+                    @item.Description.ToString()
+                </td>
+                <td>
+                    @item.AcademicMajor.Name
+                </td>
+                <td>
+                    @item.RelevantMajorId2.ToString()
+                </td>
+                <td>
+                    @item.RelevantMajorId3.ToString()
+                </td>
+                <td>
+                    @item.Organization.ToString()
+                </td>
+                <td>
+                    @item.JobType.ToDescription()
+                </td>
+                <td>
+                    @item.Address.ToString()
+                </td>
+                <td>
+                    @item.NumEmployees.ToString()
+                </td>
+                <td>
+                    @item.ContactName.ToString()
+                </td>
+                <td>
+                    @item.ContactMail.ToString()
+                </td>
+                <td>
+                    @item.ContactPhone.ToString()
+                </td>
+                <td>
+                    @item.ContactJobPosition.ToString()
+                </td>
+                <td>
+                    @item.JobStatus.ToDescription()
+                </td>
+                <td>*@
+    @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+        @Html.ActionLink("Back to List", "Index") |
+        @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
+    @*</td>*@
+    @*</tr>*@
+    }
+
+</table>

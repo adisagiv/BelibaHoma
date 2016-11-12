@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Generic.Models;
 using Ninject;
 
 namespace BelibaHoma.Controllers
@@ -48,6 +49,11 @@ namespace BelibaHoma.Controllers
 
 
             base.OnActionExecuting(filterContext);
+        }
+
+        public ActionResult Error(StatusModel status)
+        {
+            return View("~/Views/Shared/Error.cshtml",status);
         }
     }
 }

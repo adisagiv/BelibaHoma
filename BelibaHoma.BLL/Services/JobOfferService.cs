@@ -22,29 +22,26 @@ namespace BelibaHoma.BLL.Services
         /// Get all job offers from the db
         /// </summary>
         /// <returns></returns>
-        public List<JobOfferModel> Get(JobArea? jobarea)
+        public StatusModel<List<JobOfferModel>> Get()
         {
-            var result = new List<JobOfferModel>();
+            var result = new StatusModel<List<JobOfferModel>>(false, String.Empty, new List<JobOfferModel>());
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var JobOfferRepository = unitOfWork.GetRepository<IJobOfferRepository>();
+                    var jobOfferRepository = unitOfWork.GetRepository<IJobOfferRepository>();
 
-                    var Joboffer = JobOfferRepository.GetAll();
+                    result.Data = jobOfferRepository.GetAll().ToList().Select(ai => new JobOfferModel(ai)).ToList();
 
-                    result = Joboffer.Where(ai => !jobarea.HasValue || ai.JobArea == (int)jobarea.Value).ToList()
-                        .Select(ai => new JobOfferModel(ai)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting job offers from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("Error getting job offers from DB");
+                LogService.Logger.Error(result.Message, ex);
             }
-
-
             return result;
         }
 
@@ -57,8 +54,35 @@ namespace BelibaHoma.BLL.Services
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
+                    model.CreationTime = DateTime.Now;
                     var JobOfferRepository = unitOfWork.GetRepository<IJobOfferRepository>();
                     var entity = model.MapTo<JobOffer>();
+                    
+                    //add repositories for academic major and exstact by key according to form
+                   
+                    //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+
+                    var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
+                    var academicMajor = academicMajorRepository.GetByKey(model.RelevantMajorId1);
+                    var academicMajor1 = new AcademicMajor();
+                    var academicMajor2 = new AcademicMajor();
+                    if (model.RelevantMajorId2 != null)
+                    {
+                        int Id2 = (int) model.RelevantMajorId2;
+                        academicMajor1 = academicMajorRepository.GetByKey(Id2);   
+                    }
+                    if (model.RelevantMajorId3 != null)
+                    {
+                        int Id3 = (int)model.RelevantMajorId3;
+                        academicMajor2 = academicMajorRepository.GetByKey(Id3);    
+                    }
+                    
+                    //Linking the Complexed entities to the retrieved ones
+                    entity.AcademicMajor = academicMajor;
+                    entity.AcademicMajor1 = academicMajor1;
+                    entity.AcademicMajor2 = academicMajor2;
+
+                    //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
                     JobOfferRepository.Add(entity);
 
                     unitOfWork.SaveChanges();
@@ -84,8 +108,13 @@ namespace BelibaHoma.BLL.Services
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                
                 {
+                    updatedModel.UpdateTime = DateTime.Now;
                     var JobOfferRepository = unitOfWork.GetRepository<IJobOfferRepository>();
+                    var entity = updatedModel.MapTo<JobOffer>();
+
+
 
                     var joboffer = JobOfferRepository.GetByKey(id);
                     if (joboffer != null)

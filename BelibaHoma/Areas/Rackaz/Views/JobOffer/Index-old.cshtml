@@ -1,6 +1,6 @@
 ﻿
 @model IEnumerable<BelibaHoma.BLL.Models.JobOfferModel>
-@using Extensions.Enums
+@using BelibaHoma.BLL.Enums
 
 @{
     ViewBag.Title = "Index";
@@ -17,12 +17,12 @@
         <th>
             @Html.DisplayNameFor(model => model.JobTitle)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateTime)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </th>
+       <!-- <th>  -->
+         <!--   ////Html.DisplayNameFor(model => model.UpdateTime) -->
+        <!--</th>-->
+        <!-- <th>  -->
+            <!--////Html.DisplayNameFor(model => model.CreationTime)-->
+        <!--</th>-->
         <th>
             @Html.DisplayNameFor(model => model.JobArea)
         </th>
@@ -33,13 +33,13 @@
             @Html.DisplayNameFor(model => model.Description)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RelevantMajorId1)
+            @Html.DisplayNameFor(model => model.AcademicMajor.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RelevantMajorId2)
+            @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.RelevantMajorId3)
+            @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Organization)
@@ -47,24 +47,24 @@
         <th>
             @Html.DisplayNameFor(model => model.JobType)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Address)
+        <!--<th>
+            //Html.DisplayNameFor(model => model.Address)
+        </th>-->
+        <!--<th>
+            //Html.DisplayNameFor(model => model.NumEmployees)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NumEmployees)
+            //Html.DisplayNameFor(model => model.ContactName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactName)
+            //Html.DisplayNameFor(model => model.ContactMail)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactMail)
+            //Html.DisplayNameFor(model => model.ContactPhone)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ContactPhone)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContactJobPosition)
-        </th>
+            //Html.DisplayNameFor(model => model.ContactJobPosition)
+        </th>-->
         <th>
             @Html.DisplayNameFor(model => model.JobStatus)
         </th>
@@ -78,12 +78,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.JobTitle)
             </td>
-            <td>
-                @item.UpdateTime.ToLongDateString()
+            <!--<td>
+                //item.UpdateTime.ToLongDateString()
             </td>
             <td>
-                @item.CreationTime.ToLongDateString()
-            </td>
+                //item.CreationTime.ToLongDateString()
+            </td>-->
             <td>
                 @item.JobArea.ToDescription()
             </td>
@@ -94,38 +94,47 @@
                 @item.Description.ToString()
             </td>
             <td>
-                @item.RelevantMajorId1.ToString()
+                @item.AcademicMajor.Name
             </td>
             <td>
-                @item.RelevantMajorId2.ToString()
+                @{
+                    if (item.AcademicMajor1 != null)
+                    {
+                        @item.AcademicMajor1.Name
+                    }
+}
             </td>
             <td>
-                @item.RelevantMajorId3.ToString()
-            </td>
+                @{
+        if (item.AcademicMajor2 != null)
+        {
+            @item.AcademicMajor2.Name
+        }
+                }            </td>
             <td>
                 @item.Organization.ToString()
             </td>
             <td>
                 @item.JobType.ToDescription()
             </td>
-            <td>
-                @item.Address.ToString()
+            <!--<td>
+               //item.Address.ToString()
             </td>
             <td>
-                @item.NumEmployees.ToString()
+                //item.NumEmployees.ToString()
             </td>
             <td>
-                @item.ContactName.ToString()
+                //item.ContactName.ToString()
             </td>
             <td>
-                @item.ContactMail.ToString()
+                //item.ContactMail.ToString()
             </td>
             <td>
-                @item.ContactPhone.ToString()
+                //item.ContactPhone.ToString()
             </td>
             <td>
-                @item.ContactJobPosition.ToString()
-            </td>
+                //item.ContactJobPosition.ToString()
+            </td>-->
             <td>
                 @item.JobStatus.ToDescription()
             </td>

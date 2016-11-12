@@ -16,7 +16,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// Get all Job Offers from the db
         /// </summary>
         /// <returns></returns>
-        List<JobOfferModel> Get(JobArea? JobArea);
+        StatusModel<List<JobOfferModel>> Get();
 
         /// <summary>
         /// Add new Job Offer to db

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BelibaHoma.BLL.Enums;
+using Generic.Models;
 
 namespace BelibaHoma.Controllers
 {
@@ -28,6 +29,15 @@ namespace BelibaHoma.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Error(StatusModel model = null)
+        {
+            if (model == null)
+            {
+                model = new StatusModel(false, "Error test");
+            }
+            return View(model);
         }
     }
 }

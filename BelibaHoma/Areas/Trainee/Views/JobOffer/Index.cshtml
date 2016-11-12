@@ -1,0 +1,221 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.JobOfferModel>
+@using BelibaHoma.BLL.Enums
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>משרות</h2>
+
+<p>
+    @{
+
+        if (ViewBag.IsTrainee != true)
+        {
+            @Html.ActionLink("הוסף משרה", "Create", new {Area = "Rackaz"})
+        }
+    }
+</p>
+
+@section scripts{
+    <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
+<script>
+    $('#job-offer-table')
+        .DataTable({
+            language: {
+                url: "/Scripts/datatable/language/hebrew.json"
+            },
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var isActiveSelect = false;
+                        if ($(this.header()).attr('id') === "is-active") {
+                            isActiveSelect = true;
+                        }
+                        var select = $('<select class="form-control"><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change',
+                                function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                        column.data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                                var option = '<option ';
+                                if (isActiveSelect && d === "פעיל") {
+                                    option += ' selected="selected" ';
+                                }
+                                option += 'value="' + d + '">' + d + '</option>';
+                                select.append(option);
+                            });
+
+
+                    });
+                var val = 'פעיל';
+                this.api().columns(9).search('^' + val + '$', true, false)
+                                        .draw();
+            }
+        });
+</script>
+
+}
+
+<table class="table" id="job-offer-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobType)
+            </th>
+
+            <th id="is-active">
+                @Html.DisplayNameFor(model => model.JobStatus)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+
+    <tfoot>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobArea)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirements)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Organization)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobType)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.JobStatus)
+            </th>
+
+            <th></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.JobTitle)
+                </td>
+                <td>
+                    @item.JobArea.ToDescription()
+                </td>
+                <td>
+                    @item.Requirements.ToString()
+                </td>
+                <td>
+                    @item.Description.ToString()
+                </td>
+                <td>
+                    @item.AcademicMajor.Name
+                </td>
+                <td>
+                    @{
+            if (item.AcademicMajor1 != null)
+            {
+                @item.AcademicMajor1.Name
+            }
+                    }
+                </td>
+                <td>
+                    @{
+            if (item.AcademicMajor2 != null)
+            {
+                @item.AcademicMajor2.Name
+            }
+                    }
+                </td>
+                <td>
+                    @item.Organization.ToString()
+                </td>
+                <td>
+                    @item.JobType.ToDescription()
+                </td>
+                <td>
+                    @item.JobStatus.ToDescription()
+                </td>
+                <td>
+
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+
+                    @{
+                        if (ViewBag.IsTrainee != true)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new {Area = "Rackaz", id = item.Id})
+                        }
+                    }
+                    |
+                    @{
+                        if (ViewBag.IsTrainee != true)
+                        {
+                            @Html.ActionLink("Delete", "Delete", new { Area = "Rackaz", id = item.Id })
+                        }
+                    }
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+
+
+
+
+
