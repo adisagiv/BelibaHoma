@@ -16,7 +16,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        List<TraineeModel> GetTrainees(Area? area);
+        StatusModel<List<TraineeModel>> GetTrainees(Area? area);
 
         /// <summary>
         /// Add new Trainee

@@ -41,7 +41,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = false;
             }
             var result = _tutorService.GetTutors(CurrentUser.Area);
-            return View(result);
+            if (!result.Success)
+            {
+                var status = new StatusModel(false, result.Message);
+                return Error(status);
+            }
+            return View(result.Data);
         }
 
         public ActionResult Create()
@@ -138,7 +143,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return View(result.Data);
             }
-            return null;
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
     }
 }

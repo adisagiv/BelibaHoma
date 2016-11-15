@@ -49,14 +49,17 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return RedirectToAction("Index");
             }
-
-            return null;
+            var status = new StatusModel(false,result.Message);
+            return Error(status);
         }
 
         public ActionResult Edit(int id)
         {
             var result = _academicMajorService.Get(id);
-
+            if (!result.Success)
+            {
+                return Error(new StatusModel(false, result.Message));
+            }
             return View(result.Data);
         }
 
@@ -64,13 +67,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Edit(int id, AcademicMajorModel model)
         {
             var result = _academicMajorService.Update(id, model);
-
             if (result.Success)
             {
                 return RedirectToAction("Index");
             }
-
-            return null;
+            return Error(new StatusModel(false,result.Message));
         }
 
     }

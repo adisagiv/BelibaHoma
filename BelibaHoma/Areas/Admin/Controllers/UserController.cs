@@ -7,6 +7,8 @@ using BelibaHoma.BLL.Enums;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.Controllers;
+using Generic.Models;
+
 
 namespace BelibaHoma.Areas.Admin.Controllers
 {
@@ -42,8 +44,8 @@ namespace BelibaHoma.Areas.Admin.Controllers
             {
                 return RedirectToAction("Index","User", new {Area = "Rackaz"});
             }
-
-            return null;
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
 
         public ActionResult Edit(int id)
@@ -64,7 +66,7 @@ namespace BelibaHoma.Areas.Admin.Controllers
                 return RedirectToAction("Index", "User", new { Area = "Rackaz" });
             }
 
-            return null;
+            return Error(result);
         }
     }
 }

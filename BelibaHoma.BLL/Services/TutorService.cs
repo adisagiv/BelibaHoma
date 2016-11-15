@@ -30,16 +30,16 @@ namespace BelibaHoma.BLL.Services
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        public List<TutorModel> GetTutors(Area? area)
+        public StatusModel<List<TutorModel>> GetTutors(Area? area)
         {
-            var result = new List<TutorModel>();
+            var result = new StatusModel<List<TutorModel>>(false, String.Empty, new List<TutorModel>());
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-                    result =
+                    result.Data =
                         tutorRepository.GetAll()
                             .Where(t => (!area.HasValue || t.User.Area == (int) area.Value) && t.User.UserRole == 2)
                             .OrderBy(t => t.User.Area)
@@ -48,12 +48,13 @@ namespace BelibaHoma.BLL.Services
                             .ToList()
                             .Select(t => new TutorModel(t))
                             .ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Tutors from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת החונכים מ");
+                LogService.Logger.Error(result.Message, ex);
             }
 
             return result;
