@@ -38,8 +38,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = false;
             }
             var result = _tutorTraineeService.Get(CurrentUser.Area);
-            return View(result);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
     }
 }
-

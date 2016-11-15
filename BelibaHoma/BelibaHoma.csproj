@@ -154,9 +154,9 @@
     <Compile Include="Areas\Rackaz\Models\TutorViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
-	<Compile Include="Areas\Trainee\Controllers\JobOfferController.cs" />
+    <Compile Include="Areas\Trainee\Controllers\JobOfferController.cs" />
     <Compile Include="Areas\Trainee\Models\JobOfferViewModel.cs" />
-	<Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
+    <Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
     <Compile Include="Areas\Tutor\Controllers\HomeController.cs" />
     <Compile Include="Areas\Tutor\Controllers\TutorController.cs" />
@@ -230,12 +230,12 @@
     <Content Include="Areas\Rackaz\Views\Tutor\Edit.cshtml" />
     <Content Include="Areas\Tutor\Views\Tutor\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\Trainee\Details.cshtml" />
-	<Content Include="Areas\Rackaz\Views\JobOffer\Details-old.cshtml" />
+    <Content Include="Areas\Rackaz\Views\JobOffer\Details-old.cshtml" />
     <Content Include="Areas\Trainee\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Trainee\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Trainee\Views\JobOffer\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\JobOffer\Index.cshtml" />
-
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -326,8 +326,6 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
-    <Folder Include="Areas\Rackaz\Views\TutorTrainee\" />
-    <Folder Include="Areas\Trainee\Models\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
     <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />

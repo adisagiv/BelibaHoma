@@ -186,4 +186,17 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "אחר")]
         Other = 9
     }
+
+    public enum TTStatus
+    {
+        [Description("פעיל")]
+        [Display(Name = "פעיל")]
+        Active = 0,
+        [Description("לא פעיל")]
+        [Display(Name = "לא פעיל")]
+        InActive = 1,
+        [Description("טרם אושר")]
+        [Display(Name = "טרם אושר")]
+        UnApproved = 2
+    }
 }

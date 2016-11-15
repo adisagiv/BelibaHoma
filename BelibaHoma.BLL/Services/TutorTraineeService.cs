@@ -21,22 +21,23 @@ namespace BelibaHoma.BLL.Services
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        public List<TutorTraineeModel> Get(Area? area)
+        public StatusModel<List<TutorTraineeModel>> Get(Area? area)
         {
-            var result = new List<TutorTraineeModel>();
+            var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
 
-                    var tutorTrainees = tutorTraineeRepository.GetAll().Where(t => !area.HasValue || t.Trainee.User.Area == (int)area.Value).OrderBy(t => t.Trainee.User.Area).ThenBy(t => t.Trainee.User.LastName).ThenBy(t => t.Trainee.User.FirstName).ToList().Select(t => new TutorTraineeModel(t)).ToList();
+                    result.Data = tutorTraineeRepository.GetAll().ToList().Where(t => !area.HasValue || t.Trainee.User.Area == (int)area.Value).OrderBy(t => t.Trainee.User.Area).ThenBy(t => t.Trainee.User.LastName).ThenBy(t => t.Trainee.User.FirstName).ToList().Select(t => new TutorTraineeModel(t)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Relationship from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה במהלך שליפת קשרי החונכות מהמסד");
+                LogService.Logger.Error(result.Message, ex);
             }
 
             return result;
