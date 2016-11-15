@@ -46,10 +46,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = true;
             }
             // TODO: Add the user area incase of him being a Rackz
-            
-
             // TODO: change the viewbag to AcademicInstitutionVM to transfer area
-            
             return View(model);
         }
 
@@ -61,13 +58,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 model.Area = CurrentUser.Area.Value;   
             }
             var result =_academicInstitutionService.Add(model);
-
             if (result.Success)
             {
                 return RedirectToAction("Index");
             }
-
-            return null;
+            return Error(new StatusModel(false,result.Message));
         }
 
         public ActionResult Edit(int id)
@@ -103,7 +98,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return RedirectToAction("Index");
             }
 
-            return null;
+            return Error(result);
         }
 
         public ActionResult Details(int id)

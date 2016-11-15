@@ -31,24 +31,25 @@ namespace BelibaHoma.BLL.Services
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        public List<TraineeModel> GetTrainees(Area? area)
+        public StatusModel<List<TraineeModel>> GetTrainees(Area? area)
         {
-            var result = new List<TraineeModel>();
+
+            var result = new StatusModel<List<TraineeModel>>(false, String.Empty, new List<TraineeModel>());
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
-                    result = traineeRepository.GetAll().Where(t => (!area.HasValue || t.User.Area == (int)area.Value) && t.User.UserRole == 3).OrderBy(t => t.User.Area).ThenBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList().Select(t => new TraineeModel(t)).ToList();
+                    result.Data = traineeRepository.GetAll().Where(t => (!area.HasValue || t.User.Area == (int)area.Value) && t.User.UserRole == 3).OrderBy(t => t.User.Area).ThenBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList().Select(t => new TraineeModel(t)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Trainees from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת חניכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
             }
-
 
             return result;
         }

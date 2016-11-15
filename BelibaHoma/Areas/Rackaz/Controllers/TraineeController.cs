@@ -41,7 +41,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = false;
             }
             var result = _traineeService.GetTrainees(CurrentUser.Area);
-            return View(result);
+            if (!result.Success)
+            {
+                var status = new StatusModel(false, result.Message);
+                return Error(status);
+            }
+            return View(result.Data);
         }
 
         public ActionResult Create()
@@ -88,12 +93,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 model.User.Area = CurrentUser.Area;
             }
             var result = _traineeService.Add(model);
-
-            //if (result.Success)
-            //{
-            //    return RedirectToAction("Index", "Trainee", new { Area = "Rackaz" });
-            //}
-
+            //The return status check is performed in Trainee Script..
             return Json(result);
         }
 
@@ -104,7 +104,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return View(result.Data);
             }
-            return null;
+            var status = new StatusModel(false,result.Message);
+            return Error(status);
         }
 
         public ActionResult Edit(int id)
@@ -140,7 +141,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Edit(int id, TraineeModel model)
         {
             var result = _traineeService.Update(id, model);
-
+            //The return status check is performed in trainee script
             return Json(result);
         }
     }
