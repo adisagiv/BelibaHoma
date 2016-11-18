@@ -16,7 +16,7 @@ namespace BelibaHoma.BLL.Models
 
         //TODO: Consider adding required for Status +/ IsException
         [Display(Name = "סטטוס")]
-        public int Status { get; set; }
+        public TTStatus Status { get; set; }
 
         [Display(Name = "?קשר חריג")]
         public bool IsException { get; set; }

@@ -44,7 +44,8 @@ namespace BelibaHoma.Areas.Trainee.Controllers
             {
                 return View(result.Data);
             }
-            return null;
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
     }
 }

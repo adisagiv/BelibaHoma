@@ -15,7 +15,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// Get all AcademicInstitution from the db
         /// </summary>
         /// <returns></returns>
-        List<AcademicInstitutionModel> Get(Area? area);
+        StatusModel<List<AcademicInstitutionModel>> Get(Area? area);
 
         /// <summary>
         /// Add new Academic Institution to db

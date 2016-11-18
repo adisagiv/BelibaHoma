@@ -41,7 +41,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = false;
             }
             var result = _tutorService.GetTutors(CurrentUser.Area);
-            return View(result);
+            if (!result.Success)
+            {
+                var status = new StatusModel(false, result.Message);
+                return Error(status);
+            }
+            return View(result.Data);
         }
 
         public ActionResult Create()
@@ -53,15 +58,15 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 var status = new StatusModel(false, academicMajorResult.Message);
                 return Error(status);
             }
-            //var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
-            //if (!academicInstitutionResult.Success)
-            //{
-            //    var status = new StatusModel(false, academicMajorResult.Message);
-            //    return Error(status)
-            //}
+            var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
+            if (!academicInstitutionResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
             TutorViewModel model = new TutorViewModel
             {
-                AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
+                AcademicInstitutionList = academicInstitutionResult.Data,
                 AcademicMajorList = academicMajorResult.Data,
                 Tutor = new TutorModel(),
             };
@@ -94,10 +99,22 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Edit(int id)
         {
+            var academicMajorResult = _academicMajorService.Get();
+            if (!academicMajorResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
+            var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
+            if (!academicInstitutionResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
             TutorViewModel model = new TutorViewModel
             {
-                AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
-                AcademicMajorList = _academicMajorService.Get().Data,
+                AcademicInstitutionList = academicInstitutionResult.Data,
+                AcademicMajorList = academicMajorResult.Data,
                 Tutor = new TutorModel()
             };
             ViewBag.IsRackaz = CurrentUser.UserRole == UserRole.Rackaz;
@@ -126,7 +143,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return View(result.Data);
             }
-            return null;
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
     }
 }

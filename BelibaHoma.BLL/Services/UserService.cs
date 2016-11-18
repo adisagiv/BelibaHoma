@@ -21,9 +21,9 @@ namespace BelibaHoma.BLL.Services
         /// Get a list of all admins and Rackaz
         /// </summary>
         /// <returns></returns>
-        public List<UserModel> GetAdminAndRackaz()
+        public StatusModel<List<UserModel>> GetAdminAndRackaz()
         {
-            var result = new List<UserModel>();
+            var result = new StatusModel<List<UserModel>>(false, String.Empty, new List<UserModel>());
 
             try
             {
@@ -31,16 +31,15 @@ namespace BelibaHoma.BLL.Services
                 {
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     
-                    result = userRepository.GetAll().Where(u => u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    result.Data = userRepository.GetAll().Where(u => u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Admins and Rackazes from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת רכזים ואדמינים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
             }
-
-
             return result;
         }
 
