@@ -1,0 +1,18 @@
+﻿@*TODO - CHECK THIS*@
+@model BelibaHoma.BLL.Models.TutorTraineeModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/tutor.js"></script>
+}
+
+
+<h2>עדכן את מצב הקשר</h2>
+
+
+@Html.Partial("_TutorTraineeForm", Model)

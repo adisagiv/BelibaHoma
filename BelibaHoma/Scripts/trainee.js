@@ -5,6 +5,7 @@
     //    $('#academmic-institution-modal').modal();
     //});
 
+    
     $('#trainee-submit').click(function(e) {
         e.preventDefault();
 

@@ -151,6 +151,7 @@
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
+    <Compile Include="Areas\Rackaz\Models\TutorTraineeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
@@ -236,6 +237,12 @@
     <Content Include="Areas\Trainee\Views\JobOffer\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\JobOffer\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\Index.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\Edit.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\_TutorTraineeForm.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatch.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTraineeSelect.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTutorSelect.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchAreaSelected.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -345,6 +352,10 @@
     <ProjectReference Include="..\BelibaHoma.DAL\BelibaHoma.DAL.csproj">
       <Project>{a22e56a7-7da3-4c2f-85e2-d9cb12200cfc}</Project>
       <Name>BelibaHoma.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{60797012-0d76-45cf-ac74-6372f8fc7857}</Project>
+      <Name>Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Generic\Generic.csproj">
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BelibaHoma.BLL.Enums;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
@@ -44,6 +45,14 @@ namespace BelibaHoma.Controllers
                 _currentUser = new UserModel(authTicket);
 
                 ViewBag.CurrentUser = CurrentUser;
+                if (CurrentUser.UserRole == UserRole.Rackaz)
+                {
+                    ViewBag.IsRackaz = true;
+                }
+                else
+                {
+                    ViewBag.IsRackaz = false;
+                }
             }
            
 

@@ -1,0 +1,125 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorMatchViewModel>
+
+@{
+    Layout = null;
+}
+@*<h1>Trainees</h1>
+
+    @foreach (var trainee in Model)
+    {
+        <label>@trainee.FullName</label>
+    }*@
+
+<script>
+   // $(function() {
+        $('#tutors-partial-table')
+        .DataTable({
+            language: {
+                url: "/Scripts/datatable/language/hebrew.json"
+            },
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control"><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change',
+                                function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                        column.data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                    });
+            }
+        });
+  //  });
+</script>
+
+<h2>חונכים</h2>
+
+<table class="table" id="tutors-partial-table">
+    <thead>
+    <tr>
+        <th>
+            בחר חונך
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
+        </th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>
+            בחר חונך
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
+        </th>
+    </tr>
+    </tfoot>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <label class="radio-inline">
+                    <input type="radio" name="ChooseTutor" id="tutor_@item.Tutor.UserId" value="@item.Tutor.UserId">
+                </label>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.AcademicInstitution.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor1.Name)
+            </td>
+        </tr>
+    }
+    </tbody>
+
+</table>
+

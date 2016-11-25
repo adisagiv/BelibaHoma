@@ -17,32 +17,42 @@ namespace BelibaHoma.BLL.Models
         [StringLength(9, MinimumLength = 9, ErrorMessage = "נא להזין ת.ז. כולל ספרת ביקורת")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public string IdNumber { get; set; }
+        
         [Display(Name = "שם פרטי")]
         [Required(ErrorMessage = "שם פרטי זהו שדה חובה")]
         public string FirstName { get; set; }
+        
         [Display(Name = "שם משפחה")]
         [Required(ErrorMessage = "שם משפחה זהו שדה חובה")]
         public string LastName { get; set; }
+        
         [Display(Name = "סיסמא")]
         [Required(ErrorMessage = "נא להזין סיסמא")]
         [DataType(DataType.Password)]
         [MinLength(6)]
         [MaxLength(20)]
         public string Password { get; set; }
+        
         [Display(Name = "זמן יצירה")]
         public DateTime CreationTime { get; set; }
+        
         [Display(Name = "סוג משתמש")]
         [Required(ErrorMessage = "נא לבחור את סוג המשתמש")]
         public UserRole UserRole { get; set; }
+        
         [Display(Name = "זמן עדכון")]
         public DateTime UpdateTime { get; set; }
+        
         [Display(Name = "זמן עדכון סיסמא")]
-        public DateTime LastPasswordUpdate { get; set; }
+        public long? LastPasswordUpdate { get; set; }
+        
         [Display(Name = "כתובת מייל")]
         [EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
         public string Email { get; set; }
+        
         [Display(Name = "משתמש פעיל")]
         public bool IsActive { get; set; }
+        
         [Display(Name = "אזור פעילות")]
         public Area? Area { get; set; }
 

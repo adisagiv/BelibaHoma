@@ -271,5 +271,32 @@ namespace BelibaHoma.BLL.Services
             return status;
         }
 
+
+        public StatusModel<List<TutorMatchViewModel>> GetUnMatchedTutors(Area area, bool showMatched)
+        {
+            var result = new StatusModel<List<TutorMatchViewModel>>(false, String.Empty, new List<TutorMatchViewModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorList = tutorRepository.GetAll()
+                        .Where(t => t.User.IsActive && t.User.Area == (int)area && t.User.UserRole == (int)UserRole.Tutor && (showMatched || t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive)))
+                        .OrderBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList()
+                        .Select(t => new TutorMatchViewModel(t, t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.Active))).ToList();
+
+                    result = new StatusModel<List<TutorMatchViewModel>>(true, String.Empty, tutorList);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת חונכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+        
     }
 }

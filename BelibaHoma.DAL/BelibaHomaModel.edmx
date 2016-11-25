@@ -161,7 +161,7 @@
           <Property Name="Email" Type="nvarchar(max)" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="Area" Type="int" />
-          <Property Name="LastPasswordUpdate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordUpdate" Type="bigint" />
         </EntityType>
         <Association Name="FK_Grade_Trainee">
           <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
@@ -721,7 +721,7 @@
           <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="Area" Type="Int32" />
-          <Property Name="LastPasswordUpdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPasswordUpdate" Type="Int64" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
         </EntityType>

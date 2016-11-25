@@ -1,0 +1,126 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeMatchViewModel>
+@using System.Configuration
+
+
+@{
+    Layout = null;
+}
+@*<h1>Trainees</h1>
+
+@foreach (var trainee in Model)
+{
+    <label>@trainee.FullName</label>
+}*@
+
+<script>
+    //$(function () {
+        $('#trainees-partial-table')
+        .DataTable({
+            language: {
+                url: "/Scripts/datatable/language/hebrew.json"
+            },
+            initComplete: function () {
+                this.api()
+                    .columns()
+                    .every(function () {
+                        var column = this;
+                        var select = $('<select class="form-control"><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change',
+                                function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                        column.data()
+                            .unique()
+                            .sort()
+                            .each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>');
+                        });
+                    });
+            }
+        });
+   // });
+</script>
+
+<h2>חניכים</h2>
+
+<table class="table" id="trainees-partial-table">
+    <thead>
+    <tr>
+        <th>
+            בחר חניך
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicMajor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicMajor1)
+        </th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>
+            בחר חניך
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicMajor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.AcademicMajor1)
+        </th>
+    </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="ChooseTrainee" id="trainee_@item.Trainee.UserId" value="@item.Trainee.UserId">
+                    </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.AcademicInstitution.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.AcademicMajor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.AcademicMajor1.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

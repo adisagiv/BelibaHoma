@@ -18,6 +18,20 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel<List<TutorTraineeModel>> Get(Area? area);
 
+        /// <summary>
+        /// Get TutorTrainee by the User Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<TutorTraineeModel> Get(int id);
+
+        /// <summary>
+        /// Update TutirTrainee's Status in DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        StatusModel Update(int id, TutorTraineeModel updatedModel);
     }
 
 }

@@ -42,5 +42,81 @@ namespace BelibaHoma.BLL.Services
 
             return result;
         }
+
+        /// <summary>
+        /// Get TutorTrainee by the Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public StatusModel<TutorTraineeModel> Get(int id)
+        {
+            var status = new StatusModel<TutorTraineeModel>();
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+
+                    status.Data = new TutorTraineeModel(tutortrainee);
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך גישה לפרטי קשר החונכות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Change tutortrainee Status and IsException in DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        public StatusModel Update(int id, TutorTraineeModel updatedModel)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    //var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    //var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+                    //var tutor = tutortraineeRepository.GetByKey(tutortrainee.TutorId);
+                    //var trainee = tutortraineeRepository.GetByKey(tutortrainee.TraineeId);
+
+                        //Updating the entity from the model received by the form
+                        tutortrainee.Status = (int)updatedModel.Status;
+                        tutortrainee.IsException = updatedModel.IsException;
+                        unitOfWork.SaveChanges();
+
+                        status.Success = true;
+                        status.Message = String.Format("מצב הקשר עודכן בהצלחה");
+                    }
+                }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך עדכון מצב הקשר");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+       
     }
 }
