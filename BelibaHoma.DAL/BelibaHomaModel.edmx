@@ -144,7 +144,7 @@
           <Property Name="TraineeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="IsException" Type="bit" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -701,7 +701,7 @@
           <Property Name="TraineeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="IsException" Type="Boolean" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="TutorTrainee" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="TutorTrainee" ToRole="Tutor" />
           <NavigationProperty Name="TutorReport" Relationship="BelibaHomaDBModel.FK_TutorReport_TutorTrainee" FromRole="TutorTrainee" ToRole="TutorReport" />

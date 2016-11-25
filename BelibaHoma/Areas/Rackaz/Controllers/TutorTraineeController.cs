@@ -73,15 +73,17 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult ManualMatch()
         {
+            var model = new TutorTraineeViewModel();
             if (CurrentUser.UserRole.ToString() == "Rackaz")
             {
                 ViewBag.IsRackaz = true;
+                model.Area = CurrentUser.Area;
             }
             else
             {
                 ViewBag.IsRackaz = false;
             }
-            return View();
+            return View(model);
         }
 
         [HttpPost]
@@ -154,6 +156,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         [HttpPost]
         public ActionResult ManualMatchCreate(TutorTraineeModel model)
-        { }
+        {
+            var result = _tutorTraineeService.AddManual(model);
+            return Json(result);
+        }
     }
 }

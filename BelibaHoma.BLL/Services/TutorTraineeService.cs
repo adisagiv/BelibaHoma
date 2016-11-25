@@ -117,6 +117,59 @@ namespace BelibaHoma.BLL.Services
             return status;
         }
 
+        /// <summary>
+        /// Add new TutorTrainee
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public StatusModel AddManual(TutorTraineeModel model)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    //Updating the status in the model
+                    model.Status = TTStatus.Active;
+                    model.IsException = false;
+
+                    //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var trainee = traineeRepository.GetByKey(model.TraineeId);
+
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutor = tutorRepository.GetByKey(model.TutorId);
+
+                    //TODO: server side validations - check if there is an exstiting reliation,  if active - reject, if inactive  - reactive! 
+                    
+
+                    //Cast into entity
+                    var entity = model.MapTo<TutorTrainee>();
+
+                    //Linking the Complexed entities to the retrieved ones
+                    entity.Trainee = trainee;
+                    entity.Tutor = tutor;
+
+                    //Finally Adding the entity to DB
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    tutorTraineeRepository.Add(entity);
+                    unitOfWork.SaveChanges();
+
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    status.Message = String.Format("הציוות הוזן בהצלחה");
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הוספת הציוות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
        
     }
 }

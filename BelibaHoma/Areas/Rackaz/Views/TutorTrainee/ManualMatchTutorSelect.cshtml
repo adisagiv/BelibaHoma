@@ -3,6 +3,11 @@
 @{
     Layout = null;
 }
+
+@section styles {
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+
 @*<h1>Trainees</h1>
 
     @foreach (var trainee in Model)
@@ -69,6 +74,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
         </th>
+        <th class="hidden"></th>
     </tr>
     </thead>
     <tfoot>
@@ -91,12 +97,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
         </th>
+        <th class="hidden"></th>
     </tr>
     </tfoot>
     <tbody>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="@(item.IsMatchedCount > 0 ? "table-danger" : "")">
             <td>
                 <label class="radio-inline">
                     <input type="radio" name="ChooseTutor" id="tutor_@item.Tutor.UserId" value="@item.Tutor.UserId">
@@ -116,6 +123,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor1.Name)
+            </td>
+            <td class="hidden">
+                <input name="tutor-matched-count-@item.Tutor.UserId" id="tutor-matched-count-@item.Tutor.UserId" value=@item.IsMatchedCount />
             </td>
         </tr>
     }

@@ -32,6 +32,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="updatedModel"></param>
         /// <returns></returns>
         StatusModel Update(int id, TutorTraineeModel updatedModel);
+
+        /// <summary>
+        /// Add new TutorTrainee relation
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        StatusModel AddManual(TutorTraineeModel model);
     }
 
 }
