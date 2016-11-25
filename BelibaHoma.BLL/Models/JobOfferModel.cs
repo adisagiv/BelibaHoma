@@ -84,10 +84,13 @@ namespace BelibaHoma.BLL.Models
         
         [Display(Name = "מייל התקשרות")]
         [Required(ErrorMessage = "מייל התקשרות זהו שדה חובה")]
+        [EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
         public string ContactMail { get; set; }
         
         [Display(Name = "טלפון התקשרות")]
         [Required(ErrorMessage = "טלפון התקשרות זהו שדה חובה")]
+        [StringLength(10, MinimumLength = 9, ErrorMessage = "נא להזין מספר טלפון חוקי")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public string ContactPhone { get; set; }
 
         [Display(Name = "תפקיד איש הקשר")]
