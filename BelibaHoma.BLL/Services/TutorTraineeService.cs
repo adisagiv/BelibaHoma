@@ -130,6 +130,32 @@ namespace BelibaHoma.BLL.Services
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
+                    //TODO: server side validations - 
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var checkExistingRelation =
+                        tutorTraineeRepository.GetAll()
+                            .SingleOrDefault(t => t.TutorId == model.TutorId && t.TraineeId == model.TraineeId);
+                    if (checkExistingRelation != null)
+                    {
+                        if (checkExistingRelation.Status == (int)TTStatus.Active)
+                        {
+                            //relation exists in Active status
+                            status.Message = "קיים ציוות פעיל בין החניך והחונך במערכת";
+                            throw new System.ArgumentException(status.Message, "model");
+                        }
+                        else
+                        {
+                            //exist in another status => change to Active
+                            checkExistingRelation.Status = (int) TTStatus.Active;
+                            unitOfWork.SaveChanges();
+
+                            //If we got here - Yay! :)
+                            status.Success = true;
+                            status.Message = String.Format("הציוות עודכן בהצלחה");
+                            return status;
+                        }
+                    }
+
                     //Updating the status in the model
                     model.Status = TTStatus.Active;
                     model.IsException = false;
@@ -141,9 +167,6 @@ namespace BelibaHoma.BLL.Services
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var tutor = tutorRepository.GetByKey(model.TutorId);
 
-                    //TODO: server side validations - check if there is an exstiting reliation,  if active - reject, if inactive  - reactive! 
-                    
-
                     //Cast into entity
                     var entity = model.MapTo<TutorTrainee>();
 
@@ -152,7 +175,6 @@ namespace BelibaHoma.BLL.Services
                     entity.Tutor = tutor;
 
                     //Finally Adding the entity to DB
-                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
                     tutorTraineeRepository.Add(entity);
                     unitOfWork.SaveChanges();
 
@@ -164,12 +186,65 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הוספת הציוות");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הוספת הציוות");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
         }
-       
+
+        public StatusModel<List<TutorTraineeUnApprovedViewModel>> GetUnApprovedMatches(Area area)
+        {
+            var result = new StatusModel<List<TutorTraineeUnApprovedViewModel>>(false, String.Empty, new List<TutorTraineeUnApprovedViewModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = tutorTraineeRepository.GetAll().Where(t => t.Status == (int)TTStatus.UnApproved && t.Trainee.User.Area == (int)area && t.Tutor.User.Area == (int)area).ToList().Select(t => new TutorTraineeUnApprovedViewModel(t, t.Trainee.TutorTrainee.Count(tt => t.Status == (int)TTStatus.Active), t.Tutor.TutorTrainee.Count(tt => t.Status == (int)TTStatus.Active))).ToList();
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך שליפת המלצות לקשרי חונכות ממסד הנתתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
+        public StatusModel Remove(int id)
+        {
+            var status = new StatusModel<TutorTraineeModel>();
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+                    tutortraineeRepository.Delete(tutortrainee);
+
+                    unitOfWork.SaveChanges();
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך מחיקת ההמלצה לחונכות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
     }
 }
