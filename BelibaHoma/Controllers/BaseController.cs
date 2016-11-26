@@ -123,5 +123,10 @@ namespace BelibaHoma.Controllers
                 Session.Abandon();
             }
         }
+
+        public ActionResult Error(StatusModel status)
+        {
+            return View("~/Views/Shared/Error.cshtml", status);
+        }
     }
 }

@@ -21,7 +21,7 @@ namespace BelibaHoma.DAL
         }
     
         public int UserId { get; set; }
-        public bool Gender { get; set; }
+        public int Gender { get; set; }
         public int AcademicInstitutionId { get; set; }
         public System.DateTime Birthday { get; set; }
         public int AcademicYear { get; set; }
@@ -39,8 +39,8 @@ namespace BelibaHoma.DAL
         public virtual AcademicInstitution AcademicInstitution { get; set; }
         public virtual AcademicMajor AcademicMajor { get; set; }
         public virtual AcademicMajor AcademicMajor1 { get; set; }
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorTrainee> TutorTrainee { get; set; }
-        public virtual User User { get; set; }
     }
 }

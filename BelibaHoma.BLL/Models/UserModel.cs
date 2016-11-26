@@ -60,7 +60,6 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "שם מלא")]
         public string FullName { get { return String.Format("{0}, {1}", LastName, FirstName); }  }
 
-        public long? LastPasswordUpdate { get; set; }
         public UserModel(User entity)
             : base(entity)
         {

@@ -144,7 +144,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
-    <Compile Include="Areas\Rackaz\Controllers\ModalController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\JobOfferController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorController.cs" />
@@ -289,7 +288,9 @@
     <Content Include="Scripts\tutor.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
