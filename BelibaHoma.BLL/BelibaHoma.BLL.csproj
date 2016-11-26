@@ -111,6 +111,7 @@
     <Compile Include="Models\TutorMatchViewModel.cs" />
     <Compile Include="Models\TutorModel.cs" />
     <Compile Include="Models\TutorTraineeModel.cs" />
+    <Compile Include="Models\TutorTraineeUnApprovedViewModel.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Interfaces\IAcademicMajorService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />

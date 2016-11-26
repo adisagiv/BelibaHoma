@@ -295,7 +295,7 @@ namespace BelibaHoma.BLL.Services
                     var traineeList = traineeRepository.GetAll()
                         .Where(t => t.User.IsActive && t.User.Area == (int)area && t.User.UserRole == (int)UserRole.Trainee && (showMatched || t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive)))
                         .OrderBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList()
-                        .Select(t => new TraineeMatchViewModel(t, t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.Active))).ToList();
+                        .Select(t => new TraineeMatchViewModel(t, t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.Active), t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.UnApproved) > 0 ? 1 : 0)).ToList();
 
                     result = new StatusModel<List<TraineeMatchViewModel>>(true, String.Empty, traineeList);
                 }

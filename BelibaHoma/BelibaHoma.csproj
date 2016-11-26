@@ -151,6 +151,7 @@
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
+    <Compile Include="Areas\Rackaz\Models\TutorTraineeApproveViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorTraineeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
@@ -237,7 +238,7 @@
     <Content Include="Areas\Rackaz\Views\TutorTrainee\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\Edit.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\_TutorTraineeForm.cshtml" />
-    <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatch_old.cshtml" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatches.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTraineeSelect.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTutorSelect.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchAreaSelected.cshtml" />
@@ -250,6 +251,7 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatchesAreaSelected.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -315,6 +317,7 @@
     <Content Include="Scripts\trainee.js" />
     <Content Include="Scripts\transition.js" />
     <Content Include="Scripts\tutor.js" />
+    <Content Include="Scripts\tutor-trainee-approve.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />

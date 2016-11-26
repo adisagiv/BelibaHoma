@@ -39,6 +39,21 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="model"></param>
         /// <returns></returns>
         StatusModel AddManual(TutorTraineeModel model);
+
+        /// <summary>
+        /// Get UnApproved Matches and relevant details from DB
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<List<TutorTraineeUnApprovedViewModel>> GetUnApprovedMatches(Area area);
+
+        /// <summary>
+        /// Remove unApproved tutorTrainee relation
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel Remove(int id);
+
     }
 
 }
