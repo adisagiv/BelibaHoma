@@ -28,12 +28,12 @@ namespace BelibaHoma.BLL.Models
         public AcademicInstitutionModel AcademicInstitution { get; set; }
 
         [Display(Name = "תאריך לידה")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}")]
+        [DataType(DataType.Date), ]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public System.DateTime Birthday { get; set; }
 
-        [Display(Name = "שנה בתואר מבחינת התקדמות בקורסים")]
+        [Display(Name = "שנה בתואר (מבחינת ותק)")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         [Range(0, 8, ErrorMessage = "Can only be between 0 .. 8")]
         //[StringLength(2, MinimumLength = 1, ErrorMessage = "נא להזין מספר תקין)")]
@@ -84,8 +84,8 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "רמת חניכה נדרשת באנגלית")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public LevelsCoreClasses EnglishLevel { get; set; }
-        
-        [Display(Name = "מספר סמסטרים מתחילת התואר (ותק)")]
+
+        [Display(Name = "מספר סמסטרים מבחינת התקדמות בקורסים")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         [Range(0, 16, ErrorMessage = "Can only be between 0 .. 16")]
         //[StringLength(2, MinimumLength = 1, ErrorMessage = "נא להזין מספר תקין)")]
@@ -96,38 +96,15 @@ namespace BelibaHoma.BLL.Models
         [Required]
         public UserModel User { get; set; }
 
+        [Display(Name = "האם נשר")]
+        public bool DroppedOut { get; set; }
+
         [Display(Name = "שם מלא")]
         public string FullName { get { return String.Format("{0}, {1}", User.LastName, User.FirstName); } }
 
         //TODO: WHAAAAT? understand what are these 2 and why?
         //public ICollection<Grade> Grade { get; set; }
         //public ICollection<TutorTrainee> TutorTrainee { get; set; }
-
-        //[Required(ErrorMessage = "שם פרטי זהו שדה חובה")]
-        //public string FirstName { get; set; }
-        //[Display(Name = "שם משפחה")]
-        //[Required(ErrorMessage = "שם משפחה זהו שדה חובה")]
-        //public string LastName { get; set; }
-        //[Display(Name = "סיסמא")]
-        //[Required(ErrorMessage = "נא להזין סיסמא")]
-        //[DataType(DataType.Password)]
-        //[MinLength(6)]
-        //[MaxLength(20)]
-        //public string Password { get; set; }
-        //[Display(Name = "זמן יצירה")]
-        //public DateTime CreationTime { get; set; }
-        //[Display(Name = "סוג משתמש")]
-        //[Required(ErrorMessage = "נא לבחור את סוג המשתמש")]
-        //public UserRole UserRole { get; set; }
-        //[Display(Name = "זמן עדכון")]
-        //public DateTime UpdateTime { get; set; }
-        //[Display(Name = "כתובת מייל")]
-        //[EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
-        //public string Email { get; set; }
-        //[Display(Name = "משתמש פעיל")]
-        //public bool IsActive { get; set; }
-        //[Display(Name = "אזור פעילות")]
-        //public Area? Area { get; set; }
 
         public TraineeModel(Trainee entity)
             :base(entity)

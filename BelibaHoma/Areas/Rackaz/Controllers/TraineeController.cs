@@ -41,16 +41,34 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = false;
             }
             var result = _traineeService.GetTrainees(CurrentUser.Area);
-            return View(result);
+            if (!result.Success)
+            {
+                var status = new StatusModel(false, result.Message);
+                return Error(status);
+            }
+            return View(result.Data);
         }
 
         public ActionResult Create()
         {
             ViewBag.IsCreate = true;
+            var academicMajorResult = _academicMajorService.Get();
+            if (!academicMajorResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
+            var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
+            if (!academicInstitutionResult.Success)
+            {
+                var status = new StatusModel(false, academicMajorResult.Message);
+                return Error(status);
+            }
+
             TraineeViewModel model = new TraineeViewModel
             {
-                AcademicInstitutionList = _academicInstitutionService.Get(CurrentUser.Area),
-                AcademicMajorList = _academicMajorService.Get(),
+                AcademicInstitutionList = academicInstitutionResult.Data,
+                AcademicMajorList = academicMajorResult.Data,
                 Trainee = new TraineeModel(),
             };
             model.Trainee.User = new UserModel();
@@ -75,13 +93,56 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 model.User.Area = CurrentUser.Area;
             }
             var result = _traineeService.Add(model);
+            //The return status check is performed in Trainee Script..
+            return Json(result);
+        }
 
+        public ActionResult Details(int id)
+        {
+            var result = _traineeService.Get(id);
             if (result.Success)
             {
-                return RedirectToAction("Index", "Trainee", new { Area = "Rackaz" });
+                return View(result.Data);
+            }
+            var status = new StatusModel(false,result.Message);
+            return Error(status);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var academicInstitutionResult = _academicInstitutionService.Get(CurrentUser.Area);
+            if (!academicInstitutionResult.Success)
+            {
+                return Error(new StatusModel(false,academicInstitutionResult.Message));
+            }
+            var academicMajorResult = _academicMajorService.Get();
+            if (!academicMajorResult.Success)
+            {
+                return Error(new StatusModel(false, academicMajorResult.Message));
+            }
+            TraineeViewModel model = new TraineeViewModel
+            {
+                AcademicInstitutionList = academicInstitutionResult.Data,
+                AcademicMajorList = academicMajorResult.Data,
+                Trainee = new TraineeModel()
+            };
+            ViewBag.IsRackaz = CurrentUser.UserRole == UserRole.Rackaz;
+            ViewBag.IsCreate = false;
+            var result = _traineeService.Get(id);
+            if (result.Success)
+            {
+                model.Trainee = result.Data;
             }
 
-            return Json(new StatusModel(true,"יאי שמרתי"));
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(int id, TraineeModel model)
+        {
+            var result = _traineeService.Update(id, model);
+            //The return status check is performed in trainee script
+            return Json(result);
         }
     }
 }

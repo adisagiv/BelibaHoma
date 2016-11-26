@@ -25,7 +25,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Index()
         {
             var result = _academicInstitutionService.Get(CurrentUser.Area);
-            return View(result);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
         }
 
         public ActionResult Create()
@@ -41,10 +46,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = true;
             }
             // TODO: Add the user area incase of him being a Rackz
-            
-
             // TODO: change the viewbag to AcademicInstitutionVM to transfer area
-            
             return View(model);
         }
 
@@ -56,13 +58,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 model.Area = CurrentUser.Area.Value;   
             }
             var result =_academicInstitutionService.Add(model);
-
             if (result.Success)
             {
                 return RedirectToAction("Index");
             }
-
-            return null;
+            return Error(new StatusModel(false,result.Message));
         }
 
         public ActionResult Edit(int id)
@@ -76,6 +76,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 ViewBag.IsRackaz = true;
             }
             var result = _academicInstitutionService.Get(id);
+            if (!result.Success)
+            {
+                return Error(new StatusModel(false, result.Message));
+            }
 
             return View(result.Data);
         }
@@ -94,12 +98,16 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return RedirectToAction("Index");
             }
 
-            return null;
+            return Error(result);
         }
 
         public ActionResult Details(int id)
         {
             var result = _academicInstitutionService.Get(id);
+            if (!result.Success)
+            {
+                return Error(new StatusModel(false,result.Message));
+            }
 
             return View(result.Data);
         }

@@ -123,4 +123,80 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "נקבה")]
         Girl = 1
     }
+
+    public enum JobType
+    {
+        [Description("משרת סטודנט")]
+        [Display(Name = "משרת סטודנט")]
+        Student = 0,
+        [Description("משרה חלקית")]
+        [Display(Name = "משרה חלקית")]
+        PartTime = 1,
+        [Description("משרה מלאה")]
+        [Display(Name = "משרה מלאה")]
+        FullTime = 2,
+        [Description("התמחות")]
+        [Display(Name = "התמחות")]
+        Internship = 3
+    }
+
+    public enum JobStatus
+    {
+        [Description("פעיל")]
+        [Display(Name = "פעיל")]
+        Active = 0,
+        [Description("אוייש")]
+        [Display(Name = "אוייש")]
+        Taken = 1,
+        [Description("לא רלוונטי")]
+        [Display(Name = "לא רלוונטי")]
+        NotRelevant = 2,
+    }
+
+    public enum JobArea
+    {
+        [Description("צפון")]
+        [Display(Name = "צפון")]
+        North = 0,
+        [Description("חיפה והקריות")]
+        [Display(Name = "חיפה והקריות")]
+        HaifaAndKraiot = 1,
+        [Description("השרון")]
+        [Display(Name = "השרון")]
+        Hasharon = 2,
+        [Description("גוש דן")]
+        [Display(Name = "גוש דן")]
+        GushDan = 3,
+        [Description("ירושלים וסביבתה")]
+        [Display(Name = "ירושלים וסביבתה")]
+        Jerusalem = 4,
+        [Description("שומרון")]
+        [Display(Name = "שומרון")]
+        Shomron = 5,
+        [Description("שפלה")]
+        [Display(Name = "שפלה")]
+        Shfela = 6,
+        [Description("דרום")]
+        [Display(Name = "דרום")]
+        South = 7,
+        [Description("אילת והערבה")]
+        [Display(Name = "אילת והערבה")]
+        EilatAndArava = 8,
+        [Description("אחר")]
+        [Display(Name = "אחר")]
+        Other = 9
+    }
+
+    public enum TTStatus
+    {
+        [Description("פעיל")]
+        [Display(Name = "פעיל")]
+        Active = 0,
+        [Description("לא פעיל")]
+        [Display(Name = "לא פעיל")]
+        InActive = 1,
+        [Description("טרם אושר")]
+        [Display(Name = "טרם אושר")]
+        UnApproved = 2
+    }
 }

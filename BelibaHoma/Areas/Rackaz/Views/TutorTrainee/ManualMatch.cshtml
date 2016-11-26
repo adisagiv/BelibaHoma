@@ -1,0 +1,132 @@
+﻿@model BelibaHoma.Areas.Rackaz.Models.TutorTraineeViewModel
+@using BelibaHoma.BLL.Enums
+
+@{
+    ViewBag.Title = "ManualMatch";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles
+{
+    <link href="~/Scripts/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/bootstrap-confirmation.js"></script>
+    <script>
+        $(function() {
+
+
+            function populateTutorTrainee(selectedArea) {
+
+                // Send the value to the appropiate action $.post
+                $.post('/Rackaz/TutorTrainee/ManualMatchAreaSelected', { Area: selectedArea }, function(data) {
+                    // Success function replace the contant of the html in the correct div
+                    $('#area-partial').html(data);
+                    //Catch the form submition -
+                    $('#manual-match-submit').click(function(e) {
+                        e.preventDefault();
+                        var SelectedTrainee = $('input[name="ChooseTrainee"]:checked').val();
+                        var SelectedTutor = $('input[name="ChooseTutor"]:checked').val();
+                        if (SelectedTrainee == undefined || SelectedTutor == undefined) {
+                            alert("נא לבחור חניך וחונך לציוות");
+                        } else {
+                            var model =
+                            {
+                                Id: undefined,
+                                TutorId: undefined,
+                                TraineeId: undefined,
+                                Status: undefined,
+                                IsException: undefined,
+                                Trainee: undefined,
+                                Tutor: undefined
+                            }
+
+                            model.TutorId = SelectedTutor;
+                            model.TraineeId = SelectedTrainee;
+
+                            var traineeMatchedCount = $('#trainee-matched-count-'+SelectedTrainee).val();
+                            var tutorMatchedCount = $('#tutor-matched-count-'+SelectedTutor).val();
+                            var message = "";
+                            var confirmatonrequired = false;
+
+                            if (traineeMatchedCount > 0 && tutorMatchedCount > 0) {
+                                message = "שימו לב! לחניך הנבחר קיימים " + traineeMatchedCount + " קשרי חונכות ולחונך קיימים " + tutorMatchedCount + " קשרים.";
+                                confirmatonrequired = true;
+                            }
+                            else if (traineeMatchedCount > 0) {
+                                message = "שימו לב! לחניך הנבחר קיימים " + traineeMatchedCount + " קשרי חונכות.";
+                                confirmatonrequired = true;
+
+                            } else if (tutorMatchedCount > 0) {
+                                message = "שימו לב! לחונך הנבחר קיימים " + tutorMatchedCount + " קשרי חונכות.";
+                                confirmatonrequired = true;
+                            }
+                            if (confirmatonrequired === true) {
+                                if (confirm(message)) {
+                                    $.post("/Rackaz/TutorTrainee/ManualMatchCreate", model, function (data) {
+                                        alert(data.Message);
+                                        if (data.Success) {
+                                            window.location.href = "/Rackaz/TutorTrainee/ManualMatch";
+                                        }
+                                    });
+                                }
+                            } else {
+                                $.post("/Rackaz/TutorTrainee/ManualMatchCreate", model, function (data) {
+                                    alert(data.Message);
+                                    if (data.Success) {
+                                        window.location.href = "/Rackaz/TutorTrainee/ManualMatch";
+                                    }
+                                });
+                            }
+                        }
+                    });
+                }).fail(function(data) {
+                    // Make sure that the data is now a html of the error page
+                    $('html').html(data.responseText);
+                });
+            }
+
+            var selectedArea = $('#area-select select').val();
+
+            if (selectedArea) {
+                populateTutorTrainee(selectedArea);
+            }
+
+            //Catch the select change event
+            $('#area-select select').change(function() {
+                //alert('changed');
+                // Extract the selected value
+                var selectedArea = $(this).val();
+
+                populateTutorTrainee(selectedArea);
+            });
+        });
+    </script>
+}
+
+
+<h2>ציוות ידני</h2>
+<div class="form-group">
+    <label class="control-label col-md-2">אזור :</label>
+    <div class="col-md-10" id="area-select">
+
+        @{
+            //if is rackaz - cannot select area for the academic institution
+            object attr;
+            if (ViewBag.IsRackaz)
+            {
+                attr = new { @class = "form-control", @disabled = "disabled" };
+            }
+            else
+            {
+                attr = new { @class = "form-control" };
+            }
+        }
+
+        @Html.EnumDropDownListFor(model => model.Area, attr)
+    </div>
+    <div class="row" id="area-partial"></div>
+</div>

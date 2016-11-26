@@ -1,0 +1,17 @@
+﻿
+@model BelibaHoma.Areas.Rackaz.Models.JobOfferViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+<h2>ערוך משרה</h2>
+
+
+@Html.Partial("_JobOfferForm", Model)

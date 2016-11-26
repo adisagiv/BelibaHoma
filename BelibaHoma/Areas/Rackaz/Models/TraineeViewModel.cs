@@ -16,8 +16,6 @@ namespace BelibaHoma.Areas.Rackaz.Models
         public List<AcademicInstitutionModel> AcademicInstitutionList;
         public List<AcademicMajorModel> AcademicMajorList;
 
-
-
         public TraineeViewModel()
         {
 

@@ -16,7 +16,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        List<TraineeModel> GetTrainees(Area? area);
+        StatusModel<List<TraineeModel>> GetTrainees(Area? area);
 
         /// <summary>
         /// Add new Trainee
@@ -25,5 +25,27 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel Add(TraineeModel model);
 
+        /// <summary>
+        /// Get Trainee by the User Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<TraineeModel> Get(int id);
+
+        /// <summary>
+        /// Update trainee in DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        StatusModel Update(int id, TraineeModel updatedModel);
+
+        /// <summary>
+        /// Get unmatched / mached trainees from DB by area
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="showMatched"></param>
+        /// <returns></returns>
+        StatusModel<List<TraineeMatchViewModel>> GetUnMatchedTrainees(Area area, bool showMatched);
     }
 }

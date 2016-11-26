@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BelibaHoma.BLL.Enums;
 using System.Web.Routing;
 using System.Web.Security;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Generic.Models;
 using Ninject;
 
 namespace BelibaHoma.Controllers
@@ -17,7 +19,7 @@ namespace BelibaHoma.Controllers
         private readonly IAuthenticationService _authenticationService;
         private UserModel _currentUser;
         private static readonly Dictionary<int, long?> LastPasswordsUpdate = new Dictionary<int, long?>();
-
+        
         #region protected
         protected UserModel CurrentUser
         {
@@ -91,6 +93,14 @@ namespace BelibaHoma.Controllers
                 
 
                 ViewBag.CurrentUser = CurrentUser;
+                if (CurrentUser.UserRole == UserRole.Rackaz)
+                {
+                    ViewBag.IsRackaz = true;
+            }
+                else
+                {
+                    ViewBag.IsRackaz = false;
+                }
             }
            
 

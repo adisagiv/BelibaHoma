@@ -1,0 +1,17 @@
+﻿@model BelibaHoma.Areas.Rackaz.Models.TraineeViewModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/trainee.js"></script>
+}
+
+
+<h2>ערוך פרטי חניך</h2>
+
+
+@Html.Partial("_TraineeForm", Model)

@@ -73,7 +73,7 @@
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
-          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="AcademicYear" Type="int" Nullable="false" />
@@ -90,13 +90,14 @@
           <Property Name="EnglishLevel" Type="int" Nullable="false" />
           <Property Name="AcademicMajorNeededHelpId" Type="int" />
           <Property Name="SemesterNumber" Type="int" Nullable="false" />
+          <Property Name="DroppedOut" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Tutor">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="Gender" Type="bit" Nullable="false" />
+          <Property Name="Gender" Type="int" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="int" Nullable="false" />
           <Property Name="Birthday" Type="date" Nullable="false" />
           <Property Name="AcademicYear" Type="int" Nullable="false" />
@@ -109,6 +110,7 @@
           <Property Name="MathLevel" Type="int" Nullable="false" />
           <Property Name="EnglishLevel" Type="int" Nullable="false" />
           <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="SemesterNumber" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="TutorReport">
           <Key>
@@ -142,7 +144,7 @@
           <Property Name="TraineeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="IsException" Type="bit" Nullable="false" />
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -461,6 +463,7 @@
           <EntitySet Name="TutorReport" EntityType="BelibaHomaDBModel.TutorReport" />
           <EntitySet Name="TutorSession" EntityType="BelibaHomaDBModel.TutorSession" />
           <EntitySet Name="TutorTrainee" EntityType="BelibaHomaDBModel.TutorTrainee" />
+          <EntitySet Name="User" EntityType="BelibaHomaDBModel.User" />
           <AssociationSet Name="FK_Trainee_AcademicInstitution1" Association="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1">
             <End Role="AcademicInstitution" EntitySet="AcademicInstitution" />
             <End Role="Trainee" EntitySet="Trainee" />
@@ -505,9 +508,17 @@
             <End Role="Trainee" EntitySet="Trainee" />
             <End Role="Grade" EntitySet="Grade" />
           </AssociationSet>
+          <AssociationSet Name="FK_Trainee_User1" Association="BelibaHomaDBModel.FK_Trainee_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Trainee" EntitySet="Trainee" />
+          </AssociationSet>
           <AssociationSet Name="FK_TutorTrainee_Trainee" Association="BelibaHomaDBModel.FK_TutorTrainee_Trainee">
             <End Role="Trainee" EntitySet="Trainee" />
             <End Role="TutorTrainee" EntitySet="TutorTrainee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Tutor_User" Association="BelibaHomaDBModel.FK_Tutor_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Tutor" EntitySet="Tutor" />
           </AssociationSet>
           <AssociationSet Name="FK_TutorTrainee_Tutor" Association="BelibaHomaDBModel.FK_TutorTrainee_Tutor">
             <End Role="Tutor" EntitySet="Tutor" />
@@ -521,16 +532,7 @@
             <End Role="TutorReport" EntitySet="TutorReport" />
             <End Role="TutorSession" EntitySet="TutorSession" />
           </AssociationSet>
-          <EntitySet Name="User" EntityType="BelibaHomaDBModel.User" />
-          <AssociationSet Name="FK_Trainee_User1" Association="BelibaHomaDBModel.FK_Trainee_User1">
-            <End Role="User" EntitySet="User" />
-            <End Role="Trainee" EntitySet="Trainee" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Tutor_User" Association="BelibaHomaDBModel.FK_Tutor_User">
-            <End Role="User" EntitySet="User" />
-            <End Role="Tutor" EntitySet="Tutor" />
-          </AssociationSet>
-          </EntityContainer>
+        </EntityContainer>
         <EntityType Name="AcademicInstitution">
           <Key>
             <PropertyRef Name="Id" />
@@ -613,7 +615,7 @@
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
@@ -630,20 +632,21 @@
           <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
           <Property Name="AcademicMajorNeededHelpId" Type="Int32" />
           <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
+          <Property Name="DroppedOut" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" FromRole="Trainee" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="Grade" Relationship="BelibaHomaDBModel.FK_Grade_Trainee" FromRole="Trainee" ToRole="Grade" />
-          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="Trainee" ToRole="TutorTrainee" />
           <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="Trainee" ToRole="User" />
+          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="Trainee" ToRole="TutorTrainee" />
         </EntityType>
         <EntityType Name="Tutor">
           <Key>
             <PropertyRef Name="UserId" />
           </Key>
           <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="Gender" Type="Boolean" Nullable="false" />
+          <Property Name="Gender" Type="Int32" Nullable="false" />
           <Property Name="AcademicInstitutionId" Type="Int32" Nullable="false" />
           <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="AcademicYear" Type="Int32" Nullable="false" />
@@ -656,11 +659,12 @@
           <Property Name="MathLevel" Type="Int32" Nullable="false" />
           <Property Name="EnglishLevel" Type="Int32" Nullable="false" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SemesterNumber" Type="Int32" Nullable="false" />
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="Tutor" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="Tutor" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="Tutor" ToRole="AcademicMajor" />
-          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="Tutor" ToRole="TutorTrainee" />
           <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="Tutor" ToRole="User" />
+          <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="Tutor" ToRole="TutorTrainee" />
         </EntityType>
         <EntityType Name="TutorReport">
           <Key>
@@ -697,10 +701,29 @@
           <Property Name="TraineeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="IsException" Type="Boolean" Nullable="false" />
-          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="TutorTrainee" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="TutorTrainee" ToRole="Tutor" />
           <NavigationProperty Name="TutorReport" Relationship="BelibaHomaDBModel.FK_TutorReport_TutorTrainee" FromRole="TutorTrainee" ToRole="TutorReport" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserRole" Type="Int32" Nullable="false" />
+          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="Area" Type="Int32" />
+          <Property Name="LastPasswordUpdate" Type="Int64" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
         </EntityType>
         <Association Name="FK_Trainee_AcademicInstitution1">
           <End Type="BelibaHomaDBModel.AcademicInstitution" Role="AcademicInstitution" Multiplicity="1" />
@@ -834,6 +857,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Trainee_User1">
+          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_TutorTrainee_Trainee">
           <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="1" />
           <End Type="BelibaHomaDBModel.TutorTrainee" Role="TutorTrainee" Multiplicity="*" />
@@ -843,6 +878,18 @@
             </Principal>
             <Dependent Role="TutorTrainee">
               <PropertyRef Name="TraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Tutor_User">
+          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Tutor">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -879,49 +926,6 @@
             </Principal>
             <Dependent Role="TutorSession">
               <PropertyRef Name="TutorReportId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdNumber" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="true" />
-          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="UserRole" Type="Int32" Nullable="false" />
-          <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <Property Name="Area" Type="Int32" />
-          <Property Name="LastPasswordUpdate" Type="Int64" />
-          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="User" ToRole="Trainee" />
-          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="User" ToRole="Tutor" />
-        </EntityType>
-        <Association Name="FK_Trainee_User1">
-          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Trainee">
-              <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Tutor_User">
-          <End Type="BelibaHomaDBModel.User" Role="User" Multiplicity="1" />
-          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Tutor">
-              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1000,6 +1004,7 @@
           <EntitySetMapping Name="Trainee">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Trainee">
               <MappingFragment StoreEntitySet="Trainee">
+                <ScalarProperty Name="DroppedOut" ColumnName="DroppedOut" />
                 <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
                 <ScalarProperty Name="AcademicMajorNeededHelpId" ColumnName="AcademicMajorNeededHelpId" />
                 <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
@@ -1025,6 +1030,7 @@
           <EntitySetMapping Name="Tutor">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Tutor">
               <MappingFragment StoreEntitySet="Tutor">
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="EnglishLevel" ColumnName="EnglishLevel" />
                 <ScalarProperty Name="MathLevel" ColumnName="MathLevel" />

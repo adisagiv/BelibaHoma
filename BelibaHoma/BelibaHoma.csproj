@@ -145,13 +145,23 @@
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\ModalController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\JobOfferController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TutorController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
+    <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
+    <Compile Include="Areas\Rackaz\Models\TutorTraineeViewModel.cs" />
+    <Compile Include="Areas\Rackaz\Models\TutorViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Trainee\Controllers\JobOfferController.cs" />
+    <Compile Include="Areas\Trainee\Models\JobOfferViewModel.cs" />
+    <Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
     <Compile Include="Areas\Tutor\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tutor\Controllers\TutorController.cs" />
     <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
@@ -178,9 +188,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
+    <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\bootstrap-rtl.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Rackaz\Views\web.config" />
     <Content Include="Areas\Rackaz\Views\AcademicInstitution\Index.cshtml" />
@@ -189,9 +198,6 @@
     <Content Include="Areas\Rackaz\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicInstitution\_AcademicInstitutionForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicInstitution\Create.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
@@ -205,6 +211,8 @@
     <Content Include="Areas\Tutor\Views\web.config" />
     <Content Include="Areas\Trainee\Views\web.config" />
     <Content Include="Areas\Rackaz\Views\User\Index.cshtml" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\datatable\images\Sorting icons.psd" />
     <Content Include="Scripts\datatable\language\hebrew.json" />
     <Content Include="Areas\Admin\Views\User\_UserForm.cshtml" />
@@ -213,7 +221,6 @@
     <Content Include="Areas\Rackaz\Views\Trainee\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\Trainee\Create.cshtml" />
     <Content Include="Areas\Rackaz\Views\Trainee\_TraineeForm.cshtml" />
-    <Content Include="Areas\Rackaz\Views\Modal\ZeroPasswordModal.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -259,6 +266,7 @@
     <Content Include="Scripts\datatable\js\jquery.dataTables.min.js" />
     <Content Include="Scripts\datatable\js\jquery.js" />
     <Content Include="Scripts\dropdown.js" />
+    <Content Include="Scripts\JobOfferIndex.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -278,6 +286,7 @@
     <Content Include="Scripts\tooltip.js" />
     <Content Include="Scripts\trainee.js" />
     <Content Include="Scripts\transition.js" />
+    <Content Include="Scripts\tutor.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -304,9 +313,7 @@
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
-    <Folder Include="Areas\Trainee\Models\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
-    <Folder Include="Areas\Trainee\Views\Shared\" />
     <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />
     <Folder Include="Areas\Tutor\Views\Shared\" />
@@ -324,6 +331,10 @@
     <ProjectReference Include="..\BelibaHoma.DAL\BelibaHoma.DAL.csproj">
       <Project>{a22e56a7-7da3-4c2f-85e2-d9cb12200cfc}</Project>
       <Name>BelibaHoma.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Extensions\Extensions.csproj">
+      <Project>{60797012-0d76-45cf-ac74-6372f8fc7857}</Project>
+      <Name>Extensions</Name>
     </ProjectReference>
     <ProjectReference Include="..\Generic\Generic.csproj">
       <Project>{91d440d1-4962-4687-b2ee-f2b69dec23e0}</Project>

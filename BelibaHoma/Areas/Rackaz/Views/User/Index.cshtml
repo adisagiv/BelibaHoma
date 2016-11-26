@@ -16,6 +16,7 @@
 <script src="~/Scripts/zero-password.js"></script>
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script>
+        $(function() {
         $('#users-table')
             .DataTable({
                 language: {
@@ -46,7 +47,7 @@
                             column.data()
                                 .unique()
                                 .sort()
-                                .each(function (d, j) {
+                                    .each(function(d, j) {
                                     var option = '<option ';
                                     if (isActiveSelect && d === "פעיל") {
                                         option += ' selected="selected" ';
@@ -62,6 +63,7 @@
                                             .draw();
                 }
             });
+        });
     </script>
 }
 
@@ -101,78 +103,81 @@
     </tr>
     </thead>
     <tfoot>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserRole)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Area)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActive)
+            </th>
+        </tr>
     </tfoot>
     <tbody>
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdNumber)
-            </td>
-            <td>
-                @item.UserRole.ToDescription()
-            </td>
-            <td>
-                @{
-                    if (item.Area != null)
-                    {
-                        @item.Area.ToDescription()
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdNumber)
+                </td>
+                <td>
+                    @item.UserRole.ToDescription()
+                </td>
+                <td>
+                    @{
+                        if (item.Area != null)
+                        {
+                            @item.Area.ToDescription()
+                        }
                     }
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @{
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @{
                     if (item.IsActive == true)
-                    {
+                        {
                         @String.Format("פעיל")
                         ;
-                    }
-                    else
-                    {
+                        }
+                        else
+                        {
                         @String.Format("לא פעיל")
                         ;
+                        }
                     }
-                }
-            </td>
-            <td>
-                @{
+                </td>
+                <td>
+                    @{
                     if (ViewBag.IsRackaz != true)
-                    {
+                        {
                         @Html.ActionLink("ערוך פרטי משתמש", "Edit", new {Area = "Admin", id = item.Id})
                     }
-                }
+                        }
             </td>
             <td>
                 @{
                     <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
-                }
-            </td>
+                    }
+                </td>
 
-        </tr>
-    }
+            </tr>
+        }
     </tbody>
 
 </table>

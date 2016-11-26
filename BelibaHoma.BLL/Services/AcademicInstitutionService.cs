@@ -21,9 +21,9 @@ namespace BelibaHoma.BLL.Services
         /// Get all AcademicInstitution from the db
         /// </summary>
         /// <returns></returns>
-        public List<AcademicInstitutionModel> Get(Area? area)
+        public StatusModel<List<AcademicInstitutionModel>> Get(Area? area)
         {
-            var result = new List<AcademicInstitutionModel>();
+            var result = new StatusModel<List<AcademicInstitutionModel>>(false,String.Empty,new List<AcademicInstitutionModel>());
 
             try
             {
@@ -33,14 +33,16 @@ namespace BelibaHoma.BLL.Services
 
                     var academicInstitutions = academicInstitutionRepository.GetAll();
 
-                    result = academicInstitutions.Where(ai => !area.HasValue || ai.Area == (int)area.Value).ToList()
+                    result.Data = academicInstitutions.Where(ai => !area.HasValue || ai.Area == (int)area.Value).ToList()
                         .Select(ai => new AcademicInstitutionModel(ai)).ToList();
+
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Academic Institutions from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת מוסדות הלימוד ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
             }
 
 

@@ -34,6 +34,7 @@ namespace BelibaHoma.DAL
         public int MathLevel { get; set; }
         public int EnglishLevel { get; set; }
         public string Address { get; set; }
+        public int SemesterNumber { get; set; }
     
         public virtual AcademicInstitution AcademicInstitution { get; set; }
         public virtual AcademicMajor AcademicMajor { get; set; }

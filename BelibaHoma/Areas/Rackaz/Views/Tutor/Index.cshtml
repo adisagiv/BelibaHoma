@@ -1,0 +1,187 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles
+{
+    <link href="~/Scripts/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+
+
+@section scripts
+{
+    <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
+    <script>
+        $('#tutor-table')
+            .DataTable({
+                language: {
+                    url: "/Scripts/datatable/language/hebrew.json"
+                },
+                initComplete: function() {
+                    this.api()
+                        .columns()
+                        .every(function() {
+                            var column = this;
+                            var isActiveSelect = false;
+                            if ($(this.header()).attr('id') === "is-active") {
+                                isActiveSelect = true;
+                            }
+                            var select = $('<select class="form-control"><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change',
+                                    function() {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+
+                            column.data()
+                                .unique()
+                                .sort()
+                                .each(function(d, j) {
+                                    var option = '<option ';
+                                    if (isActiveSelect && d === "פעיל") {
+                                        option += ' selected="selected" ';
+                                    }
+                                    option += 'value="' + d + '">' + d + '</option>';
+                                    select.append(option);
+                                });
+
+
+                        });
+                    //if (ViewBag.IsRackaz != true)
+                    //var isAdmin = 6;
+                    //if ($(this.api().columns().header()).attr('id') === "is-area") {
+                    //    isAdmin = 5;
+                    //}
+                    var val = 'פעיל';
+                    var column = $("#column-value").val();
+                    this.api().columns(column).search('^' + val + '$', true, false)
+                        .draw();
+                }
+            });
+    </script>
+}
+
+<h2>חונכים</h2>
+
+<p>
+    @Html.ActionLink("הוסף חונך", "Create", "Tutor", new { Area = "Rackaz" }, new object { })
+</p>
+<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
+<table class="table" id="tutor-table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            @{
+                if (ViewBag.IsRackaz != true)
+                {
+                    <th id="is-area">
+                        @Html.DisplayNameFor(model => model.User.Area)
+                    </th>
+                }
+            }
+            <th id="is-active">
+                @Html.DisplayNameFor(model => model.User.IsActive)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            @{
+                if (ViewBag.IsRackaz != true)
+                {
+                    <th>
+                        @Html.DisplayNameFor(model => model.User.Area)
+                    </th>
+                }
+            }
+            <th>
+                @Html.DisplayNameFor(model => model.User.IsActive)
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.IdNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicInstitution.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </td>
+                @{
+            if (ViewBag.IsRackaz != true && item.User.Area != null)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Area)
+                </td>
+            }
+                }
+                <td>
+                    @{
+            if (item.User.IsActive == true)
+            {
+                @String.Format("פעיל");
+            }
+            else
+            {
+                @String.Format("לא פעיל");
+            }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("ערוך פרטי חונך", "Edit", new { Area = "Rackaz", id = item.User.Id }) |
+                    @Html.ActionLink("פרטים", "Details", new { Area = "Tutor", id = item.User.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

@@ -5,6 +5,7 @@ using BelibaHoma.DAL.Interfaces;
 using Catel.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using BelibaHoma.BLL.Models;
 using Extensions.DateTime;
 using Generic.Models;
 using Services.Log;
+using Extensions.DateTime;
 
 namespace BelibaHoma.BLL.Services
 {
@@ -21,9 +23,9 @@ namespace BelibaHoma.BLL.Services
         /// Get a list of all admins and Rackaz
         /// </summary>
         /// <returns></returns>
-        public List<UserModel> GetAdminAndRackaz()
+        public StatusModel<List<UserModel>> GetAdminAndRackaz()
         {
-            var result = new List<UserModel>();
+            var result = new StatusModel<List<UserModel>>(false, String.Empty, new List<UserModel>());
 
             try
             {
@@ -31,23 +33,22 @@ namespace BelibaHoma.BLL.Services
                 {
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     
-                    result = userRepository.GetAll().Where(u => u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    result.Data = userRepository.GetAll().Where(u => u.UserRole < 2).OrderBy(u => u.Area).ToList().Select(u => new UserModel(u)).ToList();
+                    result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                var message = String.Format("Error getting Admins and Rackazes from DB");
-                LogService.Logger.Error(message, ex);
+                result.Message = String.Format("שגיאה בשליפת רכזים ואדמינים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
             }
-
-
             return result;
         }
 
 
-        public StatusModel Add(UserModel model)
+        public StatusModel<int> Add(UserModel model)
         {
-            var status = new StatusModel(false, String.Empty);
+            var status = new StatusModel<int>(false, String.Empty, 0);
 
             try
             {
@@ -67,6 +68,7 @@ namespace BelibaHoma.BLL.Services
                     }
                     model.CreationTime = DateTime.Now;
                     model.UpdateTime = DateTime.Now;
+                    model.LastPasswordUpdate = DateTime.Now.Utc();
                     model.IsActive = true;
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     var entity = model.MapTo<User>();
@@ -76,6 +78,7 @@ namespace BelibaHoma.BLL.Services
 
                     status.Success = true;
                     status.Message = String.Format("המשתמש {0} הוזן בהצלחה", model.FullName);
+                    status.Data = entity.Id;
                 }
             }
             catch (Exception ex)
@@ -123,7 +126,7 @@ namespace BelibaHoma.BLL.Services
                         //TODO: ask Roey if needed here - user.Password = updatedModel.Password;
                         user.UserRole = (int)updatedModel.UserRole;
                         user.Email = updatedModel.Email;
-                        user.IdNumber = user.IdNumber;
+                        user.IdNumber = updatedModel.IdNumber;
                         user.IsActive = updatedModel.IsActive;
                         user.UpdateTime = DateTime.Now;
                         user.Area = (int?)updatedModel.Area;
