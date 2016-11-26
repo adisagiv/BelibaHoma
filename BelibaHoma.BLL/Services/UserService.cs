@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using Extensions.DateTime;
 using Generic.Models;
 using Services.Log;
 
@@ -166,6 +167,96 @@ namespace BelibaHoma.BLL.Services
                     status.Data = new UserModel(user);
 
                     status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה. המשתמש אינו קיים במערכת.");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+
+        public StatusModel<long> ChangePassword(int id, string currentPassword, string newPassword, string reTypePassword)
+        {
+            var status = new StatusModel<long>(false, String.Empty, 0);
+
+            if (currentPassword == newPassword)
+            {
+                status.Message = String.Format("אנא בחר סיסמא שונה מהסיסמא הנוחכית");
+                return status;
+            }
+            else if (newPassword != reTypePassword)
+            {
+                status.Message = String.Format("הסיסמא לא תואמת את הסיסמא שהוזנה");
+                return status;
+            }
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var user = userRepository.GetByKey(id);
+
+                    if (user.Password != currentPassword)
+                    {
+                        status.Message = String.Format("הסיסמא הנוחכית אינה תואמת את הסיסמא השמורה במערכת");
+                        return status;
+                    }
+
+                    user.Password = newPassword;
+                    user.LastPasswordUpdate = DateTime.Now.Utc();
+
+                    unitOfWork.SaveChanges();
+
+                    status.Success = true;
+                    status.Data = user.LastPasswordUpdate.Value;
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה. המשתמש אינו קיים במערכת.");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+
+        public StatusModel ZeroPassword(int id)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var user = userRepository.GetByKey(id);
+
+                    user.LastPasswordUpdate = null;
+
+                    var newPassword = Guid.NewGuid().ToString().Substring(0, 6);
+
+                    user.Password = newPassword;
+
+                    unitOfWork.SaveChanges();
+
+                    status.Success = true;
+                    status.Message = String.Format("{0} : העבר סיסמא  חדשה זו למשתמש", newPassword);
                 }
             }
             catch (Exception ex)

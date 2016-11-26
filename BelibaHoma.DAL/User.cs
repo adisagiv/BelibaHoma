@@ -25,6 +25,7 @@ namespace BelibaHoma.DAL
         public string Email { get; set; }
         public bool IsActive { get; set; }
         public Nullable<int> Area { get; set; }
+        public Nullable<long> LastPasswordUpdate { get; set; }
     
         public virtual Trainee Trainee { get; set; }
         public virtual Tutor Tutor { get; set; }

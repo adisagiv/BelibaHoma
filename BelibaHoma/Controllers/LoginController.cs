@@ -50,13 +50,7 @@ namespace BelibaHoma.Controllers
 
         public ActionResult Logout()
         {
-            var authCookie = Response.Cookies.Get("AuthCookie");
-            if (authCookie != null)
-            {
-                authCookie.Expires = DateTime.Now.AddDays(-1); // make it expire yesterday
-                Response.Cookies.Add(authCookie); // overwrite it
-                Session.Abandon();
-            }
+            RemoveAuthCookie();
             
             return RedirectToAction("Index");
         }

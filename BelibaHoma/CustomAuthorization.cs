@@ -30,12 +30,14 @@ namespace BelibaHoma
                 throw new ArgumentNullException("httpContext");
 
 
+            
             var authenticationLevel = _authenticationService.GetAuthentication(httpContext.Request);
 
 
             if (authenticationLevel != null)
             {
                 var user = new UserModel(authenticationLevel);
+
                // _logger.Info(String.Format("after getting user from auth id:{0}, name: {1}", login_model.ID, login_model.CellPhone));
                 if (UserRoles.Contains(user.UserRole))
                 {

@@ -38,5 +38,22 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         StatusModel<UserModel> Get(int id);
+
+        /// <summary>
+        /// Change current password
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="currentPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="reTypePassword"></param>
+        /// <returns></returns>
+        StatusModel<long> ChangePassword(int id,string currentPassword, string newPassword, string reTypePassword);
+
+        /// <summary>
+        /// Zero passwordd for user 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel ZeroPassword(int id);
     }
 }
