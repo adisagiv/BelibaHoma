@@ -276,5 +276,37 @@ namespace BelibaHoma.BLL.Services
 
             return status;
         }
+
+        /// <summary>
+        /// Get unmatched / mached trainees from DB by area
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="showMatched"></param>
+        /// <returns></returns>
+        public StatusModel<List<TraineeMatchViewModel>> GetUnMatchedTrainees(Area area, bool showMatched)
+        {
+            var result = new StatusModel<List<TraineeMatchViewModel>>(false, String.Empty, new List<TraineeMatchViewModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var traineeList = traineeRepository.GetAll()
+                        .Where(t => t.User.IsActive && t.User.Area == (int)area && t.User.UserRole == (int)UserRole.Trainee && (showMatched || t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive)))
+                        .OrderBy(t => t.User.LastName).ThenBy(t => t.User.FirstName).ToList()
+                        .Select(t => new TraineeMatchViewModel(t, t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.Active), t.TutorTrainee.Count(tt => tt.Status == (int)TTStatus.UnApproved) > 0 ? 1 : 0)).ToList();
+
+                    result = new StatusModel<List<TraineeMatchViewModel>>(true, String.Empty, traineeList);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת חניכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
     }
 }

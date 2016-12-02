@@ -108,11 +108,14 @@
     <Compile Include="Interfaces\ITutorTraineeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
     <Compile Include="Models\JobOfferModel.cs" />
+    <Compile Include="Models\TraineeMatchViewModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
+    <Compile Include="Models\TutorMatchViewModel.cs" />
     <Compile Include="Models\TutorModel.cs" />
     <Compile Include="Models\TutorReportModel.cs" />
     <Compile Include="Models\TutorSessionModel.cs" />
     <Compile Include="Models\TutorTraineeModel.cs" />
+    <Compile Include="Models\TutorTraineeUnApprovedViewModel.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Interfaces\IAcademicMajorService.cs" />
     <Compile Include="Interfaces\IAuthenticationService.cs" />

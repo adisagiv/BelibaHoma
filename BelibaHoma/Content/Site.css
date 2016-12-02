@@ -26,3 +26,11 @@ textarea {
 form .form-horizontal .control-label {
     text-align: right;
 }
+
+.table-danger, .table-danger>td, .table-danger>th {
+    background-color: #f2dede;
+}
+
+.table-warning, .table-warning>td, .table-warning>th {
+    background-color: lightgoldenrodyellow;
+}

@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Web;
 using System.Web.Security;
 using BelibaHoma.BLL.Models;
@@ -12,5 +13,7 @@ namespace BelibaHoma.BLL.Interfaces
 
         HttpCookie CreateAuthenticationTicket(UserModel user, bool remeberMe);
         FormsAuthenticationTicket GetAuthentication(HttpRequestBase request);
+
+        StatusModel<long?> GetLastPasswordUpdate(int id);
     }
 }

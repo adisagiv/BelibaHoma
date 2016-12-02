@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
+using Extensions.DateTime;
 using Generic.GenericModel.Models;
 using Generic.Models;
 using log4net;
@@ -17,32 +18,42 @@ namespace BelibaHoma.BLL.Models
         [StringLength(9, MinimumLength = 9, ErrorMessage = "נא להזין ת.ז. כולל ספרת ביקורת")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public string IdNumber { get; set; }
+        
         [Display(Name = "שם פרטי")]
         [Required(ErrorMessage = "שם פרטי זהו שדה חובה")]
         public string FirstName { get; set; }
+        
         [Display(Name = "שם משפחה")]
         [Required(ErrorMessage = "שם משפחה זהו שדה חובה")]
         public string LastName { get; set; }
+        
         [Display(Name = "סיסמא")]
         [Required(ErrorMessage = "נא להזין סיסמא")]
         [DataType(DataType.Password)]
         [MinLength(6)]
         [MaxLength(20)]
         public string Password { get; set; }
+        
         [Display(Name = "זמן יצירה")]
         public DateTime CreationTime { get; set; }
+        
         [Display(Name = "סוג משתמש")]
         [Required(ErrorMessage = "נא לבחור את סוג המשתמש")]
         public UserRole UserRole { get; set; }
+        
         [Display(Name = "זמן עדכון")]
         public DateTime UpdateTime { get; set; }
+        
         [Display(Name = "זמן עדכון סיסמא")]
         public long? LastPasswordUpdate { get; set; }
+        
         [Display(Name = "כתובת מייל")]
         [EmailAddress(ErrorMessage = "נא להזין כתובת מייל תקינה")]
         public string Email { get; set; }
+        
         [Display(Name = "משתמש פעיל")]
         public bool IsActive { get; set; }
+        
         [Display(Name = "אזור פעילות")]
         public Area? Area { get; set; }
 
@@ -59,16 +70,34 @@ namespace BelibaHoma.BLL.Models
         {
             try
             {
-                string[] userDetails = ticket.UserData.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] userDetails = ticket.UserData.Split(new char[] { ';' }, StringSplitOptions.None);
 
                 Id = ticket.Version;
-                UserRole = (UserRole)Enum.Parse(typeof(UserRole), userDetails[0]);
-                LastName = userDetails[1];
-                FirstName = userDetails[2];
 
-                if (userDetails.Length > 3)
+                try
                 {
-                    Area = (Area) Enum.Parse(typeof(Area), userDetails[3]);
+                    if (!String.IsNullOrEmpty(userDetails[0]))
+                    {
+                        LastPasswordUpdate = long.Parse(userDetails[0]);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    LastPasswordUpdate = null;
+                }
+                
+
+                UserRole = (UserRole)Enum.Parse(typeof(UserRole), userDetails[1]);
+                LastName = userDetails[2];
+                FirstName = userDetails[3];
+
+
+                 
+
+                if (!String.IsNullOrEmpty(userDetails[4]))
+                {
+                    Area = (Area) Enum.Parse(typeof(Area), userDetails[4]);
                 }
                 else
                 {

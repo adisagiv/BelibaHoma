@@ -40,6 +40,14 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="updatedModel"></param>
         /// <returns></returns>
         StatusModel Update(int id, TutorModel updatedModel);
+
+        /// <summary>
+        /// Get tutors from DB based on area and only Unmatched
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="showMatched"></param>
+        /// <returns></returns>
+        StatusModel<List<TutorMatchViewModel>> GetUnMatchedTutors(Area area, bool showMatched);
     }
 
     }

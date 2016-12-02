@@ -42,5 +42,209 @@ namespace BelibaHoma.BLL.Services
 
             return result;
         }
+
+        /// <summary>
+        /// Get TutorTrainee by the Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public StatusModel<TutorTraineeModel> Get(int id)
+        {
+            var status = new StatusModel<TutorTraineeModel>();
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+
+                    status.Data = new TutorTraineeModel(tutortrainee);
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך גישה לפרטי קשר החונכות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Change tutortrainee Status and IsException in DB
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="updatedModel"></param>
+        /// <returns></returns>
+        public StatusModel Update(int id, TutorTraineeModel updatedModel)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    //var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    //var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+                    //var tutor = tutortraineeRepository.GetByKey(tutortrainee.TutorId);
+                    //var trainee = tutortraineeRepository.GetByKey(tutortrainee.TraineeId);
+
+                        //Updating the entity from the model received by the form
+                        tutortrainee.Status = (int)updatedModel.Status;
+                        tutortrainee.IsException = updatedModel.IsException;
+                        unitOfWork.SaveChanges();
+
+                        status.Success = true;
+                        status.Message = String.Format("מצב הקשר עודכן בהצלחה");
+                    }
+                }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך עדכון מצב הקשר");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        /// <summary>
+        /// Add new TutorTrainee
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        public StatusModel AddManual(TutorTraineeModel model)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    //TODO: server side validations - 
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var checkExistingRelation =
+                        tutorTraineeRepository.GetAll()
+                            .SingleOrDefault(t => t.TutorId == model.TutorId && t.TraineeId == model.TraineeId);
+                    if (checkExistingRelation != null)
+                    {
+                        if (checkExistingRelation.Status == (int)TTStatus.Active)
+                        {
+                            //relation exists in Active status
+                            status.Message = "קיים ציוות פעיל בין החניך והחונך במערכת";
+                            throw new System.ArgumentException(status.Message, "model");
+                        }
+                        else
+                        {
+                            //exist in another status => change to Active
+                            checkExistingRelation.Status = (int) TTStatus.Active;
+                            unitOfWork.SaveChanges();
+
+                            //If we got here - Yay! :)
+                            status.Success = true;
+                            status.Message = String.Format("הציוות עודכן בהצלחה");
+                            return status;
+                        }
+                    }
+
+                    //Updating the status in the model
+                    model.Status = TTStatus.Active;
+                    model.IsException = false;
+
+                    //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var trainee = traineeRepository.GetByKey(model.TraineeId);
+
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutor = tutorRepository.GetByKey(model.TutorId);
+
+                    //Cast into entity
+                    var entity = model.MapTo<TutorTrainee>();
+
+                    //Linking the Complexed entities to the retrieved ones
+                    entity.Trainee = trainee;
+                    entity.Tutor = tutor;
+
+                    //Finally Adding the entity to DB
+                    tutorTraineeRepository.Add(entity);
+                    unitOfWork.SaveChanges();
+
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    status.Message = String.Format("הציוות הוזן בהצלחה");
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הוספת הציוות");   
+                }
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        public StatusModel<List<TutorTraineeUnApprovedViewModel>> GetUnApprovedMatches(Area area)
+        {
+            var result = new StatusModel<List<TutorTraineeUnApprovedViewModel>>(false, String.Empty, new List<TutorTraineeUnApprovedViewModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = tutorTraineeRepository.GetAll().Where(t => t.Status == (int)TTStatus.UnApproved && t.Trainee.User.Area == (int)area && t.Tutor.User.Area == (int)area).ToList().Select(t => new TutorTraineeUnApprovedViewModel(t, t.Trainee.TutorTrainee.Count(tt => t.Status == (int)TTStatus.Active), t.Tutor.TutorTrainee.Count(tt => t.Status == (int)TTStatus.Active))).ToList();
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך שליפת המלצות לקשרי חונכות ממסד הנתתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
+        public StatusModel Remove(int id)
+        {
+            var status = new StatusModel<TutorTraineeModel>();
+
+            try
+            {
+                status.Message = String.Empty;
+                status.Success = false;
+
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+                    tutortraineeRepository.Delete(tutortrainee);
+
+                    unitOfWork.SaveChanges();
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך מחיקת ההמלצה לחונכות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
     }
 }
