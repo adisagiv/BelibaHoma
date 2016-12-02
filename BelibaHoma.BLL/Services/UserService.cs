@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
 using Generic.Models;
 using Services.Log;
+using Extensions.DateTime;
 
 namespace BelibaHoma.BLL.Services
 {
@@ -66,7 +67,7 @@ namespace BelibaHoma.BLL.Services
                     }
                     model.CreationTime = DateTime.Now;
                     model.UpdateTime = DateTime.Now;
-                    model.LastPasswordUpdate = DateTime.Now;
+                    model.LastPasswordUpdate = DateTime.Now.Utc();
                     model.IsActive = true;
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
                     var entity = model.MapTo<User>();
