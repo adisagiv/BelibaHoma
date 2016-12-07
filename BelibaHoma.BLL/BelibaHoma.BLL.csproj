@@ -129,6 +129,7 @@
     <Compile Include="Services\AcademicMajorService.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\JobOfferService.cs" />
+    <Compile Include="Services\MatchingAlgorithm.cs" />
     <Compile Include="Services\TraineeService.cs" />
     <Compile Include="Services\TutorReportService.cs" />
     <Compile Include="Services\TutorService.cs" />
