@@ -11,33 +11,46 @@
     @{
         UserModel user = ViewBag.CurrentUser;
     }
+
+    <style>
+    </style>
 </head>
-<body>
+<body background="~/Content/סתםרקע.jpg">
+
+
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                @*@Html.ActionLink("בליבה חומה", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})*@
+                <div>
+                    <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;" />
+                </div>
             </div>
             @* This is the menu per user role below.. *@
-            @Html.Action("Index",new { controller = "Menu" , area = "" });
+            @Html.Action("Index", new { controller = "Menu", area = "" });
 
             <div class="pull-left">
+
                 @if (user != null)
                 {
                     <span class="label label-inverse">@String.Format("שלום {0}", user.FullName)</span>
                     <a href="/Login/Logout">התנתק</a>
-                   // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
+                    // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
                 }
                 else
                 {
                     @Html.ActionLink("התחבר", "Index", "Login")
                 }
-                
+
             </div>
         </div>
     </div>
@@ -45,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ציוני דרך - פרויקט בליבה חומה</p>
         </footer>
     </div>
 

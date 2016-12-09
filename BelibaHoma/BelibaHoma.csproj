@@ -160,9 +160,9 @@
     <Compile Include="Areas\Trainee\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
-    <Compile Include="Areas\Tutor\Controllers\HomeController.cs" />
-    <Compile Include="Areas\Tutor\Controllers\TutorController.cs" />
-    <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
+    <Compile Include="Content\Tutor\Controllers\HomeController.cs" />
+    <Compile Include="Content\Tutor\Controllers\TutorController.cs" />
+    <Compile Include="Content\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -180,6 +180,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-rtl.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\אולירקע.jpg" />
+    <Content Include="Content\לוגו.jpg" />
+    <Content Include="Content\סתםרקע.jpg" />
+    <Content Include="Content\פרויקט בליבה חומה פותח.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -206,7 +210,7 @@
     <Content Include="Areas\Rackaz\Views\AcademicMajor\_AcademicMajorForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicMajor\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Tutor\Views\web.config" />
+    <Content Include="Content\Tutor\Views\web.config" />
     <Content Include="Areas\Trainee\Views\web.config" />
     <Content Include="Areas\Rackaz\Views\User\Index.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -228,7 +232,7 @@
     <Content Include="Areas\Rackaz\Views\Tutor\Create.cshtml" />
     <Content Include="Areas\Rackaz\Views\Tutor\_TutorForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\Tutor\Edit.cshtml" />
-    <Content Include="Areas\Tutor\Views\Tutor\Details.cshtml" />
+    <Content Include="Content\Tutor\Views\Tutor\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\Trainee\Details.cshtml" />
     <Content Include="Areas\Rackaz\Views\JobOffer\Details-old.cshtml" />
     <Content Include="Areas\Trainee\Views\_ViewStart.cshtml" />
@@ -344,9 +348,9 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
-    <Folder Include="Areas\Tutor\Models\" />
-    <Folder Include="Areas\Tutor\Views\Home\" />
-    <Folder Include="Areas\Tutor\Views\Shared\" />
+    <Folder Include="Content\Tutor\Models\" />
+    <Folder Include="Content\Tutor\Views\Home\" />
+    <Folder Include="Content\Tutor\Views\Shared\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
