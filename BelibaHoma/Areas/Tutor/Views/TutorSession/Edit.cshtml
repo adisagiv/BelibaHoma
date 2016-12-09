@@ -1,0 +1,18 @@
+﻿@model BelibaHoma.BLL.Models.TutorSessionModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@section scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
+
+
+<h2>ערוך מפגש</h2>
+
+
+@Html.Partial("_TutorSessionForm", Model)
+
+

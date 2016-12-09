@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
+using Extensions.DateTime;
 using Generic.GenericModel.Models;
 using Generic.Models;
 using log4net;
@@ -69,16 +70,34 @@ namespace BelibaHoma.BLL.Models
         {
             try
             {
-                string[] userDetails = ticket.UserData.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] userDetails = ticket.UserData.Split(new char[] { ';' }, StringSplitOptions.None);
 
                 Id = ticket.Version;
-                UserRole = (UserRole)Enum.Parse(typeof(UserRole), userDetails[0]);
-                LastName = userDetails[1];
-                FirstName = userDetails[2];
 
-                if (userDetails.Length > 3)
+                try
                 {
-                    Area = (Area) Enum.Parse(typeof(Area), userDetails[3]);
+                    if (!String.IsNullOrEmpty(userDetails[0]))
+                    {
+                        LastPasswordUpdate = long.Parse(userDetails[0]);
+                    }
+                }
+                catch (Exception)
+                {
+
+                    LastPasswordUpdate = null;
+                }
+                
+
+                UserRole = (UserRole)Enum.Parse(typeof(UserRole), userDetails[1]);
+                LastName = userDetails[2];
+                FirstName = userDetails[3];
+
+
+                 
+
+                if (!String.IsNullOrEmpty(userDetails[4]))
+                {
+                    Area = (Area) Enum.Parse(typeof(Area), userDetails[4]);
                 }
                 else
                 {

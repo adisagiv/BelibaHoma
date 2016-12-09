@@ -1,0 +1,67 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
+
+@{
+    ViewBag.Title = "ToturTraineeReports";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>דיווחים</h2>
+
+<p>
+    @Html.ActionLink("הוסף דיווח", "Create")
+</p>
+<table class="table">
+    <tr>
+        @*TODO: Fix it*@
+        @*<th>
+                @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.TutorHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TutorHoursBonding)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingsDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsProblem)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*TODO:FIX it*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingsDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsProblem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationTime)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)
+
+            </td>
+        </tr>
+    }
+
+</table>

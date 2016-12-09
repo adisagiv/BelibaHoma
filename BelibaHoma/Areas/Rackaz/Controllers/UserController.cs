@@ -40,5 +40,18 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             return View(result.Data);
         }
+
+        [HttpPost]
+        public ActionResult ZeroPassword(int id)
+        {
+            var status = _userService.ZeroPassword(id);
+
+            if (status.Success)
+            {
+                SetUserLastPasswordUpdate(id);
+            }
+
+            return Json(status);
+        }
     }
 }

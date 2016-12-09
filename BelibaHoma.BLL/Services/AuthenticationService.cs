@@ -10,6 +10,7 @@ using Catel.Data;
 using Generic.Models;
 using log4net;
 using Services.Log;
+using Extensions.DateTime;
 
 namespace BelibaHoma.BLL.Services
 {
@@ -51,7 +52,7 @@ namespace BelibaHoma.BLL.Services
         {
             try
             {
-                string[] userDetailsArray = new string[] { user.UserRole.ToString(), user.LastName, user.FirstName, user.Area.ToString() };
+                string[] userDetailsArray = new string[] { user.LastPasswordUpdate == null ? user.LastPasswordUpdate.ToString() : user.LastPasswordUpdate.Value.ToString(), user.UserRole.ToString(), user.LastName, user.FirstName, user.Area.ToString() };
                 string userDetails = CreateDetailsString(userDetailsArray);
 
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
@@ -106,5 +107,34 @@ namespace BelibaHoma.BLL.Services
 
         }
 
+        public StatusModel<long?> GetLastPasswordUpdate(int id)
+        {
+            var result = new StatusModel<long?>(false, string.Empty, null);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var userEntity = userRepository.GetByKey(id);
+
+                    if (userEntity != null)
+                    {
+
+                        result = new StatusModel<long?>(true, "", userEntity.LastPasswordUpdate);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //  TODO : Handle exception
+                result.Success = false;
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
+        }
     }
 }

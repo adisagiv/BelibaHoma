@@ -147,6 +147,8 @@
     <Compile Include="Areas\Rackaz\Controllers\JobOfferController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TutorReportControllerOld.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TutorSessionControllerOld.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
@@ -160,10 +162,13 @@
     <Compile Include="Areas\Trainee\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
-    <Compile Include="Content\Tutor\Controllers\HomeController.cs" />
-    <Compile Include="Content\Tutor\Controllers\TutorController.cs" />
-    <Compile Include="Content\Tutor\TutorAreaRegistration.cs" />
+    <Compile Include="Areas\Tutor\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Tutor\Controllers\TutorController.cs" />
+    <Compile Include="Areas\Tutor\Controllers\TutorReportController.cs" />
+    <Compile Include="Areas\Tutor\Controllers\TutorSessionController.cs" />
+    <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ChangePasswordController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -171,6 +176,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,7 +216,6 @@
     <Content Include="Areas\Rackaz\Views\AcademicMajor\_AcademicMajorForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\AcademicMajor\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Content\Tutor\Views\web.config" />
     <Content Include="Areas\Trainee\Views\web.config" />
     <Content Include="Areas\Rackaz\Views\User\Index.cshtml" />
     <Content Include="Scripts\bootstrap.js" />
@@ -232,7 +237,6 @@
     <Content Include="Areas\Rackaz\Views\Tutor\Create.cshtml" />
     <Content Include="Areas\Rackaz\Views\Tutor\_TutorForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\Tutor\Edit.cshtml" />
-    <Content Include="Content\Tutor\Views\Tutor\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\Trainee\Details.cshtml" />
     <Content Include="Areas\Rackaz\Views\JobOffer\Details-old.cshtml" />
     <Content Include="Areas\Trainee\Views\_ViewStart.cshtml" />
@@ -310,6 +314,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\popover.js" />
@@ -324,7 +329,9 @@
     <Content Include="Scripts\tutor-trainee-approve.js" />
     <Content Include="Scripts\user.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -341,6 +348,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\ChangePassword\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -348,10 +356,6 @@
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Rackaz\Views\Home\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
-    <Folder Include="Content\Tutor\Models\" />
-    <Folder Include="Content\Tutor\Views\Home\" />
-    <Folder Include="Content\Tutor\Views\Shared\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
