@@ -49,3 +49,8 @@ ul#main-menu li a:hover {
     color: #5FB0E4;
     padding-left: 10px;
 }
+
+.well wellnew{
+    background-color: red;
+
+}
