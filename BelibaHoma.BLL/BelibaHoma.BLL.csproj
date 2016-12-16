@@ -107,6 +107,7 @@
     <Compile Include="Interfaces\ITutorSessionService.cs" />
     <Compile Include="Interfaces\ITutorTraineeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\AlgorithmModel.cs" />
     <Compile Include="Models\JobOfferModel.cs" />
     <Compile Include="Models\TraineeMatchViewModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
