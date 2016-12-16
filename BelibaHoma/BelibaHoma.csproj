@@ -145,6 +145,7 @@
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\JobOfferController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\ReportController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorReportControllerOld.cs" />
@@ -152,6 +153,7 @@
     <Compile Include="Areas\Rackaz\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
+    <Compile Include="Areas\Rackaz\Models\HomeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorTraineeApproveViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorTraineeViewModel.cs" />
@@ -177,9 +179,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\ChangePasswordViewModel.cs" />
+    <Compile Include="Models\ReportType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Rackaz\Views\Home\alertIcon.jpg" />
+    <Content Include="Areas\Rackaz\Views\Home\reportIcon.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -260,6 +265,23 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatchesAreaSelected.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Home\HourStatisticsReport.cshtml" />
+    <Content Include="Areas\Tutor\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Create.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Edit.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Index.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\TutorTraineeReports.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\_TutorReportForm.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Create.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Edit.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Index.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\_TutorSessionForm.cshtml" />
+    <Content Include="Areas\Tutor\Views\Tutor\Details.cshtml" />
+    <Content Include="Areas\Tutor\Views\web.config" />
+    <Content Include="Areas\Tutor\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Report\HourStatistics.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Report\AlertsStatistics.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -314,6 +336,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\rackaz-reports.js" />
     <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
@@ -354,8 +377,9 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Rackaz\Views\Home\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
+    <Folder Include="Areas\Tutor\Models\" />
+    <Folder Include="Areas\Tutor\Views\Home\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
