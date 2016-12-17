@@ -335,7 +335,6 @@
     <Content Include="Scripts\dashboard\LICENSE" />
     <Content Include="Scripts\dashboard\README.md" />
     <Content Include="Areas\Rackaz\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Rackaz\Views\Home\HourStatisticsReport.cshtml" />
     <Content Include="Areas\Tutor\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Tutor\Views\TutorReport\Create.cshtml" />
     <Content Include="Areas\Tutor\Views\TutorReport\Edit.cshtml" />
@@ -515,6 +514,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\rackaz-reports.js" />
+    <Content Include="Scripts\reports\hour-statistics.js" />
     <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
