@@ -29,12 +29,12 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "מכינה")]
         [Description("מכינה")]
         Mechina = 0,
-        [Description("אוניברסיטה")]
-        [Display(Name = "אוניברסיטה")]
-        University = 1,
         [Description("מכללה")]
         [Display(Name = "מכללה")]
-        Collage = 2
+        College = 1,
+        [Description("אוניברסיטה")]
+        [Display(Name = "אוניברסיטה")]
+        University = 2
     }
 
     public enum UserRole

@@ -3,26 +3,27 @@
     Layout = null;
 }
 <div class="navbar-collapse collapse">
-    <ul class="nav navbar-nav">
-        <li>@Html.ActionLink("Home", "Index", "Home")</li>
-        <li>@Html.ActionLink("About", "About", "Home")</li>
-        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    @*<span class="icon-bar"></span>*@
+    <ul id="main-menu" class="nav navbar-nav">
+        <li>@Html.ActionLink("דף הבית", "Index", "Home")</li>
+        <li>@Html.ActionLink("על התוכנית", "About", "Home")</li>
+        <li>@Html.ActionLink("פרטי קשר", "Contact", "Home")</li>
         @if (Model != null)
         {
             // Add Admin related links here
             if (Model.UserRole.ToString() == "Admin")
             {
-                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new { Area = "Rackaz" }, new object { })</li>
+                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new {Area = "Rackaz"}, new object {})</li>
                 <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new {Area = "Rackaz"}, new object {})</li>
-                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>            
+                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
             }
 
             // Add Rackaz related links here
             if (Model.UserRole.ToString() == "Rackaz")
             {
-                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new { Area = "Rackaz" }, new object { })</li>
+                <li>@Html.ActionLink("מוסדות אקדמאים", "Index", "AcademicInstitution", new {Area = "Rackaz"}, new object {})</li>
                 <li>@Html.ActionLink("מסלולי לימוד", "Index", "AcademicMajor", new {Area = "Rackaz"}, new object {})</li>
-                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>
+                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
 
             }
 
@@ -31,7 +32,7 @@
             {
                 var id = Model.Id;
                 var action = "Details/" + id;
-                <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Tutor", new { Area = "Tutor" }, new object { })</li>
+                <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Tutor", new {Area = "Tutor"}, new object {})</li>
             }
 
             // Add Trainee related links here
@@ -40,7 +41,7 @@
                 var id = Model.Id;
                 var action = "Details/" + id;
                 <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Trainee", new {Area = "Trainee"}, new object {})</li>
-                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>
+                <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
             }
         }
     </ul>

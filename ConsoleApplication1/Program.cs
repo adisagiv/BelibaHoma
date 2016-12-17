@@ -16,20 +16,44 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            var ais = new AcademicInstitutionService();
+            int size = 6;
+            int[,] matrix = new int[size,size];
+            Random r = new Random();
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    matrix[i, j] = r.Next(1,3000);
+                }
+            }
 
-            var model = new AcademicInstitutionModel();
+            Console.WriteLine("Initial cost");
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write("[");
+                for (int j = 0; j < size -1; j++)
+                {
+                    Console.Write(matrix[i,j] + ", ");
+                }
+                Console.Write(matrix[i, size-1]);
+                Console.Write("]\n");
+            }
 
-            model.Area = Area.Jerusalem;
-            model.Name = "העברית";
-            model.InstitutionType = InstitutionType.University;
-            //model.Id = 1;
-            //model.Id = 5;
-            StatusModel statusModel = ais.Add(model);
+            MatchingAlgorithm Algo = new MatchingAlgorithm(matrix);
+            int[,] mat = Algo.Run();
 
-            Console.WriteLine(statusModel.Success);
-            Console.WriteLine(statusModel.Message);
-
+            Console.WriteLine("Final assignment");
+            for (int i = 0; i < size; i++)
+            {
+                Console.Write("[");
+                for (int j = 0; j < size - 1; j++)
+                {
+                    Console.Write(mat[i, j] + ", ");
+                }
+                Console.Write(mat[i, size - 1]);
+                Console.Write("]\n");
+            }
+            Console.Read();
         }
     }
 }

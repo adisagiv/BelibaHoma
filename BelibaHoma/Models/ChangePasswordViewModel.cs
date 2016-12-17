@@ -5,8 +5,8 @@ namespace BelibaHoma.Models
 {
     public class ChangePasswordViewModel
     {
-        [Display(Name = "סיסמא נוחכית")]
-        [Required(ErrorMessage = "נא להזין סיסמא נוחכית")]
+        [Display(Name = "סיסמא נוכחית")]
+        [Required(ErrorMessage = "יש להזין את הסיסמא הנוכחית")]
         [DataType(DataType.Password)]
         public string CurrentPassword { get; set; }
 
@@ -17,8 +17,8 @@ namespace BelibaHoma.Models
         [MaxLength(20)]
         public string NewPassword { get; set; }
 
-        [Display(Name = "הזן סיסמא חדשה שוב")]
-        [Required(ErrorMessage = "נא להזין סיסמא חדשה שוב")]
+        [Display(Name = "הזן סיסמא חדשה שנית")]
+        [Required(ErrorMessage = "יש להזין את הסיסמא החדשה פעם נוספת")]
         [DataType(DataType.Password)]
         [MinLength(6)]
         [MaxLength(20)]

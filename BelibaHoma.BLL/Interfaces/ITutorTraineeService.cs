@@ -55,6 +55,28 @@ namespace BelibaHoma.BLL.Interfaces
         StatusModel Remove(int id);
 
         /// <summary>
+        /// Get list of recommended TutorTrainee from db
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<List<TutorTraineeModel>> GetRecommended(Area area);
+
+        /// <summary>
+        /// Run Auto Matching Algorithm
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        StatusModel RunAlgorithm(AlgorithmModel model);
+
+        /// <summary>
+        /// Add recomendation to DB
+        /// </summary>
+        /// <param name="tutor"></param>
+        /// <param name="trainee"></param>
+        /// <returns></returns>
+        StatusModel TutorTraineeAdd(TutorModel tutor, TraineeModel trainee);
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>

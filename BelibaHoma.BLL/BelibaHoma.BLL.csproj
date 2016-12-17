@@ -108,6 +108,7 @@
     <Compile Include="Interfaces\ITutorSessionService.cs" />
     <Compile Include="Interfaces\ITutorTraineeService.cs" />
     <Compile Include="Interfaces\IUserService.cs" />
+    <Compile Include="Models\AlgorithmModel.cs" />
     <Compile Include="Models\GradeModel.cs" />
     <Compile Include="Models\JobOfferModel.cs" />
     <Compile Include="Models\TraineeMatchViewModel.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Services\GradeService.cs" />
     <Compile Include="Services\JobOfferService.cs" />
+    <Compile Include="Services\MatchingAlgorithm.cs" />
     <Compile Include="Services\TraineeService.cs" />
     <Compile Include="Services\TutorReportService.cs" />
     <Compile Include="Services\TutorService.cs" />
