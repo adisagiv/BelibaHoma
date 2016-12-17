@@ -60,11 +60,24 @@ namespace BelibaHoma.Areas.Tutor.Controllers
 
             if (result.Success)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","TutorReport");
             }
             var status = new StatusModel(false, result.Message);
             return Error(status);
         }
+
+        public ActionResult Details(int id)
+        {
+            var result = _TutorSessionService.GetById(id);
+            if (result.Success)
+            {
+                return View(result.Data);
+
+            }
+            var status = new StatusModel(false, result.Message);
+            return Error(status);
+        }
+
 
         public ActionResult Edit(int id)
         {

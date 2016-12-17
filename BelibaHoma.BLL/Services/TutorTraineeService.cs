@@ -218,6 +218,31 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+
+        public StatusModel<List<TutorTraineeModel>> GetById(int id)
+        {
+            var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var TutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = TutorTraineeRepository.GetAll().ToList().Where(tid => tid.TutorId == id).Select(ai => new TutorTraineeModel(ai)).ToList();
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting TutorTrainee from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
+        }
+
+
         public StatusModel Remove(int id)
         {
             var status = new StatusModel<TutorTraineeModel>();

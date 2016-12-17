@@ -24,7 +24,7 @@
                 @Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
             </div>
             @* This is the menu per user role below.. *@
-            @Html.Action("Index",new { controller = "Menu" , area = "" });
+            @Html.Action("Index",new { controller = "Menu" , area = "" })
 
             <div class="pull-left">
                 @if (user != null)

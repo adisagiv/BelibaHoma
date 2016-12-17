@@ -22,9 +22,7 @@
         <th>
             @Html.DisplayNameFor(model => model.TutorHoursBonding)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MeetingsDescription)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.IsProblem)
         </th>
@@ -47,9 +45,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TutorHoursBonding)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeetingsDescription)
-            </td>
+            
             <td>
                 @Html.DisplayFor(modelItem => item.IsProblem)
             </td>
@@ -58,7 +54,9 @@
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
-                @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)
+                @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)|
+                @Html.ActionLink("Details", "Details", "TutorSession", new { id = item.Id }, null)
+
 
             </td>
         </tr>

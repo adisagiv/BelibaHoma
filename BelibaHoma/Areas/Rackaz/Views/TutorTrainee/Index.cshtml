@@ -178,7 +178,10 @@
                 <td>
                     @Html.ActionLink("ערוך פרטי קשר", "Edit", new { Area = "Rackaz", id = item.Id }) |
                     @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, null)|
-                    @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, null)
+                    @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, null)|
+                    @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id }, null)
+
+
                 </td>
             </tr>
         }

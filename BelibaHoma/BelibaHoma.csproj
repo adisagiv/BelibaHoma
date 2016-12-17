@@ -157,8 +157,10 @@
     <Compile Include="Areas\Rackaz\Models\TutorTraineeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TutorViewModel.cs" />
     <Compile Include="Areas\Rackaz\RackazAreaRegistration.cs" />
+    <Compile Include="Areas\Trainee\Controllers\GradeController.cs" />
     <Compile Include="Areas\Trainee\Controllers\HomeController.cs" />
     <Compile Include="Areas\Trainee\Controllers\JobOfferController.cs" />
+    <Compile Include="Areas\Trainee\Models\GradeViewModel.cs" />
     <Compile Include="Areas\Trainee\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Trainee\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Trainee\TraineeAreaRegistration.cs" />
@@ -166,6 +168,7 @@
     <Compile Include="Areas\Tutor\Controllers\TutorController.cs" />
     <Compile Include="Areas\Tutor\Controllers\TutorReportController.cs" />
     <Compile Include="Areas\Tutor\Controllers\TutorSessionController.cs" />
+    <Compile Include="Areas\Tutor\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
@@ -258,6 +261,22 @@
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatchesAreaSelected.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Create.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Edit.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\Index.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\TutorTraineeReports.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorReport\_TutorReportForm.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Create.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Edit.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Index.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\_TutorSessionForm.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorSession\Details.cshtml" />
+    <Content Include="Areas\Tutor\Views\TutorTrainee\Index.cshtml" />
+    <Content Include="Areas\Trainee\Views\Grade\Index.cshtml" />
+    <Content Include="Areas\Trainee\Views\Grade\Create.cshtml" />
+    <Content Include="Areas\Trainee\Views\Grade\Edit.cshtml" />
+    <Content Include="Areas\Trainee\Views\Grade\_GradeForm.cshtml" />
+    <Content Include="Areas\Trainee\Views\Grade\_GradesList.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -357,7 +376,6 @@
     <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />
     <Folder Include="Areas\Tutor\Views\Shared\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

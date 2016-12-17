@@ -54,6 +54,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel Remove(int id);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<List<TutorTraineeModel>> GetById(int id);
     }
 
 }

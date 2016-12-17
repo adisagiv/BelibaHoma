@@ -45,6 +45,29 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+        public StatusModel<List<TutorReportModel>> GetById(int id)
+        {
+            var result = new StatusModel<List<TutorReportModel>>(false, String.Empty, new List<TutorReportModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var TutorReportRepository = unitOfWork.GetRepository<ITutorReportRepository>();
+
+                    result.Data = TutorReportRepository.GetAll().ToList().Where(tr => tr.TutorTraineeId == id).Select(ai => new TutorReportModel(ai)).ToList();
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting Tutor Sessions from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
+        }
+
 
         public StatusModel Add(TutorReportModel model)
         {

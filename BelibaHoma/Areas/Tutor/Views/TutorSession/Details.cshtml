@@ -1,0 +1,79 @@
+﻿@using System.Runtime.ExceptionServices
+@using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical
+@model IEnumerable<BelibaHoma.BLL.Models.TutorSessionModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>מפגשים</h2>
+
+
+<p>
+    @Html.ActionLink("חזור לעמוד דיווחים", "Index", "TutorReport")
+</p>
+<p>
+    @Html.DisplayNameFor(model => model.TutorReport.MeetingsDescription)
+</p>
+
+
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
+            </td>
+        </tr>
+
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MeetingPlace)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumBondingHours)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MeetingPlace)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumBondingHours)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            @*<td>
+                    @item.MeetingPlace.ToDescription()
+                </td>
+                <td>
+                    @item.NumBondingHours.ToDescription()
+                </td>*@
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

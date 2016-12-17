@@ -199,4 +199,16 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "טרם אושר")]
         UnApproved = 2
     }
+    public enum SemesterType
+    {
+        [Description("חורף")]
+        [Display(Name = "חורף")]
+        Winter = 0,
+        [Description("אביב")]
+        [Display(Name = "אביב")]
+        Spring = 1,
+        [Description("קיץ")]
+        [Display(Name = "קיץ")]
+        Summer = 2
+    }
 }
