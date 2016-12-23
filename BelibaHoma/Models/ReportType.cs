@@ -8,6 +8,9 @@ namespace BelibaHoma.Models
         HourStatistics,
 
         [Description("סטטיסטיקת התרעות")]
-        AlertsStatistics
+        AlertsStatistics,
+
+        [Description("סטטיסטיקת הצטרפות ונשירת חניכים")]
+        JoinDropStatistics
     }
 }

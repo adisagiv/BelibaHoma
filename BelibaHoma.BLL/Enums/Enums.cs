@@ -211,4 +211,10 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "קיץ")]
         Summer = 2
     }
+
+    public enum HourStatisticsType
+    {
+        Sum = 0,
+        Average = 1
+    }
 }

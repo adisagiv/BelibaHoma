@@ -100,8 +100,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Models\JoinDropStatisticsModel.cs" />
+    <Compile Include="Models\Reports\HighChartJDModel.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Models\HourStatisticsModel.cs" />
     <Compile Include="Interfaces\IGradeService.cs" />
     <Compile Include="Interfaces\IJobOfferService.cs" />
+    <Compile Include="Interfaces\IReportService.cs" />
     <Compile Include="Interfaces\ITraineeService.cs" />
     <Compile Include="Interfaces\ITutorReportService.cs" />
     <Compile Include="Interfaces\ITutorService.cs" />
@@ -111,6 +116,7 @@
     <Compile Include="Models\AlgorithmModel.cs" />
     <Compile Include="Models\GradeModel.cs" />
     <Compile Include="Models\JobOfferModel.cs" />
+    <Compile Include="Models\Reports\HighChartModel.cs" />
     <Compile Include="Models\TraineeMatchViewModel.cs" />
     <Compile Include="Models\TraineeModel.cs" />
     <Compile Include="Models\TutorMatchViewModel.cs" />

@@ -1,40 +1,24 @@
 ﻿$(function () {
-    debugger;
-    Highcharts.chart('container', {
-        title: {
-            text: 'Monthly Average Temperature',
-            x: -20 //center
-        },
-        subtitle: {
-            text: 'Source: WorldClimate.com',
-            x: -20
-        },
-        xAxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        },
-        yAxis: {
-            title: {
-                text: 'Temperature (°C)'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-            valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
-            name: 'Tokyo',
-            data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-        }]
+    function getHourStaistics(hourType, year) {
+
+        $.post("/Rackaz/Report/GetHourStatistics", { hourStatisticsType : hourType,  year : year }, function (result) {
+            if (result != null) {
+                Highcharts.chart('container', result);
+            }
+
+        });
+    }
+
+    // Cathcing the click event and collecti the data 
+    $("#get-hour-statistics").click(function () {
+        // get year from input
+        var year = $('#year').val();
+        var hourType = $('#hour-type').val();
+        // get data from server
+        getHourStaistics(hourType, year);
     });
+
+    // defualt call to get hour statitics 
+    var year = $('#year').val();
+    getHourStaistics(0, year);
 });
