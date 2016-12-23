@@ -20,6 +20,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         private readonly ITutorService _tutorService;
         private readonly IAcademicInstitutionService _academicInstitutionService;
         private readonly IAcademicMajorService _academicMajorService;
+        private readonly ITutorTraineeService _tutorTraineeService;
 
         public TutorController(ITutorService tutorService, IAcademicInstitutionService academicInstitutionService,
             IAcademicMajorService academicMajorService)
@@ -28,6 +29,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             this._academicInstitutionService = academicInstitutionService;
             this._academicMajorService = academicMajorService;
         }
+
 
         public ActionResult Details(int id)
         {

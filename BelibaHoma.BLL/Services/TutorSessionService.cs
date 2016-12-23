@@ -145,6 +145,30 @@ namespace BelibaHoma.BLL.Services
         }
 
 
+        public StatusModel<List<TutorSessionModel>> GetById(int id)
+        {
+            var result = new StatusModel<List<TutorSessionModel>>(false, String.Empty, new List<TutorSessionModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var TutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
+
+                    result.Data = TutorSessionRepository.GetAll().ToList().Where(TR => TR.TutorReportId == id).Select(ai => new TutorSessionModel(ai)).ToList();
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting Tutor Sessions from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
+        }
+
+
         public StatusModel<TutorSessionModel> Get(int id)
         {
             var status = new StatusModel<TutorSessionModel>();

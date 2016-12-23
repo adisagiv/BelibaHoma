@@ -1,0 +1,66 @@
+﻿@using BelibaHoma.BLL.Enums
+@model BelibaHoma.BLL.Models.GradeModel
+
+@{
+    Layout = null;
+    var isRackaz = ViewBag.IsRackaz; //change to addministrator aswell later on
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="direction: rtl">
+        @*<h4>דיווח</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @*</div>*@
+        @*//TODO: validate that semester number does not exist with same trainee id*@
+    <div class="form-group">
+        <label class="control-label col-md-2">מספר סמסטר </label>
+        <div class="col-md-10">
+            @{
+                object htmlAttributes = new { @class = "form-control", @disabled = "disabled" };
+                if (ViewBag.IsCreate)
+                {
+                    htmlAttributes = new { @class = "form-control" };
+                }
+                 
+            }
+            @Html.EditorFor(model => model.SemesterNumber, new {htmlAttributes = htmlAttributes })
+            @Html.ValidationMessageFor(model => model.SemesterNumber, "", new {@class = "text-danger"})
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">ממוצע ציונים בסמסטר </label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Grade1, new {htmlAttributes = new {@class = "form-control"}})
+            @Html.ValidationMessageFor(model => model.Grade1, "", new {@class = "text-danger"})
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">סוג סמסטר</label>
+        <div class="col-md-10">
+            @Html.EnumDropDownListFor(model => model.SemesterType, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.SemesterType, "", new { @class = "text-danger" })
+
+
+        </div>
+    </div>
+
+     
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

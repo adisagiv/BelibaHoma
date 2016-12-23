@@ -39,7 +39,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         //TODO: how to create index of only one specific TutorTraineeId
         public ActionResult TutorTraineeReports(int id)
         {
-            var result = _TutorReportService.Get(id);
+            var result = _TutorReportService.GetById(id);
             if (result.Success)
             {
                 return View(result.Data);
