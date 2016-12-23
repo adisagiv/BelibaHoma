@@ -234,89 +234,6 @@ namespace BelibaHoma.BLL.Services
                 }
             }
 
-            //int countAssignments = 0;
-            //while (countAssignments < _size)
-            //{
-            //    bool changed = false;
-            //    //assign only constrained zeros in marked cols
-            //    foreach (var col in _colsCovered)
-            //    {
-            //        if (_colsCovered[col] != 5)
-            //        {
-            //            int countZeros = 0;
-            //            int tmpRow = -1;
-            //            for (int row = 0; row < _size; row++)
-            //            {
-            //                if (_rowsCovered[row] != 5 && zeroes[row, col] != 0)
-            //                {
-            //                    countZeros++;
-            //                    tmpRow = row;
-            //                }
-            //                if (countZeros > 1) break;
-            //            }
-            //            if (countZeros == 1)
-            //            {
-            //                zeroes[tmpRow, col] = 5;
-            //                _colsCovered[col] = 5;
-            //                _rowsCovered[tmpRow] = 5;
-            //                changed = true;
-            //                countAssignments++;
-            //            }
-            //        }
-            //    }
-
-            //    //assign only constrained zeros in marked rows
-            //    foreach (var row in _rowsCovered)
-            //    {
-            //        if (_rowsCovered[row] != 5)
-            //        {
-            //            int countZeros = 0;
-            //            int tmpCol = -1;
-            //            for (int col = 0; col < _size; col++)
-            //            {
-            //                if (_colsCovered[col] != 5 && zeroes[row, col] != 0)
-            //                {
-            //                    countZeros++;
-            //                    tmpCol = col;
-            //                }
-            //                if (countZeros > 1) break;
-            //            }
-            //            if (countZeros == 1)
-            //            {
-            //                zeroes[row, tmpCol] = 5;
-            //                _colsCovered[tmpCol] = 5;
-            //                _rowsCovered[row] = 5;
-            //                changed = true;
-            //                countAssignments++;
-            //            }
-            //        }
-            //    }
-
-            //    if (changed == false)
-            //    {
-            //        List<Tuple<int,int>> zeroLocs = new List<Tuple<int,int>>();
-            //        for (int row = 0; row < _size; row++)
-            //        {
-            //            if (_rowsCovered[row] == 5) continue;
-            //            for (int col = 0; col < _size; col++)
-            //            {
-            //                if (_colsCovered[col] == 5) continue;
-            //                if (zeroes[row, col] == 1 || zeroes[row, col] == 2)
-            //                {
-            //                    zeroLocs.Add(Tuple.Create(row, col));
-            //                }
-            //            }
-            //        }
-
-            //        Random rnd = new Random();
-            //        int r = rnd.Next(zeroLocs.Count - 1);
-            //        zeroes[(zeroLocs[r]).Item1, (zeroLocs[r]).Item2] = 7;
-            //        _rowsCovered[(zeroLocs[r]).Item1] = 5;
-            //        _colsCovered[(zeroLocs[r]).Item2] = 5;
-            //        countAssignments++;
-            //    }
-            //}
-
             int[] countRowZeros = new int[_size];
             int[] countColZeros = new int[_size];
 
@@ -355,6 +272,11 @@ namespace BelibaHoma.BLL.Services
                         minCol = countColZeros[i];
                         minColLoc = i;
                     }
+                }
+
+                if (minRowLoc == -1 && minColLoc == -1)
+                {
+                    break;
                 }
 
                 if (minRow < minCol)

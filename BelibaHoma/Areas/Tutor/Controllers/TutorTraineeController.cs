@@ -26,14 +26,6 @@ namespace BelibaHoma.Areas.Tutor.Controllers
 
         public ActionResult Index(int id)
         {
-            //if (CurrentUser.UserRole.ToString() == "Rackaz")
-            //{
-            //    ViewBag.IsRackaz = true;
-            //}
-            //else
-            //{
-            //    ViewBag.IsRackaz = false;
-            //}
             var result = _tutorTraineeService.GetById(id);
             if (result.Success)
             {

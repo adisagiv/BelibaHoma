@@ -241,5 +241,55 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             Response.StatusCode = 404;
             return Error(status);
         }
+
+        public ActionResult RunAlgorithm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RunAlgorithm(Area area)
+        {
+            var model = new AlgorithmModel
+            {
+                Area = area
+            };
+            var trainees = _traineeService.GetTrainees(model.Area);
+            if (trainees.Success)
+            {
+                model.TraineeList = trainees.Data;
+            }
+            else
+            {
+                return Error(trainees);
+            }
+            var tutors = _tutorService.GetTutors(model.Area);
+            if (tutors.Success)
+            {
+                model.TutorList = tutors.Data;
+            }
+            else
+            {
+                return Error(tutors);
+            }
+            var status = _tutorTraineeService.ResetTutorTrainee(model.Area);
+            if (status.Success)
+            {
+                status = _tutorTraineeService.RunAlgorithm(model);
+                if (status.Success)
+                {
+
+                }
+                else
+                {
+                    return Error(status);
+                }
+            }
+            else
+            {
+                return Error(status);
+            }
+            return View();
+        }
     }
 }

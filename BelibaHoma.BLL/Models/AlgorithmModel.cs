@@ -11,11 +11,18 @@ namespace BelibaHoma.BLL.Models
     {
         public List<TraineeModel> TraineeList;
         public List<TutorModel> TutorList;
+        public Area Area;
 
         public AlgorithmModel(List<TutorModel> tutors, List<TraineeModel> trainees)
         {
             TraineeList = trainees;
             TutorList = tutors;
+        }
+
+        public AlgorithmModel()
+        {
+            TraineeList = new List<TraineeModel>();
+            TutorList = new List<TutorModel>();
         }
     }
 }
