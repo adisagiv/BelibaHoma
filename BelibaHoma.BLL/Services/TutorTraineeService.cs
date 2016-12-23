@@ -242,6 +242,38 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+        public StatusModel<bool> IsUnRecommended(Area area)
+        {
+            var status = new StatusModel<bool>(false,String.Empty,false);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorEntityList = tutorRepository.GetAll().ToList();
+
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var traineeEntityList = traineeRepository.GetAll().ToList();
+
+                    status.Data = tutorEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int) TTStatus.InActive));
+                    if (!status.Data)
+                    {
+                        status.Data = traineeEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive));
+                    }
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה בזיהוי חניכים וחונכים ללא שיבוץ");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
 
         public StatusModel Remove(int id)
         {
@@ -309,11 +341,11 @@ namespace BelibaHoma.BLL.Services
                 {
                     TraineeModel trainee = model.TraineeList[traineeIdx];
                     TutorModel tutor = model.TutorList[tutorIdx];
-                    int libaWeight = 5;
-                    int majorWeight = 1000;
-                    int minorWeight = 800;
-                    int clusterWeight = 200;
-                    int institutionWeight = 100; 
+                    int libaWeight = 200;
+                    int majorWeight = 2000;
+                    int minorWeight = 1000;
+                    int clusterWeight = 20;
+                    int institutionWeight = 50; 
 
                     bool isMechina = trainee.AcademicInstitution.InstitutionType == InstitutionType.Mechina;
                     if (isMechina)
@@ -346,7 +378,7 @@ namespace BelibaHoma.BLL.Services
                         utilityMat[traineeIdx, tutorIdx] = -1;
                         continue;
                     }
-                    else 
+                    else if(isMechina)
                     {
                         utilityMat[traineeIdx, tutorIdx] += libaWeight;
                     }
@@ -469,6 +501,12 @@ namespace BelibaHoma.BLL.Services
                     {
                         utilityMat[traineeIdx, tutorIdx] += institutionWeight;
                     }
+
+                    //check what is max util
+                    if (utilityMat[traineeIdx,tutorIdx] > maxUtil)
+                    {
+                        maxUtil = utilityMat[traineeIdx, tutorIdx];
+                    }
                 }
 
             }
@@ -479,8 +517,7 @@ namespace BelibaHoma.BLL.Services
             int matSize = 0;
             matSize = numTrainees >= numTutors ? numTrainees : numTutors;
             int[,] costMatrix = new int[matSize,matSize];
-            int bigM= 100000;
-            maxUtil = 5000;
+            int bigM = maxUtil * 100;
 
             for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
             {
