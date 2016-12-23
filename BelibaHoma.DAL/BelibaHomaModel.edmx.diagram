@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1" ZoomLevel="72">
+      <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicInstitution" Width="1.5" PointX="0.75" PointY="5.25" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicMajor" Width="1.5" PointX="0.75" PointY="9" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Alert" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Grade" Width="1.5" PointX="5.25" PointY="14" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.JobOffer" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.JobOffer" Width="1.5" PointX="3" PointY="20.625" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Trainee" Width="1.5" PointX="3" PointY="7.5" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Tutor" Width="1.5" PointX="6" PointY="8.25" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.TutorReport" Width="1.5" PointX="10.5" PointY="9.25" />

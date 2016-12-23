@@ -82,7 +82,8 @@ namespace BelibaHoma.BLL.Services
 
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
                     var academicMajor = academicMajorRepository.GetByKey(model.AcademicMajor.Id);
-                    var academicMajor1 = academicMajorRepository.GetByKey(model.AcademicMajor1.Id);
+                    var academicMajor1 = new AcademicMajor();
+                    academicMajor1 = model.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(model.AcademicMajor1.Id) : null;
 
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
 
@@ -123,7 +124,10 @@ namespace BelibaHoma.BLL.Services
 
                         entity.AcademicInstitutionId = academicInstitution.Id;
                         entity.AcademicMajorId = academicMajor.Id;
-                        entity.AcademicMinorId = academicMajor1.Id;
+                        if (model.AcademicMajor1.Id != 0)
+                        {
+                            entity.AcademicMinorId = academicMajor1.Id;
+                        }
                         entity.UserId = user.Id;
 
                         //Finally Adding the entity to DB
@@ -196,11 +200,10 @@ namespace BelibaHoma.BLL.Services
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
-
-                    var academicInstitution =
-                        academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
+                    var academicInstitution = academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
                     var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
-                    var academicMajor1 = academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id);
+                    var academicMajor1 = new AcademicMajor();
+                    academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
                    
 
                     var tutor = tutorRepository.GetByKey(id);
@@ -253,7 +256,14 @@ namespace BelibaHoma.BLL.Services
                         tutor.AcademicMajor = academicMajor;
                         tutor.AcademicMajorId = academicMajor.Id;
                         tutor.AcademicMajor1 = academicMajor1;
-                        tutor.AcademicMinorId = academicMajor1.Id;
+                        if (updatedModel.AcademicMajor1.Id != 0)
+                        {
+                            tutor.AcademicMinorId = academicMajor1.Id;
+                        }
+                        else
+                        {
+                            tutor.AcademicMinorId = null;
+                        }
                      
                         unitOfWork.SaveChanges();
 

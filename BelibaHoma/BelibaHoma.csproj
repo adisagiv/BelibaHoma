@@ -329,6 +329,7 @@
     <Content Include="Scripts\dashboard\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Scripts\dashboard\LICENSE" />
     <Content Include="Scripts\dashboard\README.md" />
+    <Content Include="Areas\Rackaz\Views\TutorTrainee\RunAlgorithm.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />

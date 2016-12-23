@@ -76,9 +76,11 @@ namespace BelibaHoma.BLL.Services
 
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
                     var academicMajor = academicMajorRepository.GetByKey(model.AcademicMajor.Id);
-                    var academicMajor1 = academicMajorRepository.GetByKey(model.AcademicMajor1.Id);
-                    var academicMajor2 = academicMajorRepository.GetByKey(model.AcademicMajor2.Id);
-
+                    //academic major 1 & 2 can be null
+                    var academicMajor1 = new AcademicMajor();
+                    academicMajor1 = model.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(model.AcademicMajor1.Id) : null;
+                    var academicMajor2 = new AcademicMajor();
+                    academicMajor2 = model.AcademicMajor2.Id != 0 ? academicMajorRepository.GetByKey(model.AcademicMajor2.Id) : null;
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
 
                     //Running some server side validations
@@ -120,8 +122,14 @@ namespace BelibaHoma.BLL.Services
 
                         entity.AcademicInstitutionId = academicInstitution.Id;
                         entity.AcademicMajorId = academicMajor.Id;
-                        entity.AcademicMinorId = academicMajor1.Id;
-                        entity.AcademicMajorNeededHelpId = academicMajor2.Id;
+                        if (model.AcademicMajor1.Id != 0)
+                        {
+                            entity.AcademicMinorId = academicMajor1.Id;
+                        }
+                        if (model.AcademicMajor2.Id != 0)
+                        {
+                            entity.AcademicMajorNeededHelpId = academicMajor2.Id;
+                        }
                         entity.UserId = user.Id;
 
                         //Finally Adding the entity to DB
@@ -198,8 +206,10 @@ namespace BelibaHoma.BLL.Services
                     var academicInstitution =
                         academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
                     var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
-                    var academicMajor1 = academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id);
-                    var academicMajor2 = academicMajorRepository.GetByKey(updatedModel.AcademicMajor2.Id);
+                    var academicMajor1 = new AcademicMajor();
+                    academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
+                    var academicMajor2 = new AcademicMajor();
+                    academicMajor2 = updatedModel.AcademicMajor2.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor2.Id) : null;
 
                     var trainee = traineeRepository.GetByKey(id);
                     if (trainee != null)
@@ -257,10 +267,25 @@ namespace BelibaHoma.BLL.Services
                         trainee.AcademicMajor = academicMajor;
                         trainee.AcademicMajorId = academicMajor.Id;
                         trainee.AcademicMajor1 = academicMajor1;
-                        trainee.AcademicMinorId = academicMajor1.Id;
-                        trainee.AcademicMajor2 = academicMajor;
-                        trainee.AcademicMajorNeededHelpId = academicMajor2.Id;
+                        if (updatedModel.AcademicMajor1.Id != 0)
+                        {
+                            trainee.AcademicMinorId = academicMajor1.Id;
+                        }
+                        else
+                        {
+                            trainee.AcademicMinorId = null;
+                        }
+                        trainee.AcademicMajor2 = academicMajor2;
+                        if (updatedModel.AcademicMajor2.Id != 0)
+                        {
+                            trainee.AcademicMajorNeededHelpId = academicMajor2.Id;
+                        }
+                        else
+                        {
+                            trainee.AcademicMajorNeededHelpId = null;
+                        }
 
+                        //traineeRepository.Update(trainee);
                         unitOfWork.SaveChanges();
 
                         status.Success = true;

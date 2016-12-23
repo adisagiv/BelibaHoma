@@ -271,7 +271,6 @@ namespace BelibaHoma.BLL.Services
 
         public StatusModel RunAlgorithm(AlgorithmModel model)
         {
-            throw new NotImplementedException();
             var status = new StatusModel(false, String.Empty);
             int numTrainees = model.TraineeList.Count;
             int numTutors = model.TutorList.Count;
@@ -305,7 +304,7 @@ namespace BelibaHoma.BLL.Services
                     if (trainee.Gender != tutor.Gender)
                     {
                         utilityMat[traineeIdx, tutorIdx] = -1;
-                        break;
+                        continue;
                     }
 
                     //TODO: Check with or if required AcademicYear instead of SemesterNumber
@@ -313,14 +312,14 @@ namespace BelibaHoma.BLL.Services
                     if (trainee.SemesterNumber > tutor.SemesterNumber)
                     {
                         utilityMat[traineeIdx, tutorIdx] = -1;
-                        break;
+                        continue;
                     }
 
                     //Liba matching
                     if ((int)trainee.MathLevel > (int)tutor.MathLevel || (int)trainee.EnglishLevel > (int)tutor.EnglishLevel || (int)trainee.PhysicsLevel > (int)tutor.PhysicsLevel)
                     {
                         utilityMat[traineeIdx, tutorIdx] = -1;
-                        break;
+                        continue;
                     }
                     else 
                     {
@@ -480,23 +479,31 @@ namespace BelibaHoma.BLL.Services
             int[,] finalmatch = alg.Run();
 
             //Translate Matrix to actual matches
-
-
-
-            //TODO: make sure its fine to not go over the whole matrix - and that eliminates the need to go over imaginary rows/cols
-            for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
+            try
             {
-                for (int tutorIdx = 0; tutorIdx < numTutors; tutorIdx++)
+                for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
                 {
-                    if (finalmatch[traineeIdx, tutorIdx] == 5)
+                    for (int tutorIdx = 0; tutorIdx < numTutors; tutorIdx++)
                     {
-                        if (costMatrix[traineeIdx, traineeIdx] != bigM)
+                        if (finalmatch[traineeIdx, tutorIdx] == 5)
                         {
-                            //Create Match
-                            TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
+                            if (costMatrix[traineeIdx, traineeIdx] != bigM)
+                            {
+                                //Create Match
+                                var result = TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
+                                if (!result.Success)
+                                {
+                                    throw new Exception(result.Message);
+                                }
+                            }
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הרצת האלגוריתם");
+                LogService.Logger.Error(status.Message, ex);
             }
 
             return status;
@@ -504,52 +511,83 @@ namespace BelibaHoma.BLL.Services
 
         public StatusModel TutorTraineeAdd(TutorModel tutor,TraineeModel trainee )
         {
-            throw new NotImplementedException();
-            //var status = new StatusModel(false, String.Empty);
+            var status = new StatusModel(false, String.Empty);
 
-            //try
-            //{
-            //    using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
-            //    {
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
 
-            //        //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
-            //        var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
-            //        var _trainee  = traineeRepository.GetByKey(trainee.UserId);
+                    //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var _trainee  = traineeRepository.GetByKey(trainee.UserId);
 
-            //        var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-            //        var _tutor = tutorRepository.GetByKey(tutor.UserId);
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var _tutor = tutorRepository.GetByKey(tutor.UserId);
 
-            //        TutorTraineeModel newModel = new TutorTraineeModel();
-            //        newModel.Status = TTStatus.UnApproved;    
+                    TutorTraineeModel newModel = new TutorTraineeModel();
+                    newModel.Status = TTStatus.UnApproved;    
 
-            //        //Mapping the model into TutorTrainee Entity
-            //        var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
-            //        var entity = newModel.MapTo<TutorTrainee>();
+                    //Mapping the model into TutorTrainee Entity
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var entity = newModel.MapTo<TutorTrainee>();
 
-            //        //Linking the Complexed entities to the retrieved ones
-            //        entity.Tutor = _tutor;
-            //        entity.TutorId = tutor.UserId;
-            //        entity.Trainee = _trainee;
-            //        entity.TraineeId = _trainee.UserId;
-            //        entity.IsException = false;
+                    //Linking the Complexed entities to the retrieved ones
+                    entity.Tutor = _tutor;
+                    entity.TutorId = tutor.UserId;
+                    entity.Trainee = _trainee;
+                    entity.TraineeId = _trainee.UserId;
+                    entity.IsException = false;
 
-            //        //Finally Adding the entity to DB
-            //        ITutorTraineeRepository.Add(entity);
-            //        unitOfWork.SaveChanges();
+                    //Finally Adding the entity to DB
+                    tutortraineeRepository.Add(entity);
+                    unitOfWork.SaveChanges();
 
-            //            //If we got here - Yay! :)
-            //            status.Success = true;
-            //            status.Message = String.Format("חונך {0} הוזן בהצלחה", tutor1.User.FullName);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    status.Message = String.Format("שגיאה במהלך הוספת החונך");
-            //    LogService.Logger.Error(status.Message, ex);
-            //}
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    }
+                }
+            
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הוספת קשר החונכות למסד");
+                LogService.Logger.Error(status.Message, ex);
+            }
 
-            //return status;
+            return status;
+        }
+
+        public StatusModel ResetTutorTrainee(Area area)
+        {
+            var result = new StatusModel(false, string.Empty);
+            var tutorTrainees = Get(area);
+            try
+            {
+                if (tutorTrainees.Success)
+                {
+                    using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                    {
+                        var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                        foreach (var tt in tutorTrainees.Data)
+                        {
+                            var entity = tutorTraineeRepository.GetByKey(tt.Id);
+                            entity.Status = (int)TTStatus.InActive;
+                            unitOfWork.SaveChanges();
+                        }
+                        result.Success = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception(tutorTrainees.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך איפוס קשרי החונכות הקיימים לפני הרצת באלגוריתם");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
         }
     }
 }

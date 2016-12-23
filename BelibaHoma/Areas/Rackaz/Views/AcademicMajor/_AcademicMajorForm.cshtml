@@ -4,7 +4,7 @@
 @{
     Layout = null;
 }
-<div class="panel panel-default" >
+
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -40,4 +40,4 @@
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
-</div>
+

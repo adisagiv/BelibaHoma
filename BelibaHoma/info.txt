@@ -1655,3 +1655,197 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Core.Objects.ELinq.ObjectQueryProvider.System.Linq.IQueryProvider.Execute[TResult](Expression expression)
    at System.Linq.Queryable.SingleOrDefault[TSource](IQueryable`1 source, Expression`1 predicate)
    at BelibaHoma.BLL.Services.AuthenticationService.Authenticate(LoginModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AuthenticationService.cs:line 30
+2016-12-23 11:45:37,528 [34] ERROR Services.Log.LogService - שגיאה במהלך הוספת חניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Add(TraineeModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 123
+2016-12-23 11:46:25,181 [35] ERROR Services.Log.LogService - שגיאה במהלך הוספת חניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Add(TraineeModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 123
+2016-12-23 11:54:03,143 [7] ERROR Services.Log.LogService - שגיאה במהלך הוספת חניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Add(TraineeModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 125
+2016-12-23 12:32:12,955 [16] ERROR Services.Log.LogService - שגיאה במהלך הוספת המשתמש
+System.ArgumentException: User Id Number is invalid
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Add(UserModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 67
+2016-12-23 12:32:23,118 [17] ERROR Services.Log.LogService - שגיאה במהלך הוספת המשתמש
+System.ArgumentException: User Id Number is invalid
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Add(UserModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 67
+2016-12-23 12:55:46,631 [59] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 126
+2016-12-23 12:59:19,637 [7] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 126
+2016-12-23 13:00:10,260 [6] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 126
+2016-12-23 13:00:49,371 [6] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 126
+2016-12-23 13:09:51,565 [6] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.ArgumentException: Trainee is in Mechina, Academic Year and Semester should be 0
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 101
+2016-12-23 13:13:04,347 [11] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 126
+2016-12-23 13:15:57,520 [17] ERROR Services.Log.LogService - שגיאה במהלך הוספת החונך
+System.ArgumentException: Trainee is in Mechina, Academic Year and Semester should be 0
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorService.Add(TutorModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 101
+2016-12-23 13:21:32,116 [21] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:22:01,135 [25] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:23:08,193 [29] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:23:42,141 [25] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:24:06,724 [25] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:24:52,893 [29] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:25:17,902 [25] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:26:52,829 [25] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 226
+2016-12-23 13:29:13,083 [29] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 226
+2016-12-23 13:31:01,085 [29] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 226
+2016-12-23 13:31:07,388 [23] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:31:07,485 [38] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:35:03,869 [40] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:35:43,371 [40] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 280
+2016-12-23 13:41:41,155 [7] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 281
+2016-12-23 13:54:27,926 [7] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: Conflicting changes to the role 'AcademicMajor' of the relationship 'BelibaHomaDBModel.FK_Trainee_AcademicMajor3' have been detected.
+   at System.Data.Entity.Core.Objects.ObjectStateManager.DetectConflicts(IList`1 entries)
+   at System.Data.Entity.Core.Objects.ObjectStateManager.DetectChanges()
+   at System.Data.Entity.Core.Objects.ObjectContext.DetectChanges()
+   at System.Data.Entity.Internal.InternalContext.DetectChanges(Boolean force)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries(Func`2 predicate)
+   at System.Data.Entity.Internal.InternalContext.GetStateEntries()
+   at System.Data.Entity.Infrastructure.DbChangeTracker.Entries()
+   at System.Data.Entity.DbContext.GetValidationErrors()
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 289
+2016-12-23 14:03:18,014 [7] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.InvalidOperationException: The operation failed: The relationship could not be changed because one or more of the foreign-key properties is non-nullable. When a change is made to a relationship, the related foreign-key property is set to a null value. If the foreign-key does not support null values, a new relationship must be defined, the foreign-key property must be assigned another non-null value, or the unrelated object must be deleted.
+   at System.Data.Entity.Core.Objects.ObjectContext.PrepareToSaveChanges(SaveOptions options)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChangesInternal(SaveOptions options, Boolean executeInExistingTransaction)
+   at System.Data.Entity.Core.Objects.ObjectContext.SaveChanges(SaveOptions options)
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 289

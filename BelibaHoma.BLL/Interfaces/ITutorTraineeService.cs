@@ -76,6 +76,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel TutorTraineeAdd(TutorModel tutor, TraineeModel trainee);
 
+        /// <summary>
+        /// Reset TutorTrainee relations in a given area
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel ResetTutorTrainee(Area area);
     }
 
 }
