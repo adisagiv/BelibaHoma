@@ -50,7 +50,7 @@
         <th id="is-active">
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
-        <th></th>
+        <th id="actions">פעולות</th>
     </tr>
     </thead>
     <tfoot>
@@ -73,6 +73,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
+            <th></th>
         </tr>
     </tfoot>
     <tbody>
@@ -101,32 +102,27 @@
                 </td>
                 <td>
                     @{
-                    if (item.IsActive == true)
+                        if (item.IsActive == true)
                         {
-                        @String.Format("פעיל")
-                        ;
+                            @String.Format("פעיל")
+                            ;
                         }
                         else
                         {
-                        @String.Format("לא פעיל")
-                        ;
+                            @String.Format("לא פעיל")
+                            ;
                         }
                     }
                 </td>
                 <td>
                     @{
-                    if (ViewBag.IsRackaz != true)
+                        if (ViewBag.IsRackaz != true)
                         {
-                        @Html.ActionLink("ערוך פרטי משתמש", "Edit", new {Area = "Admin", id = item.Id})
-                    }
+                            @Html.ActionLink("ערוך פרטי משתמש", "Edit", new {Area = "Admin", id = item.Id}) @Html.Raw(" |")
                         }
-            </td>
-            <td>
-                @{
-                    <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
+                        <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
                     }
                 </td>
-
             </tr>
         }
     </tbody>
