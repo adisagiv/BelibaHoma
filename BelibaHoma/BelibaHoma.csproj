@@ -261,6 +261,7 @@
     <Content Include="Scripts\dashboard\js\plugins\morris\morris.min.js" />
     <Content Include="Scripts\dashboard\js\plugins\morris\raphael.min.js" />
     <Content Include="Scripts\dashboard\tables.html" />
+    <Content Include="Scripts\datatable.settings.js" />
     <Content Include="Scripts\datatable\images\Sorting icons.psd" />
     <Content Include="Scripts\datatable\language\hebrew.json" />
     <Content Include="Areas\Admin\Views\User\_UserForm.cshtml" />
@@ -537,6 +538,7 @@
     <Content Include="Scripts\rackaz-reports.js" />
     <Content Include="Scripts\reports\hour-statistics.js" />
     <Content Include="Scripts\reports\JoinDropStatistics.js" />
+    <Content Include="Scripts\trainee-indexjs.js" />
     <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />

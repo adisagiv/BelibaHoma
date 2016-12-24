@@ -20,12 +20,19 @@ namespace BelibaHoma
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/bootstrap-rtl.js",
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/css/bootstrap-rtl.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datatable/js").Include(
+                "~/Scripts/datatable/js/jquery.dataTables.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/datatable/css").Include(
+                "~/Scripts/datatable/css/jquery.dataTables.min.css",
+                "~/Scripts/datatable/css/dataTables.bootstrap.css"));
         }
     }
 }
