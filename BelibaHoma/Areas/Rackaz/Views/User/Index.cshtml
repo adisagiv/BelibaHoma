@@ -7,64 +7,15 @@
 }
 @section styles
 {
-    <link href="~/Scripts/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/datatable/css")
 }
 
 
 @section scripts
 {
-<script src="~/Scripts/zero-password.js"></script>
-    <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
-    <script>
-        $(function() {
-        $('#users-table')
-            .DataTable({
-                language: {
-                    url: "/Scripts/datatable/language/hebrew.json"
-                },
-                initComplete: function() {
-                    this.api()
-                        .columns()
-                        .every(function() {
-                            var column = this;
-                            var isActiveSelect = false;
-                            if ($(this.header()).attr('id') === "is-active") {
-                                isActiveSelect = true;
-                            }
-                            var select = $('<select class="form-control"><option value=""></option></select>')
-                                .appendTo($(column.footer()).empty())
-                                .on('change',
-                                    function() {
-                                        var val = $.fn.dataTable.util.escapeRegex(
-                                            $(this).val()
-                                        );
-
-                                        column
-                                            .search(val ? '^' + val + '$' : '', true, false)
-                                            .draw();
-                                    });
-
-                            column.data()
-                                .unique()
-                                .sort()
-                                    .each(function(d, j) {
-                                    var option = '<option ';
-                                    if (isActiveSelect && d === "פעיל") {
-                                        option += ' selected="selected" ';
-                                    }
-                                    option += 'value="' + d + '">' + d + '</option>';
-                                    select.append(option);
-                                });
-
-                            
-                        });
-                    var val = 'פעיל';
-                    this.api().columns(5).search('^' + val + '$', true, false)
-                                            .draw();
-                }
-            });
-        });
-    </script>
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/zero-password.js"></script>
+    <script src="~/Scripts/user-index.js"></script>
 }
 
 <h2>משתמשי אדמין ורכזים</h2>
@@ -99,7 +50,7 @@
         <th id="is-active">
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
-        <th></th>
+        <th id="actions">פעולות</th>
     </tr>
     </thead>
     <tfoot>
@@ -122,6 +73,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
+            <th></th>
         </tr>
     </tfoot>
     <tbody>
@@ -150,32 +102,27 @@
                 </td>
                 <td>
                     @{
-                    if (item.IsActive == true)
+                        if (item.IsActive == true)
                         {
-                        @String.Format("פעיל")
-                        ;
+                            @String.Format("פעיל")
+                            ;
                         }
                         else
                         {
-                        @String.Format("לא פעיל")
-                        ;
+                            @String.Format("לא פעיל")
+                            ;
                         }
                     }
                 </td>
                 <td>
                     @{
-                    if (ViewBag.IsRackaz != true)
+                        if (ViewBag.IsRackaz != true)
                         {
-                        @Html.ActionLink("ערוך פרטי משתמש", "Edit", new {Area = "Admin", id = item.Id})
-                    }
+                            @Html.ActionLink("ערוך פרטי משתמש", "Edit", new {Area = "Admin", id = item.Id}) @Html.Raw(" |")
                         }
-            </td>
-            <td>
-                @{
-                    <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
+                        <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
                     }
                 </td>
-
             </tr>
         }
     </tbody>

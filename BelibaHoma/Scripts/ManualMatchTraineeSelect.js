@@ -1,23 +1,17 @@
-﻿$(function() {
-    $('#job-offer-table')
+﻿$('#trainees-partial-table')
         .DataTable({
-            initComplete: function() {
+            initComplete: function () {
                 this.api()
                     .columns()
-                    .every(function() {
+                    .every(function () {
                         var column = this;
-                        var isActiveSelect = false;
-                        if ($(this.header()).attr('id') === "is-active") {
-                            isActiveSelect = true;
-                        }
                         var select = $('<select class="form-control"><option value=""></option></select>')
                             .appendTo($(column.footer()).empty())
                             .on('change',
-                                function() {
+                                function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
                                     );
-
                                     column
                                         .search(val ? '^' + val + '$' : '', true, false)
                                         .draw();
@@ -27,19 +21,8 @@
                             .unique()
                             .sort()
                             .each(function (d, j) {
-                                var option = '<option ';
-                                if (isActiveSelect && d === "פעיל") {
-                                    option += ' selected="selected" ';
-                                }
-                                option += 'value="' + d + '">' + d + '</option>';
-                                select.append(option);
+                                select.append('<option value="' + d + '">' + d + '</option>');
                             });
-
-                            
                     });
-                var val = 'פעיל';
-                this.api().columns(5).search('^' + val + '$', true, false)
-                                        .draw();
             }
         });
-});
