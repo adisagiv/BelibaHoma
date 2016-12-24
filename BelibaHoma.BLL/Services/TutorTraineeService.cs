@@ -99,15 +99,15 @@ namespace BelibaHoma.BLL.Services
                     //var tutor = tutortraineeRepository.GetByKey(tutortrainee.TutorId);
                     //var trainee = tutortraineeRepository.GetByKey(tutortrainee.TraineeId);
 
-                        //Updating the entity from the model received by the form
-                        tutortrainee.Status = (int)updatedModel.Status;
-                        tutortrainee.IsException = updatedModel.IsException;
-                        unitOfWork.SaveChanges();
+                    //Updating the entity from the model received by the form
+                    tutortrainee.Status = (int)updatedModel.Status;
+                    tutortrainee.IsException = updatedModel.IsException;
+                    unitOfWork.SaveChanges();
 
-                        status.Success = true;
-                        status.Message = String.Format("מצב הקשר עודכן בהצלחה");
-                    }
+                    status.Success = true;
+                    status.Message = String.Format("מצב הקשר עודכן בהצלחה");
                 }
+            }
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך עדכון מצב הקשר");
@@ -146,7 +146,7 @@ namespace BelibaHoma.BLL.Services
                         else
                         {
                             //exist in another status => change to Active
-                            checkExistingRelation.Status = (int) TTStatus.Active;
+                            checkExistingRelation.Status = (int)TTStatus.Active;
                             unitOfWork.SaveChanges();
 
                             //If we got here - Yay! :)
@@ -181,14 +181,14 @@ namespace BelibaHoma.BLL.Services
                     //If we got here - Yay! :)
                     status.Success = true;
                     status.Message = String.Format("הציוות הוזן בהצלחה");
-                    
+
                 }
             }
             catch (Exception ex)
             {
                 if (status.Message == String.Empty)
                 {
-                    status.Message = String.Format("שגיאה במהלך הוספת הציוות");   
+                    status.Message = String.Format("שגיאה במהלך הוספת הציוות");
                 }
                 LogService.Logger.Error(status.Message, ex);
             }
@@ -244,7 +244,7 @@ namespace BelibaHoma.BLL.Services
 
         public StatusModel<bool> IsUnRecommended(Area area)
         {
-            var status = new StatusModel<bool>(false,String.Empty,false);
+            var status = new StatusModel<bool>(false, String.Empty, false);
 
             try
             {
@@ -256,7 +256,7 @@ namespace BelibaHoma.BLL.Services
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
                     var traineeEntityList = traineeRepository.GetAll().ToList();
 
-                    status.Data = tutorEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int) TTStatus.InActive));
+                    status.Data = tutorEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive));
                     if (!status.Data)
                     {
                         status.Data = traineeEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive));
@@ -332,7 +332,7 @@ namespace BelibaHoma.BLL.Services
             int numTrainees = model.TraineeList.Count;
             int numTutors = model.TutorList.Count;
 
-            int[,] utilityMat = new int[numTrainees,numTutors];
+            int[,] utilityMat = new int[numTrainees, numTutors];
             int maxUtil = 0;
 
             for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
@@ -345,15 +345,15 @@ namespace BelibaHoma.BLL.Services
                     int majorWeight = 2000;
                     int minorWeight = 1000;
                     int clusterWeight = 20;
-                    int institutionWeight = 50; 
+                    int institutionWeight = 50;
 
                     bool isMechina = trainee.AcademicInstitution.InstitutionType == InstitutionType.Mechina;
                     if (isMechina)
                     {
-                        majorWeight = majorWeight/5;
-                        institutionWeight = institutionWeight/4;
-                        minorWeight = minorWeight/5;
-                        clusterWeight = clusterWeight/4;
+                        majorWeight = majorWeight / 5;
+                        institutionWeight = institutionWeight / 4;
+                        minorWeight = minorWeight / 5;
+                        clusterWeight = clusterWeight / 4;
 
                     }
 
@@ -378,7 +378,7 @@ namespace BelibaHoma.BLL.Services
                         utilityMat[traineeIdx, tutorIdx] = -1;
                         continue;
                     }
-                    else if(isMechina)
+                    else if (isMechina)
                     {
                         utilityMat[traineeIdx, tutorIdx] += libaWeight;
                     }
@@ -391,7 +391,7 @@ namespace BelibaHoma.BLL.Services
                     }
                     else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor == tutor.AcademicMajor1)
                     {
-                        calc1 += majorWeight - (int)(0.1*majorWeight);
+                        calc1 += majorWeight - (int)(0.1 * majorWeight);
                     }
 
                     //Trainee minor match
@@ -405,11 +405,11 @@ namespace BelibaHoma.BLL.Services
                         else if (trainee.AcademicMajor1 == tutor.AcademicMajor)
                         {
                             calc2 += minorWeight - (int)(0.1 * minorWeight);
-                        }            
+                        }
                     }
                     else
                     {
-                        calc1 = (int)(1.5*calc1);
+                        calc1 = (int)(1.5 * calc1);
                     }
 
                     //Trainee needed help exsists
@@ -417,19 +417,19 @@ namespace BelibaHoma.BLL.Services
                     {
                         if (trainee.AcademicMajor2 == tutor.AcademicMajor)
                         {
-                            calc1 += (int) (majorWeight*0.5);
+                            calc1 += (int)(majorWeight * 0.5);
                         }
                         else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor2 == tutor.AcademicMajor1)
                         {
-                            calc1 += (int) (majorWeight*0.5);
+                            calc1 += (int)(majorWeight * 0.5);
                         }
                     }
                     else
                     {
-                        if (calc1 > 0) calc1 += (int) (majorWeight*0.5);
-                        if (calc2 > 0) calc2 += (int)(minorWeight*0.5);
+                        if (calc1 > 0) calc1 += (int)(majorWeight * 0.5);
+                        if (calc2 > 0) calc2 += (int)(minorWeight * 0.5);
                     }
-                    
+
                     //adding calc to matrix
                     utilityMat[traineeIdx, tutorIdx] += (calc1 + calc2);
 
@@ -493,7 +493,7 @@ namespace BelibaHoma.BLL.Services
                     }
                     else if (trainee.AcademicInstitution.InstitutionType < tutor.AcademicInstitution.InstitutionType)
                     {
-                        utilityMat[traineeIdx, tutorIdx] += institutionWeight/2;
+                        utilityMat[traineeIdx, tutorIdx] += institutionWeight / 2;
                     }
 
                     //If they have the same Academic Institution
@@ -503,7 +503,7 @@ namespace BelibaHoma.BLL.Services
                     }
 
                     //check what is max util
-                    if (utilityMat[traineeIdx,tutorIdx] > maxUtil)
+                    if (utilityMat[traineeIdx, tutorIdx] > maxUtil)
                     {
                         maxUtil = utilityMat[traineeIdx, tutorIdx];
                     }
@@ -516,7 +516,7 @@ namespace BelibaHoma.BLL.Services
             //Create a balanced matrix for the algorithm NXN
             int matSize = 0;
             matSize = numTrainees >= numTutors ? numTrainees : numTutors;
-            int[,] costMatrix = new int[matSize,matSize];
+            int[,] costMatrix = new int[matSize, matSize];
             int bigM = maxUtil * 100;
 
             for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
@@ -561,6 +561,7 @@ namespace BelibaHoma.BLL.Services
                         }
                     }
                 }
+                status.Success = true;    
             }
             catch (Exception ex)
             {
@@ -571,7 +572,7 @@ namespace BelibaHoma.BLL.Services
             return status;
         }
 
-        public StatusModel TutorTraineeAdd(TutorModel tutor,TraineeModel trainee )
+        public StatusModel TutorTraineeAdd(TutorModel tutor, TraineeModel trainee)
         {
             var status = new StatusModel(false, String.Empty);
 
@@ -582,13 +583,13 @@ namespace BelibaHoma.BLL.Services
 
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
-                    var _trainee  = traineeRepository.GetByKey(trainee.UserId);
+                    var _trainee = traineeRepository.GetByKey(trainee.UserId);
 
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var _tutor = tutorRepository.GetByKey(tutor.UserId);
 
                     TutorTraineeModel newModel = new TutorTraineeModel();
-                    newModel.Status = TTStatus.UnApproved;    
+                    newModel.Status = TTStatus.UnApproved;
 
                     //Mapping the model into TutorTrainee Entity
                     var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
@@ -607,9 +608,9 @@ namespace BelibaHoma.BLL.Services
 
                     //If we got here - Yay! :)
                     status.Success = true;
-                    }
                 }
-            
+            }
+
             catch (Exception ex)
             {
                 status.Message = String.Format("שגיאה במהלך הוספת קשר החונכות למסד");
