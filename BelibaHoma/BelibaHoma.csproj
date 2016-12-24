@@ -371,6 +371,7 @@
     <Content Include="Areas\Trainee\Views\Grade\_GradeForm.cshtml" />
     <Content Include="Areas\Trainee\Views\Grade\_GradesList.cshtml" />
     <Content Include="Areas\Rackaz\Views\Report\JoinDropStatistics.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Report\InvestedHoursStatistics.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -536,6 +537,7 @@
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\rackaz-reports.js" />
     <Content Include="Scripts\reports\hour-statistics.js" />
+    <Content Include="Scripts\reports\InvestedHoursStatistics.js" />
     <Content Include="Scripts\reports\JoinDropStatistics.js" />
     <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />

@@ -256,9 +256,119 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             return null;
         }
 
+        
+        /// //////////////////////////InvestedHoursStatistics
 
 
 
+        // return the view of the report
+        [HttpPost]
+        public ActionResult InvestedHoursStatistics()
+        {
+            return View();
+        }
+
+        //return the data for the report
+        [HttpPost]
+        public ActionResult GetInvestedHoursStatistics()
+        {
+            //TODO: if rackaz send area
+            var result = _reportService.GetInvestedHoursStatistics(null);
+
+            if (result.Success)
+            {
+                var series = new List<double>();
+
+                //function that findes the most pazam trainee!!!
+                var maxYearT = _reportService.GetMaxPazam();
+                var max = maxYearT.Data;
+
+                for (var i = 0; i <= max; i++)
+                {
+                    var investedHours = 0.0;
+                    //var month = (i + 10) % 12 + 1;
+
+                    if (result.Data.InvestedHoursStatistics.ContainsKey(i))
+                    {
+                        investedHours = result.Data.InvestedHoursStatistics[i];
+                    }
+
+                    series.Add(investedHours);
+                }
+                //int[] pazamList = new int[max];
+                var pazamList = new List<string>();
+                
+                for (var i = 0; i <= max; i++)
+                {
+                    //pazamList[i] = i.ToString();
+                    pazamList.Add(i.ToString());
+                }
+
+
+                var chartModel = new HighChartModel
+                {
+                    chart = new Chart
+                    {
+                        type = "line"
+                    },
+                    title = new Title
+                    {
+                        text = "דוח סטטיסטיקה שעות חניכה כתלות בותק",
+                        x = -20
+                    },
+                    xAxis = new Xaxis
+                    {
+                        categories = pazamList  // new List<string>
+                        
+                        
+                    },
+                    yAxis = new Yaxis
+                    {
+                        title = new Title1
+                        {
+                            text = "סכום שעות החניכה"
+                        },
+                        plotLines = new List<Plotline> {
+                            new Plotline
+                            {
+                                color = "#808080",
+                                value = 0,
+                                width = 1
+                            }
+                        }
+                    },
+                    series = new List<Series>
+                    {
+                        new Series
+                        {
+                            data = series,
+                            name = "סכום שעות חניכה"
+                        }
+                        
+                    },
+                    legend = new Legend
+                    {
+                        layout = "vertical",
+                        align = "right",
+                        verticalAlign = "middle",
+                        borderWidth = 0
+                    },
+                    tooltip = new Tooltip
+                    {
+                        valueSuffix = "H"
+                    },
+                    exporting = new Exporting
+                    {
+                        enabled = false
+                    }
+
+                };
+
+                return Json(chartModel);
+            }
+
+            return null;
+        }
 
 
 
