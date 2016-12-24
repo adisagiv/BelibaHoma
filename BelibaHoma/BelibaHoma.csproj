@@ -205,6 +205,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
+    <Content Include="Scripts\approvematches.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\bootstrap-rtl.js" />
     <Content Include="Areas\Admin\Views\web.config" />
@@ -526,6 +527,7 @@
     <Content Include="Scripts\Highchart\code\themes\grid.js" />
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
+    <Content Include="Scripts\joboffer-index.js" />
     <Content Include="Scripts\JobOfferIndex.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -535,10 +537,18 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\login.js" />
+    <Content Include="Scripts\ManualMatchAreaSelected.js" />
+    <Content Include="Scripts\ManualMatchTraineeSelect.js" />
+    <Content Include="Scripts\ManualMatchTutorSelect.js" />
+    <Content Include="Scripts\menualmatch.js" />
     <Content Include="Scripts\rackaz-reports.js" />
     <Content Include="Scripts\reports\hour-statistics.js" />
     <Content Include="Scripts\reports\JoinDropStatistics.js" />
-    <Content Include="Scripts\trainee-indexjs.js" />
+    <Content Include="Scripts\RunAlgorithm.js" />
+    <Content Include="Scripts\trainee-index.js" />
+    <Content Include="Scripts\tutor-index.js" />
+    <Content Include="Scripts\tutortrainee-index.js" />
+    <Content Include="Scripts\user-index.js" />
     <Content Include="Scripts\zero-password.js" />
     <Content Include="Scripts\modal.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
