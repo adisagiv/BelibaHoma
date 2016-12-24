@@ -218,6 +218,63 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+
+        public StatusModel<List<TutorTraineeModel>> GetById(int id)
+        {
+            var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var TutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = TutorTraineeRepository.GetAll().ToList().Where(tid => tid.TutorId == id).Select(ai => new TutorTraineeModel(ai)).ToList();
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting TutorTrainee from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
+        }
+
+        public StatusModel<bool> IsUnRecommended(Area area)
+        {
+            var status = new StatusModel<bool>(false,String.Empty,false);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorEntityList = tutorRepository.GetAll().ToList();
+
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var traineeEntityList = traineeRepository.GetAll().ToList();
+
+                    status.Data = tutorEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int) TTStatus.InActive));
+                    if (!status.Data)
+                    {
+                        status.Data = traineeEntityList.Any(t => t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive));
+                    }
+
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה בזיהוי חניכים וחונכים ללא שיבוץ");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+
         public StatusModel Remove(int id)
         {
             var status = new StatusModel<TutorTraineeModel>();
@@ -245,6 +302,354 @@ namespace BelibaHoma.BLL.Services
             }
 
             return status;
+        }
+
+        public StatusModel<List<TutorTraineeModel>> GetRecommended(Area area)
+        {
+            var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = tutorTraineeRepository.GetAll().ToList().Where(t => t.Trainee.User.Area == (int)area && t.Status == (int)TTStatus.UnApproved).OrderBy(t => t.Trainee.User.LastName).ThenBy(t => t.Trainee.User.FirstName).ToList().Select(t => new TutorTraineeModel(t)).ToList();
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך שליפת ההמלצות לחונכות מהמסד");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
+        public StatusModel RunAlgorithm(AlgorithmModel model)
+        {
+            var status = new StatusModel(false, String.Empty);
+            int numTrainees = model.TraineeList.Count;
+            int numTutors = model.TutorList.Count;
+
+            int[,] utilityMat = new int[numTrainees,numTutors];
+            int maxUtil = 0;
+
+            for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
+            {
+                for (int tutorIdx = 0; tutorIdx < numTutors; tutorIdx++)
+                {
+                    TraineeModel trainee = model.TraineeList[traineeIdx];
+                    TutorModel tutor = model.TutorList[tutorIdx];
+                    int libaWeight = 200;
+                    int majorWeight = 2000;
+                    int minorWeight = 1000;
+                    int clusterWeight = 20;
+                    int institutionWeight = 50; 
+
+                    bool isMechina = trainee.AcademicInstitution.InstitutionType == InstitutionType.Mechina;
+                    if (isMechina)
+                    {
+                        majorWeight = majorWeight/5;
+                        institutionWeight = institutionWeight/4;
+                        minorWeight = minorWeight/5;
+                        clusterWeight = clusterWeight/4;
+
+                    }
+
+                    //Gender must match
+                    if (trainee.Gender != tutor.Gender)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] = -1;
+                        continue;
+                    }
+
+                    //TODO: Check with or if required AcademicYear instead of SemesterNumber
+                    //tutor has senority over trainee
+                    if (trainee.SemesterNumber > tutor.SemesterNumber)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] = -1;
+                        continue;
+                    }
+
+                    //Liba matching
+                    if ((int)trainee.MathLevel > (int)tutor.MathLevel || (int)trainee.EnglishLevel > (int)tutor.EnglishLevel || (int)trainee.PhysicsLevel > (int)tutor.PhysicsLevel)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] = -1;
+                        continue;
+                    }
+                    else if(isMechina)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] += libaWeight;
+                    }
+
+                    //Trainee Major match
+                    int calc1 = 0;
+                    if (trainee.AcademicMajor == tutor.AcademicMajor)
+                    {
+                        calc1 += majorWeight;
+                    }
+                    else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor == tutor.AcademicMajor1)
+                    {
+                        calc1 += majorWeight - (int)(0.1*majorWeight);
+                    }
+
+                    //Trainee minor match
+                    int calc2 = 0;
+                    if (trainee.AcademicMajor1 != null)
+                    {
+                        if (tutor.AcademicMajor1 != null && trainee.AcademicMajor1 == tutor.AcademicMajor1)
+                        {
+                            calc2 += minorWeight;
+                        }
+                        else if (trainee.AcademicMajor1 == tutor.AcademicMajor)
+                        {
+                            calc2 += minorWeight - (int)(0.1 * minorWeight);
+                        }            
+                    }
+                    else
+                    {
+                        calc1 = (int)(1.5*calc1);
+                    }
+
+                    //Trainee needed help exsists
+                    if (trainee.AcademicMajor2 != null)
+                    {
+                        if (trainee.AcademicMajor2 == tutor.AcademicMajor)
+                        {
+                            calc1 += (int) (majorWeight*0.5);
+                        }
+                        else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor2 == tutor.AcademicMajor1)
+                        {
+                            calc1 += (int) (majorWeight*0.5);
+                        }
+                    }
+                    else
+                    {
+                        if (calc1 > 0) calc1 += (int) (majorWeight*0.5);
+                        if (calc2 > 0) calc2 += (int)(minorWeight*0.5);
+                    }
+                    
+                    //adding calc to matrix
+                    utilityMat[traineeIdx, tutorIdx] += (calc1 + calc2);
+
+
+                    //Academic Clusters
+                    //Trainee major cluster
+                    calc1 = 0;
+                    if (trainee.AcademicMajor.AcademicCluster == tutor.AcademicMajor.AcademicCluster)
+                    {
+                        calc1 += clusterWeight;
+                    }
+                    else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor.AcademicCluster == tutor.AcademicMajor1.AcademicCluster)
+                    {
+                        calc1 += clusterWeight - (int)(0.1 * clusterWeight);
+                    }
+
+                    //Trainee minor cluster
+                    calc2 = 0;
+                    if (trainee.AcademicMajor1 != null)
+                    {
+                        if (tutor.AcademicMajor1 != null && trainee.AcademicMajor1.AcademicCluster == tutor.AcademicMajor1.AcademicCluster)
+                        {
+                            calc2 += clusterWeight;
+                        }
+                        else if (trainee.AcademicMajor1.AcademicCluster == tutor.AcademicMajor.AcademicCluster)
+                        {
+                            calc2 += clusterWeight - (int)(0.1 * clusterWeight);
+                        }
+                    }
+                    else
+                    {
+                        calc1 = (int)(1.5 * calc1);
+                    }
+
+                    //Trainee needed help exsists - consider cluster
+                    if (trainee.AcademicMajor2 != null)
+                    {
+                        if (trainee.AcademicMajor2.AcademicCluster == tutor.AcademicMajor.AcademicCluster)
+                        {
+                            calc1 += (int)(clusterWeight * 0.5);
+                        }
+                        else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor2.AcademicCluster == tutor.AcademicMajor1.AcademicCluster)
+                        {
+                            calc1 += (int)(clusterWeight * 0.35);
+                        }
+                    }
+                    else
+                    {
+                        if (calc1 > 0) calc1 += (int)(clusterWeight * 0.5);
+                        if (calc2 > 0) calc2 += (int)(clusterWeight * 0.5);
+                    }
+
+                    //adding calc to matrix
+                    utilityMat[traineeIdx, tutorIdx] += (calc1 + calc2);
+
+                    //AcademicInstitution needs to be alike.. or similar
+                    //Academic institution does not disqualify matches
+                    if (trainee.AcademicInstitution.InstitutionType == tutor.AcademicInstitution.InstitutionType)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] += institutionWeight;
+                    }
+                    else if (trainee.AcademicInstitution.InstitutionType < tutor.AcademicInstitution.InstitutionType)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] += institutionWeight/2;
+                    }
+
+                    //If they have the same Academic Institution
+                    if (trainee.AcademicInstitution.Name == tutor.AcademicInstitution.Name)
+                    {
+                        utilityMat[traineeIdx, tutorIdx] += institutionWeight;
+                    }
+
+                    //check what is max util
+                    if (utilityMat[traineeIdx,tutorIdx] > maxUtil)
+                    {
+                        maxUtil = utilityMat[traineeIdx, tutorIdx];
+                    }
+                }
+
+            }
+
+            //Generate cost matrix
+
+            //Create a balanced matrix for the algorithm NXN
+            int matSize = 0;
+            matSize = numTrainees >= numTutors ? numTrainees : numTutors;
+            int[,] costMatrix = new int[matSize,matSize];
+            int bigM = maxUtil * 100;
+
+            for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
+            {
+                for (int tutorIdx = 0; tutorIdx < numTutors; tutorIdx++)
+                {
+                    //replace -1 (forbidden) with M
+                    if (utilityMat[traineeIdx, tutorIdx] == -1)
+                    {
+                        costMatrix[traineeIdx, tutorIdx] = bigM;
+                    }
+                    //Convert utility to cost
+                    else
+                    {
+                        costMatrix[traineeIdx, tutorIdx] = maxUtil - utilityMat[traineeIdx, tutorIdx];
+                    }
+                }
+            }
+
+            // Send Matrix to Algorithm
+            MatchingAlgorithm alg = new MatchingAlgorithm(costMatrix);
+            int[,] finalmatch = alg.Run();
+
+            //Translate Matrix to actual matches
+            try
+            {
+                for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
+                {
+                    for (int tutorIdx = 0; tutorIdx < numTutors; tutorIdx++)
+                    {
+                        if (finalmatch[traineeIdx, tutorIdx] == 5)
+                        {
+                            if (costMatrix[traineeIdx, traineeIdx] != bigM)
+                            {
+                                //Create Match
+                                var result = TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
+                                if (!result.Success)
+                                {
+                                    throw new Exception(result.Message);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הרצת האלגוריתם");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        public StatusModel TutorTraineeAdd(TutorModel tutor,TraineeModel trainee )
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+
+                    //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var _trainee  = traineeRepository.GetByKey(trainee.UserId);
+
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var _tutor = tutorRepository.GetByKey(tutor.UserId);
+
+                    TutorTraineeModel newModel = new TutorTraineeModel();
+                    newModel.Status = TTStatus.UnApproved;    
+
+                    //Mapping the model into TutorTrainee Entity
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var entity = newModel.MapTo<TutorTrainee>();
+
+                    //Linking the Complexed entities to the retrieved ones
+                    entity.Tutor = _tutor;
+                    entity.TutorId = tutor.UserId;
+                    entity.Trainee = _trainee;
+                    entity.TraineeId = _trainee.UserId;
+                    entity.IsException = false;
+
+                    //Finally Adding the entity to DB
+                    tutortraineeRepository.Add(entity);
+                    unitOfWork.SaveChanges();
+
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    }
+                }
+            
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך הוספת קשר החונכות למסד");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        public StatusModel ResetTutorTrainee(Area area)
+        {
+            var result = new StatusModel(false, string.Empty);
+            var tutorTrainees = Get(area);
+            try
+            {
+                if (tutorTrainees.Success)
+                {
+                    using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                    {
+                        var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                        foreach (var tt in tutorTrainees.Data)
+                        {
+                            var entity = tutorTraineeRepository.GetByKey(tt.Id);
+                            entity.Status = (int)TTStatus.InActive;
+                            unitOfWork.SaveChanges();
+                        }
+                        result.Success = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception(tutorTrainees.Message);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך איפוס קשרי החונכות הקיימים לפני הרצת באלגוריתם");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
         }
     }
 }

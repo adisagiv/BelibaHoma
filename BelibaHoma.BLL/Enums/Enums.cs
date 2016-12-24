@@ -29,12 +29,12 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "מכינה")]
         [Description("מכינה")]
         Mechina = 0,
-        [Description("אוניברסיטה")]
-        [Display(Name = "אוניברסיטה")]
-        University = 1,
         [Description("מכללה")]
         [Display(Name = "מכללה")]
-        Collage = 2
+        College = 1,
+        [Description("אוניברסיטה")]
+        [Display(Name = "אוניברסיטה")]
+        University = 2
     }
 
     public enum UserRole
@@ -198,5 +198,23 @@ namespace BelibaHoma.BLL.Enums
         [Description("טרם אושר")]
         [Display(Name = "טרם אושר")]
         UnApproved = 2
+    }
+    public enum SemesterType
+    {
+        [Description("חורף")]
+        [Display(Name = "חורף")]
+        Winter = 0,
+        [Description("אביב")]
+        [Display(Name = "אביב")]
+        Spring = 1,
+        [Description("קיץ")]
+        [Display(Name = "קיץ")]
+        Summer = 2
+    }
+
+    public enum HourStatisticsType
+    {
+        Sum = 0,
+        Average = 1
     }
 }

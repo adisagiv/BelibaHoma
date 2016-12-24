@@ -1,0 +1,67 @@
+﻿@model BelibaHoma.BLL.Models.TutorSessionModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>פרטי המפגש</h2>
+
+<div>
+    <h4>TutorSessionModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MeetingDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeetingDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumBondingHours)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumBondingHours)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TutorReportId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TutorReportId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MeetingPlace)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MeetingPlace)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) 
+    @*@Html.ActionLink("Back to List", "Index")*@
+</p>

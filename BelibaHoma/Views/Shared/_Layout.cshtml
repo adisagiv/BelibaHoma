@@ -11,22 +11,35 @@
     @{
         UserModel user = ViewBag.CurrentUser;
     }
+
+    <style>
+    </style>
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+<body background="~/Content/סתםרקע.jpg">
+
+
+    <div class="navbar navbar-inverse navbar-fixed-top"  id="nav1">
         <div class="container">
+
             <div class="navbar-header">
+
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
+
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                @*@Html.ActionLink("בליבה חומה", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})*@
+                <div>
+                    <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;" />
+                </div>
             </div>
             @* This is the menu per user role below.. *@
-            @Html.Action("Index",new { controller = "Menu" , area = "" });
+            @Html.Action("Index",new { controller = "Menu" , area = "" })
 
             <div class="pull-left">
+
                 @if (user != null)
                 {
                     <span class="label label-inverse">@String.Format("שלום {0}", user.FullName)</span>
@@ -45,7 +58,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - ציוני דרך - פרויקט בליבה חומה</p>
         </footer>
     </div>
 

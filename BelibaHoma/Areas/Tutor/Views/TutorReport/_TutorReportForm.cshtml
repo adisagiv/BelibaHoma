@@ -1,0 +1,76 @@
+﻿@using BelibaHoma.BLL.Enums
+@model BelibaHoma.BLL.Models.TutorReportModel
+
+@{
+    Layout = null;
+    var isRackaz = ViewBag.IsRackaz; //change to addministrator aswell later on
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="direction: rtl">
+        @*<h4>דיווח</h4>*@
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @*<div class="form-group">
+            <label class="control-label col-md-2">תז חניך:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TutorTraineeId, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TutorTraineeId, "", new { @class = "text-danger" })
+            </div>
+        </div*@>
+        @*<div class="form-group">
+            <label class="control-label col-md-2">שעות המפגש:</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TutorHours, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TutorHours, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        @*<div class="form-group">
+            <label class="control-label col-md-2">מספר שעות חברותא : </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TutorHoursBonding, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TutorHoursBonding, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+        @Html.HiddenFor(model=> model.TutorTraineeId)
+        <div class="form-group">
+            <label class="control-label col-md-2">תיאור המפגש : </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MeetingsDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.MeetingsDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2">דרושה התערבות?: </label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsProblem, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsProblem, "", new { @class = "text-danger" })
+
+
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <label class="control-label col-md-2">זמן יצירה : </label>
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.CreationTime, new SelectList(Model.AcademicMajors, "Id", "Name", Model.JobOffer.AcademicMajor.Id), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CreationTime, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })
+    </div>*@
