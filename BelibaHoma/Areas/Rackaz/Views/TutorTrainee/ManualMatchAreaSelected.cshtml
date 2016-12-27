@@ -7,37 +7,8 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 }
 
-<script>
-    $(function() {
-        $('#show-matched-trainees').change(function (e) {
-            // Extract the selected value
-            var selectedValue = $(this).prop("checked");
-            var selectedArea = $('#area-select select').val();
-            // Send the value to the appropiate action $.post
-            $.post('/Rackaz/TutorTrainee/ManualMatchTraineeSelect', { showMatched: selectedValue, area: selectedArea }, function (data) {
-                // Success function replace the contant of the html in the correct div
-                $('#trainees-partial').html(data);
-            }).fail(function(data) {
-                // Make sure that the data is now a html of the error page
-                $('html').html(data.responseText);
-            });
-        });
 
-        $('#show-matched-tutors').change(function (e) {
-            // Extract the selected value
-            var selectedValue = $(this).prop("checked");
-            var selectedArea = $('#area-select select').val();
-            // Send the value to the appropiate action $.post
-            $.post('/Rackaz/TutorTrainee/ManualMatchTutorSelect', { showMatched: selectedValue, area: selectedArea }, function (data) {
-                // Success function replace the contant of the html in the correct div
-                $('#tutors-partial').html(data);
-            }).fail(function (data) {
-                // Make sure that the data is now a html of the error page
-                $('html').html(data.responseText);
-            });
-        });
-    });
-</script>
+ <script src="~/Scripts/ManualMatchAreaSelected.js"></script>
 
 <div class="form-horizontal" style="direction: rtl">
     <br>
@@ -57,34 +28,35 @@
             </tr>
         </tbody>
     </table>
-<div class="row">
-    <div class="col">
-        <div class="panel panel-default col-md-6">
-            <div class="panel-heading">
-                <div class="checkbox">
-                    <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
-                </div>
-            </div>
-            <div id="trainees-partial">
-                @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
-            </div>
-        </div>
+    <div class="row">
         <div class="col">
             <div class="panel panel-default col-md-6">
                 <div class="panel-heading">
                     <div class="checkbox">
-                        <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
+                        <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
                     </div>
                 </div>
-                <div id="tutors-partial">
-                    @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
+                <div id="trainees-partial">
+                    @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
+                </div>
+            </div>
+            <div class="col">
+                <div class="panel panel-default col-md-6">
+                    <div class="panel-heading">
+                        <div class="checkbox">
+                            <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
+                        </div>
+                    </div>
+                    <div id="tutors-partial">
+                        @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-6 col-md-6">
-            <input type="submit" value="בצע ציוות" class="btn btn-default" id="manual-match-submit"/>
+        <div class="form-group">
+            <div class="col-md-offset-6 col-md-6">
+                <input type="submit" value="בצע ציוות" class="btn btn-default" id="manual-match-submit"/>
+            </div>
         </div>
     </div>
 </div>

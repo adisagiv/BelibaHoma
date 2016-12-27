@@ -7,49 +7,7 @@
 @section styles {
     <link href="~/Content/Site.css" rel="stylesheet" />
 }
-
-@*<h1>Trainees</h1>
-
-    @foreach (var trainee in Model)
-    {
-        <label>@trainee.FullName</label>
-    }*@
-
-<script>
-   // $(function() {
-        $('#tutors-partial-table')
-        .DataTable({
-            language: {
-                url: "/Scripts/datatable/language/hebrew.json"
-            },
-            initComplete: function () {
-                this.api()
-                    .columns()
-                    .every(function () {
-                        var column = this;
-                        var select = $('<select class="form-control"><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change',
-                                function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-
-                        column.data()
-                            .unique()
-                            .sort()
-                            .each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>');
-                        });
-                    });
-            }
-        });
-  //  });
-</script>
+<script src="~/Scripts/ManualMatchTutorSelect.js"></script>
 
 <h2>חונכים</h2>
 

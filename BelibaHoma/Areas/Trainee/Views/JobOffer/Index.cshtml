@@ -6,6 +6,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/joboffer-index.js"></script>
+}
+
 <h2>משרות</h2>
 
 <p>
@@ -17,59 +29,6 @@
         }
     }
 </p>
-
-@section scripts{
-    <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
-<script>
-    $('#job-offer-table')
-        .DataTable({
-            language: {
-                url: "/Scripts/datatable/language/hebrew.json"
-            },
-            initComplete: function () {
-                this.api()
-                    .columns()
-                    .every(function () {
-                        var column = this;
-                        var isActiveSelect = false;
-                        if ($(this.header()).attr('id') === "is-active") {
-                            isActiveSelect = true;
-                        }
-                        var select = $('<select class="form-control"><option value=""></option></select>')
-                            .appendTo($(column.footer()).empty())
-                            .on('change',
-                                function () {
-                                    var val = $.fn.dataTable.util.escapeRegex(
-                                        $(this).val()
-                                    );
-
-                                    column
-                                        .search(val ? '^' + val + '$' : '', true, false)
-                                        .draw();
-                                });
-
-                        column.data()
-                            .unique()
-                            .sort()
-                            .each(function (d, j) {
-                                var option = '<option ';
-                                if (isActiveSelect && d === "פעיל") {
-                                    option += ' selected="selected" ';
-                                }
-                                option += 'value="' + d + '">' + d + '</option>';
-                                select.append(option);
-                            });
-
-
-                    });
-                var val = 'פעיל';
-                this.api().columns(9).search('^' + val + '$', true, false)
-                                        .draw();
-            }
-        });
-</script>
-
-}
 
 <table class="table" id="job-offer-table">
     <thead>

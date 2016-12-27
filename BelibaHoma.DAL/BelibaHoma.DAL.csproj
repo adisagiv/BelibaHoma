@@ -100,6 +100,7 @@
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IGradeRepository.cs" />
+    <Compile Include="Interfaces\IAlertRepository.cs" />
     <Compile Include="Interfaces\ITutorReportRepository.cs" />
     <Compile Include="Interfaces\IAcademicInstitutionRepository.cs" />
     <Compile Include="Interfaces\IAcademicMajorRepository.cs" />
@@ -114,6 +115,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Interfaces\IUserRepository.cs" />
     <Compile Include="Interfaces\ITraineeRepository.cs" />
+    <Compile Include="Repositories\AlertRepository.cs" />
     <Compile Include="Repositories\GradeRepository.cs" />
     <Compile Include="Repositories\TutorReportRepository.cs" />
     <Compile Include="Repositories\JobOfferRepository.cs" />

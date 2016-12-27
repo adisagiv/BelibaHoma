@@ -16,7 +16,6 @@
 
     <div class="form-horizontal" style="direction: rtl">
         <form autocomplete="off">
-            <h4>חניך</h4>
         <hr/>
             <h3>פרטים אישיים</h3>  
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -170,7 +169,7 @@
                     @Html.ValidationMessageFor(model => model.Trainee.NeededHelpDescription, "", new {@class = "text-danger"})
                 </div>
             </div>
-
+        <h4>הסעיפים הבאים מתייחסים לרמת החניכה (יח"ל) במקצעות ליבה עבור חניכי מכינה</h4>
             <div class="form-group">
                 <label class="control-label col-md-2">רמת חניכה נדרשת בפיזיקה : </label>
                 <div class="col-md-10">
@@ -193,7 +192,7 @@
                     @Html.ValidationMessageFor(model => model.Trainee.EnglishLevel, "", new {@class = "text-danger"})
                 </div>
             </div>
-
+            <h4>הערה: עבור חניכי מכינה יש לסמן 0 בשדות הבאים</h4>
             <div class="form-group">
                 <label class="control-label col-md-2">שנה בתואר מבחינת התקדמות בקורסים :</label>
                 <div class="col-md-10">

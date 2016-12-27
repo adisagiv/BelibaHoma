@@ -217,4 +217,17 @@ namespace BelibaHoma.BLL.Enums
         Sum = 0,
         Average = 1
     }
+
+    public enum AlertStatus
+    {
+        [Description("חדשה")]
+        [Display(Name = "חדשה")]
+        New = 0,
+        [Description("בטיפול")]
+        [Display(Name = "בטיפול")]
+        Ongoing = 1,
+        [Description("סגורה")]
+        [Display(Name = "סגורה")]
+        Cloesd = 2
+    }
 }

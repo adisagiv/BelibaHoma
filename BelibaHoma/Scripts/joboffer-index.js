@@ -1,10 +1,10 @@
 ﻿$(function() {
     $('#job-offer-table')
         .DataTable({
-            initComplete: function() {
+            initComplete: function () {
                 this.api()
                     .columns()
-                    .every(function() {
+                    .every(function () {
                         var column = this;
                         var isActiveSelect = false;
                         if ($(this.header()).attr('id') === "is-active") {
@@ -13,7 +13,7 @@
                         var select = $('<select class="form-control"><option value=""></option></select>')
                             .appendTo($(column.footer()).empty())
                             .on('change',
-                                function() {
+                                function () {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
                                     );
@@ -35,10 +35,10 @@
                                 select.append(option);
                             });
 
-                            
+
                     });
                 var val = 'פעיל';
-                this.api().columns(5).search('^' + val + '$', true, false)
+                this.api().columns(9).search('^' + val + '$', true, false)
                                         .draw();
             }
         });
