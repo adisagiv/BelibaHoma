@@ -208,5 +208,39 @@ namespace BelibaHoma.BLL.Services
             }
             return status;
         }
+
+        public StatusModel ChangeStatus(int id)
+        {
+            var status = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+
+                    var alert = alertRepository.GetByKey(id);
+                    if (alert != null)
+                    {
+                        if (alert.Status == (int) AlertStatus.New)
+                        {
+                            alert.Status = (int) AlertStatus.Ongoing;
+                        }
+                        unitOfWork.SaveChanges();
+
+                        status.Success = true;
+                        status.Message = String.Format("מוסד הלימוד עודכן בהצלחה");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך בסגירת התרעה");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
+
+
     }
 }

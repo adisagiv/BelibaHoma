@@ -9,7 +9,7 @@ using BelibaHoma.BLL.Models;
 
 namespace BelibaHoma.BLL.Interfaces
 {
-    interface IAlertService
+    public interface IAlertService
     {
         /// <summary>
         /// Add Alert to DB due to Trainee low grade
@@ -37,5 +37,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <returns></returns>
         StatusModel GenerateLateTutorsAlerts();
+
+        /// <summary>
+        /// Change Alert's status 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel ChangeStatus(int id);
     }
 }

@@ -17,19 +17,22 @@ namespace BelibaHoma.Areas.Trainee.Controllers
     [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz, UserRole.Trainee })]
     public class GradeController : BaseController
     {
-        private readonly IGradeService _GradeService;
+        private readonly IGradeService _gradeService;
         private readonly ITraineeService _traineeService;
+        //private readonly IAlertService _alertService;
+        private readonly int GradeThreshold = 60;
 
-        public GradeController(IGradeService GradeService,ITraineeService traineeService)
+        public GradeController(IGradeService gradeService,ITraineeService traineeService)//, IAlertService alertService, IAlertService alertService1)
         {
-            this._GradeService = GradeService;
+            this._gradeService = gradeService;
             _traineeService = traineeService;
+            //_alertService = alertService1;
         }
 
         // GET: Rackaz/AcademicMajor
         public ActionResult Index(int id)
         {
-            var result = _GradeService.GetById(id);
+            var result = _gradeService.GetById(id);
             if (result.Success)
             {
                 var traineeResult = _traineeService.Get(id);
@@ -66,23 +69,32 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         public ActionResult Create(GradeModel model)
         {
             ViewBag.IsCreate = true;
-            var result = _GradeService.Add(model);
+            var result = _gradeService.Add(model);
 
             if (result.Success)
             {
                 //TODO: Change Index to other action
+                //if (model.Grade1 < GradeThreshold)
+                //{
+                //    var status = _alertService.AddTraineeGrade(model.TraineeId);
+                //    if (!status.Success)
+                //    {
+                //        return Error(status);
+                //    }
+                //}
                 return RedirectToAction("Index", new { id = model.TraineeId});
             }
 
-            var status = new StatusModel(false, result.Message);
+            //TODO: What is these lines below supposed to do? If it needs to refer to Error page that is not the way..
+            var status1 = new StatusModel(false, result.Message);
             ModelState.AddModelError(result.Data, result.Message);
             return View(model);
         }
 
-        public ActionResult Edit(int id, int semesterNumber) //I am here?????????
+        public ActionResult Edit(int id, int semesterNumber)
         {
             ViewBag.IsCreate = false;
-            var result = _GradeService.Get(id,semesterNumber); //shell we do bet ny id and semester number?
+            var result = _gradeService.Get(id,semesterNumber); //shell we do bet ny id and semester number?
             if (!result.Success)
             {
                 return Error(new StatusModel(false, result.Message));
@@ -94,18 +106,26 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         public ActionResult Edit(int id, int semesterNumber, GradeModel model)
         {
             ViewBag.IsCreate = false;
-            var result = _GradeService.Update(id, model);
+            var result = _gradeService.Update(id, model);
             if (result.Success)
             {
                 //TODO: Change Index to other action
+                //if (model.Grade1 < GradeThreshold)
+                //{
+                //    var status = _alertService.AddTraineeGrade(model.TraineeId);
+                //    if (!status.Success)
+                //    {
+                //        return Error(status);
+                //    }
+                //}
                 return RedirectToAction("Index", new { id = id });
             }
-            return Error(new StatusModel(false, result.Message));
+            return Error(result);
         }
         [HttpGet]
         public ActionResult Delete(int id, int semesterNumber)
         {
-            _GradeService.Delete(id, semesterNumber);
+            _gradeService.Delete(id, semesterNumber);
             // TODO  : result.Success
             return RedirectToAction("Index", new { id = id });
         }

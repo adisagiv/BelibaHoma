@@ -140,6 +140,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\AlertController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
@@ -589,6 +590,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
+    <Folder Include="Areas\Rackaz\Views\Alert\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
     <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />

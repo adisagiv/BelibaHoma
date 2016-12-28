@@ -16,17 +16,19 @@ namespace BelibaHoma.Areas.Tutor.Controllers
     [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz, UserRole.Tutor })]
     public class TutorReportController : BaseController
     {
-        private readonly ITutorReportService _TutorReportService;
+        private readonly ITutorReportService _tutorReportService;
+        //private readonly IAlertService _alertService;
 
-        public TutorReportController(ITutorReportService TutorReportService)
+        public TutorReportController(ITutorReportService tutorReportService)//, IAlertService alertService, IAlertService alertService1)
         {
-            this._TutorReportService = TutorReportService;
+            this._tutorReportService = tutorReportService;
+            //_alertService = alertService1;
         }
 
         // GET: Rackaz/AcademicMajor
         public ActionResult Index()
         {
-            var result = _TutorReportService.Get();
+            var result = _tutorReportService.Get();
             if (result.Success)
             {
                 return View(result.Data);
@@ -39,7 +41,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         //TODO: how to create index of only one specific TutorTraineeId
         public ActionResult TutorTraineeReports(int id)
         {
-            var result = _TutorReportService.GetById(id);
+            var result = _tutorReportService.GetById(id);
             if (result.Success)
             {
                 return View(result.Data);
@@ -60,19 +62,26 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Create(TutorReportModel model)
         {
-            var result = _TutorReportService.Add(model);
+            var result = _tutorReportService.Add(model);
 
             if (result.Success)
             {
+                //if (model.IsProblem)
+                //{
+                //    result = _alertService.AddInervention(model.Id);
+                //    if (!result.Success)
+                //    {
+                //        return Error(result);
+                //    }
+                //}
                 return RedirectToAction("Index");
             }
-            var status = new StatusModel(false, result.Message);
-            return Error(status);
+            return Error(result);
         }
 
         public ActionResult Edit(int id)
         {
-            var result = _TutorReportService.Get(id);
+            var result = _tutorReportService.Get(id);
             if (!result.Success)
             {
                 return Error(new StatusModel(false, result.Message));
@@ -83,12 +92,20 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TutorReportModel model)
         {
-            var result = _TutorReportService.Update(id, model);
+            var result = _tutorReportService.Update(id, model);
             if (result.Success)
             {
+                //if (model.IsProblem)
+                //{
+                //    result = _alertService.AddInervention(model.Id);
+                //    if (!result.Success)
+                //    {
+                //        return Error(result);
+                //    }
+                //}
                 return RedirectToAction("Index");
             }
-            return Error(new StatusModel(false, result.Message));
+            return Error(result);
         }
 
     }
