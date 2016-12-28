@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
 using Generic.GenericModel.Models;
@@ -35,6 +36,20 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             return Error(status);
         }
 
+        //////////
+        //public ActionResult Index(int id)
+        //{
+        //    var result = _TutorReportService.GetById(id);
+        //    if (result.Success)
+        //    {
+        //        ViewBag.TutorTraineeId = id;
+        //        return View(result.Data);
+        //    }
+        //    var status = new StatusModel(false, result.Message);
+        //    return Error(status);
+        //}
+
+
 
         //TODO: how to create index of only one specific TutorTraineeId
         public ActionResult TutorTraineeReports(int id)
@@ -42,6 +57,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             var result = _TutorReportService.GetById(id);
             if (result.Success)
             {
+                ViewBag.TutorTraineeId = id;
                 return View(result.Data);
 
             }
@@ -61,10 +77,11 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         public ActionResult Create(TutorReportModel model)
         {
             var result = _TutorReportService.Add(model);
-
+            var id = model.TutorTraineeId;
             if (result.Success)
             {
-                return RedirectToAction("Index");
+                //TODO: Send tutorTraineeId back to index
+                return RedirectToAction("TutorTraineeReports", new { id = id });
             }
             var status = new StatusModel(false, result.Message);
             return Error(status);
@@ -84,9 +101,11 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         public ActionResult Edit(int id, TutorReportModel model)
         {
             var result = _TutorReportService.Update(id, model);
+            var tutorTraineeId = model.TutorTraineeId;
+
             if (result.Success)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("TutorTraineeReports", new { id = tutorTraineeId });
             }
             return Error(new StatusModel(false, result.Message));
         }

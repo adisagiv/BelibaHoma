@@ -11,6 +11,7 @@ namespace BelibaHoma.BLL.Interfaces
         StatusModel<HourStatisticsModel> GetHourStatistics(Area? area, DateTime startTime, DateTime endTime, HourStatisticsType hourStatisticsType);
         StatusModel<JoinDropStatisticsModel> GetJoinDropStatistics(Area? area);
         StatusModel<InvestedHoursStatisticsModel> GetInvestedHoursStatistics(Area? area);
+        StatusModel<AvrGradeStatisticsModel> GetAvrGradeStatistics(Area? area);
         StatusModel<List<int>> GetHourStatisticsProssibleYears();
         StatusModel<int> GetMaxPazam();
     }

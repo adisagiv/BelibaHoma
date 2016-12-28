@@ -53,8 +53,10 @@
         </div>
         @*<input type="hidden"
                value="TutorReportId">*@
-        <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId" />
-        
+        <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId"/>
+
+        @Html.HiddenFor(model=> model.TutorReport.TutorTraineeId)
+
         @*TODO: add this to the model by the given parameters from tutorReport*@ 
         @*<div class="form-group">
             <label class="control-label col-md-2">תז דוח חונך : </label>

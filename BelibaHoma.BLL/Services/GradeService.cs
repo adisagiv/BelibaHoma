@@ -65,7 +65,7 @@ namespace BelibaHoma.BLL.Services
                     var TraineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
                     var Trainee = TraineeRepository.GetByKey(model.TraineeId);
 
-                    if (GradeRepository.GetAll().Any(g => g.SemesterNumber == model.SemesterNumber))
+                    if (GradeRepository.GetAll().Any(g => (g.SemesterNumber == model.SemesterNumber)&&(g.TraineeId==model.TraineeId))) //maybe id input?
                     {
                         status = new StatusModel<string>(false, "מספר סמסטר כבר קיים אנא הזן מספר אחר", "SemesterNumber");
                         return status;
@@ -105,11 +105,23 @@ namespace BelibaHoma.BLL.Services
                     var GradeRepository = unitOfWork.GetRepository<IGradeRepository>();
                     var entity = updatedModel.MapTo<Grade>();
 
+                    //if (GradeRepository.GetAll().Any(g => (g.SemesterNumber == updatedModel.SemesterNumber) && (g.TraineeId == updatedModel.TraineeId))) //maybe id input?
+                    //{
+                    //    status = new StatusModel<string>(false, "מספר סמסטר כבר קיים אנא הזן מספר אחר", "SemesterNumber");
+                    //    return status;
+                    //}
+
                     var grade = GradeRepository.GetAll().FirstOrDefault(g => g.SemesterNumber == updatedModel.SemesterNumber && g.TraineeId == id);
                     if (grade != null)
                     {
+
+                       
                         grade.Grade1 = (int)updatedModel.Grade1;
                         grade.SemesterType = (int)updatedModel.SemesterType;
+
+                        //TODO: remove comment after year will be added to the data base
+                        //grade.Year = (int) updatedModel.Year;
+
 
                         unitOfWork.SaveChanges();
 

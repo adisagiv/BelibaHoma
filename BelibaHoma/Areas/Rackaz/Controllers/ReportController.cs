@@ -126,9 +126,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         verticalAlign= "middle",
                         borderWidth = 0
                     },
-                    tooltip = new Tooltip
+                    tooltip = new Tooltip1()
                     {
-                        valueSuffix = "H"
+                        headerFormat = "<span style='font-size:10px'>{point.key}</span><table>",
+                        pointFormat = "<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y}</b></td></tr>",
+                        footerFormat = "</table>",
+                        shared = true,
+                        useHTML = true
+
                     },
                     exporting = new Exporting
                     {
@@ -159,7 +164,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         //return the data for the report
         [HttpPost]
-        public ActionResult GetJoinDropStatistics()
+        public ActionResult GetJoinDropStatistics(Area? area)
         {
             //if (!year.HasValue)
             //{
@@ -185,7 +190,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             //}
 
             /// TODO: if Rackaz send his area
-                var result = _reportService.GetJoinDropStatistics(null);
+                var result = _reportService.GetJoinDropStatistics(area);
             if (result.Success)
             {
                 var chartModel1 = new HighChartJDModel
@@ -270,10 +275,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         //return the data for the report
         [HttpPost]
-        public ActionResult GetInvestedHoursStatistics()
+        public ActionResult GetInvestedHoursStatistics(Area? area)
         {
             //TODO: if rackaz send area
-            var result = _reportService.GetInvestedHoursStatistics(null);
+            var result = _reportService.GetInvestedHoursStatistics(area);
 
             if (result.Success)
             {
@@ -353,9 +358,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         verticalAlign = "middle",
                         borderWidth = 0
                     },
-                    tooltip = new Tooltip
+                    tooltip = new Tooltip1()
                     {
-                        valueSuffix = "H"
+                        headerFormat = "<span style='font-size:10px'>{point.key}</span><table>",
+                        pointFormat = "<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y}</b></td></tr>",
+                        footerFormat = "</table>",
+                        shared = true,
+                        useHTML = true
+
                     },
                     exporting = new Exporting
                     {
@@ -369,6 +379,123 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
             return null;
         }
+
+        /// //////////////////////////  for AvrGrade
+
+        // return the view of the report
+        [HttpPost]
+        public ActionResult AvrGradeStatistics()
+        {
+            return View();
+        }
+
+        //return the data for the report
+        [HttpPost]
+        //TODO: add area, function should get area but nullble
+        public ActionResult GetAvrGradeStatistics(Area? area)
+        {
+            
+            var result = _reportService.GetAvrGradeStatistics(area);
+
+            //function that findes the most pazam trainee!!!TODO: maybe we'll change it to oldest Grade, when we'll have that parameter
+            var maxYearT = _reportService.GetMaxPazam();
+            var max = maxYearT.Data;
+
+
+            if (result.Success)
+            {
+                var series = new List<double>();
+                ///TODO: at the moment we have only 4 semester types, when we'll add years we'll change it..
+                for (var i = 0; i <= 3; i++)
+                {
+                    var avrGrade = 0.0;
+                    //var month = (i + 10) % 12 + 1;
+
+                    if (result.Data.AvrGradeStatistics.ContainsKey(i))
+                    {
+                        avrGrade = result.Data.AvrGradeStatistics[i];
+                    }
+                   
+                    series.Add(avrGrade);
+                }
+                //TODO: we'll have to change it to the number of year and semester, now it is just semester type
+                var yearAndSemesterList = new List<string>();
+
+                for (var i = 0; i <= 3; i++)
+                {
+                    yearAndSemesterList.Add(i.ToString());
+                }
+
+
+                var chartModel = new HighChartModel
+                {
+                    chart = new Chart
+                    {
+                        type = "line"
+                    },
+                    title = new Title
+                    {
+                        text = "דוח ממוצע חניכים במהלך הסמסטרים",
+                        x = -20
+                    },
+                    xAxis = new Xaxis
+                    {
+                        categories = yearAndSemesterList                        
+                    },
+                    yAxis = new Yaxis
+                    {
+                        title = new Title1
+                        {
+                            text = "ממוצע ציונים"
+                        },
+                        plotLines = new List<Plotline> {
+                            new Plotline
+                            {
+                                color = "#808080",
+                                value = 0,
+                                width = 1
+                            }
+                        }
+                    },
+                    series = new List<Series>
+                    {
+                        new Series
+                        {
+                            data = series,
+                            name = "ממוצע ציונים"
+                        }
+                        
+                    },
+                    legend = new Legend
+                    {
+                        layout = "vertical",
+                        align = "right",
+                        verticalAlign = "middle",
+                        borderWidth = 0
+                    },
+                    tooltip = new Tooltip1()
+                    {
+                        headerFormat = "<span style='font-size:10px'>{point.key}</span><table>",
+                        pointFormat = "<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y}</b></td></tr>",
+                        footerFormat = "</table>",
+                        shared = true,
+                        useHTML = true
+
+                    },
+                    exporting = new Exporting
+                    {
+                        enabled = false
+                    }
+                     
+
+                };
+
+                return Json(chartModel);
+            }
+
+            return null;
+        }
+
 
 
 

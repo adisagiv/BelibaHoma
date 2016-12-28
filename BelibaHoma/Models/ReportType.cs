@@ -14,6 +14,9 @@ namespace BelibaHoma.Models
         JoinDropStatistics,
 
         [Description("סטטיסטיקת שעות חניכה לאורך ותק בתוכנית")]
-        InvestedHoursStatistics
+        InvestedHoursStatistics,
+        
+        [Description("סטטיסטיקת ממוצעי ציונים לאורך סמסטרים")]
+        AvrGradeStatistics
     }
 }

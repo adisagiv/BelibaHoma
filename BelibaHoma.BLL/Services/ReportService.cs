@@ -172,7 +172,7 @@ namespace BelibaHoma.BLL.Services
         public StatusModel<InvestedHoursStatisticsModel> GetInvestedHoursStatistics(Area? area)
         {
             var result = new StatusModel<InvestedHoursStatisticsModel>();
-
+            
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
@@ -193,19 +193,23 @@ namespace BelibaHoma.BLL.Services
                     {
                         var totalTutorHoursGiven = 0;
                         var i = 0.0;
-                        var vetek = thisYear - tr.First().User.CreationTime.Year;
-                        foreach (var person in tr)
-                        {
-                            i = i++;
-                            totalTutorHoursGiven = totalTutorHoursGiven + person.TutorHours;
-                        }
-                        var avrTotalTutorHoursGiven = totalTutorHoursGiven/i;
+                        var vetek = thisYear - tr.Key;
+                        var avrTotalTutorHoursGiven = tr.Average(t => t.TutorHours);
+                        //var vetek = thisYear - tr.First().User.CreationTime.Year;
+                        //foreach (var person in tr)
+                        //{
+                        //    i = i++;
+                        //    totalTutorHoursGiven = totalTutorHoursGiven + person.TutorHours;
+                        //}
+                        //var avrTotalTutorHoursGiven = totalTutorHoursGiven/i;
                         dic.Add(vetek, avrTotalTutorHoursGiven);
                     }
 
 
-                    //result.Data = new InvestedHoursStatisticsModel();
-                    result.Data.InvestedHoursStatistics = dic;
+                    result.Data = new InvestedHoursStatisticsModel
+                    {
+                        InvestedHoursStatistics = dic
+                    };
 
                     result.Success = true;
                 }
@@ -222,6 +226,68 @@ namespace BelibaHoma.BLL.Services
 
 
         }
+
+        /// ///////AvrGrade...
+        /// 
+
+
+        public StatusModel<AvrGradeStatisticsModel> GetAvrGradeStatistics(Area? area)
+        {
+            var result = new StatusModel<AvrGradeStatisticsModel>();
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var gradeRepository = unitOfWork.GetRepository<IGradeRepository>();
+
+                    var grades = gradeRepository.GetAll().Where(
+                        t =>(!area.HasValue || t.Trainee.User.Area == (int?)area));
+
+                    // TODO: grouping by year and semester type, mean while (till we'll add year to the database:
+                    //TODO: now only by semester type
+                    //var groupedGrades =
+                    //    grades.GroupBy(ts => (ts.Year)).GroupBy(tr=> tr.SemesterType);
+
+                    ///only for now
+                    var groupedGrades = grades.GroupBy(ts => ts.SemesterType);
+
+                    var thisYear = DateTime.Now.Year;
+                    var dic = new Dictionary<int, double>(); // dictionary of vetek, avg of that vetek.
+                    foreach (var tr in groupedGrades)
+                    {
+                        var avrSumOfGradesInSemester= tr.Average(t => t.Grade1);
+                        ////TODO: we'll have to change it after adding the year
+                        dic.Add(tr.First().SemesterType, avrSumOfGradesInSemester);
+                    }
+
+
+                    result.Data = new AvrGradeStatisticsModel
+                    {
+                        AvrGradeStatistics = dic
+                    };
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ///TODO: not a job offer, change in all places...
+                result.Message = String.Format("Error getting job offers from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
+
+
+
+        }
+
+
+
+
+
 
         public StatusModel<List<int>> GetHourStatisticsProssibleYears()
         {

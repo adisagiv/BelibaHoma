@@ -1,9 +1,8 @@
 ﻿$(function () {
-    function getInvestedHoursStatistics() {
-        $.post("/Rackaz/Report/GetInvestedHoursStatistics", function (result) {
-            //debugger;
+    function getAvrGradeStatistics() {
+
+        $.post("/Rackaz/Report/GetAvrGradeStatistics", function (result) {
             if (result != null) {
-                //debugger;
                 Highcharts.chart('container', result);
             }
 
@@ -11,15 +10,15 @@
     }
 
     // Cathcing the click event and collecti the data 
-    $("#get-InvestedHours-statistics").click(function () {
+    $("#get-AvrGrade-statistics").click(function () {
 
         //// get year from input
         //var year = $('#year').val();
 
         // get data from server
-        getInvestedHoursStatistics();
+        getAvrGradeStatistics();
     });
     //// defualt call to get hour statitics 
     //var year = new Date().getFullYear();
-    getInvestedHoursStatistics();
+    getAvrGradeStatistics();
 });
