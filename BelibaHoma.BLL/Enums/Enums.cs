@@ -230,4 +230,17 @@ namespace BelibaHoma.BLL.Enums
         [Display(Name = "סגורה")]
         Cloesd = 2
     }
+
+    public enum AlertType
+    {
+        [Description("ציון חניך")]
+        [Display(Name = "ציון חניך")]
+        TraineeGrade = 0,
+        [Description("דרושה התערבות")]
+        [Display(Name = "דרושה התערבות")]
+        Intervention = 1,
+        [Description("איחור בדיווח")]
+        [Display(Name = "איחור בדיווח")]
+        LateTutor = 2
+    }
 }

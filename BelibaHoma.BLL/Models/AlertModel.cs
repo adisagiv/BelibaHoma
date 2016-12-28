@@ -16,19 +16,26 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "תאריך יצירה")]
         public DateTime CreationTime { get; set; }
 
-
         [Display(Name = "עדכון אחרון")]
         public DateTime UpdateTime { get; set; }
-
-        public Trainee Trainee { get; set; }
-
-        [Display(Name = "הערות")]
-        public string Notes { get; set; }
 
         [Display(Name = "סטטוס טיפול")]
         public AlertStatus Status { get; set; }
 
+        [Display(Name = "הערות")]
+        public string Notes { get; set; }
 
+        [Display(Name = "סוג התרעה")]
+        public AlertType AlertType { get; set; }
+
+        [Display(Name = "חניך")]
+        public Trainee Trainee { get; set; }
+
+        [Display(Name = "חונך")]
+        public Tutor Tutor { get; set; }
+
+        [Display(Name = "דיווח")]
+        public TutorReport TutorReport { get; set; }
 
         public AlertModel(Alert entity)
             : base(entity)

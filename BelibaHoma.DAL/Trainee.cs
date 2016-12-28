@@ -17,6 +17,7 @@ namespace BelibaHoma.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Trainee()
         {
+            this.Alert = new HashSet<Alert>();
             this.Grade = new HashSet<Grade>();
             this.TutorTrainee = new HashSet<TutorTrainee>();
         }
@@ -46,6 +47,8 @@ namespace BelibaHoma.DAL
         public virtual AcademicMajor AcademicMajor { get; set; }
         public virtual AcademicMajor AcademicMajor1 { get; set; }
         public virtual AcademicMajor AcademicMajor2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alert> Alert { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Grade> Grade { get; set; }
         public virtual User User { get; set; }
