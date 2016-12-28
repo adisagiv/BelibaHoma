@@ -23,7 +23,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        StatusModel Add(TutorReportModel model);
+        StatusModel<int> Add(TutorReportModel model);
 
         /// <summary>
         /// Update TutorReport in db

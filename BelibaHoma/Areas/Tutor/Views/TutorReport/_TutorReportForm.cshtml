@@ -35,7 +35,7 @@
                         @Html.ValidationMessageFor(model => model.TutorHoursBonding, "", new { @class = "text-danger" })
                     </div>
                 </div>*@
-            @Html.HiddenFor(model=> model.TutorTraineeId)
+            @Html.HiddenFor(model => model.TutorTraineeId)
             <div class="form-group">
                 <label class="control-label col-md-2">תיאור המפגש : </label>
                 <div class="col-md-10">
@@ -64,9 +64,9 @@
                 </div>
             </div>
         </div>
-        }
+    </div>
+}
 
         @*<div>
                 @Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })
             </div>*@
-</div>

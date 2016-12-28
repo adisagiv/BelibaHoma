@@ -18,15 +18,14 @@ namespace BelibaHoma.Areas.Tutor.Controllers
     public class TutorReportController : BaseController
     {
         private readonly ITutorReportService _tutorReportService;
-        //private readonly IAlertService _alertService;
+        private readonly IAlertService _alertService;
 
-        public TutorReportController(ITutorReportService tutorReportService)//, IAlertService alertService, IAlertService alertService1)
+        public TutorReportController(ITutorReportService tutorReportService, IAlertService alertService)
         {
             this._tutorReportService = tutorReportService;
-            //_alertService = alertService1;
+            _alertService = alertService;
         }
 
-        // GET: Rackaz/AcademicMajor
         public ActionResult Index()
         {
             var result = _tutorReportService.Get();
@@ -37,20 +36,6 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             var status = new StatusModel(false, result.Message);
             return Error(status);
         }
-
-        //////////
-        //public ActionResult Index(int id)
-        //{
-        //    var result = _TutorReportService.GetById(id);
-        //    if (result.Success)
-        //    {
-        //        ViewBag.TutorTraineeId = id;
-        //        return View(result.Data);
-        //    }
-        //    var status = new StatusModel(false, result.Message);
-        //    return Error(status);
-        //}
-
 
 
         //TODO: how to create index of only one specific TutorTraineeId
@@ -78,21 +63,21 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Create(TutorReportModel model)
         {
-            var result = _TutorReportService.Add(model);
+            var result = _tutorReportService.Add(model);
             var id = model.TutorTraineeId;
             if (result.Success)
             {
-                //if (model.IsProblem)
-                //{
-                //    result = _alertService.AddInervention(model.Id);
-                //    if (!result.Success)
-                //    {
-                //        return Error(result);
-                //    }
-                //}
+                if (model.IsProblem)
+                {
+                    var status = _alertService.AddInervention(result.Data);
+                    if (!status.Success)
+                    {
+                        return Error(status);
+                    }
+                }
                 return RedirectToAction("Index");
-                //TODO: Send tutorTraineeId back to index
-                return RedirectToAction("TutorTraineeReports", new { id = id });
+                ////TODO: Send tutorTraineeId back to index
+                //return RedirectToAction("TutorTraineeReports", new { id = id });
             }
             return Error(result);
         }
@@ -110,21 +95,21 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TutorReportModel model)
         {
-            var result = _TutorReportService.Update(id, model);
+            var result = _tutorReportService.Update(id, model);
             var tutorTraineeId = model.TutorTraineeId;
 
             if (result.Success)
             {
-                //if (model.IsProblem)
-                //{
-                //    result = _alertService.AddInervention(model.Id);
-                //    if (!result.Success)
-                //    {
-                //        return Error(result);
-                //    }
-                //}
+                if (model.IsProblem)
+                {
+                    result = _alertService.AddInervention(model.Id);
+                    if (!result.Success)
+                    {
+                        return Error(result);
+                    }
+                }
                 return RedirectToAction("Index");
-                return RedirectToAction("TutorTraineeReports", new { id = tutorTraineeId });
+                //return RedirectToAction("TutorTraineeReports", new { id = tutorTraineeId });
             }
             return Error(result);
         }

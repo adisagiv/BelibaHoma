@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BelibaHoma.Areas.Rackaz.Models;
 using BelibaHoma.BLL.Models;
 using Generic.GenericModel.Models;
 using BelibaHoma.Controllers;
@@ -25,14 +26,25 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         // GET: Rackaz/AcademicMajor
         public ActionResult Index()
         {
-            //var result = _alertService.Get();
-            //if (result.Success)
-            //{
-            //    return View(result.Data);
-            //}
-            //var status = new StatusModel(false, result.Message);
-            //return Error(status);
-            return View();
+            var reportAlerts = _alertService.GetReportAlerts(CurrentUser.Area);
+            if (!reportAlerts.Success)
+            {
+                return Error(reportAlerts);
+            }
+
+            var gradeAlerts = _alertService.GetGradeAlerts(CurrentUser.Area);
+            if (!gradeAlerts.Success)
+            {
+                return Error(gradeAlerts);
+            }
+
+            var lateAlerts = _alertService.GetLateTutorAlerts(CurrentUser.Area);
+            if (!lateAlerts.Success)
+            {
+                return Error(lateAlerts);
+            }
+            var model = new AlertViewModel(lateAlerts.Data, gradeAlerts.Data, reportAlerts.Data);
+            return View(model);
         }
 
         //public ActionResult Edit(int id)

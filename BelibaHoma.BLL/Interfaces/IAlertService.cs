@@ -44,5 +44,26 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         StatusModel ChangeStatus(int id);
+
+        /// <summary>
+        /// Get active required intervention alerts from DB (all / by area)
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<List<AlertModel>> GetReportAlerts(Area? area);
+
+        /// <summary>
+        /// Get active grade alerts from DB (all / by area) 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<List<AlertModel>> GetGradeAlerts(Area? area);
+
+        /// <summary>
+        /// Get active alerts 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<List<AlertModel>> GetLateTutorAlerts(Area? area);
     }
 }

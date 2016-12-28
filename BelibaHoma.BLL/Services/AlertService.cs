@@ -14,7 +14,7 @@ using Services.Log;
 
 namespace BelibaHoma.BLL.Services
 {
-    class AlertService : IAlertService
+    public class AlertService : IAlertService
     {
         public StatusModel AddTraineeGrade(int traineeId)
         {
@@ -31,7 +31,7 @@ namespace BelibaHoma.BLL.Services
                     var checkExistingAlert =
                         alertRepository.GetAll()
                             .ToList()
-                            .Any(a => a.LinkedTraineeId == traineeId && a.Status != (int) AlertStatus.Cloesd);
+                            .Any(a => a.AlertType == (int) AlertType.TraineeGrade && a.LinkedTraineeId == traineeId && a.Status != (int) AlertStatus.Cloesd);
                     if (!checkExistingAlert)
                     {
                         var alert = new Alert
@@ -80,7 +80,7 @@ namespace BelibaHoma.BLL.Services
                     var checkExistingAlert =
                         alertRepository.GetAll()
                             .ToList()
-                            .Any(a => a.LinkedReportId == tutorReportId && a.Status != (int)AlertStatus.Cloesd);
+                            .Any(a => a.AlertType == (int)AlertType.Intervention && a.LinkedReportId == tutorReportId && a.Status != (int)AlertStatus.Cloesd);
                     if (!checkExistingAlert)
                     {
                         var alert = new Alert
@@ -129,13 +129,13 @@ namespace BelibaHoma.BLL.Services
                     var checkExistingAlert =
                         alertRepository.GetAll()
                             .ToList()
-                            .Any(a => a.LinkedTutorId == tutorId && a.Status != (int)AlertStatus.Cloesd);
+                            .Any(a => a.AlertType == (int)AlertType.LateTutor && a.LinkedTutorId == tutorId && a.Status != (int)AlertStatus.Cloesd);
                     if (!checkExistingAlert)
                     {
                         var alert = new Alert
                         {
                             Status = (int)AlertStatus.New,
-                            AlertType = (int)AlertType.Intervention,
+                            AlertType = (int)AlertType.LateTutor,
                             LinkedTutorId = tutorId,
                             CreationTime = DateTime.Now,
                             UpdateTime = DateTime.Now,
@@ -241,6 +241,83 @@ namespace BelibaHoma.BLL.Services
             return status;
         }
 
+        public StatusModel<List<AlertModel>> GetReportAlerts(Area? area)
+        {
+            var status = new StatusModel<List<AlertModel>>(false, String.Empty, new List<AlertModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
 
+                   // status.Data = alertRepository.GetAll().ToList().Where(a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.Intervention && (area == null || a.TutorReport.TutorTrainee.Tutor.User.Area == (int) area)).Select(a => new AlertModel(a)).OrderBy(a => a.UpdateTime).ToList();
+
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutors = tutorRepository.GetAll().Where(t => t.User.IsActive && (area == null || t.User.Area == (int?)area));
+                    var alerts =
+                        tutors.ToList().SelectMany(t => t.TutorTrainee)
+                            .SelectMany(tt => tt.TutorReport)
+                            .SelectMany(tr => tr.Alert)
+                            .Where(
+                                a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.Intervention)
+                            .OrderBy(a => a.UpdateTime)
+                            .ToList()
+                            .Select(a => new AlertModel(a)).ToList();
+                    status.Data = alerts;
+                    //If we got here - Yay!!
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך שליפת התרעות דורשות התערבות ממסד הנתונים");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
+
+        public StatusModel<List<AlertModel>> GetGradeAlerts(Area? area)
+        {
+            var status = new StatusModel<List<AlertModel>>(false, String.Empty, new List<AlertModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+                    status.Data = alertRepository.GetAll().Where(a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.TraineeGrade && (area == null || a.Trainee.User.Area == (int?)area)).OrderBy(a => a.UpdateTime).ToList().Select(a => new AlertModel(a)).ToList();
+
+                    //If we got here - Yay!!
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך שליפת התרעות עבור ציוני חניכים ממסד הנתונים");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
+
+        public StatusModel<List<AlertModel>> GetLateTutorAlerts(Area? area)
+        {
+            var status = new StatusModel<List<AlertModel>>(false, String.Empty, new List<AlertModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+                    status.Data = alertRepository.GetAll().Where(a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.LateTutor && (area == null || a.Tutor.User.Area == (int?)area)).OrderBy(a => a.UpdateTime).ToList().Select(a => new AlertModel(a)).ToList();
+
+                    //If we got here - Yay!!
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך שליפת התרעות עבור ציוני חניכים ממסד הנתונים");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
     }
 }

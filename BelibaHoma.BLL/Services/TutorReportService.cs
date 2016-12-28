@@ -69,9 +69,9 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel Add(TutorReportModel model)
+        public StatusModel<int> Add(TutorReportModel model)
         {
-            var status = new StatusModel(false, String.Empty);
+            var status = new StatusModel<int>(false, String.Empty,0);
 
             try
             {
@@ -93,6 +93,8 @@ namespace BelibaHoma.BLL.Services
                     TutorReportRepository.Add(entity);
 
                     unitOfWork.SaveChanges();
+
+                    status.Data = entity.Id;
 
                     status.Success = true;
                     status.Message = String.Format("הדיווח בתאריך {0} הוזן בהצלחה", model.CreationTime);

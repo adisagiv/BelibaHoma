@@ -153,6 +153,7 @@
     <Compile Include="Areas\Rackaz\Controllers\TutorSessionControllerOld.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
+    <Compile Include="Areas\Rackaz\Models\AlertViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\JobOfferViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\HomeViewModel.cs" />
     <Compile Include="Areas\Rackaz\Models\TraineeViewModel.cs" />
@@ -367,6 +368,7 @@
     <Content Include="Areas\Tutor\Views\TutorReport\TutorTraineeReports.cshtml" />
     <Content Include="Areas\Tutor\Views\TutorReport\_TutorReportForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\Report\AvrGradeStatistics.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Alert\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -585,7 +587,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
-    <Folder Include="Areas\Rackaz\Views\Alert\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
     <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />

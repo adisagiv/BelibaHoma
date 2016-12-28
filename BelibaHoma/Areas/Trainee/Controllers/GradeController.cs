@@ -19,14 +19,14 @@ namespace BelibaHoma.Areas.Trainee.Controllers
     {
         private readonly IGradeService _gradeService;
         private readonly ITraineeService _traineeService;
-        //private readonly IAlertService _alertService;
+        private readonly IAlertService _alertService;
         private readonly int GradeThreshold = 60;
 
-        public GradeController(IGradeService gradeService,ITraineeService traineeService)//, IAlertService alertService, IAlertService alertService1)
+        public GradeController(IGradeService gradeService,ITraineeService traineeService, IAlertService alertService)
         {
             this._gradeService = gradeService;
             _traineeService = traineeService;
-            //_alertService = alertService1;
+            _alertService = alertService;
         }
 
         // GET: Rackaz/AcademicMajor
@@ -52,11 +52,6 @@ namespace BelibaHoma.Areas.Trainee.Controllers
             return Error(status);
         }
 
-        //public ActionResult Create()
-        //{
-        //    var model = new GradeModel { };
-        //    return View(model);
-        //}
         //TODO:Fix this : 
         public ActionResult Create(int traineeId) //,int semesterNumber )
         {
@@ -73,15 +68,15 @@ namespace BelibaHoma.Areas.Trainee.Controllers
 
             if (result.Success)
             {
+                if (model.Grade1 < GradeThreshold)
+                {
+                    var status = _alertService.AddTraineeGrade(model.TraineeId);
+                    if (!status.Success)
+                    {
+                        return Error(status);
+                    }
+                }
                 //TODO: Change Index to other action
-                //if (model.Grade1 < GradeThreshold)
-                //{
-                //    var status = _alertService.AddTraineeGrade(model.TraineeId);
-                //    if (!status.Success)
-                //    {
-                //        return Error(status);
-                //    }
-                //}
                 return RedirectToAction("Index", new { id = model.TraineeId});
             }
 
@@ -109,15 +104,15 @@ namespace BelibaHoma.Areas.Trainee.Controllers
             var result = _gradeService.Update(id, model);
             if (result.Success)
             {
+                if (model.Grade1 < GradeThreshold)
+                {
+                    var status = _alertService.AddTraineeGrade(model.TraineeId);
+                    if (!status.Success)
+                    {
+                        return Error(status);
+                    }
+                }
                 //TODO: Change Index to other action
-                //if (model.Grade1 < GradeThreshold)
-                //{
-                //    var status = _alertService.AddTraineeGrade(model.TraineeId);
-                //    if (!status.Success)
-                //    {
-                //        return Error(status);
-                //    }
-                //}
                 return RedirectToAction("Index", new { id = id });
             }
             return Error(result);
