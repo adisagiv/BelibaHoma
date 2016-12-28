@@ -4,53 +4,56 @@
 @{
     var user = ViewBag.CurrentUser as UserModel;
 }
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.SemesterNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grade1)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SemesterType)
-        </th>
-        <th>
-            
-        </th>
-    </tr>
+<div class="well">
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SemesterNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Grade1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SemesterType)
+            </th>
+            <th>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SemesterNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grade1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
-        <td>
-            @item.SemesterType.ToDescription()
-        </td>
-        <td>
-            
-            @{
+            </th>
+        </tr>
 
-                if (user != null && (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz))
-                {
-                    @Html.ActionLink("Delete", "Delete", new {id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */}) @Html.Raw(" |")
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SemesterNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Grade1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdateDate)
+                </td>
+                <td>
+                    @item.SemesterType.ToDescription()
+                </td>
+                <td>
+
+                    @{
+
+            if (user != null && (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz))
+            {
+                @Html.ActionLink("מחיקה", "Delete", new { id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */}) @Html.Raw(" |")
 
 
-                }
             }
-            @Html.ActionLink("Edit", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+                    }
+                    @Html.ActionLink("עריכה", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>

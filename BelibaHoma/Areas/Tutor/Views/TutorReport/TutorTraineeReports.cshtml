@@ -4,62 +4,59 @@
     ViewBag.Title = "ToturTraineeReports";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>דיווחים</h2>
-
-<p>
-    @Html.ActionLink("הוסף דיווח", "Create")
-</p>
-<table class="table">
-    <tr>
-        @*TODO: Fix it*@
-        @*<th>
-                @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
-            </th>*@
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHoursBonding)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.IsProblem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="well">
+    <h2>דיווחים</h2>
+    <p>
+        @Html.ActionLink("הוסף דיווח", "Create")
+    </p>
+    <table class="table">
         <tr>
-            @*TODO:FIX it*@
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
-                </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHoursBonding)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.IsProblem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationTime)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
-                @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)|
-                @Html.ActionLink("Details", "Details", "TutorSession", new { id = item.Id }, null)
+            @*TODO: Fix it*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHoursBonding)
+            </th>
 
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.IsProblem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationTime)
+            </th>
+            <th></th>
         </tr>
-    }
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*TODO:FIX it*@
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+                </td>
 
-</table>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsProblem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationTime)
+                </td>
+                <td>
+                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id })|
+                    @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)|
+                    @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new { id = item.Id }, null)
+
+                </td>
+            </tr>
+        }
+    </table>
+</div>

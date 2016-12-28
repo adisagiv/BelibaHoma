@@ -7,55 +7,55 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 }
 
-
- <script src="~/Scripts/ManualMatchAreaSelected.js"></script>
-
-<div class="form-horizontal" style="direction: rtl">
-    <br>
-    <table class="table" class="col-md-6">
-        <tbody>
-            <tr>
-                <td class="table-danger">
-                    משתמשים הצבועים באדום הם בעלי קשרי חניכה פעילים במערכת - 
-                    @Html.ActionLink("להצגת קשרי חונכות", "Index", "TutorTrainee", new { Area = "Rackaz"})
-                </td>
-            </tr>
-            <tr>
-                <td class="table-warning">
-                    משתמשים הצבועים בצהוב הם בעלי המלצה לציוות - 
-                    @Html.ActionLink("להצגת המלצות לציוות", "ApproveMatches", "TutorTrainee", new { Area = "Rackaz" })
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div class="row">
-        <div class="col">
-            <div class="panel panel-default col-md-6">
-                <div class="panel-heading">
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
-                    </div>
-                </div>
-                <div id="trainees-partial">
-                    @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
-                </div>
-            </div>
+<div class="well">
+    <script src="~/Scripts/ManualMatchAreaSelected.js"></script>
+    <div class="form-horizontal" style="direction: rtl">
+        <br>
+        <table class="table" class="col-md-6">
+            <tbody>
+                <tr>
+                    <td class="table-danger">
+                        משתמשים הצבועים באדום הם בעלי קשרי חניכה פעילים במערכת -
+                        @Html.ActionLink("להצגת קשרי חונכות", "Index", "TutorTrainee", new { Area = "Rackaz" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-warning">
+                        משתמשים הצבועים בצהוב הם בעלי המלצה לציוות -
+                        @Html.ActionLink("להצגת המלצות לציוות", "ApproveMatches", "TutorTrainee", new { Area = "Rackaz" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
             <div class="col">
                 <div class="panel panel-default col-md-6">
                     <div class="panel-heading">
                         <div class="checkbox">
-                            <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
+                            <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
                         </div>
                     </div>
-                    <div id="tutors-partial">
-                        @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
+                    <div id="trainees-partial">
+                        @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="panel panel-default col-md-6">
+                        <div class="panel-heading">
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
+                            </div>
+                        </div>
+                        <div id="tutors-partial">
+                            @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-6 col-md-6">
-                <input type="submit" value="בצע ציוות" class="btn btn-default" id="manual-match-submit"/>
+            <div class="form-group">
+                <div class="col-md-offset-6 col-md-6">
+                    <input type="submit" value="בצע ציוות" class="btn btn-default" id="manual-match-submit" />
+                </div>
             </div>
         </div>
     </div>
