@@ -4,9 +4,8 @@
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="well">
+    <h2>ערוך ציון בסמסטר</h2>
 
-
-<h2>ערוך ציון בסמסטר</h2>
-
-
-@Html.Partial("_GradeForm", Model)
+    @Html.Partial("_GradeForm", Model)
+</div>

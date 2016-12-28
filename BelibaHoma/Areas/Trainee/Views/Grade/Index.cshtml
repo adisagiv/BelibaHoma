@@ -5,10 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var grades = Model.Grades;
 }
-
-<h2>@String.Format("ציונים לסטודנט {0}",Model.Trainee.FullName)</h2>
-@*//TODO: to add option of create with traineeId and semester number and order by , send only od of 1 student otherwise the first is not a good referenced to.  , semesterNumber = item.SemesterNumber*@
-<p>
-    @Html.ActionLink("הוסף ציון בסמסטר", "Create", new { traineeId = Model.Trainee.UserId }, null)
-</p>
-@Html.Partial("_GradesList",Model.Grades)
+<div class="well">
+    <h2>@String.Format("ציונים לסטודנט {0}", Model.Trainee.FullName)</h2>
+    @*//TODO: to add option of create with traineeId and semester number and order by , send only od of 1 student otherwise the first is not a good referenced to.  , semesterNumber = item.SemesterNumber*@
+    <p>
+        @Html.ActionLink("הוסף ציון בסמסטר", "Create", new { traineeId = Model.Trainee.UserId }, null)
+    </p>
+    @Html.Partial("_GradesList", Model.Grades)
+</div>
