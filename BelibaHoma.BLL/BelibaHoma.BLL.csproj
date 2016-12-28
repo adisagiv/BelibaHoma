@@ -102,8 +102,11 @@
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Models\AvrGradeStatisticsModel.cs" />
     <Compile Include="Models\InvestedHoursStatisticsModel.cs" />
+    <Compile Include="Interfaces\IAlertService.cs" />
+    <Compile Include="Models\AlertModel.cs" />
     <Compile Include="Models\JoinDropStatisticsModel.cs" />
     <Compile Include="Models\Reports\HighChartJDModel.cs" />
+    <Compile Include="Services\AlertService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Models\HourStatisticsModel.cs" />
     <Compile Include="Interfaces\IGradeService.cs" />

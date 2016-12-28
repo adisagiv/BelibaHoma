@@ -133,10 +133,28 @@
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד משני : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Tutor.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name"), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new { @class = "text-danger" })
+                    @Html.DropDownListFor(model => model.Tutor.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name"), "אנא בחר מסלול לימוד מהרשימה", new {@class = "form-control"})
+                    @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new {@class = "text-danger"})
                 </div>
             </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">שנה בתואר (ותק) :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tutor.AcademicYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tutor.AcademicYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-2">מספר סמסטרים מבחינת התקדמות בתואר :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Tutor.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tutor.SemesterNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <h4>הסעיפים הבאים מתייחסים לרמת החניכה (יח"ל) במקצועות ליבה שיכול החונך לספק </h4>
 
             <div class="form-group">
                 <label class="control-label col-md-2">רמת חניכה בפיזיקה : </label>
@@ -161,21 +179,7 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">שנה בתואר (ותק) :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.AcademicYear, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicYear, "", new { @class = "text-danger" })
-                </div>
-            </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">מספר סמסטרים מבחינת התקדמות בתואר :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.SemesterNumber, "", new { @class = "text-danger" })
-                </div>
-            </div>
             @{
     if (ViewBag.IsCreate != true)
     {
@@ -201,7 +205,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("חזור לרשימה", "לתפריט")
 </div>
 
 

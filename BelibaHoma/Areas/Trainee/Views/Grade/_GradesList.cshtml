@@ -4,6 +4,7 @@
 @{
     var user = ViewBag.CurrentUser as UserModel;
 }
+<div class="well">
 <table class="table">
     <tr>
         <th>
@@ -31,7 +32,8 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.SemesterNumber)
@@ -56,14 +58,15 @@
 
                 if (user != null && (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz))
                 {
-                    @Html.ActionLink("Delete", "Delete", new {id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */}) @Html.Raw(" |")
+                @Html.ActionLink("מחיקה", "Delete", new { id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */}) @Html.Raw(" |")
 
 
                 }
             }
-            @Html.ActionLink("Edit", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })
+                    @Html.ActionLink("עריכה", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
 
 </table>
+</div>

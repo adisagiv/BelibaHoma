@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    <div class="well">
     <div class="form-horizontal" style="direction: rtl">
         @*<h4>דיווח</h4>*@
         <hr />
@@ -50,7 +50,7 @@
 
 
 
-        <div class="form-group">
+    <div class="form-group">
         <label class="control-label col-md-2">סוג סמסטר</label>
         <div class="col-md-10">
             @Html.EnumDropDownListFor(model => model.SemesterType, new { htmlAttributes = new { @class = "form-control" } })
@@ -79,3 +79,4 @@
         </div>
     </div>
 }
+</div>

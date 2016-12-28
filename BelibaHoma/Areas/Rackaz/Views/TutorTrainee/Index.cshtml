@@ -15,7 +15,7 @@
     @Scripts.Render("~/bundles/datatable/js")
     <script src="~/Scripts/tutortrainee-index.js"></script>
 }
-
+<div class="well">
 <h2>קשרי חונכות</h2>
 
 <p>
@@ -25,121 +25,124 @@
 <input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
 <table class="table" id="tutortrainee-table">
     <thead>
-        <tr>
-            <th>
-                שם החונך
-            </th>
-            <th>
-               ת.ז חונך
-            </th>
-            <th>
-               שם החניך
-            </th>
-            <th>
-                ת.ז חניך
-            </th>
-            <th id="is-active">
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+    <tr>
+        <th>
+            שם החונך
+        </th>
+        <th>
+            ת.ז חונך
+        </th>
+        <th>
+            שם החניך
+        </th>
+        <th>
+            ת.ז חניך
+        </th>
+        <th id="is-active">
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
 
-            @{
-                if (ViewBag.IsRackaz != true)
-                {
-                    <th id="is-area">
-                        @Html.DisplayNameFor(model => model.Trainee.User.Area)
-                    </th>
-                }
+        @{
+            if (ViewBag.IsRackaz != true)
+            {
+                <th id="is-area">
+                    @Html.DisplayNameFor(model => model.Trainee.User.Area)
+                </th>
             }
-            <th>
-               ציוות חריג
-            </th>
-            <th id="actions">
-                פעולות
-            </th>
-        </tr>
+        }
+        <th>
+            ציוות חריג
+        </th>
+        <th id="actions">
+            פעולות
+        </th>
+    </tr>
     </thead>
     <tfoot>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Tutor.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trainee.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
 
-            @{
-                if (ViewBag.IsRackaz != true)
-                {
-                    <th>
-                        @Html.DisplayNameFor(model => model.Trainee.User.Area)
-                    </th>
-                }
+        @{
+            if (ViewBag.IsRackaz != true)
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Trainee.User.Area)
+                </th>
             }
-            <th>
-                @Html.DisplayNameFor(model => model.IsException)
-            </th>
-            <th></th>
-        </tr>
+        }
+        <th>
+            @Html.DisplayNameFor(model => model.IsException)
+        </th>
+        <th></th>
+    </tr>
     </tfoot>
     <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tutor.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Trainee.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
-                </td>
-                <td>
-                    @item.Status.ToDescription()
-                </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trainee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+            </td>
+            <td>
+                @item.Status.ToDescription()
+            </td>
 
-                @{
-            if (ViewBag.IsRackaz != true && item.Trainee.User.Area != null)
-            {
-                <td>
-                    @Html.DisplayNameFor(model => model.Trainee.User.Area)
-                </td>
-            }
+            @{
+                if (ViewBag.IsRackaz != true && item.Trainee.User.Area != null)
+                {
+                    <td>
+                        @Html.DisplayNameFor(model => model.Trainee.User.Area)
+                    </td>
                 }
-                <td>
-                    @{
-            if (item.IsException == true)
-            {
-                @String.Format("ציוות חריג");
             }
-            else
-            {
-                @String.Format("");
-            }
+            <td>
+                @{
+                    if (item.IsException == true)
+                    {
+                        @String.Format("ציוות חריג")
+                        ;
                     }
-                </td>
-                <td>
-                    @Html.ActionLink("ערוך פרטי קשר", "Edit", new { Area = "Rackaz", id = item.Id }) |
-                    @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, null)|
-                    @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, null)|
-                    @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id }, null)
+                    else
+                    {
+                        @String.Format("")
+                        ;
+                    }
+                }
+            </td>
+            <td>
+                @Html.ActionLink("ערוך פרטי קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
+                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.Trainee.User.Id}, null)|
+                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.Tutor.User.Id}, null)|
+                @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new {Area = "Tutor", id = item.Id}, null)
 
 
-                </td>
-            </tr>
-        }
+            </td>
+        </tr>
+    }
     </tbody>
 
 </table>
+</div>

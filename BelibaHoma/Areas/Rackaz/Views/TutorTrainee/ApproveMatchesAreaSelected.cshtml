@@ -5,65 +5,64 @@
 
     <link href="~/Content/Site.css" rel="stylesheet"/>
 
-    
+
 <script src="~/Scripts/tutor-trainee-approve.js"></script>
 
+<div class="well">
 
-<h2>קשרי חונכות</h2>
-
-<p>
-    @*//TODO: Make this the actual link to the manual matching interface*@
-    @Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")
-</p>
+    <h2>קשרי חונכות</h2>
+    <p>
+        @*//TODO: Make this the actual link to the manual matching interface*@
+        @Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")
+    </p>
 <table class="table" id="tutortrainee-unapproved-table">
     <thead>
-        <tr>
-            <th>
-                שם החונך
-            </th>
-            <th>
-                ת.ז חונך
-            </th>
-            <th>
-                שם החניך
-            </th>
-            <th>
-                ת.ז חניך
-            </th>
-            <th>
+    <tr>
+        <th>
+            שם החונך
+        </th>
+        <th>
+            ת.ז חונך
+        </th>
+        <th>
+            שם החניך
+        </th>
+        <th>
+            ת.ז חניך
+        </th>
+        <th>
+        </th>
+        <th>
 
-            </th>
-            <th>
-                
-            </th>
-        </tr>
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.MatchesList)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.IdNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.IdNumber)
-                </td>
-                <td>
-                    @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})|
-                    @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id}, new {target = "_blank"})
-                </td>
-                <td>
-                    <a class="btn btn-success btn-sm approve-match" data-tutortraineeid="@item.TutorTrainee.Id">אשר</a> |
-                    <a class="btn btn-danger btn-sm decline-match" data-tutortraineeid="@item.TutorTrainee.Id">דחה</a>
-                </td>
-            </tr>
-        }
+    @foreach (var item in Model.MatchesList)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.IdNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.IdNumber)
+            </td>
+            <td>
+                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})|
+                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id}, new {target = "_blank"})
+            </td>
+            <td>
+                <a class="btn btn-success btn-sm approve-match" data-tutortraineeid="@item.TutorTrainee.Id">אשר</a> |
+                <a class="btn btn-danger btn-sm decline-match" data-tutortraineeid="@item.TutorTrainee.Id">דחה</a>
+            </td>
+        </tr>
+    }
     </tbody>
-
 </table>
+    </div>

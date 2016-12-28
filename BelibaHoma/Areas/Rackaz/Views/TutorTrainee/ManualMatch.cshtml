@@ -18,27 +18,26 @@
     <script src="~/Scripts/bootstrap-confirmation.js"></script>
     <script src="~/Scripts/menualmatch.js"></script>
 }
-
-<h2>ציוות ידני</h2>
-<div class="form-group">
-    <label class="control-label col-md-2">אזור :</label>
-    <div class="col-md-10" id="area-select">
-
-        @{
-            //if is rackaz - cannot select area for the academic institution
-            object attr;
-            if (ViewBag.IsRackaz)
-            {
-                attr = new { @class = "form-control", @disabled = "disabled" };
+<div class="well">
+    <h2>ציוות ידני</h2>
+    <div class="form-group">
+        <label class="control-label col-md-2">אזור :</label>
+        <div class="col-md-10" id="area-select">
+            @{
+                //if is rackaz - cannot select area for the academic institution
+                object attr;
+                if (ViewBag.IsRackaz)
+                {
+                    attr = new { @class = "form-control", @disabled = "disabled" };
+                }
+                else
+                {
+                    attr = new { @class = "form-control" };
+                }
             }
-            else
-            {
-                attr = new { @class = "form-control" };
-            }
-        }
-
-        @Html.EnumDropDownListFor(model => model.Area, attr)
-        <br>
+            @Html.EnumDropDownListFor(model => model.Area, attr)
+            <br>
+        </div>
+        <div class="row" id="area-partial"></div>
     </div>
-    <div class="row" id="area-partial"></div>
 </div>
