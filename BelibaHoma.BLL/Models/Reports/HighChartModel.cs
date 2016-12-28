@@ -11,7 +11,7 @@ namespace BelibaHoma.BLL.Models.Reports
         public Subtitle subtitle { get; set; }
         public Xaxis xAxis { get; set; }
         public Yaxis yAxis { get; set; }
-        public Tooltip tooltip { get; set; }
+        public Tooltip1 tooltip { get; set; }
         public Legend legend { get; set; }
         public List<Series> series { get; set; }
         public Exporting exporting { get; set; }

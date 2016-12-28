@@ -67,11 +67,18 @@ namespace BelibaHoma.BLL.Services
 
                     //Linking the Complexed entities to the retrieved ones
                     entity.TutorReport = TutorReport;
-                    var TutorHoursTemp = entity.StartTime - entity.EndTime;
+                    var TutorHoursTemp = entity.EndTime - entity.StartTime;
                     var Tht = TutorHoursTemp.TotalHours;
-                    entity.TutorReport.TutorHours += Tht;
+                    entity.TutorReport.TutorHours += Tht; ///adding the total tutoring hours to tutorReport 
+                    entity.TutorReport.TutorTrainee.Trainee.TutorHours += (int)Tht; ///adding the total tutoring hours to trainee
+                    entity.TutorReport.TutorTrainee.Tutor.TutorHours += (int)Tht; ///adding the total tutoring hours to tutor
 
-                    entity.TutorReport.TutorHoursBonding += entity.NumBondingHours;
+
+                    entity.TutorReport.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to tutorReport
+                    entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding += (int)entity.NumBondingHours;//adding the total bonding hour to trainee
+                    entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding += (int)entity.NumBondingHours;//adding the total bonding hour to tutor
+
+
                     
                     //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
                     TutorSessionRepository.Add(entity);

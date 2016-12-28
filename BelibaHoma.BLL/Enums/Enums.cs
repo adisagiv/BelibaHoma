@@ -209,7 +209,10 @@ namespace BelibaHoma.BLL.Enums
         Spring = 1,
         [Description("קיץ")]
         [Display(Name = "קיץ")]
-        Summer = 2
+        Summer = 2,
+        [Description("מכינה")]
+        [Display(Name = "מכינה")]
+        Mechina = 3
     }
 
     public enum HourStatisticsType
