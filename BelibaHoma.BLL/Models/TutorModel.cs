@@ -42,7 +42,7 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "מסלול לימוד ראשי")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public AcademicMajorModel AcademicMajor { get; set; }
-
+ 
         [Display(Name = "מסלול לימוד משני")]
         public AcademicMajorModel AcademicMajor1 { get; set; }
 

@@ -7,6 +7,7 @@ using BelibaHoma.BLL.Enums;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.Controllers;
+using Extensions.DateTime;
 using Generic.Models;
 
 
@@ -60,6 +61,7 @@ namespace BelibaHoma.Areas.Admin.Controllers
         public ActionResult Edit(int id, UserModel model)
         {
             var result = _userService.Update(id, model);
+            SetUserUpdate(id, DateTime.MinValue.Utc());
 
             if (result.Success)
             {

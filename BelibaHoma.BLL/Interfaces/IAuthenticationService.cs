@@ -15,5 +15,6 @@ namespace BelibaHoma.BLL.Interfaces
         FormsAuthenticationTicket GetAuthentication(HttpRequestBase request);
 
         StatusModel<long?> GetLastPasswordUpdate(int id);
+        StatusModel<DateTime> GetLastUserUpdate(int id);
     }
 }

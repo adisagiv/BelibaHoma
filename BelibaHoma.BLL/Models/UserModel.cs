@@ -103,6 +103,15 @@ namespace BelibaHoma.BLL.Models
                 {
                     Area = null;
                 }
+
+                if (!String.IsNullOrEmpty(userDetails[5]))
+                {
+                    UpdateTime = userDetails[5].ToDateFromUtc();
+                }
+                else
+                {
+                    UpdateTime = DateTime.MinValue;
+                }
                 
                 IdNumber = ticket.Name;
 

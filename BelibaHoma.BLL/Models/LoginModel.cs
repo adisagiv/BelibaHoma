@@ -14,6 +14,7 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "סיסמא")]
         public string Password { get; set; }
 
+        [Display(Name = "זכור אותי")]
         public bool RememberMe { get; set; }
 
         [HiddenInput(DisplayValue = false)]
