@@ -13,7 +13,7 @@ namespace BelibaHoma.Models
         [Description("סטטיסטיקת הצטרפות ונשירת חניכים")]
         JoinDropStatistics,
 
-        [Description("סטטיסטיקת שעות חניכה לאורך ותק בתוכנית")]
+        [Description("סטטיסטיקת שעות חניכה כתלות בותק בתוכנית")]
         InvestedHoursStatistics,
         
         [Description("סטטיסטיקת ממוצעי ציונים לאורך סמסטרים")]

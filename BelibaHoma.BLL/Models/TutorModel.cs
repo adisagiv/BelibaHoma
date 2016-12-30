@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using BelibaHoma.BLL.Enums;
 using BelibaHoma.DAL;
@@ -84,7 +85,7 @@ namespace BelibaHoma.BLL.Models
         public string FullName { get { return String.Format("{0}, {1}", User.LastName, User.FirstName); } }
 
         //TODO: WHAAAAT? understand what is this and why?
-        //public ICollection<TutorTrainee> TutorTrainee { get; set; }
+        //public List<TutorTrainee> TutorTrainee { get; set; }
 
         public TutorModel(Tutor entity)
             : base(entity)

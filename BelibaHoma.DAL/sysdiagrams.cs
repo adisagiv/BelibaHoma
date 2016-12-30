@@ -12,15 +12,12 @@ namespace BelibaHoma.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Grade
+    public partial class sysdiagrams
     {
-        public int TraineeId { get; set; }
-        public int SemesterNumber { get; set; }
-        public int Grade1 { get; set; }
-        public System.DateTime UpdateDate { get; set; }
-        public int SemesterType { get; set; }
-        public int Year { get; set; }
-    
-        public virtual Trainee Trainee { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

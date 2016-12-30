@@ -25,10 +25,9 @@ namespace BelibaHoma.BLL.Models
         [Required(ErrorMessage = "ממוצע ציונים זה שדה חובה")]
         public int Grade1 { get; set; }
 
-         //TODO: remove comment after year will be added to the database*
-        //[Display(Name = "שנה")]
-        //[Required(ErrorMessage = "שנה זה שדה חובה")]
-        //public int Year { get; set; }
+        [Display(Name = "שנה")]
+        [Required(ErrorMessage = "שנה זה שדה חובה")]
+        public int Year { get; set; }
 
         [Display(Name = "תאריך עדכון")]
         [Required]

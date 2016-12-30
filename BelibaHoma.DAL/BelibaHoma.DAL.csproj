@@ -126,6 +126,9 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\AcademicInstitutionRepository.cs" />
     <Compile Include="Repositories\AcademicMajorRepository.cs" />
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>BelibaHomaModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Trainee.cs">
       <DependentUpon>BelibaHomaModel.tt</DependentUpon>
     </Compile>

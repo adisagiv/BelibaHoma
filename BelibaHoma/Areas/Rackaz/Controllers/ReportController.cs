@@ -277,7 +277,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult GetInvestedHoursStatistics(Area? area)
         {
-            //TODO: if rackaz send area
+            //TODO: if rackaz send area, done, check if works
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
             var result = _reportService.GetInvestedHoursStatistics(area);
 
             if (result.Success)
@@ -306,7 +310,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 for (var i = 0; i <= max; i++)
                 {
                     //pazamList[i] = i.ToString();
-                    pazamList.Add(i.ToString());
+                    var relevantYear = DateTime.Now.Year - max + i;
+                    pazamList.Add(relevantYear.ToString());
                 }
 
 
@@ -406,26 +411,39 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 var series = new List<double>();
                 ///TODO: at the moment we have only 4 semester types, when we'll add years we'll change it..
-                for (var i = 0; i <= 3; i++)
+
+                foreach (var ts in result.Data.AvrGradeStatistics)
                 {
                     var avrGrade = 0.0;
-                    //var month = (i + 10) % 12 + 1;
-
-                    if (result.Data.AvrGradeStatistics.ContainsKey(i))
-                    {
-                        avrGrade = result.Data.AvrGradeStatistics[i];
-                    }
-                   
+                    avrGrade = ts.Value;
                     series.Add(avrGrade);
+
                 }
+                //for (var i = 0; i <= 3; i++)
+                //{
+                //    var avrGrade = 0.0;
+                //    //var month = (i + 10) % 12 + 1;
+
+                //    if (result.Data.AvrGradeStatistics.ContainsKey(i))
+                //    {
+                //        avrGrade = result.Data.AvrGradeStatistics[i];
+                //    }
+
+                //    series.Add(avrGrade);
+                //}
                 //TODO: we'll have to change it to the number of year and semester, now it is just semester type
                 var yearAndSemesterList = new List<string>();
 
-                for (var i = 0; i <= 3; i++)
+                foreach (var ts in result.Data.AvrGradeStatistics)
                 {
-                    yearAndSemesterList.Add(i.ToString());
+                    var i = ts.Key;
+                    yearAndSemesterList.Add(i);
                 }
 
+                //for (var i = 0; i <= 3; i++)
+                //{
+                //    yearAndSemesterList.Add(i.ToString());
+                //}
 
                 var chartModel = new HighChartModel
                 {

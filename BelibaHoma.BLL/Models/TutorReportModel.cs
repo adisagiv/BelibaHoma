@@ -15,8 +15,7 @@ namespace BelibaHoma.BLL.Models
 
         public int TutorTraineeId { get; set; }
 
-        public TutorTrainee TutorTrainee { get; set; }
-
+        public TutorTraineeModel TutorTrainee { get; set; }
 
         [Display(Name = "שעות חונכות")]
         [Required(ErrorMessage = "שעות חונכות זה שדה חובה")]
@@ -33,8 +32,6 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "דרושה התערבות?")]
         //[Required(ErrorMessage = "דרושה התערבות זה שדה חובה")]
         public bool IsProblem { get; set; }
-
-
 
         [Display(Name = "זמן יצירה")]
         [Required(ErrorMessage = "זמן יצירה זה שדה חובה")]

@@ -120,9 +120,9 @@ namespace BelibaHoma.BLL.Services
                         grade.SemesterType = (int)updatedModel.SemesterType;
 
                         //TODO: remove comment after year will be added to the data base
-                        //grade.Year = (int) updatedModel.Year;
+                        grade.Year = (int) updatedModel.Year;
 
-
+                        
                         unitOfWork.SaveChanges();
 
                         status.Success = true;
@@ -241,8 +241,12 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var GradeRepository = unitOfWork.GetRepository<IGradeRepository>();
-
-                    result.Data = GradeRepository.GetAll().Where(trId => trId.TraineeId == id).OrderBy(g=> g.SemesterNumber).ToList().Select(ai => new GradeModel(ai)).ToList();
+                    var grades =
+                        GradeRepository.GetAll()
+                            .Where(trId => trId.TraineeId == id)
+                            .OrderBy(g => g.SemesterNumber)
+                            .ToList();
+                    result.Data = grades.Select(ai => new GradeModel(ai)).ToList();
 
                     result.Success = true;
                 }

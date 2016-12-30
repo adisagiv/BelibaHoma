@@ -240,31 +240,45 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var gradeRepository = unitOfWork.GetRepository<IGradeRepository>();
-
+                        
                     var grades = gradeRepository.GetAll().Where(
-                        t =>(!area.HasValue || t.Trainee.User.Area == (int?)area));
+                        t =>(!area.HasValue || t.Trainee.User.Area == (int?)area)).ToList();
 
                     // TODO: grouping by year and semester type, mean while (till we'll add year to the database:
                     //TODO: now only by semester type
                     //var groupedGrades =
                     //    grades.GroupBy(ts => (ts.Year)).GroupBy(tr=> tr.SemesterType);
-
+                    //var groupedGrades = grades.GroupBy((ts => (ts.Year)) && (tr=> tr.SemesterType));
                     ///only for now
-                    var groupedGrades = grades.GroupBy(ts => ts.SemesterType);
+                    //var partGroupedGrades = grades.GroupBy(ts => ts.SemesterType);
+                    var groupedGrades = grades.GroupBy(tr => tr.Year);
+                    
+                    var dict = new Dictionary<string, double>(); // dictionary of vetek, avg of that vetek.
+                    foreach (var tt in groupedGrades)
+                    {
+                        var groupedGrades2 = tt.GroupBy(ts => ts.SemesterType);
+                        foreach (var tr in groupedGrades2)
+                        {
+                            var avrSumOfGradesInYearSemester = tr.Average(t => t.Grade1);
+                            var key = String.Format("{0}_{1}", tt.Key.GetType(), tr.Key);
+                            dict.Add(key, avrSumOfGradesInYearSemester);
+
+                        }
+                    }
 
                     var thisYear = DateTime.Now.Year;
-                    var dic = new Dictionary<int, double>(); // dictionary of vetek, avg of that vetek.
-                    foreach (var tr in groupedGrades)
-                    {
-                        var avrSumOfGradesInSemester= tr.Average(t => t.Grade1);
-                        ////TODO: we'll have to change it after adding the year
-                        dic.Add(tr.First().SemesterType, avrSumOfGradesInSemester);
-                    }
+                    //var dic = new Dictionary<int, double>(); // dictionary of vetek, avg of that vetek.
+                    //foreach (var tr in groupedGrades)
+                    //{
+                    //    var avrSumOfGradesInSemester= tr.Average(t => t.Grade1);
+                    //    ////TODO: we'll have to change it after adding the year
+                    //    dic.Add(tr.First().SemesterType, avrSumOfGradesInSemester);
+                    //}
 
 
                     result.Data = new AvrGradeStatisticsModel
                     {
-                        AvrGradeStatistics = dic
+                        AvrGradeStatistics = dict
                     };
 
                     result.Success = true;

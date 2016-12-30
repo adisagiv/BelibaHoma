@@ -14,9 +14,9 @@
             @Html.DisplayNameFor(model => model.Grade1)
         </th>
         @*//TODO: remove comment after year will be added to the database*@
-        @*<th>
+        <th>
             @Html.DisplayNameFor(model => model.Year)
-        </th>*@
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.UpdateDate)
         </th>
@@ -42,15 +42,16 @@
             @Html.DisplayFor(modelItem => item.Grade1)
         </td>
         @*//TODO: remove comment after year will be added to the database*@
-        @*<td>
+        <td>
             @Html.DisplayFor(modelItem => item.Year)
-        </td>*@
+        </td>
         
         <td>
             @Html.DisplayFor(modelItem => item.UpdateDate)
         </td>
         <td>
-            @item.SemesterType.ToDescription()
+            @Html.DisplayFor(modelItem => item.SemesterType)
+            @*@item.SemesterType.ToDescription()*@
         </td>
         <td>
             
