@@ -1,5 +1,7 @@
 ﻿$('#trainees-partial-table')
         .DataTable({
+            "scrollX": true,
+            responsive: true,
             initComplete: function () {
                 this.api()
                     .columns()

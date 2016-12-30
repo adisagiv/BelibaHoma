@@ -46,12 +46,11 @@ namespace BelibaHoma.BLL.Services
 
                         alertRepository.Add(alert);
                         unitOfWork.SaveChanges();
-
-                        //If we got here - Yay! :)
-                        status.Success = true;
-                        status.Message = String.Format("ההתרעה עודכנה בהצלחה");
-                        return status;
                     }
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    status.Message = String.Format("ההתרעה עודכנה בהצלחה");
+                    return status;
                 }
             }
             catch (Exception ex)
@@ -95,12 +94,11 @@ namespace BelibaHoma.BLL.Services
 
                         alertRepository.Add(alert);
                         unitOfWork.SaveChanges();
-
-                        //If we got here - Yay! :)
-                        status.Success = true;
-                        status.Message = String.Format("ההתרעה עודכנה בהצלחה");
-                        return status;
                     }
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    status.Message = String.Format("ההתרעה עודכנה בהצלחה");
+                    return status;
                 }
             }
             catch (Exception ex)
@@ -144,12 +142,11 @@ namespace BelibaHoma.BLL.Services
 
                         alertRepository.Add(alert);
                         unitOfWork.SaveChanges();
-
-                        //If we got here - Yay! :)
-                        status.Success = true;
-                        status.Message = String.Format("ההתרעה עודכנה בהצלחה");
-                        return status;
                     }
+                    //If we got here - Yay! :)
+                    status.Success = true;
+                    status.Message = String.Format("ההתרעה עודכנה בהצלחה");
+                    return status;
                 }
             }
             catch (Exception ex)
@@ -306,15 +303,36 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
-                    status.Data = alertRepository.GetAll().Where(a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.LateTutor && (area == null || a.Tutor.User.Area == (int?)area)).OrderBy(a => a.UpdateTime).ToList().Select(a => new AlertModel(a)).ToList();
+                    status.Data = alertRepository.GetAll().Where(a => a.Status != (int)AlertStatus.Cloesd && a.AlertType == (int)AlertType.LateTutor && (area == null || a.Tutor.User.Area == (int?)area)).OrderBy(a => a.Status).ThenBy(a => a.UpdateTime).ToList().Select(a => new AlertModel(a)).ToList();
 
+                    foreach (var alert in status.Data)
+                    {
+                        DateTime? lastReportTime = null;
+                        if (alert.Tutor != null)
+                        {
+                            var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                            var tutorId = alert.Tutor.UserId;
+                            var tutor =
+                                tutorRepository.FirstOrDefault(t => t.UserId == tutorId);
+                            var tutorTrainee = tutor.TutorTrainee;
+                            var creationTimes = tutorTrainee.SelectMany(
+                                            tt => tt.TutorReport.Select(tr => tr.CreationTime));
+                            if (creationTimes.Count() > 0)
+                            {
+                                lastReportTime = creationTimes.OrderByDescending(ct => ct).FirstOrDefault();    
+                            }
+                            
+                        }
+                        alert.LastReportTime = lastReportTime;
+                        
+                    }
                     //If we got here - Yay!!
                     status.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך שליפת התרעות עבור ציוני חניכים ממסד הנתונים");
+                status.Message = String.Format("שגיאה במהלך שליפת התרעות עבור חונכים המאחרים בדיווח ממסד הנתונים");
                 LogService.Logger.Error(status.Message, ex);
             }
             return status;

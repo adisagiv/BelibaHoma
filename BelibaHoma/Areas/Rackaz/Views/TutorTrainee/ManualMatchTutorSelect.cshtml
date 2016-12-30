@@ -10,92 +10,90 @@
 <script src="~/Scripts/ManualMatchTutorSelect.js"></script>
 
 
-<div class="well">
-    <h2>חונכים</h2>
-    <table class="table" id="tutors-partial-table">
-        <thead>
-            <tr>
-                <th>
-                    בחר חונך
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
-                </th>
-                <th>
-                    פרטים נוספים
-                </th>
-                <th class="hidden"></th>
+<h2>חונכים</h2>
+<table class="table" id="tutors-partial-table">
+    <thead>
+        <tr>
+            <th>
+                בחר חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
+            </th>
+            <th>
+                פרטים נוספים
+            </th>
+            <th class="hidden"></th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                בחר חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
+            </th>
+            <th></th>
+            <th class="hidden"></th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="@(item.IsMatchedCount > 0 ? "table-danger" : (item.IsUnAuthMatch > 0 ? "table-warning" : ""))">
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="ChooseTutor" id="tutor_@item.Tutor.UserId" value="@item.Tutor.UserId">
+                    </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tutor.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tutor.AcademicInstitution.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor1.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("פרטים", "Details", "Tutor", new { Area = "Tutor", id = @item.Tutor.UserId }, new { target = "_blank" })
+                </td>
+                <td class="hidden">
+                    <input name="tutor-matched-count-@item.Tutor.UserId" id="tutor-matched-count-@item.Tutor.UserId" value=@item.IsMatchedCount />
+                    <input name="tutor-unapproved-@item.Tutor.UserId" id="tutor-unapproved-@item.Tutor.UserId" value=@item.IsUnAuthMatch />
+                </td>
             </tr>
-        </thead>
-        <tfoot>
-            <tr>
-                <th>
-                    בחר חונך
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicInstitution)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicMajor)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
-                </th>
-                <th></th>
-                <th class="hidden"></th>
-            </tr>
-        </tfoot>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr class="@(item.IsMatchedCount > 0 ? "table-danger" : (item.IsUnAuthMatch > 0 ? "table-warning" : ""))">
-                    <td>
-                        <label class="radio-inline">
-                            <input type="radio" name="ChooseTutor" id="tutor_@item.Tutor.UserId" value="@item.Tutor.UserId">
-                        </label>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.AcademicInstitution.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor1.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("פרטים", "Details", "Tutor", new { Area = "Tutor", id = @item.Tutor.UserId }, new { target = "_blank" })
-                    </td>
-                    <td class="hidden">
-                        <input name="tutor-matched-count-@item.Tutor.UserId" id="tutor-matched-count-@item.Tutor.UserId" value=@item.IsMatchedCount />
-                        <input name="tutor-unapproved-@item.Tutor.UserId" id="tutor-unapproved-@item.Tutor.UserId" value=@item.IsUnAuthMatch />
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+        }
+    </tbody>
+</table>
