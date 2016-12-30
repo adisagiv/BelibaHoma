@@ -11,7 +11,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    <div class="well">
+    
         <div class="form-horizontal" style="direction: rtl">
             <form autocomplete="off">
                 <hr />
@@ -99,4 +99,3 @@
         <div>
             @Html.ActionLink("חזור", "Index", new {Area = "Rackaz"})
         </div>
-</div>

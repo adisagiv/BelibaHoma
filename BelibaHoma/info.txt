@@ -2856,3 +2856,112 @@ Invalid column name 'LinkedReportId'.
 2016-12-30 11:17:57,943 [6] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
 System.Exception: ????? ????? ????? ?????? ???? ???? ???? ??????
    at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:21:28,231 [7] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:26:25,000 [22] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:26:33,055 [21] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:27:36,972 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 107
+2016-12-30 12:27:37,023 [6] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 107
+2016-12-30 12:27:50,439 [12] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:31:18,617 [11] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:33:07,269 [6] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:35:38,302 [7] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:52:00,834 [9] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 12:57:06,506 [12] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 13:45:56,992 [8] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 13:46:00,973 [6] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 13:54:16,323 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 13:54:40,863 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:01:12,737 [23] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:06:18,694 [29] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:13:27,972 [34] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 14:19:36,166 [34] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:27:19,807 [25] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:32:15,595 [7] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:36:18,978 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:36:34,210 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:40:52,255 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:42:44,840 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:43:11,676 [7] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:43:26,816 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:44:17,640 [6] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 14:57:49,251 [28] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 15:02:40,681 [23] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2016-12-30 15:05:55,580 [8] ERROR Services.Log.LogService - ????? ????? ????? ???? ???????
+System.ArgumentException: User is Admin but Area is initialized
+Parameter name: model
+   at BelibaHoma.BLL.Services.UserService.Update(Int32 id, UserModel updatedModel) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\UserService.cs:line 118
+2016-12-30 15:06:17,076 [9] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
+System.Exception
+   at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
