@@ -45,7 +45,7 @@
     <div class="row">
         <select class="form-control" id="Report" name="Report">
             <option>אנא בחר בדו"ח הרצוי</option>
-            @foreach (ReportType type in Enum.GetValues(typeof(ReportType)))
+            @foreach (ReportType type in Enum.GetValues(typeof (ReportType)))
             {
                 <option value="@type.ToString()">@type.ToDescription()</option>
             }
@@ -53,3 +53,4 @@
     </div>
     <div class="row" id="report-partial"></div>
 </div>
+
