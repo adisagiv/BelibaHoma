@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
+using Extensions.DateTime;
 using Generic.Models;
 using Services.Log;
 
@@ -36,6 +37,7 @@ namespace BelibaHoma.Controllers
             {
                 var cookie = _authenticationService.CreateAuthenticationTicket(result.Data, model.RememberMe);
                 Response.Cookies.Add(cookie);
+                SetUserUpdate(result.Data.Id, result.Data.UpdateTime.Utc());
                 if (model.UrlRedirect == null)
                 {
                     model.UrlRedirect = String.Format("/{0}/Home", result.Data.UserRole.ToString());

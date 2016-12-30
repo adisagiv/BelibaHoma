@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
@@ -52,7 +53,7 @@ namespace BelibaHoma.BLL.Services
         {
             try
             {
-                string[] userDetailsArray = new string[] { user.LastPasswordUpdate == null ? user.LastPasswordUpdate.ToString() : user.LastPasswordUpdate.Value.ToString(), user.UserRole.ToString(), user.LastName, user.FirstName, user.Area.ToString() };
+                string[] userDetailsArray = new string[] { user.LastPasswordUpdate == null ? user.LastPasswordUpdate.ToString() : user.LastPasswordUpdate.Value.ToString(), user.UserRole.ToString(), user.LastName, user.FirstName, user.Area.ToString(), user.UpdateTime.Utc().ToString() };
                 string userDetails = CreateDetailsString(userDetailsArray);
 
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
@@ -123,6 +124,36 @@ namespace BelibaHoma.BLL.Services
                     {
 
                         result = new StatusModel<long?>(true, "", userEntity.LastPasswordUpdate);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //  TODO : Handle exception
+                result.Success = false;
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
+        }
+
+        public StatusModel<DateTime> GetLastUserUpdate(int id)
+        {
+            var result = new StatusModel<DateTime>(false, string.Empty, DateTime.MinValue);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+
+                    var userEntity = userRepository.GetByKey(id);
+
+                    if (userEntity != null)
+                    {
+
+                        result = new StatusModel<DateTime>(true, "", userEntity.UpdateTime);
                     }
                 }
             }

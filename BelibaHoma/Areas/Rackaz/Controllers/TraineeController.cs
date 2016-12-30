@@ -10,6 +10,7 @@ using BelibaHoma.BLL.Models;
 using BelibaHoma.Controllers;
 using BelibaHoma.DAL;
 using BelibaHoma.DAL.Repositories;
+using Extensions.DateTime;
 using Generic.Models;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
@@ -141,6 +142,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Edit(int id, TraineeModel model)
         {
             var result = _traineeService.Update(id, model);
+            SetUserUpdate(id, DateTime.MinValue.Utc());
             //The return status check is performed in trainee script
             return Json(result);
         }

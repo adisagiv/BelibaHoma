@@ -98,7 +98,7 @@ namespace BelibaHoma.BLL.Services
         /// <returns></returns>
         public StatusModel Update(int id, UserModel updatedModel)
         {
-            var status = new StatusModel(false, String.Empty);
+            var status = new StatusModel<DateTime>(false, String.Empty, DateTime.MinValue);
 
             try
             {
@@ -135,6 +135,7 @@ namespace BelibaHoma.BLL.Services
 
                         status.Success = true;
                         status.Message = String.Format("פרטי המתשמש {0} עודכנו בהצלחה", updatedModel.FullName);
+                        status.Data = user.UpdateTime;
                     }
                 }
             }

@@ -9,6 +9,7 @@ using System.Web.Security;
 using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
+using Extensions.DateTime;
 using Generic.Models;
 using Ninject;
 
@@ -19,6 +20,7 @@ namespace BelibaHoma.Controllers
         private readonly IAuthenticationService _authenticationService;
         private UserModel _currentUser;
         private static readonly Dictionary<int, long?> LastPasswordsUpdate = new Dictionary<int, long?>();
+        private static readonly  Dictionary<int,long> LastUserUpdate = new Dictionary<int, long>(); 
         
         #region protected
         protected UserModel CurrentUser
@@ -41,45 +43,94 @@ namespace BelibaHoma.Controllers
 
             if (authTicket != null)
             {
-                _currentUser = new UserModel(authTicket);
-
-                long? updatedPassword =  null;
-
-                if (LastPasswordsUpdate.ContainsKey(CurrentUser.Id))
+                try
                 {
-                    updatedPassword = LastPasswordsUpdate[CurrentUser.Id];
-                }
-                else
-                {
-                    var status  = _authenticationService.GetLastPasswordUpdate(CurrentUser.Id);
+                    _currentUser = new UserModel(authTicket);
+                    long? updatedPassword = null;
+                    long lastUserUpdate;
 
-                    if (status.Success)
+                    if (LastPasswordsUpdate.ContainsKey(CurrentUser.Id))
                     {
-                        updatedPassword = status.Data;
-                        
+                        updatedPassword = LastPasswordsUpdate[CurrentUser.Id];
                     }
                     else
                     {
-                        updatedPassword = null;
+                        var status = _authenticationService.GetLastPasswordUpdate(CurrentUser.Id);
+
+                        if (status.Success)
+                        {
+                            updatedPassword = status.Data;
+
+                        }
+                        else
+                        {
+                            updatedPassword = null;
+                        }
+
+                        SetUserLastPasswordUpdate(CurrentUser.Id, updatedPassword);
                     }
 
-                    SetUserLastPasswordUpdate(CurrentUser.Id, updatedPassword);
-                }
+                    if (LastUserUpdate.ContainsKey(CurrentUser.Id))
+                    {
+                        lastUserUpdate = LastUserUpdate[CurrentUser.Id];
+                    }
+                    else
+                    {
+                        var status = _authenticationService.GetLastUserUpdate(CurrentUser.Id);
+
+                        if (status.Success)
+                        {
+                            lastUserUpdate = status.Data.Utc();
+
+                        }
+                        else
+                        {
+                            lastUserUpdate = DateTime.MinValue.Utc();
+                        }
+
+                        SetUserUpdate(CurrentUser.Id, lastUserUpdate);
+                    }
 
                     // TODO : Add _lastPasswordsUpdate to cookie as unix time to check next time user enter site need to reset password
-                if (updatedPassword == null && !filterContext.IsChildAction && !(filterContext.ActionDescriptor.ActionName == "Index" && filterContext.ActionDescriptor.ControllerDescriptor.ControllerName == "ChangePassword"))
-                {
-                    filterContext.Result = new RedirectToRouteResult(
-                        new RouteValueDictionary
+                    if (updatedPassword == null && !filterContext.IsChildAction && !(filterContext.ActionDescriptor.ActionName == "Index" && filterContext.ActionDescriptor.ControllerDescriptor.ControllerName == "ChangePassword"))
+                    {
+                        filterContext.Result = new RedirectToRouteResult(
+                            new RouteValueDictionary
                         {
                             {"controller", "ChangePassword"},
                             {"action", "Index"},
                             { "area" , ""}
                         });
-                }
+                    }
 
-                if (updatedPassword != null && updatedPassword != CurrentUser.LastPasswordUpdate)
+                    if (updatedPassword != null && updatedPassword != CurrentUser.LastPasswordUpdate ||
+                        lastUserUpdate == DateTime.MinValue.Utc() || lastUserUpdate != CurrentUser.UpdateTime.Utc())
+                    {
+                        RemoveAuthCookie();
+
+                        filterContext.Result = new RedirectToRouteResult(
+                            new RouteValueDictionary
+                        {
+                            {"controller", "Login"},
+                            {"action", "Index"},
+                            { "area" , ""}
+                        });
+                    }
+
+
+                    ViewBag.CurrentUser = CurrentUser;
+                    if (CurrentUser.UserRole == UserRole.Rackaz)
+                    {
+                        ViewBag.IsRackaz = true;
+                    }
+                    else
+                    {
+                        ViewBag.IsRackaz = false;
+                    }
+                }
+                catch (Exception)
                 {
+                    // if we can't parse user we send him to login page
                     RemoveAuthCookie();
 
                     filterContext.Result = new RedirectToRouteResult(
@@ -90,22 +141,13 @@ namespace BelibaHoma.Controllers
                             { "area" , ""}
                         });
                 }
-                
-
-                ViewBag.CurrentUser = CurrentUser;
-                if (CurrentUser.UserRole == UserRole.Rackaz)
-                {
-                    ViewBag.IsRackaz = true;
             }
-                else
-                {
-                    ViewBag.IsRackaz = false;
-                }
-            }
-           
-
-
             base.OnActionExecuting(filterContext);
+        }
+
+        protected void SetUserUpdate(int id, long lastUserUpdate)
+        {
+            LastUserUpdate[id] = lastUserUpdate;
         }
 
         protected void SetUserLastPasswordUpdate(int id, long? passwordUpdate = null)

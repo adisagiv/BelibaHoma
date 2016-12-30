@@ -36,14 +36,24 @@ namespace BelibaHoma
 
             if (authenticationLevel != null)
             {
-                var user = new UserModel(authenticationLevel);
+                try
+                {
+                    var user = new UserModel(authenticationLevel);
+                    if (UserRoles.Contains(user.UserRole))
+                    {
+
+                        return true;
+                    }
+                }
+                catch (Exception)
+                {
+                    // if we can't parse the cookie we send the user to login
+                    return false;
+                }
+                
 
                // _logger.Info(String.Format("after getting user from auth id:{0}, name: {1}", login_model.ID, login_model.CellPhone));
-                if (UserRoles.Contains(user.UserRole))
-                {
-
-                    return true;
-                }
+                
             }
 
             return false;
