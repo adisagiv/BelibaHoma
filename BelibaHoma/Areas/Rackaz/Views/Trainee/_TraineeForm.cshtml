@@ -130,7 +130,7 @@
         <div class="form-group">
                 <label class="control-label col-md-2">מוסד אקדמי : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Trainee.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name"), "אנא בחר מוסד אקדמי מהרשימה", new {@class = "form-control"})
+                    @Html.DropDownListFor(model => model.Trainee.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name", Model.Trainee.AcademicInstitution != null ? Model.Trainee.AcademicInstitution.Id : (int?)null), "אנא בחר מוסד אקדמי מהרשימה", new {@class = "form-control"})
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicInstitution, "", new {@class = "text-danger"})
                     @*<button class="btn" id="create-new-academic">הוסף מוסד אקדמי</button>*@
                 </div>
@@ -141,7 +141,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד ראשי : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor, new SelectList(Model.AcademicMajorList, "Id", "Name"), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Trainee.AcademicMajor != null ? Model.Trainee.AcademicMajor.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -149,7 +149,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד משני : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name"), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Trainee.AcademicMajor1 != null ? Model.Trainee.AcademicMajor1.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor1, "", new {@class = "text-danger"})
                 </div>
             </div>
@@ -157,7 +157,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד נוסף בו נדרשת חניכה : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor2, new SelectList(Model.AcademicMajorList, "Id", "Name"), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.Trainee.AcademicMajor2, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Trainee.AcademicMajor2 != null ? Model.Trainee.AcademicMajor2.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor2, "", new {@class = "text-danger"})
                 </div>
             </div>
