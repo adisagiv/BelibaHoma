@@ -9,7 +9,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    <div class="well">
     <div class="form-horizontal" style="direction: rtl">
         @*<h4>משרה</h4>*@
         <hr />
@@ -35,7 +35,6 @@
                 @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">זמן סיום המפגש : </label>
             <div class="col-md-10">
@@ -43,7 +42,6 @@
                 @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">מספר שעות חברותה : </label>
             <div class="col-md-10">
@@ -53,7 +51,9 @@
         </div>
         @*<input type="hidden"
                value="TutorReportId">*@
-        <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId" />
+        <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId"/>
+
+        @Html.HiddenFor(model=> model.TutorReport.TutorTraineeId)
         
         @*TODO: add this to the model by the given parameters from tutorReport*@ 
         @*<div class="form-group">
@@ -63,25 +63,22 @@
                 @Html.ValidationMessageFor(model => model.TutorReportId, "", new { @class = "text-danger" })
             </div>
         </div>*@
-
         <div class="form-group">
             <label class="control-label col-md-2">מקום המפגש : </label>
             <div class="col-md-10">
                 @Html.EditorFor(model => model.MeetingPlace, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.MeetingPlace, "", new { @class = "text-danger" })
-
             </div>
         </div>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
-
 }
 
 @*<div>
         @Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })
     </div>*@
+</div>

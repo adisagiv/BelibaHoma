@@ -4,43 +4,38 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>קשרי חונכות</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Trainee.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsException)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="well">
+    <h2>קשרי חונכות</h2>
+    <table class="table">
         <tr>
-
-            <td>
-                @Html.DisplayFor(modelItem => item.Trainee.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsException)
-            </td>
-
-            <td>
-                @Html.ActionLink("TutorTraineeReports", "TutorTraineeReports", "TutorReport", new {id = item.Id}, null)|
-                @Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)
-
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Trainee.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsException)
+            </th>
+            <th></th>
         </tr>
-    }
-
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Trainee.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsException)
+                </td>
+                <td>
+                    @Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)|
+                    @Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

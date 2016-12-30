@@ -31,6 +31,10 @@
           <Property Name="UpdateTime" Type="datetime" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
           <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="AlertType" Type="int" Nullable="false" />
+          <Property Name="LinkedTutorId" Type="int" />
+          <Property Name="LinkedTraineeId" Type="int" />
+          <Property Name="LinkedReportId" Type="int" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -163,6 +167,42 @@
           <Property Name="Area" Type="int" />
           <Property Name="LastPasswordUpdate" Type="bigint" />
         </EntityType>
+        <Association Name="FK_Alert_Trainee">
+          <End Role="Trainee" Type="Self.Trainee" Multiplicity="0..1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedTraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Tutor">
+          <End Role="Tutor" Type="Self.Tutor" Multiplicity="0..1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedTutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_TutorReport">
+          <End Role="TutorReport" Type="Self.TutorReport" Multiplicity="0..1" />
+          <End Role="Alert" Type="Self.Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Grade_Trainee">
           <End Role="Trainee" Type="Self.Trainee" Multiplicity="1" />
           <End Role="Grade" Type="Self.Grade" Multiplicity="*" />
@@ -379,6 +419,18 @@
           <EntitySet Name="TutorSession" EntityType="Self.TutorSession" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorTrainee" EntityType="Self.TutorTrainee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alert_Trainee" Association="Self.FK_Alert_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Tutor" Association="Self.FK_Alert_Tutor">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_TutorReport" Association="Self.FK_Alert_TutorReport">
+            <End Role="TutorReport" EntitySet="TutorReport" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
           <AssociationSet Name="FK_Grade_Trainee" Association="Self.FK_Grade_Trainee">
             <End Role="Trainee" EntitySet="Trainee" />
             <End Role="Grade" EntitySet="Grade" />
@@ -504,6 +556,18 @@
             <End Role="AcademicMajor" EntitySet="AcademicMajor" />
             <End Role="Tutor" EntitySet="Tutor" />
           </AssociationSet>
+          <AssociationSet Name="FK_Alert_Trainee" Association="BelibaHomaDBModel.FK_Alert_Trainee">
+            <End Role="Trainee" EntitySet="Trainee" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_Tutor" Association="BelibaHomaDBModel.FK_Alert_Tutor">
+            <End Role="Tutor" EntitySet="Tutor" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Alert_TutorReport" Association="BelibaHomaDBModel.FK_Alert_TutorReport">
+            <End Role="TutorReport" EntitySet="TutorReport" />
+            <End Role="Alert" EntitySet="Alert" />
+          </AssociationSet>
           <AssociationSet Name="FK_Grade_Trainee" Association="BelibaHomaDBModel.FK_Grade_Trainee">
             <End Role="Trainee" EntitySet="Trainee" />
             <End Role="Grade" EntitySet="Grade" />
@@ -569,6 +633,13 @@
           <Property Name="UpdateTime" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Status" Type="Int32" Nullable="false" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AlertType" Type="Int32" Nullable="false" />
+          <Property Name="LinkedTutorId" Type="Int32" />
+          <Property Name="LinkedTraineeId" Type="Int32" />
+          <Property Name="LinkedReportId" Type="Int32" />
+          <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_Alert_Trainee" FromRole="Alert" ToRole="Trainee" />
+          <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_Alert_Tutor" FromRole="Alert" ToRole="Tutor" />
+          <NavigationProperty Name="TutorReport" Relationship="BelibaHomaDBModel.FK_Alert_TutorReport" FromRole="Alert" ToRole="TutorReport" />
         </EntityType>
         <EntityType Name="Grade">
           <Key>
@@ -637,6 +708,7 @@
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor2" FromRole="Trainee" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_Trainee_AcademicMajor3" FromRole="Trainee" ToRole="AcademicMajor" />
+          <NavigationProperty Name="Alert" Relationship="BelibaHomaDBModel.FK_Alert_Trainee" FromRole="Trainee" ToRole="Alert" />
           <NavigationProperty Name="Grade" Relationship="BelibaHomaDBModel.FK_Grade_Trainee" FromRole="Trainee" ToRole="Grade" />
           <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Trainee_User1" FromRole="Trainee" ToRole="User" />
           <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="Trainee" ToRole="TutorTrainee" />
@@ -663,6 +735,7 @@
           <NavigationProperty Name="AcademicInstitution" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" FromRole="Tutor" ToRole="AcademicInstitution" />
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor" FromRole="Tutor" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_Tutor_AcademicMajor1" FromRole="Tutor" ToRole="AcademicMajor" />
+          <NavigationProperty Name="Alert" Relationship="BelibaHomaDBModel.FK_Alert_Tutor" FromRole="Tutor" ToRole="Alert" />
           <NavigationProperty Name="User" Relationship="BelibaHomaDBModel.FK_Tutor_User" FromRole="Tutor" ToRole="User" />
           <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="Tutor" ToRole="TutorTrainee" />
         </EntityType>
@@ -677,6 +750,7 @@
           <Property Name="MeetingsDescription" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IsProblem" Type="Boolean" Nullable="false" />
           <Property Name="CreationTime" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Alert" Relationship="BelibaHomaDBModel.FK_Alert_TutorReport" FromRole="TutorReport" ToRole="Alert" />
           <NavigationProperty Name="TutorTrainee" Relationship="BelibaHomaDBModel.FK_TutorReport_TutorTrainee" FromRole="TutorReport" ToRole="TutorTrainee" />
           <NavigationProperty Name="TutorSession" Relationship="BelibaHomaDBModel.FK_TutorSession_TutorReport" FromRole="TutorReport" ToRole="TutorSession" />
         </EntityType>
@@ -845,6 +919,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Alert_Trainee">
+          <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainee">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedTraineeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_Tutor">
+          <End Type="BelibaHomaDBModel.Tutor" Role="Tutor" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tutor">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedTutorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Alert_TutorReport">
+          <End Type="BelibaHomaDBModel.TutorReport" Role="TutorReport" Multiplicity="0..1" />
+          <End Type="BelibaHomaDBModel.Alert" Role="Alert" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TutorReport">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Alert">
+              <PropertyRef Name="LinkedReportId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Grade_Trainee">
           <End Type="BelibaHomaDBModel.Trainee" Role="Trainee" Multiplicity="1" />
           <End Type="BelibaHomaDBModel.Grade" Role="Grade" Multiplicity="*" />
@@ -957,6 +1067,10 @@
           <EntitySetMapping Name="Alert">
             <EntityTypeMapping TypeName="BelibaHomaDBModel.Alert">
               <MappingFragment StoreEntitySet="Alert">
+                <ScalarProperty Name="LinkedReportId" ColumnName="LinkedReportId" />
+                <ScalarProperty Name="LinkedTraineeId" ColumnName="LinkedTraineeId" />
+                <ScalarProperty Name="LinkedTutorId" ColumnName="LinkedTutorId" />
+                <ScalarProperty Name="AlertType" ColumnName="AlertType" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />

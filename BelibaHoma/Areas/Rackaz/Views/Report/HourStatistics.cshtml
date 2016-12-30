@@ -2,45 +2,43 @@
 @{
     Layout = null;
 }
-
-<hr/>
-<div class="row" style="direction: rtl">
-    <div class="form-group col-md-5">
-        <label class="control-label col-md-2">שנה :</label>
-        <div class="col-md-10">
-            <select class="form-control valid" id="year">
-                @{
-                    foreach (var year in Model)
-                    {
-                        <option value="@year">@year.ToString()</option>
+<div class="well">
+    <hr />
+    <div class="row" style="direction: rtl">
+        <div class="form-group col-md-5">
+            <label class="control-label col-md-2">שנה :</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="year">
+                    @{
+                        foreach (var year in Model)
+                        {
+                            <option value="@year">@year.ToString()</option>
+                        }
                     }
-                }
-                
-            </select>
-     
+
+                </select>
+
+            </div>
+        </div>
+        <div class="form-group col-md-5">
+            <label class="control-label col-md-2">סוג :</label>
+            <div class="col-md-10">
+                <select class="form-control valid" id="hour-type">
+                    <option value="0">סכום שעות</option>
+                    <option value="1">ממוצע שעות</option>
+                </select>
+                <span class="text-danger field-validation-valid" data-valmsg-for="AcademicCluster" data-valmsg-replace="true"></span>
+            </div>
+        </div>
+        <div class="form-group col-md-2">
+            <div class="col-md-offset-2 col-md-10">
+                <input id="get-hour-statistics" type="submit" value="הצג גרף" class="btn btn-default">
+            </div>
         </div>
     </div>
-    <div class="form-group col-md-5">
-        <label class="control-label col-md-2">סוג :</label>
-        <div class="col-md-10">
-            <select class="form-control valid" id="hour-type">
-                <option value="0">סכום שעות</option>
-                <option value="1">ממוצע שעות</option>
-            </select>
-            <span class="text-danger field-validation-valid" data-valmsg-for="AcademicCluster" data-valmsg-replace="true"></span>
-        </div>
-    </div>
-    <div class="form-group col-md-2">
-        <div class="col-md-offset-2 col-md-10">
-            <input id="get-hour-statistics" type="submit" value="הצג גרף" class="btn btn-default">
-        </div>
-    </div>
+
+    @* Graph Container *@
+    <div id="container"></div>
+    @* Graph report scripts *@
+    <script src="~/Scripts/reports/hour-statistics.js"></script>
 </div>
-
-
-
-@* Graph Container *@
-<div id="container"></div>
-
-@* Graph report scripts *@
-<script src="~/Scripts/reports/hour-statistics.js"></script>

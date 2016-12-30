@@ -4,44 +4,62 @@
     ViewBag.Title = "RunAlgorithm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="well">
+    <h2>הרצת אלגוריתם השידוך</h2>
 
-<h2>RunAlgorithm</h2>
-
-@section scripts{
-<script src="~/Scripts/RunAlgorithm.js"></script>
- 
-}
-
-@using (Html.BeginForm())
-    {
-<div class="form-group">
-    <label class="control-label col-md-2">אזור :</label>
-    <div class="col-md-10">
-        @{
-            //if is rackaz - cannot select area for the academic institution
-            object attr;
-            if (ViewBag.IsRackaz)
-            {
-                attr = new {@class = "form-control", @disabled = "disabled"};
-            }
-            else
-            {
-                attr = new {@class = "form-control"};
-            }
-        }
-        @Html.EnumDropDownListFor(model => model.Area, attr)
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="בחר" class="btn btn-default" id="submit-and-run"/>
-        </div>
-    </div>
-</div>
-
-
+    @section scripts{
+        <script src="~/Scripts/RunAlgorithm.js"></script>
 
     }
-    
 
-
-
+    @using (Html.BeginForm())
+    {
+        <div class="row">
+            <div class="form-group" id="run-algorithm-form">
+                <label class="control-label col-md-2">אזור :</label>
+                <div class="col-md-10">
+                    @{
+        //if is rackaz - cannot select area for the academic institution
+        object attr;
+        if (ViewBag.IsRackaz)
+        {
+            attr = new { @class = "form-control", @disabled = "disabled" };
+        }
+        else
+        {
+            attr = new { @class = "form-control" };
+        }
+                    }
+                    @Html.EnumDropDownListFor(model => model.Area, attr)
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="בחר" class="btn btn-default" id="submit-and-run" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row hidden" id="after-run">
+        <div>
+            <center>
+                <h1>האלגוריתם הסתיים בהצלחה!</h1>
+            </center>
+        </div>
+        <div>
+            <h4>
+                למעבר להמלצות האלגוריתם
+                <a class="btn btn-success" href="/Rackaz/TutorTrainee/ApproveMatches">לחץ כאן</a>
+            </h4>
+        </div>
+        <div class="hidden" id="unmatched">
+            <h4>
+                קיימים במערכת חניכים ו/או חונכים עבורם לא נמצאה המלצה. למעבר לשידוך ידני
+                <a href="/Rackaz/TutorTrainee/ManualMatch" class="btn btn-warning">לחץ כאן</a>
+            </h4>
+        </div>
+    </div>
+    <div class="hidden" id="run-failure">
+        <center>נכשלה ריצת האלגוריתם.</center>
+    </div>
+</div>

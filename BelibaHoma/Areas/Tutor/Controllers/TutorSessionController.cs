@@ -9,6 +9,7 @@ using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
 using Generic.GenericModel.Models;
 using BelibaHoma.Controllers;
+using BelibaHoma.DAL;
 using Generic.Models;
 
 namespace BelibaHoma.Areas.Tutor.Controllers
@@ -45,7 +46,11 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             {
                 var model = new TutorSessionModel
                 {
-                    TutorReportId = id
+                    TutorReportId = id,
+                    TutorReport = new TutorReport
+                    {
+                        TutorTraineeId = status.Data.TutorTraineeId
+                    }
                 };
                 return View(model);
             }
@@ -57,10 +62,12 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         public ActionResult Create(TutorSessionModel model)
         {
             var result = _TutorSessionService.Add(model);
-
+            var tutorTraineeId = model.TutorReport.TutorTraineeId;
+            
             if (result.Success)
             {
-                return RedirectToAction("Index","TutorReport");
+                ViewBag.TutorTraineeId = tutorTraineeId;
+                return RedirectToAction("TutorTraineeReports", "TutorReport", new { id = tutorTraineeId });
             }
             var status = new StatusModel(false, result.Message);
             return Error(status);

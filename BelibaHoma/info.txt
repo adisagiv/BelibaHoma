@@ -1912,3 +1912,10 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Core.Objects.ObjectContext.TryGetObjectByKey(EntityKey key, Object& value)
    at Catel.Data.Repositories.EntityRepositoryBase`2.GetByKey(TPrimaryKey keyValue) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Repositories\EntityRepositoryBase.cs:line 70
    at BelibaHoma.BLL.Services.AuthenticationService.GetLastPasswordUpdate(Int32 id) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AuthenticationService.cs:line 120
+2016-12-27 19:34:45,058 [7] ERROR Services.Log.LogService - ????? ????? ????? ????
+System.Data.Entity.Validation.DbEntityValidationException: Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+   at System.Data.Entity.Internal.InternalContext.SaveChanges()
+   at System.Data.Entity.Internal.LazyInternalContext.SaveChanges()
+   at System.Data.Entity.DbContext.SaveChanges()
+   at Catel.Data.UnitOfWork.SaveChanges() in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Data\UnitOfWork.cs:line 330
+   at BelibaHoma.BLL.Services.TraineeService.Add(TraineeModel model) in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 137

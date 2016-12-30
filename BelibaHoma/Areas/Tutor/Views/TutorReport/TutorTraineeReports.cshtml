@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "ToturTraineeReports";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    int tutorTraineeId = ViewBag.TutorTraineeId;
 }
-
+<div class="well">
 <h2>דיווחים</h2>
-
 <p>
-    @Html.ActionLink("הוסף דיווח", "Create")
+    @Html.ActionLink("הוסף דיווח", "Create", new  { tutorTraineeId = tutorTraineeId })
 </p>
 <table class="table">
     <tr>
@@ -31,7 +31,6 @@
         </th>
         <th></th>
     </tr>
-
     @foreach (var item in Model)
     {
         <tr>
@@ -53,13 +52,12 @@
                 @Html.DisplayFor(modelItem => item.CreationTime)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id })|
+                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id })|
                 @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)|
-                @Html.ActionLink("Details", "Details", "TutorSession", new { id = item.Id }, null)
-
+                    @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new { id = item.Id }, null)
 
             </td>
         </tr>
     }
-
 </table>
+</div>

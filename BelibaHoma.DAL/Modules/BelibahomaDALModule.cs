@@ -29,7 +29,7 @@ namespace BelibaHoma.DAL.Modules
             serviceLocator.RegisterType<ITutorReportRepository, TutorReportRepository>();
             serviceLocator.RegisterType<ITutorSessionRepository, TutorSessionRepository>();
             serviceLocator.RegisterType<IGradeRepository, GradeRepository>();
-
+            serviceLocator.RegisterType<IAlertRepository, AlertRepository>();
 
         }
     }

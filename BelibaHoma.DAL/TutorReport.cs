@@ -17,6 +17,7 @@ namespace BelibaHoma.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TutorReport()
         {
+            this.Alert = new HashSet<Alert>();
             this.TutorSession = new HashSet<TutorSession>();
         }
     
@@ -28,6 +29,8 @@ namespace BelibaHoma.DAL
         public bool IsProblem { get; set; }
         public System.DateTime CreationTime { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Alert> Alert { get; set; }
         public virtual TutorTrainee TutorTrainee { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TutorSession> TutorSession { get; set; }

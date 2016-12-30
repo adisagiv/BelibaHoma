@@ -209,12 +209,41 @@ namespace BelibaHoma.BLL.Enums
         Spring = 1,
         [Description("קיץ")]
         [Display(Name = "קיץ")]
-        Summer = 2
+        Summer = 2,
+        [Description("מכינה")]
+        [Display(Name = "מכינה")]
+        Mechina = 3
     }
 
     public enum HourStatisticsType
     {
         Sum = 0,
         Average = 1
+    }
+
+    public enum AlertStatus
+    {
+        [Description("חדשה")]
+        [Display(Name = "חדשה")]
+        New = 0,
+        [Description("בטיפול")]
+        [Display(Name = "בטיפול")]
+        Ongoing = 1,
+        [Description("סגורה")]
+        [Display(Name = "סגורה")]
+        Cloesd = 2
+    }
+
+    public enum AlertType
+    {
+        [Description("ציון חניך")]
+        [Display(Name = "ציון חניך")]
+        TraineeGrade = 0,
+        [Description("דרושה התערבות")]
+        [Display(Name = "דרושה התערבות")]
+        Intervention = 1,
+        [Description("איחור בדיווח")]
+        [Display(Name = "איחור בדיווח")]
+        LateTutor = 2
     }
 }

@@ -19,5 +19,13 @@ namespace BelibaHoma.DAL
         public System.DateTime UpdateTime { get; set; }
         public int Status { get; set; }
         public string Notes { get; set; }
+        public int AlertType { get; set; }
+        public Nullable<int> LinkedTutorId { get; set; }
+        public Nullable<int> LinkedTraineeId { get; set; }
+        public Nullable<int> LinkedReportId { get; set; }
+    
+        public virtual Trainee Trainee { get; set; }
+        public virtual Tutor Tutor { get; set; }
+        public virtual TutorReport TutorReport { get; set; }
     }
 }

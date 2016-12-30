@@ -261,7 +261,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             else
             {
-                return Error(trainees);
+                return Json(trainees);
             }
             var tutors = _tutorService.GetTutors(model.Area);
             if (tutors.Success)
@@ -270,7 +270,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             else
             {
-                return Error(tutors);
+                return Json(tutors);
             }
             var status = _tutorTraineeService.ResetTutorTrainee(model.Area);
             if (status.Success)
@@ -278,18 +278,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 status = _tutorTraineeService.RunAlgorithm(model);
                 if (status.Success)
                 {
-
+                    var result = _tutorTraineeService.IsUnRecommended(model.Area);
+                    return Json(result);
                 }
-                else
-                {
-                    return Error(status);
-                }
+                return Json(status);
             }
-            else
-            {
-                return Error(status);
-            }
-            return View();
+            return Json(status);
         }
     }
 }
