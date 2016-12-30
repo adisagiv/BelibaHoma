@@ -207,6 +207,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert.js" />
+    <Content Include="Scripts\alerts-index.js" />
     <Content Include="Scripts\approvematches.js" />
     <Content Include="Scripts\bootstrap-confirmation.js" />
     <Content Include="Scripts\bootstrap-rtl.js" />

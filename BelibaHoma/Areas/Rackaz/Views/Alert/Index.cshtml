@@ -1,9 +1,199 @@
-﻿@model BelibaHoma.Areas.Rackaz.Models.AlertViewModel
+﻿@using BelibaHoma.BLL.Enums
+@model BelibaHoma.Areas.Rackaz.Models.AlertViewModel
+@using Extensions.Enums
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>ניהול התרעות</h2>
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
 
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/alerts-index.js"></script>
+}
+<div class="well">
+    <br/>
+    <center><h1>ניהול התרעות</h1> </center>
+    <br>
+    <div class="row">
+        <div class="panel panel-default col-md-6">
+            <div class="panel-heading">
+                <h4>חונכים מאחרים בדיווח</h4>
+            </div>
+            <br/>
+            <table class="table" id="Late-Tutors-table">
+                <thead>
+                <tr>
+                    <th>
+                        שם החונך
+                    </th>
+                    <th>
+                        דיווח אחרון
+                    </th>
+                    @{
+                        if (ViewBag.IsRackaz == false)
+                        {
+                            <th>
+                                אזור
+                            </th>
+                        }
+                    }
+                    <th id="actions">הערות</th>
+                    <td id="actions"></td>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                    <th>
+                        שם החונך
+                    </th>
+                    <th>
+                        תאריך דיווח אחרון
+                    </th>
+                    @{
+                        if (ViewBag.IsRackaz == false)
+                        {
+                            <th>
+                                אזור
+                            </th>
+                        }
+                    }
+                    <th id="actions"></th>
+                    <th id="actions"></th>
+                </tr>
+                </tfoot>
+                <tbody>
+                @foreach (var item in Model.LateTutor)
+                {
+                    <tr class="@(item.Status == AlertStatus.New ? "table-warning" : "")">
+                        <td>
+                            <a href="/Tutor/Tutor/Details/@item.Tutor.UserId" target="_blank">@Html.DisplayFor(modelItem => item.Tutor.User.FullName)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LastReportTime)
+                        </td>
+                        @if (ViewBag.IsRackaz == false)
+                        {
+                            <td>
+                                @item.Tutor.User.Area.ToDescription()
+                            </td>
+                        }
+
+                        @{
+                            if (item.Status == AlertStatus.New)
+                            {
+                                <td>
+                                    <a class="btn btn-warning btn-xs" href="">עדכן הערות</a>
+                                </td>
+                                <td></td>
+                            }
+                            else if (item.Status == AlertStatus.Ongoing)
+                            {
+                                <td>
+                                    <a class="btn btn-warning btn-xs" href="">עדכן הערות</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-xs" href="">סיים טיפול</a>
+                                </td>
+                            }
+                        }
+                    </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="panel panel-default col-md-6">
+            <div class="panel-heading">
+                <h4>דרושה התערבות</h4>
+            </div>
+            <br />
+            <table class="table" id="Intervention-Table">
+                <thead>
+                    <tr>
+                        <th>
+                            שם החניך
+                        </th>
+                        <th>
+                            עבור לדיווח
+                        </th>
+                        @{
+                            if (ViewBag.IsRackaz == false)
+                            {
+                                <th>
+                                    אזור
+                                </th>
+                            }
+                        }
+                        <th id="actions">הערות</th>
+                        <td id="actions"></td>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>
+                            שם החניך
+                        </th>
+                        <th>
+                            עבור לדיווח
+                        </th>
+                        @{
+                            if (ViewBag.IsRackaz == false)
+                            {
+                                <th>
+                                    אזור
+                                </th>
+                            }
+                        }
+                        <th id="actions">הערות</th>
+                        <td id="actions"></td>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var item in Model.TutorReport)
+                    {
+                        <tr class="@(item.Status == AlertStatus.New ? "table-warning" : "")">
+                            <td>
+                                <a href="/Trainee/Trainee/Details/@item.TutorReport.TutorTrainee.TraineeId" target="_blank">@String.Format("{0}, {1}", @item.TutorReport.TutorTrainee.Trainee.User.LastName, @item.TutorReport.TutorTrainee.Trainee.User.FullName)</a>
+                            </td>
+                            <td>
+                                @*<a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.TutorReport.Id">עבור לדיווח</a>*@
+                            </td>
+                            @if (ViewBag.IsRackaz == false)
+                            {
+                                <td>
+                                    @item.TutorReport.TutorTrainee.Trainee.User.Area.ToDescription()
+                                </td>
+                            }
+
+                            @{
+                        if (item.Status == AlertStatus.New)
+                        {
+                            <td>
+                                <a class="btn btn-warning btn-xs" href="">עדכן הערות</a>
+                            </td>
+                                <td></td>
+                        }
+                        else if (item.Status == AlertStatus.Ongoing)
+                        {
+                            <td>
+                                <a class="btn btn-warning btn-xs" href="">עדכן הערות</a>
+                            </td>
+                                <td>
+                                    <a class="btn btn-success btn-xs" href="">סיים טיפול</a>
+                                </td>
+                        }
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
