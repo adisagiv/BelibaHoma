@@ -75,9 +75,9 @@ namespace BelibaHoma.Areas.Tutor.Controllers
                         return Error(status);
                     }
                 }
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
                 ////TODO: Send tutorTraineeId back to index
-                //return RedirectToAction("TutorTraineeReports", new { id = id });
+                return RedirectToAction("TutorTraineeReports", new { id = id });
             }
             return Error(result);
         }
@@ -108,8 +108,8 @@ namespace BelibaHoma.Areas.Tutor.Controllers
                         return Error(result);
                     }
                 }
-                return RedirectToAction("Index");
-                //return RedirectToAction("TutorTraineeReports", new { id = tutorTraineeId });
+                //return RedirectToAction("Index");
+                return RedirectToAction("TutorTraineeReports", new { id = tutorTraineeId });
             }
             return Error(result);
         }

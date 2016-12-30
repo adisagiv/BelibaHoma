@@ -15,7 +15,7 @@ namespace BelibaHoma.BLL.Models
 
         public int TutorTraineeId { get; set; }
 
-        public TutorTrainee TutorTrainee { get; set; }
+        public TutorTraineeModel TutorTrainee { get; set; }
 
 
         [Display(Name = "שעות חונכות")]

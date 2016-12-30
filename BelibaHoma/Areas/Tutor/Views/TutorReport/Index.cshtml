@@ -6,15 +6,24 @@
 }
 <div class="well">
     <h2>דיווחים</h2>
-    <p>
+    @*<p>
         @Html.ActionLink("הוסף דיווח", "Create")
-    </p>
+    </p>*@
     <table class="table">
         <tr>
-            @*TODO: Fix it*@
             @*<th>
-                    @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
-                </th>*@
+                @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
+            </th>*@
+
+            <th>
+                שם חניך
+            </th>
+            <th>
+                שם חונך
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.TutorTrainee.Tutor.User.FirstName)
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.TutorHours)
             </th>
@@ -34,12 +43,17 @@
         {
             <tr>
                 @*TODO:FIX it*@
-                @*@if (item.TutorTrainee.Trainee.User.FirstName != null)
+                @if (item.TutorTrainee.Trainee.User.FirstName != null)
                     {
                         <td>
                             @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
                         </td>
-                    }*@
+                    }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FirstName)
+                </td>
+
                 <td>
                     @Html.DisplayFor(modelItem => item.TutorHours)
                 </td>
@@ -55,8 +69,12 @@
                 </td>
                 <td>
                     @Html.ActionLink("עריכה", "Edit", new { id = item.Id })|
+                    
                     @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new { id = item.Id }, null)|
-                    @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new { id = item.Id }, null)
+                    @if (item.TutorHours > 0)
+                    {
+                        @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)
+                    }
                 </td>
             </tr>
         }
