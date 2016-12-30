@@ -94,7 +94,6 @@
     <Compile Include="DataTables\DataTablesEFSQL.cs" />
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="EnumExtensions.cs" />
-    <Compile Include="Enums.cs" />
     <Compile Include="ExceptionExtensions.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Html.cs" />

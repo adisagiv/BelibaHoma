@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
 @using BelibaHoma.BLL.Enums
-@using Extensions
+@using Extensions.Enums
 
 @{
     ViewBag.Title = "Index";
@@ -109,7 +109,7 @@
                 if (ViewBag.IsRackaz != true && item.User.Area != null)
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.User.Area)
+                       @item.User.Area.ToDescription()
                     </td>
                 }
             }

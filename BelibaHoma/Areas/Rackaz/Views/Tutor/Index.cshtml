@@ -108,7 +108,7 @@
                 if (ViewBag.IsRackaz != true && item.User.Area != null)
                 {
                     <td>
-                        @Html.DisplayFor(modelItem => item.User.Area)
+                       @item.User.Area.ToDescription()
                     </td>
                 }
             }

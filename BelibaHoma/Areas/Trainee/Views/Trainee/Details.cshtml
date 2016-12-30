@@ -1,4 +1,5 @@
 ﻿@using BelibaHoma.BLL.Enums
+@using Extensions.Enums
 @model BelibaHoma.BLL.Models.TraineeModel
 
 @{
@@ -73,10 +74,10 @@
                 @Html.DisplayFor(model => model.Address)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.User.Area)
+                @Model.User.Area.ToDescription()
             </dt>
             <dd>
-                @Html.DisplayFor(model => model.User.Area)
+                @Model.User.Area.ToDescription()
             </dd>
             <dt>
                 @Html.DisplayNameFor(model => model.PhoneNumber)
