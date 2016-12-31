@@ -206,6 +206,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\affix.js" />
+    <Content Include="Scripts\alert-archive.js" />
     <Content Include="Scripts\alert.js" />
     <Content Include="Scripts\alerts-index.js" />
     <Content Include="Scripts\approvematches.js" />
@@ -370,6 +371,7 @@
     <Content Include="Areas\Tutor\Views\TutorReport\_TutorReportForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\Report\AvrGradeStatistics.cshtml" />
     <Content Include="Areas\Rackaz\Views\Alert\Index.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Alert\AlertArchive.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />

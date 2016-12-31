@@ -62,15 +62,25 @@ namespace BelibaHoma.BLL.Services
                     {
                         throw new System.ArgumentException("User is Admin but Area is initialized", "model");
                     }
+                    if ((model.UserRole == UserRole.Trainee || model.UserRole == UserRole.Tutor) && model.Area == null)
+                    {
+                        throw new System.ArgumentException("User is Trainee/Tutor but Area is not initialized", "model");
+                    }
                     if (model.IdNumber.Length != 9)
                     {
                         throw new System.ArgumentException("User Id Number is invalid", "model");
+                    }
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+                    var IsIdExist = userRepository.GetAll().FirstOrDefault(u => u.IdNumber == model.IdNumber);
+                    if (IsIdExist != null)
+                    {
+                        throw new System.ArgumentException("User Id Number should be unique", "model");
                     }
                     model.CreationTime = DateTime.Now;
                     model.UpdateTime = DateTime.Now;
                     model.LastPasswordUpdate = DateTime.Now.Utc();
                     model.IsActive = true;
-                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+                    
                     var entity = model.MapTo<User>();
                     userRepository.Add(entity);
 

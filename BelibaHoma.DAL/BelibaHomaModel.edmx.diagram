@@ -5,18 +5,17 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="82431223d372499cacb62d2ed9d56343" Name="Diagram1" ZoomLevel="18">
-        <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicInstitution" Width="1.5" PointX="3.75" PointY="17" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicInstitution" Width="1.5" PointX="3.75" PointY="24.125" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.AcademicMajor" Width="1.5" PointX="0.75" PointY="11.375" />
         <EntityTypeShape EntityType="BelibaHomaDBModel.Alert" Width="1.5" PointX="8.25" PointY="11.25" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.Grade" Width="1.5" PointX="8.25" PointY="19.5" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.JobOffer" Width="1.5" PointX="3" PointY="23.25" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.Trainee" Width="1.5" PointX="6" PointY="9.75" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.Tutor" Width="1.5" PointX="3" PointY="10.375" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorReport" Width="1.5" PointX="13.5" PointY="11.375" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorSession" Width="1.5" PointX="15.75" PointY="11.625" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorTrainee" Width="1.5" PointX="11.25" PointY="11.625" />
-        <EntityTypeShape EntityType="BelibaHomaDBModel.User" Width="1.5" PointX="3.75" PointY="5.625" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.Grade" Width="1.5" PointX="5.25" PointY="19.75" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.JobOffer" Width="1.5" PointX="3" PointY="17.5" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.Trainee" Width="1.5" PointX="3" PointY="9.75" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.Tutor" Width="1.5" PointX="6" PointY="10.5" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorReport" Width="1.5" PointX="13.5" PointY="11.5" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorSession" Width="1.5" PointX="15.75" PointY="11.75" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.TutorTrainee" Width="1.5" PointX="11.25" PointY="11.75" />
+        <EntityTypeShape EntityType="BelibaHomaDBModel.User" Width="1.5" PointX="3.75" PointY="4.625" />
         <AssociationConnector Association="BelibaHomaDBModel.FK_Trainee_AcademicInstitution1" />
         <AssociationConnector Association="BelibaHomaDBModel.FK_Tutor_AcademicInstitution" />
         <AssociationConnector Association="BelibaHomaDBModel.FK_JobOffer_AcademicMajor" />

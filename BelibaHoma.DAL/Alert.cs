@@ -23,6 +23,7 @@ namespace BelibaHoma.DAL
         public Nullable<int> LinkedTutorId { get; set; }
         public Nullable<int> LinkedTraineeId { get; set; }
         public Nullable<int> LinkedReportId { get; set; }
+        public int Area { get; set; }
     
         public virtual Trainee Trainee { get; set; }
         public virtual Tutor Tutor { get; set; }

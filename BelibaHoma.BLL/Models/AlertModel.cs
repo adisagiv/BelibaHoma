@@ -40,6 +40,9 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "תאריך דיווח אחרון")]
         public DateTime? LastReportTime { get; set; }
 
+        [Display(Name = "אזור")]
+        public Area Area { get; set; }
+
         public AlertModel(Alert entity)
             : base(entity)
         {

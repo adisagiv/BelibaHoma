@@ -49,21 +49,31 @@ namespace BelibaHoma.BLL.Interfaces
         /// Get active required intervention alerts from DB (all / by area)
         /// </summary>
         /// <param name="area"></param>
+        /// <param name="archive"></param>
         /// <returns></returns>
-        StatusModel<List<AlertModel>> GetReportAlerts(Area? area);
+        StatusModel<List<AlertModel>> GetReportAlerts(Area? area, bool archive);
 
         /// <summary>
         /// Get active grade alerts from DB (all / by area) 
         /// </summary>
         /// <param name="area"></param>
+        /// <param name="archive"></param>
         /// <returns></returns>
-        StatusModel<List<AlertModel>> GetGradeAlerts(Area? area);
+        StatusModel<List<AlertModel>> GetGradeAlerts(Area? area, bool archive);
 
         /// <summary>
         /// Get active alerts 
         /// </summary>
         /// <param name="area"></param>
+        /// <param name="archive"></param>
         /// <returns></returns>
-        StatusModel<List<AlertModel>> GetLateTutorAlerts(Area? area);
+        StatusModel<List<AlertModel>> GetLateTutorAlerts(Area? area, bool archive);
+
+        /// <summary>
+        /// Count how many alerts are in the DB which are in the given area (or all) and per status
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<int[]> GetAlertStatusCounts(Area? area);
     }
 }

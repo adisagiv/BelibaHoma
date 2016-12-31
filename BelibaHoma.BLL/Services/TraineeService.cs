@@ -96,6 +96,10 @@ namespace BelibaHoma.BLL.Services
                     {
                         throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
                     }
+                    if (model.User.Area != null && academicInstitution.Area != (int)model.User.Area)
+                    {
+                        throw new System.ArgumentException("המוסד האקדמי של החניך נמצא באזור פעילות שונה מהאזור שהוזן לחניך", "model");
+                    }
 
                     //Adding the User Model to the DB (By using the Add function in UserService)
                     var userStatus = _userService.Add(model.User);
@@ -139,6 +143,10 @@ namespace BelibaHoma.BLL.Services
                         //If we got here - Yay! :)
                         status.Success = true;
                         status.Message = String.Format("חניך {0} הוזן בהצלחה", model.User.FullName);
+                    }
+                    else
+                    {
+                        status.Message = userStatus.Message;
                     }
                 }
             }
@@ -234,6 +242,10 @@ namespace BelibaHoma.BLL.Services
                         if (updatedModel.User.IsActive != false && updatedModel.DroppedOut == true)
                         {
                             throw new System.ArgumentException("Trainee dropped out so he is no longer updated", "updatedModel");
+                        }
+                        if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
+                        {
+                            throw new System.ArgumentException("המוסד האקדמי של החניך נמצא באזור פעילות שונה מהאזור שהוזן לחניך", "updatedModel");
                         }
 
                         //Updating the entity from the model received by the form

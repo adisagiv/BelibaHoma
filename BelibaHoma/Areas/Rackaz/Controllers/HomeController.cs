@@ -13,10 +13,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
     [CustomAuthorization(UserRoles = new UserRole[] { UserRole.Admin, UserRole.Rackaz })]
     public class HomeController : BaseController
     {
+        private readonly ITutorService _tutorService;
         private readonly IAlertService _alertService;
 
-        public HomeController(IAlertService alertService)
+        public HomeController(IAlertService alertService, ITutorService tutorService)
         {
+            _tutorService = tutorService;
             this._alertService = alertService;
         }
 
@@ -29,6 +31,19 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return Error(status);
             }
+            var result = _alertService.GetAlertStatusCounts(CurrentUser.Area);
+            if (!result.Success)
+            {
+                return Error(result);
+            }
+            var status2 = _tutorService.GetTutorHours(CurrentUser.Area);
+            if (!status2.Success)
+            {
+                return Error(status2);
+            }
+            model.TutorHoursCount = status2.Data;
+            model.newAlertsCount = result.Data[0];
+            model.OnGoingAlertsCount = result.Data[1];
             return View(model);
         }
     }

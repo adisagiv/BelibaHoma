@@ -29,8 +29,8 @@ namespace BelibaHoma.DAL
         public int AcademicMajorId { get; set; }
         public Nullable<int> AcademicMinorId { get; set; }
         public string PhoneNumber { get; set; }
-        public int TutorHoursBonding { get; set; }
-        public int TutorHours { get; set; }
+        public double TutorHoursBonding { get; set; }
+        public double TutorHours { get; set; }
         public int PhysicsLevel { get; set; }
         public int MathLevel { get; set; }
         public int EnglishLevel { get; set; }

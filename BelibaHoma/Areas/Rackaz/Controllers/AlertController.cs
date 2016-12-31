@@ -26,19 +26,43 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         // GET: Rackaz/AcademicMajor
         public ActionResult Index()
         {
-            var reportAlerts = _alertService.GetReportAlerts(CurrentUser.Area);
+            var reportAlerts = _alertService.GetReportAlerts(CurrentUser.Area, false);
             if (!reportAlerts.Success)
             {
                 return Error(reportAlerts);
             }
 
-            var gradeAlerts = _alertService.GetGradeAlerts(CurrentUser.Area);
+            var gradeAlerts = _alertService.GetGradeAlerts(CurrentUser.Area, false);
             if (!gradeAlerts.Success)
             {
                 return Error(gradeAlerts);
             }
 
-            var lateAlerts = _alertService.GetLateTutorAlerts(CurrentUser.Area);
+            var lateAlerts = _alertService.GetLateTutorAlerts(CurrentUser.Area, false);
+            if (!lateAlerts.Success)
+            {
+                return Error(lateAlerts);
+            }
+            var model = new AlertViewModel(lateAlerts.Data, gradeAlerts.Data, reportAlerts.Data);
+            return View(model);
+        }
+
+        // GET: Rackaz/AcademicMajor
+        public ActionResult AlertArchive()
+        {
+            var reportAlerts = _alertService.GetReportAlerts(CurrentUser.Area, true);
+            if (!reportAlerts.Success)
+            {
+                return Error(reportAlerts);
+            }
+
+            var gradeAlerts = _alertService.GetGradeAlerts(CurrentUser.Area, true);
+            if (!gradeAlerts.Success)
+            {
+                return Error(gradeAlerts);
+            }
+
+            var lateAlerts = _alertService.GetLateTutorAlerts(CurrentUser.Area, true);
             if (!lateAlerts.Success)
             {
                 return Error(lateAlerts);
@@ -68,5 +92,14 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         //    return Error(new StatusModel(false, result.Message));
         //}
 
+        public ActionResult CloseAlert(int id)
+        {
+            var result = _alertService.ChangeStatus(id);
+            if (result.Success)
+            {
+                return RedirectToAction("Index","Alert", new {Area = "Rackaz"});
+            }
+            return Error(result);
+        }
     }
 }

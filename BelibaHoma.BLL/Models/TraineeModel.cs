@@ -61,10 +61,10 @@ namespace BelibaHoma.BLL.Models
         public EmploymentStatus? EmploymentStatus { get; set; }
         
         [Display(Name = "שעות חברותא (השנה)")]
-        public int TutorHoursBonding { get; set; }
+        public double TutorHoursBonding { get; set; }
         
         [Display(Name = "שעות חניכה (השנה)")]
-        public int TutorHours { get; set; }
+        public double TutorHours { get; set; }
         
         [Display(Name = "מסלול לימוד נוסף בו נדרשת חניכה")]
         public AcademicMajorModel AcademicMajor2 { get; set; }

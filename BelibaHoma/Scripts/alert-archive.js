@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $('#Late-Tutors-table')
+    $('#Late-Tutors-a-table')
         .DataTable({
             initComplete: function () {
                 this.api()
@@ -45,7 +45,7 @@
                                         .draw();
             }
         });
-    $('#Intervention-Table')
+    $('#Intervention-a-Table')
         .DataTable({
             initComplete: function () {
                 this.api()
@@ -91,7 +91,7 @@
                                         .draw();
             }
         });
-    $('#Trainee-Grade-Table')
+    $('#Trainee-Grade-a-Table')
     .DataTable({
         initComplete: function () {
             this.api()
