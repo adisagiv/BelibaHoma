@@ -61,10 +61,10 @@ namespace BelibaHoma.Areas.Admin.Controllers
         public ActionResult Edit(int id, UserModel model)
         {
             var result = _userService.Update(id, model);
-            SetUserUpdate(id, DateTime.MinValue.Utc());
 
             if (result.Success)
             {
+                SetUserUpdate(id, DateTime.MinValue.Utc());
                 return RedirectToAction("Index", "User", new { Area = "Rackaz" });
             }
 
