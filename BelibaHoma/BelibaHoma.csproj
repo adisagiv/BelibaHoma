@@ -450,6 +450,7 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
+    <Content Include="Areas\Rackaz\Views\Alert\GetAlert.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />

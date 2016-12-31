@@ -412,5 +412,59 @@ namespace BelibaHoma.BLL.Services
             }
             return status;
         }
+
+        public StatusModel<AlertModel> Get(int alertId)
+        {
+            var status = new StatusModel<AlertModel>(false, String.Empty, null);
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+                    var alert = alertRepository.GetByKey(alertId);
+
+                    status.Data = new AlertModel(alert);
+
+                    //If we got here - Yay!!
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך שליפת ההתרעה ממסד הנתונים");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
+
+        public StatusModel SaveAlertNotes(int alertId, string notes)
+        {
+            var status = new StatusModel(false, String.Empty);
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+                    var alert = alertRepository.GetByKey(alertId);
+
+                    if (alert.Status != (int) AlertStatus.Cloesd)
+                    {
+                        alert.Notes = notes;
+                        alert.Status = (int)AlertStatus.Ongoing;
+                        alert.UpdateTime = DateTime.Now;
+
+                        unitOfWork.SaveChanges();
+                    }
+                    //If we got here - Yay!!
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("שגיאה במהלך שמירת ההתרעה במסד הנתונים");
+                LogService.Logger.Error(status.Message, ex);
+            }
+            return status;
+        }
     }
 }

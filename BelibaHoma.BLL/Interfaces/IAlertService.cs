@@ -75,5 +75,8 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="area"></param>
         /// <returns></returns>
         StatusModel<int[]> GetAlertStatusCounts(Area? area);
+
+        StatusModel<AlertModel> Get(int alertId);
+        StatusModel SaveAlertNotes(int alertId, string notes);
     }
 }
