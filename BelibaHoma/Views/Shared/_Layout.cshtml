@@ -8,6 +8,7 @@
     @Styles.Render("~/Content/css")
     @RenderSection("styles", false)
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/datetimepicker/css")
     @{
         UserModel user = ViewBag.CurrentUser;
     }
@@ -64,6 +65,9 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    @Scripts.Render("~/bundles/datetimepicker/js")
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/datatable.settings.js"></script>
     @RenderSection("scripts", required: false)

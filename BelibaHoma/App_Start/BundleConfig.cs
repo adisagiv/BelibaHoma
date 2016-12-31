@@ -33,6 +33,12 @@ namespace BelibaHoma
             bundles.Add(new StyleBundle("~/bundles/datatable/css").Include(
                 "~/Scripts/datatable/css/jquery.dataTables.min.css",
                 "~/Scripts/datatable/css/dataTables.bootstrap.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker/js").Include(
+               "~/Scripts/bootstrap-datetimepicker.min.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/datetimepicker/css").Include(
+                "~/Content/bootstrap-datetimepicker.css"));
         }
     }
 }

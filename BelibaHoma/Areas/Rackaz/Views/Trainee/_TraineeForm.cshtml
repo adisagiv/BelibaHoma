@@ -113,9 +113,17 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">תאריך לידה :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Trainee.Birthday, new { htmlAttributes = new { @class = "form-control" }, @type = "date" })
-                    @Html.ValidationMessageFor(model => model.Trainee.Birthday, "", new { @class = "text-danger", @type = "date" })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                            <input type='text' class="form-control" value="@Model.Trainee.Birthday" id="Trainee_Birthday" name="Trainee.Birthday" data-val="true" data-val-date="The field תאריך לידה must be a date." data-val-required="זהו שדה חובה" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                        @*@Html.EditorFor(model => model.Trainee.Birthday, new {htmlAttributes = new {@class = "form-control"}, @type = "date"})*@
+                        @Html.ValidationMessageFor(model => model.Trainee.Birthday, "", new { @class = "text-danger", @type = "date" })
                 </div>
             </div>
             <div class="form-group">
@@ -243,3 +251,5 @@
 <div>
     @Html.ActionLink("חזור לרשימה", "Index")
 </div>
+
+
