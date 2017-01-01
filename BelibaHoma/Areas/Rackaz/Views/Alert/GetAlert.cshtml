@@ -1,0 +1,59 @@
+﻿@model BelibaHoma.BLL.Models.AlertModel
+
+@{
+    Layout = null;
+    bool isArchived = ViewBag.isArchived;
+}
+
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">הערות</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="notes">@Model.Notes</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">סגור</button>
+                @if (!isArchived) {
+                    <button type="button" data-id="@Model.Id" id="edit-notes" class="btn btn-primary">ערוך הערות</button>
+                }
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+<!-- /.modal-dialog -->
+
+<script>
+    $('#myModal').on('hidden.bs.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+</script>
+    @if (!isArchived)
+    {
+        <script>
+            $('#edit-notes').click(function(e) {
+                e.preventDefault();
+
+                if ($(this).hasClass('save')) {
+                    var alertId = $(this).data('id');
+                    var notes = $('.notes').val();
+                    $.post('/Rackaz/Alert/SaveAlertNotes', { alertId: alertId, notes: notes }, function(result) {
+                        $('#myModal').modal('hide');
+                        if (!result.Success) {
+                            alert(result.Message);
+                        } else {
+                            window.location.reload();
+                        }
+                        
+                    });
+                } else {
+                    $('.notes').replaceWith("<textarea class='notes'>" + $('.notes').text() + "</textarea>");
+                    $(this).text('שמור הערות').addClass('save');
+                }
+            });
+        </script>
+    }

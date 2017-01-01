@@ -100,6 +100,10 @@ namespace BelibaHoma.BLL.Services
                     {
                         throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
                     }
+                    if (model.User.Area != null && academicInstitution.Area != (int)model.User.Area)
+                    {
+                        throw new System.ArgumentException("המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך", "model");
+                    }
 
                     //Adding the User Model to the DB (By using the Add function in UserService)
                     var userStatus = _userService.Add(model.User);
@@ -137,6 +141,10 @@ namespace BelibaHoma.BLL.Services
                         //If we got here - Yay! :)
                         status.Success = true;
                         status.Message = String.Format("חונך {0} הוזן בהצלחה", model.User.FullName);
+                    }
+                    else
+                    {
+                        status.Message = userStatus.Message;
                     }
                 }
             }
@@ -226,6 +234,10 @@ namespace BelibaHoma.BLL.Services
                         {
                             throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "updatedModel");
                         }
+                        if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
+                        {
+                            throw new System.ArgumentException("המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך", "updatedModel");
+                        }
                    
 
                         //Updating the entity from the model received by the form
@@ -307,6 +319,29 @@ namespace BelibaHoma.BLL.Services
 
             return result;
         }
-        
+
+        public StatusModel<float> GetTutorHours(Area? area)
+        {
+            var result = new StatusModel<float>(false, String.Empty, new float());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorList = tutorRepository.GetAll().Where(t => t.User.IsActive == true && (area == null || t.User.Area == (int?)area));
+                    var tutorHours = tutorList.Sum(t => t.TutorHours);
+
+                    //If we got here - Yay! :)
+                    result = new StatusModel<float>(true, String.Empty, (float)tutorHours);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת שעות החונכות ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
     }
 }

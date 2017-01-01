@@ -18,27 +18,31 @@
 <div class="well">
     <div class="row">
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <div>התרעות חדשות</div>
+                    <div>יש לך <b>@Model.newAlertsCount</b> התרעות חדשות</div>
                 </div>
-                <div class="panel-footer">עבור להתרעות</div>
+                <div class="panel-footer">
+                    <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
+                </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
+            <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <div>התרעות בטיפול</div>
+                    <div>יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול</div>
                 </div>
-                <div class="panel-footer">עבור להתרעות</div>
+                <div class="panel-footer">
+                    <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
+                </div >
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
+            <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div>שעות חניכה</div>
+                    <div>עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה</div>
                 </div>
-                <div class="panel-footer">עבור לדיווחים</div>
+                <div class="panel-footer">עבור לקשרי החניכה</div>
             </div>
         </div>
     </div>

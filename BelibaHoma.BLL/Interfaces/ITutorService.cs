@@ -48,6 +48,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="showMatched"></param>
         /// <returns></returns>
         StatusModel<List<TutorMatchViewModel>> GetUnMatchedTutors(Area area, bool showMatched);
+
+        /// <summary>
+        /// Get sum of all tutoring hours per area (or all) since the beggining of the year
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel<float> GetTutorHours(Area? area);
     }
 
     }
