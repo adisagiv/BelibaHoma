@@ -45,6 +45,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             if (result.Success)
             {
                 ViewBag.TutorTraineeId = id;
+                ViewBag.TutorId = CurrentUser.Id;
                 ViewBag.IsTutor = CurrentUser.UserRole == UserRole.Tutor;
                 return View(result.Data);
 
