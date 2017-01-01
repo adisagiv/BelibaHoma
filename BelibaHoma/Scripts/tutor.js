@@ -4,7 +4,10 @@
     //    ac.preventDefault();
     //    $('#academmic-institution-modal').modal();
     //});
-
+    $('#datetimepicker1').datetimepicker({
+        locale: 'he',
+        format: 'DD/MM/YYYY'
+    });
     $('#tutor-submit').click(function (e) {
         e.preventDefault();
 

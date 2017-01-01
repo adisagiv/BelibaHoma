@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
+﻿@using System.Runtime.InteropServices
+@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
 
 @{
     ViewBag.Title = "ToturTraineeReports";
@@ -6,70 +7,81 @@
     int tutorTraineeId = ViewBag.TutorTraineeId;
 }
 <div class="well">
-<h2>דיווחים</h2>
-<p>
-    @Html.ActionLink("הוסף דיווח", "Create", new  { tutorTraineeId = tutorTraineeId })
-</p>
-<table class="table">
-    <tr>
-        @*TODO: Fix it*@
-        @*<th>
+    <h2>דיווחים</h2>
+    <p>
+        @Html.ActionLink("הוסף דיווח", "Create", new {tutorTraineeId = tutorTraineeId})
+    </p>
+    <table class="table">
+        <tr>
+            @*TODO: Fix it*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
             </th>*@
-        <th>
+            <th>
                 שם חניך
-        </th>
-        <th>
-            שם חונך
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHoursBonding)
-        </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.IsProblem)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr>
-            @*TODO:FIX it*@
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHoursBonding)
-            </td>
-            
-            <td>
-                @Html.DisplayFor(modelItem => item.IsProblem)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationTime)
-            </td>
-            <td>
-                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id })|
-                @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new {id = item.Id}, null)|
-                @if (item.TutorHours > 0)
-                {
-                    @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)
-                }
+            </th>
+            <th>
+                שם חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHoursBonding)
+            </th>
 
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.IsProblem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationTime)
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*TODO:FIX it*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorHours)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsProblem)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationTime)
+                </td>
+                <td>
+                    @Html.ActionLink("עריכה", "Edit", new {id = item.Id})|
+                    @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new {id = item.Id}, null)|
+                    @if (item.TutorHours > 0)
+                    {
+                        @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)
+                    }
+
+                </td>
+            </tr>
+        }
+    </table>
+    @{
+        if (ViewBag.IsTutor == false)
+        {
+            <a href="/Rackaz/TutorTrainee/Index">חזור לקשרי חונכות</a>
+        }
+        else
+        {
+            <a href="/Tutor/TutorTrainee/Index/@ViewBag.TutorId">חזור לקשרי חונכות</a>
+        }
+}
 </div>
+

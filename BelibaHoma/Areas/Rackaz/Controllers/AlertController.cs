@@ -101,5 +101,41 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             return Error(result);
         }
+
+        public ActionResult GetAlert(int alertId)
+        {
+            var result = _alertService.Get(alertId);
+
+            ViewBag.isArchived = false;
+
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+
+            return Error(result);
+        }
+
+        public ActionResult GetArchivedAlert(int alertId)
+        {
+            var result = _alertService.Get(alertId);
+
+            ViewBag.isArchived = true;
+
+            if (result.Success)
+            {
+                return View("GetAlert",result.Data);
+            }
+
+            return Error(result);
+        }
+
+        [HttpPost]
+        public ActionResult SaveAlertNotes(int alertId,string notes)
+        {
+            var result = _alertService.SaveAlertNotes(alertId, notes);
+            return Json(result);
+            
+        }
     }
 }
