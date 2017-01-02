@@ -26,6 +26,10 @@ namespace BelibaHoma.Areas.Tutor.Controllers
 
         public ActionResult Index(int id)
         {
+            if (CurrentUser.UserRole == UserRole.Tutor)
+            {
+                id = CurrentUser.Id;
+            }
             var result = _tutorTraineeService.GetById(id);
             if (result.Success)
             {
