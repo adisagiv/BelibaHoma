@@ -39,20 +39,7 @@
             @* This is the menu per user role below.. *@
             @Html.Action("Index",new { controller = "Menu" , area = "" })
 
-            <div class="pull-left">
-
-                @if (user != null)
-                {
-                    <span class="label label-inverse">@String.Format("שלום {0}", user.FullName)</span>
-                    <a href="/Login/Logout">התנתק</a>
-                   // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
-                }
-                else
-                {
-                    @Html.ActionLink("התחבר", "Index", "Login")
-                }
-                
-            </div>
+            
         </div>
     </div>
 <div class="container body-content">

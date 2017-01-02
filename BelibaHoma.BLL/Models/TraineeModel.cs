@@ -28,8 +28,8 @@ namespace BelibaHoma.BLL.Models
         public AcademicInstitutionModel AcademicInstitution { get; set; }
 
         [Display(Name = "תאריך לידה")]
-        [DataType(DataType.Date), ]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date), ]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public System.DateTime Birthday { get; set; }
 

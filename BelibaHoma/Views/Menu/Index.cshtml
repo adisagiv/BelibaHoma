@@ -43,8 +43,20 @@
                 <li>@Html.ActionLink("צפייה בפרטים אישיים", action, "Trainee", new {Area = "Trainee"}, new object {})</li>
                 <li>@Html.ActionLink("דף המשרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
             }
-            
+
         }
     </ul>
+    <div class="pull-left">
+        @if (Model != null)
+        {
+            <span class="label label-inverse">@String.Format("שלום {0}", Model.FullName)</span>
+            <a href="/Login/Logout">התנתק</a>
+            // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
+        }
+        else
+        {
+            @Html.ActionLink("התחבר", "Index", "Login")
+        }
+    </div>
 </div>
 
