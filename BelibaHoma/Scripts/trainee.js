@@ -53,9 +53,10 @@
                 Area: undefined,
                 Password: undefined,
                 IsActive: undefined,
-                Email: undefined,
+                Email: undefined
 
-            }
+            },
+            DroppedOut: undefined
         };
 
         model.EmploymentStatus = $('#Trainee_EmploymentStatus').val();
@@ -64,7 +65,7 @@
         model.User.LastName = $('#Trainee_User_LastName').val();
         model.User.Area = $('#Trainee_User_Area').val();
         model.User.Password = $('#Trainee_User_Password').val();
-        model.User.IsActive = $('#Trainee_User_IsActive').val();
+        model.User.IsActive = $('#Trainee_User_IsActive').is(":checked");
         model.User.Email = $('#Trainee_User_Email').val();
         model.Gender = $('#Trainee_Gender').val();
         model.MaritalStatus = $('#Trainee_MaritalStatus').val();
@@ -81,6 +82,8 @@
         model.EnglishLevel = $('#Trainee_EnglishLevel').val();
         model.AcademicYear = $('#Trainee_AcademicYear').val();
         model.SemesterNumber = $('#Trainee_SemesterNumber').val();
+        model.DroppedOut = $('#Trainee_DroppedOut').is(":checked");
+
         var isCreate = $('#is-create').val();
         var url = '';
         if (isCreate == "true") {

@@ -18,10 +18,12 @@ namespace BelibaHoma.BLL.Services
 {
     public class TraineeService : ITraineeService
     {
+        private readonly IPredictionTrainingService _predictionTrainingService;
         private readonly IUserService _userService;
 
-        public TraineeService(IUserService userService)
+        public TraineeService(IUserService userService, IPredictionTrainingService predictionTrainingService)
         {
+            _predictionTrainingService = predictionTrainingService;
             _userService = userService;
         }
 
@@ -271,6 +273,10 @@ namespace BelibaHoma.BLL.Services
                         trainee.PhysicsLevel = (int) updatedModel.PhysicsLevel;
                         trainee.MathLevel = (int) updatedModel.MathLevel;
                         trainee.EnglishLevel = (int) updatedModel.EnglishLevel;
+                        if (trainee.DroppedOut == false && updatedModel.DroppedOut == true)
+                        {
+                            _predictionTrainingService.AddFromDropping(trainee.UserId);
+                        }
                         trainee.DroppedOut = updatedModel.DroppedOut;
                         
                         //Linked Entities - need to verify Academic Institutions and Majors

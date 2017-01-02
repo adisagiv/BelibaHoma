@@ -73,6 +73,21 @@
           <Property Name="ContactJobPosition" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="JobStatus" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="PredictionTraining">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="float" Nullable="false" />
+          <Property Name="AcademicMajor" Type="float" Nullable="false" />
+          <Property Name="AcademicMinor" Type="float" Nullable="false" />
+          <Property Name="AcademicInstitution" Type="float" Nullable="false" />
+          <Property Name="SemesterNumber" Type="float" Nullable="false" />
+          <Property Name="LastSemesterGrade" Type="float" Nullable="false" />
+          <Property Name="AlertCount" Type="float" Nullable="false" />
+          <Property Name="IsDroppedOut" Type="float" Nullable="false" />
+          <Property Name="TraineeId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Trainee">
           <Key>
             <PropertyRef Name="UserId" />
@@ -415,6 +430,7 @@
           <EntitySet Name="Alert" EntityType="Self.Alert" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Grade" EntityType="Self.Grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="JobOffer" EntityType="Self.JobOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PredictionTraining" EntityType="Self.PredictionTraining" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trainee" EntityType="Self.Trainee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tutor" EntityType="Self.Tutor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TutorReport" EntityType="Self.TutorReport" Schema="dbo" store:Type="Tables" />
@@ -512,6 +528,7 @@
           <EntitySet Name="Alert" EntityType="BelibaHomaDBModel.Alert" />
           <EntitySet Name="Grade" EntityType="BelibaHomaDBModel.Grade" />
           <EntitySet Name="JobOffer" EntityType="BelibaHomaDBModel.JobOffer" />
+          <EntitySet Name="PredictionTraining" EntityType="BelibaHomaDBModel.PredictionTraining" />
           <EntitySet Name="Trainee" EntityType="BelibaHomaDBModel.Trainee" />
           <EntitySet Name="Tutor" EntityType="BelibaHomaDBModel.Tutor" />
           <EntitySet Name="TutorReport" EntityType="BelibaHomaDBModel.TutorReport" />
@@ -683,6 +700,21 @@
           <NavigationProperty Name="AcademicMajor" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor" FromRole="JobOffer" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor1" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor1" FromRole="JobOffer" ToRole="AcademicMajor" />
           <NavigationProperty Name="AcademicMajor2" Relationship="BelibaHomaDBModel.FK_JobOffer_AcademicMajor2" FromRole="JobOffer" ToRole="AcademicMajor" />
+        </EntityType>
+        <EntityType Name="PredictionTraining">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="Double" Nullable="false" />
+          <Property Name="AcademicMajor" Type="Double" Nullable="false" />
+          <Property Name="AcademicMinor" Type="Double" Nullable="false" />
+          <Property Name="AcademicInstitution" Type="Double" Nullable="false" />
+          <Property Name="SemesterNumber" Type="Double" Nullable="false" />
+          <Property Name="LastSemesterGrade" Type="Double" Nullable="false" />
+          <Property Name="AlertCount" Type="Double" Nullable="false" />
+          <Property Name="IsDroppedOut" Type="Double" Nullable="false" />
+          <Property Name="TraineeId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Trainee">
           <Key>
@@ -1117,6 +1149,22 @@
                 <ScalarProperty Name="CreationTime" ColumnName="CreationTime" />
                 <ScalarProperty Name="UpdateTime" ColumnName="UpdateTime" />
                 <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PredictionTraining">
+            <EntityTypeMapping TypeName="BelibaHomaDBModel.PredictionTraining">
+              <MappingFragment StoreEntitySet="PredictionTraining">
+                <ScalarProperty Name="TraineeId" ColumnName="TraineeId" />
+                <ScalarProperty Name="IsDroppedOut" ColumnName="IsDroppedOut" />
+                <ScalarProperty Name="AlertCount" ColumnName="AlertCount" />
+                <ScalarProperty Name="LastSemesterGrade" ColumnName="LastSemesterGrade" />
+                <ScalarProperty Name="SemesterNumber" ColumnName="SemesterNumber" />
+                <ScalarProperty Name="AcademicInstitution" ColumnName="AcademicInstitution" />
+                <ScalarProperty Name="AcademicMinor" ColumnName="AcademicMinor" />
+                <ScalarProperty Name="AcademicMajor" ColumnName="AcademicMajor" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -329,7 +329,7 @@ namespace BelibaHoma.BLL.Services
                 {
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var tutorList = tutorRepository.GetAll().Where(t => t.User.IsActive == true && (area == null || t.User.Area == (int?)area));
-                    var tutorHours = tutorList.Sum(t => t.TutorHours);
+                    var tutorHours = (tutorList.Count() != 0 ? tutorList.Sum(t => t.TutorHours) : 0);
 
                     //If we got here - Yay! :)
                     result = new StatusModel<float>(true, String.Empty, (float)tutorHours);

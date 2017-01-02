@@ -244,7 +244,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult RunAlgorithm()
         {
-            return View();
+            var model = new AlgorithmModel
+            {
+                Area = CurrentUser.Area ?? Area.North
+            };
+            return View(model);
         }
 
         [HttpPost]
