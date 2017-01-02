@@ -8,49 +8,48 @@
     Layout = null;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null,null,FormMethod.Post, new { id = "tutor-form", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal" style="direction: rtl">
-        <form autocomplete="off">
-            <hr />
-            <h3>פרטים אישיים</h3>
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <input type="hidden" name="UserId" id="UserId" value="@Model.Tutor.UserId" />
-            <input id="is-create" type="hidden" name="IsCreate" value=@(ViewBag.IsCreate ? "true" : "false")>
-            <div class="form-group">
-                <label class="control-label col-md-2">תעודת זהות :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.User.IdNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.User.IdNumber, "", new { @class = "text-danger" })
-                </div>
+        <hr />
+        <h3>פרטים אישיים</h3>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <input type="hidden" name="UserId" id="UserId" value="@Model.Tutor.UserId" />
+        <input id="is-create" type="hidden" name="IsCreate" value=@(ViewBag.IsCreate ? "true" : "false")>
+        <div class="form-group">
+            <label class="control-label col-md-2">תעודת זהות :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.User.IdNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.User.IdNumber, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">שם פרטי :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.User.FirstName, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">שם פרטי :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.User.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.User.FirstName, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">שם משפחה :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.User.LastName, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">שם משפחה :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.User.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.User.LastName, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">מגדר : </label>
-                <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Tutor.Gender, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.Gender, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">מגדר : </label>
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Tutor.Gender, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.Gender, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">אזור :</label>
-                <div class="col-md-10">
-                    @{
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">אזור :</label>
+            <div class="col-md-10">
+                @{
     //if is rackaz - cannot select area for the academic institution
     //The area is set in the controller based on CurrentUser's area
     object attr;
@@ -62,20 +61,20 @@
     {
         attr = new { @class = "form-control" };
     }
-                    }
-                    @Html.EnumDropDownListFor(model => model.Tutor.User.Area, attr)
-                    @Html.ValidationMessageFor(model => model.Tutor.User.Area, "", new { @class = "text-danger" })
-                </div>
+                }
+                @Html.EnumDropDownListFor(model => model.Tutor.User.Area, attr)
+                @Html.ValidationMessageFor(model => model.Tutor.User.Area, "", new { @class = "text-danger" })
             </div>
-            <h3>פרטי התקשרות</h3>
-            <div class="form-group">
-                <label class="control-label col-md-2">כתובת :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.Address, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.Address, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <h3>פרטי התקשרות</h3>
+        <div class="form-group">
+            <label class="control-label col-md-2">כתובת :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.Address, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.Address, "", new { @class = "text-danger" })
             </div>
-            @{
+        </div>
+        @{
     if (ViewBag.IsCreate == true)
     {
         <div class="form-group">
@@ -86,122 +85,122 @@
             </div>
         </div>
     }
-            }
+        }
 
-            <div class="form-group">
-                <label class="control-label col-md-2">כתובת מייל :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.User.Email, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.User.Email, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">כתובת מייל :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.User.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.User.Email, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">תאריך לידה :</label>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" value="@Model.Tutor.Birthday"  id="Tutor_Birthday" name="Trainee.Birthday" data-val="true" data-val-date="The field תאריך לידה must be a date." data-val-required="זהו שדה חובה" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">תאריך לידה :</label>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" value="@Model.Tutor.Birthday" id="Tutor_Birthday" name="Trainee.Birthday" data-val="true" data-val-date="The field תאריך לידה must be a date." data-val-required="זהו שדה חובה" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
-                    @*@Html.EditorFor(model => model.Trainee.Birthday, new {htmlAttributes = new {@class = "form-control"}, @type = "date"})*@
-                    @Html.ValidationMessageFor(model => model.Tutor.Birthday, "", new { @class = "text-danger", @type = "date" })
                 </div>
+                @*@Html.EditorFor(model => model.Trainee.Birthday, new {htmlAttributes = new {@class = "form-control"}, @type = "date"})*@
+                @Html.ValidationMessageFor(model => model.Tutor.Birthday, "", new { @class = "text-danger", @type = "date" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">מספר טלפון :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.PhoneNumber, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">מספר טלפון :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.PhoneNumber, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <h3>מידע אקדמי</h3>
-            <div class="form-group">
-                <label class="control-label col-md-2">מוסד אקדמי : </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Tutor.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name", Model.Tutor.AcademicInstitution != null ? Model.Tutor.AcademicInstitution.Id : (int?)null), "אנא בחר מוסד אקדמי מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicInstitution, "", new { @class = "text-danger" })
-                    @*<button class="btn" id="create-new-academic">הוסף מוסד אקדמי</button>*@
-                </div>
+        <h3>מידע אקדמי</h3>
+        <div class="form-group">
+            <label class="control-label col-md-2">מוסד אקדמי : </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Tutor.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name", Model.Tutor.AcademicInstitution != null ? Model.Tutor.AcademicInstitution.Id : (int?)null), "אנא בחר מוסד אקדמי מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.AcademicInstitution, "", new { @class = "text-danger" })
+                @*<button class="btn" id="create-new-academic">הוסף מוסד אקדמי</button>*@
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">מסלול לימוד ראשי : </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Tutor.AcademicMajor, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Tutor.AcademicMajor != null ? Model.Tutor.AcademicMajor.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">מסלול לימוד ראשי : </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Tutor.AcademicMajor, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Tutor.AcademicMajor != null ? Model.Tutor.AcademicMajor.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">מסלול לימוד משני : </label>
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Tutor.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Tutor.AcademicMajor1 != null ? Model.Tutor.AcademicMajor1.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new {@class = "text-danger"})
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">מסלול לימוד משני : </label>
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Tutor.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Tutor.AcademicMajor1 != null ? Model.Tutor.AcademicMajor1.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">שנה בתואר (ותק) :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.AcademicYear, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicYear, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">שנה בתואר (ותק) :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.AcademicYear, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.AcademicYear, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">מספר סמסטרים מבחינת התקדמות בתואר :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Tutor.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Tutor.SemesterNumber, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">מספר סמסטרים מבחינת התקדמות בתואר :</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tutor.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Tutor.SemesterNumber, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <h4>הסעיפים הבאים מתייחסים לרמת החניכה (יח"ל) במקצועות ליבה שיכול החונך לספק </h4>
+        <h4>הסעיפים הבאים מתייחסים לרמת החניכה (יח"ל) במקצועות ליבה שיכול החונך לספק </h4>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">רמת חניכה בפיזיקה : </label>
-                <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Tutor.PhysicsLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.PhysicsLevel, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">רמת חניכה בפיזיקה : </label>
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Tutor.PhysicsLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.PhysicsLevel, "", new { @class = "text-danger" })
             </div>
-            <div class="form-group">
-                <label class="control-label col-md-2">רמת חניכה במתמטיקה : </label>
-                <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Tutor.MathLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.MathLevel, "", new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">רמת חניכה במתמטיקה : </label>
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Tutor.MathLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.MathLevel, "", new { @class = "text-danger" })
             </div>
+        </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">רמת חניכה באנגלית : </label>
-                <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Tutor.EnglishLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.EnglishLevel, "", new { @class = "text-danger" })
-                </div>
+        <div class="form-group">
+            <label class="control-label col-md-2">רמת חניכה באנגלית : </label>
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Tutor.EnglishLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Tutor.EnglishLevel, "", new { @class = "text-danger" })
             </div>
+        </div>
 
 
-            @{
+        @{
     if (ViewBag.IsCreate != true)
     {
         <h3>סטטוס בתוכנית</h3>
-                <div class="form-group">
-                    <h5>שדה זה מציין האם המשתמש פעיל בתוכנית החונכות</h5>
-                    @Html.LabelFor(model => model.Tutor.User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.CheckBoxFor(model => model.Tutor.User.IsActive, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Tutor.User.IsActive, "", new { @class = "text-danger" })
-                    </div>
+            <div class="form-group">
+                <h5>שדה זה מציין האם המשתמש פעיל בתוכנית החונכות</h5>
+                @Html.LabelFor(model => model.Tutor.User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.CheckBoxFor(model => model.Tutor.User.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Tutor.User.IsActive, "", new { @class = "text-danger" })
                 </div>
- }
-            }
+            </div>
+    }
+        }
 
-        </form>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="tutor-submit" type="submit" value="שמור" class="btn btn-default" />
