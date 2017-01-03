@@ -10,7 +10,7 @@
     });
     $('#tutor-submit').click(function (e) {
         e.preventDefault();
-
+        if ($('#tutor-form').valid()) {
         var model = {
             EmploymentStatus: undefined,
             Gender: undefined,
@@ -88,5 +88,8 @@
                 window.location.href = "/Rackaz/Tutor";
             }
         });
+        } else {
+            $('#tutor-form').validate();
+        }
     });
 });

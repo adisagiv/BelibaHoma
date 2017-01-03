@@ -608,6 +608,7 @@
     <Content Include="Scripts\Highchart\code\themes\grid.js" />
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
+    <Content Include="Scripts\tutor-session.js" />
     <Content Include="Scripts\joboffer-index.js" />
     <Content Include="Scripts\JobOfferIndex.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

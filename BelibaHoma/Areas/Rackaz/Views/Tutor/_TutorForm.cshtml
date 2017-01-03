@@ -8,12 +8,11 @@
     Layout = null;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null,null,FormMethod.Post, new { id = "tutor-form", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal" style="direction: rtl">
-        <form autocomplete="off">
             <hr />
             <h3>פרטים אישיים</h3>
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -99,8 +98,8 @@
                 <label class="control-label col-md-2">תאריך לידה :</label>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <div class='input-group date' id='datetimepicker1'>
-                            <input type='text' class="form-control" value="@Model.Tutor.Birthday"  id="Tutor_Birthday" name="Trainee.Birthday" data-val="true" data-val-date="The field תאריך לידה must be a date." data-val-required="זהו שדה חובה" />
+                        <div class='input-group date datetimepicker-style' id='datetimepicker1'>
+                            <input type='text' class="form-control" value="@Model.Tutor.Birthday" id="Tutor_Birthday" name="Trainee.Birthday" data-val="true" data-val-date="The field תאריך לידה must be a date." data-val-required="זהו שדה חובה" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
@@ -140,7 +139,7 @@
                 <label class="control-label col-md-2">מסלול לימוד משני : </label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.Tutor.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Tutor.AcademicMajor1 != null ? Model.Tutor.AcademicMajor1.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new {@class = "text-danger"})
+                @Html.ValidationMessageFor(model => model.Tutor.AcademicMajor1, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -201,7 +200,7 @@
  }
             }
 
-        </form>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="tutor-submit" type="submit" value="שמור" class="btn btn-default" />

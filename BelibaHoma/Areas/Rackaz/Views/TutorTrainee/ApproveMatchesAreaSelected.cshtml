@@ -22,13 +22,13 @@
             שם החונך
         </th>
         <th>
-            ת.ז חונך
+            מסלול ראשי
         </th>
         <th>
             שם החניך
         </th>
         <th>
-            ת.ז חניך
+            עזרה נדרשת
         </th>
         <th>
         </th>
@@ -45,13 +45,13 @@
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.AcademicMajor.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.NeededHelpDescription)
             </td>
             <td>
                 @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})|

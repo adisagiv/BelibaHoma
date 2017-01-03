@@ -16,13 +16,13 @@
         <thead>
             <tr>
                 <th>
-                    בחר חניך
+                    חניך
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+                    פירוט עזרה נדרשת
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
@@ -42,13 +42,13 @@
         <tfoot>
             <tr>
                 <th>
-                    בחר חניך
+                    חניך
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+                    פירוט עזרה נדרשת
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
@@ -76,7 +76,7 @@
                         @Html.DisplayFor(modelItem => item.Trainee.FullName)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+                        @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Trainee.AcademicInstitution.Name)

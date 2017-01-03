@@ -30,13 +30,13 @@
             שם החונך
         </th>
         <th>
-            ת.ז חונך
+            מסלול ראשי
         </th>
         <th>
             שם החניך
         </th>
         <th>
-            ת.ז חניך
+            פירוט העזרה הנדרשת
         </th>
         <th id="is-active">
             @Html.DisplayNameFor(model => model.Status)
@@ -50,9 +50,6 @@
                 </th>
             }
         }
-        <th>
-            ציוות חריג
-        </th>
         <th id="actions">
             פעולות
         </th>
@@ -64,13 +61,13 @@
             @Html.DisplayNameFor(model => model.Tutor.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Trainee.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+            @Html.DisplayNameFor(model => model.Trainee.NeededHelpDescription)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -84,9 +81,6 @@
                 </th>
             }
         }
-        <th>
-            @Html.DisplayNameFor(model => model.IsException)
-        </th>
         <th></th>
     </tr>
     </tfoot>
@@ -98,13 +92,13 @@
                 @Html.DisplayFor(modelItem => item.Tutor.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Trainee.FullName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
             </td>
             <td>
                 @item.Status.ToDescription()
@@ -114,11 +108,11 @@
                 if (ViewBag.IsRackaz != true && item.Trainee.User.Area != null)
                 {
                     <td>
-                        @Html.DisplayNameFor(model => model.Trainee.User.Area)
+                        @item.Trainee.User.Area.ToDescription()
                     </td>
                 }
             }
-            <td>
+            @*<td>
                 @{
                     if (item.IsException == true)
                     {
@@ -131,12 +125,12 @@
                         ;
                     }
                 }
-            </td>
+            </td>*@
             <td>
                 @Html.ActionLink("ערוך פרטי קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
-                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.Trainee.User.Id}, null)|
-                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.Tutor.User.Id}, null)|
-                @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new {Area = "Tutor", id = item.Id}, null)
+                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, new { target = "_blank" })|
+                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, new { target = "_blank" })|
+                @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})
 
 
             </td>

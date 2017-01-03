@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorTraineeModel>
+@using Extensions.Enums
 
 @{
     ViewBag.Title = "Index";
@@ -14,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsException)
-            </th>
             <th></th>
         </tr>
         @foreach (var item in Model)
@@ -26,10 +24,7 @@
                     @Html.DisplayFor(modelItem => item.Trainee.FullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsException)
+                    @item.Status.ToDescription()
                 </td>
                 <td>
                     @Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)|
