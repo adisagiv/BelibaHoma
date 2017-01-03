@@ -5,9 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@*@section scripts {
+@section styles{
+    <link href="~/Content/Site.css" rel="stylesheet" />
+}
+
+@section scripts {
         @Scripts.Render("~/bundles/jqueryval")
-    }*@
+<script src="~/Scripts/tutor-session.js"></script>
+    }
 
 <div class="well">
     <h2>ערוך מפגש</h2>
