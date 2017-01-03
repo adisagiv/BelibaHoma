@@ -91,7 +91,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
+                @Html.ActionLink(@item.FullName, "Details", new { Area = "Trainee", id = item.User.Id }, new {target=""})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NeededHelpDescription)
@@ -128,8 +128,7 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("ערוך פרטי חניך", "Edit", new {Area = "Rackaz", id = item.User.Id}) |
-                @Html.ActionLink("פרטים", "Details", new {Area = "Trainee", id = item.User.Id})
+                @Html.ActionLink("עריכת חניך", "Edit", new {Area = "Rackaz", id = item.User.Id})
             </td>
         </tr>
     }

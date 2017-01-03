@@ -32,6 +32,10 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         // GET: Rackaz/AcademicMajor
         public ActionResult Index(int id)
         {
+            if (CurrentUser.UserRole == UserRole.Trainee)
+            {
+                id = CurrentUser.Id;
+            }
             var result = _gradeService.GetById(id);
             if (result.Success)
             {

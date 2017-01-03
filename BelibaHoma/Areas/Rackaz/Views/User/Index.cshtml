@@ -34,9 +34,6 @@
                     @Html.DisplayNameFor(model => model.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdNumber)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.UserRole)
                 </th>
                 <th>
@@ -55,9 +52,6 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdNumber)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UserRole)
@@ -80,9 +74,6 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdNumber)
                     </td>
                     <td>
                         @item.UserRole.ToDescription()
@@ -116,7 +107,7 @@
                         @{
                 if (ViewBag.IsRackaz != true)
                 {
-                    @Html.ActionLink("ערוך פרטי משתמש", "Edit", new { Area = "Admin", id = item.Id }) @Html.Raw(" |")
+                    @Html.ActionLink("עריכת משתמש", "Edit", new { Area = "Admin", id = item.Id }) @Html.Raw(" |")
                 }
                 <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
                         }

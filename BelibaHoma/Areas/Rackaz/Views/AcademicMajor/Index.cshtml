@@ -6,22 +6,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section styles{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/academic-major.js"></script>
+}
+
 <div class="well">
     <h2>מסלולי לימוד</h2>
 
     <p>
         @Html.ActionLink("הוסף מסלול אקדמי", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AcademicCluster)
-            </th>
-            <th></th>
-        </tr>
+    <table class="table" id="academic-major-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AcademicCluster)
+                </th>
+                <th id="actions"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AcademicCluster)
+                </th>
+                <th id="actions"></th>
+            </tr>
+        </tfoot>
 
         @foreach (var item in Model)
         {

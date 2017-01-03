@@ -4,25 +4,51 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section styles{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/academic-inst.js"></script>
+}
+
 <div class="well">
     <h2>מוסדות אקדמאים</h2>
 
     <p>
         @Html.ActionLink("הוסף מוסד אקדמי", "Create")
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InstitutionType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Area)
-            </th>
-            <th></th>
-        </tr>
+    <table class="table" id="academic-inst-table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InstitutionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th id="actions"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InstitutionType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Area)
+                </th>
+                <th id="actions"></th>
+            </tr>
+        </tfoot>
 
         @foreach (var item in Model)
         {
@@ -37,8 +63,7 @@
                     @item.Area.ToDescription()
                 </td>
                 <td>
-                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("פרטים נוספים", "Details", new { id = item.Id })
+                    @Html.ActionLink("עריכה", "Edit", new {id = item.Id})
                 </td>
             </tr>
         }

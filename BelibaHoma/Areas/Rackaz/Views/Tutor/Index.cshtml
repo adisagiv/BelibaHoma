@@ -22,15 +22,12 @@
 <p>
     @Html.ActionLink("הוסף חונך", "Create", "Tutor", new { Area = "Rackaz" }, new object { })
 </p>
-<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
+<input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 4 : 5)" />
 <table class="table" id="tutor-table">
     <thead>
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.IdNumber)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
@@ -61,9 +58,6 @@
             @Html.DisplayNameFor(model => model.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.User.IdNumber)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.AcademicInstitution.Name)
         </th>
         <th>
@@ -90,10 +84,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.IdNumber)
+                @Html.ActionLink(@item.FullName, "Details", new { Area = "Tutor", id = item.User.Id })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AcademicInstitution.Name)
@@ -127,8 +118,7 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("ערוך פרטי חונך", "Edit", new {Area = "Rackaz", id = item.User.Id}) |
-                @Html.ActionLink("פרטים", "Details", new {Area = "Tutor", id = item.User.Id})
+                @Html.ActionLink("עריכת חונך", "Edit", new {Area = "Rackaz", id = item.User.Id})
             </td>
         </tr>
     }

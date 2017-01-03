@@ -69,7 +69,7 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "מסלול לימוד נוסף בו נדרשת חניכה")]
         public AcademicMajorModel AcademicMajor2 { get; set; }
         
-        [Display(Name = "תיאור מילולי למקצוע בו נדרשת עזרה")]
+        [Display(Name = "תיאור העזרה הנדרשת")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public string NeededHelpDescription { get; set; }
         

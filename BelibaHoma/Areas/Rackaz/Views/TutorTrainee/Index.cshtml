@@ -89,13 +89,13 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tutor.FullName)
+                @Html.ActionLink(@item.Tutor.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainee.FullName)
+                @Html.ActionLink(@item.Trainee.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
@@ -127,10 +127,8 @@
                 }
             </td>*@
             <td>
-                @Html.ActionLink("ערוך פרטי קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
-                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, new { target = "_blank" })|
-                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, new { target = "_blank" })|
-                @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})
+                @Html.ActionLink("עריכת קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
+                @Html.ActionLink("צפייה בדיווחים", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})
 
 
             </td>

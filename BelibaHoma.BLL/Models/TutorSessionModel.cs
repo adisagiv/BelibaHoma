@@ -15,6 +15,8 @@ namespace BelibaHoma.BLL.Models
 
         [Display(Name = "תאריך המפגש")]
         [Required(ErrorMessage = "תאריך מפגש זה שדה חובה")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime MeetingDate { get; set; }
 
         [Display(Name = "זמן תחילת המפגש")]

@@ -207,6 +207,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\academic-inst.js" />
+    <Content Include="Scripts\academic-major.js" />
     <Content Include="Scripts\affix.js" />
     <Content Include="Scripts\alert-archive.js" />
     <Content Include="Scripts\alert.js" />

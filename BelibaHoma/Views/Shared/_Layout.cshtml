@@ -30,7 +30,27 @@
                 </button>*@
                 @*@Html.ActionLink("בליבה חומה", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})*@
                 <div>
-                    <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;" />
+                    @{
+                        var route = "";
+                        if (user != null)
+                        {
+                            if (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz)
+                            {
+                                route = "/Rackaz/Home";
+                            }
+                            else if (user.UserRole == UserRole.Trainee)
+                            {
+                                route = "";
+                            }
+                            else
+                            {
+                                route = "";
+                            }
+                        }
+                        <a href=@route>
+                            <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;"/>
+                        </a>
+                    }
                 </div>
             </div>
             @* This is the menu per user role below.. *@
