@@ -160,24 +160,29 @@ namespace BelibaHoma.BLL.Services
 
                         for (int i = 0; i < traineeCount; i++)
                         {
+                            var trainee = testRawData[i];
                             //Gender0,AcademicInstitution1,AcademicMajor2,AcademicMinor3,SemesterNumber4,SemesterGrade5,AlertCount6
                             var testParameters = new double[7];
-                            testParameters[0] = testRawData[i].Gender;
-                            testParameters[1] = testRawData[i].AcademicInstitutionId;
-                            testParameters[2] = testRawData[i].AcademicMajorId;
-                            testParameters[3] = (double) (testRawData[i].AcademicMajor1 != null ? testRawData[i].AcademicMinorId : -1);
-                            testParameters[4] = testRawData[i].SemesterNumber;
-                            testParameters[5] = testRawData[i].Grade.OrderByDescending(g => g.SemesterNumber).Select(g => g.Grade1).FirstOrDefault();
-                            testParameters[6] = alertRepository.GetQuery(a => a.AlertType == (int)AlertType.Intervention && a.TutorReport.TutorTrainee.TraineeId == testRawData[i].UserId).Count();
+                            testParameters[0] = trainee.Gender;
+                            testParameters[1] = trainee.AcademicInstitutionId;
+                            testParameters[2] = trainee.AcademicMajorId;
+                            testParameters[3] = (double)(trainee.AcademicMajor1 != null ? trainee.AcademicMinorId : -1);
+                            testParameters[4] = trainee.SemesterNumber;
+                            testParameters[5] = trainee.Grade.OrderByDescending(g => g.SemesterNumber).Select(g => g.Grade1).FirstOrDefault();
+                            //testParameters[6] = (double) alertRepository.GetQuery(a => a.AlertType == (int)AlertType.Intervention && a.TutorReport.TutorTrainee.TraineeId == testRawData[i].UserId).Count();
+                            testParameters[6] =
+                                alertRepository.GetAll().Count(a => a.AlertType == (int) AlertType.Intervention &&
+                                                                    a.TutorReport.TutorTrainee.TraineeId == trainee.UserId);
                             var prediction = new double[NClasses];
                             alglib.dforest.dfprocess(forest, testParameters, ref prediction);
                             if (prediction[1] > 0.65)
                             {
-                                endangeredTrainees.Add(new TraineeModel(testRawData[i]));
+                                endangeredTrainees.Add(new TraineeModel(trainee));
                             }
                         }
 
                         //If we got here - Yay! :)
+                        status.Data = endangeredTrainees;
                         status.Success = true;
                         status.Message = String.Format("חיזוי בוצע בהצלחה");
                         return status;

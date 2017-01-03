@@ -347,7 +347,7 @@ namespace BelibaHoma.BLL.Services
                     int clusterWeight = 20;
                     int institutionWeight = 50;
 
-                    bool isMechina = trainee.AcademicInstitution.InstitutionType == InstitutionType.Mechina;
+                    bool isMechina = (trainee.EnglishLevel > 0 || trainee.MathLevel > 0 || trainee.PhysicsLevel > 0);
                     if (isMechina)
                     {
                         majorWeight = majorWeight / 5;

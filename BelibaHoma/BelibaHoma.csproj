@@ -146,11 +146,11 @@
     <Compile Include="Areas\Rackaz\Controllers\AcademicInstitutionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AcademicMajorController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\JobOfferController.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\PredictionController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\ReportController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorController.cs" />
-    <Compile Include="Areas\Rackaz\Controllers\TutorReportControllerOld.cs" />
-    <Compile Include="Areas\Rackaz\Controllers\TutorSessionControllerOld.cs" />
+    <Compile Include="Areas\Rackaz\Controllers\TutorReportController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\TutorTraineeController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\UserController.cs" />
     <Compile Include="Areas\Rackaz\Models\AlertViewModel.cs" />
@@ -451,6 +451,9 @@
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Areas\Rackaz\Views\Alert\GetAlert.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Prediction\Predict.cshtml" />
+    <Content Include="Content\AboutPDF.pdf" />
+    <Content Include="Areas\Rackaz\Views\TutorReport\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -623,6 +626,7 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\Predict.js" />
     <Content Include="Scripts\rackaz-reports.js" />
     <Content Include="Scripts\reports\AvrGradeStatistics.js" />
     <Content Include="Scripts\reports\hour-statistics.js" />
@@ -631,6 +635,7 @@
     <Content Include="Scripts\RunAlgorithm.js" />
     <Content Include="Scripts\trainee-index.js" />
     <Content Include="Scripts\tutor-index.js" />
+    <Content Include="Scripts\TutorReport.js" />
     <Content Include="Scripts\tutortrainee-index.js" />
     <Content Include="Scripts\user-index.js" />
     <Content Include="Scripts\zero-password.js" />
@@ -662,7 +667,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Login\Index.cshtml" />

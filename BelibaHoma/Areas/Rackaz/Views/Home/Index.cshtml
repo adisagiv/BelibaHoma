@@ -13,34 +13,45 @@
     <script src="~/Scripts/rackaz-reports.js"></script>
 }
 
-<h1>ברוכים הבאים</h1>
-
 <div class="well">
+   
+     @*<br/>
+    <h1 align="center">ברוכים הבאים</h1>*@
+    <br/>
+
     <div class="row">
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <div>יש לך <b>@Model.newAlertsCount</b> התרעות חדשות</div>
-                </div>
-                <div class="panel-footer">
-                    <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
-                </div>
+            <div class="panel panel-danger" style="background-color: #f2dede">
+                @*       <div class="panel-heading">*@
+                <br/>
+                <center>
+                    <div style="color: brown"><h4>יש לך <b>@Model.newAlertsCount</b> התרעות חדשות </h4>
+                    </div>
+                </center>
+                @*</div>*@
+                @*<div class="panel-footer">
+                     <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
+                         <a class="btn btn-info" href="/Home/About">על התוכנית &raquo; </a>
+                    </div>*@
+                <br/>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
             <div class="panel panel-warning">
                 <div class="panel-heading">
-                    <div>יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול</div>
+                    <div>יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול
+                    </div>
                 </div>
                 <div class="panel-footer">
                     <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
-                </div >
+                </div>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <div>עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה</div>
+                    <div>עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה
+                    </div>
                 </div>
                 <div class="panel-footer">עבור לקשרי החניכה</div>
             </div>
@@ -57,4 +68,5 @@
     </div>
     <div class="row" id="report-partial"></div>
 </div>
+
 

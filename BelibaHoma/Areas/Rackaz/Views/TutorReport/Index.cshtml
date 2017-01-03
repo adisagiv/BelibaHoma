@@ -1,0 +1,91 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable/js")
+   
+<script src="~/Scripts/TutorReport.js"></script>
+}
+
+<div class="well">
+    <h2> דיווחים אודות החניך</h2>
+
+    <table class="table" id="tutor-reports">
+        <thead>
+        <tr>
+            @*TODO: Fix it*@
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
+                </th>*@
+            <th>
+                שם חניך
+            </th>
+            <th>
+                שם חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHoursBonding)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IsProblem)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationTime)
+            </th>
+            <th>פעולות</th>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    @*TODO:FIX it*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TutorHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsProblem)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreationTime)
+                    </td>
+                    <td>
+
+                        @if (item.TutorHours > 0)
+                        {
+                            @Html.ActionLink("פרטים נוספים", "Details", "TutorSession",new { Area = "Tutor", id = item.Id }, new { target = "_blank" })
+                        }
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+            <a href="/Rackaz/TutorTrainee/Index"> קשרי חונכות</a>
+
+</div>
+ 
