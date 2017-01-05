@@ -127,8 +127,11 @@
                 }
             </td>*@
             <td>
-                @Html.ActionLink("עריכת קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
-                @Html.ActionLink("צפייה בדיווחים", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})
+                @*@Html.ActionLink("עריכת קשר", "Edit", new {Area = "Rackaz", id = item.Id})*@
+                <a class="btn btn-default btn-xs" href="/Rackaz/TutorTrainee/Edit/?id=@item.Id">עריכה</a>
+                @Html.Raw("|")
+                <a class="btn btn-default btn-xs" href="/Tutor/TutorReport/TutorTraineeReports/?id=@item.Id" target="_blank">דיווחים</a>
+                @*@Html.ActionLink("צפייה בדיווחים", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})*@
 
 
             </td>
