@@ -16,6 +16,12 @@
     <p>
         @Html.DisplayNameFor(model => model.TutorReport.MeetingsDescription)
     </p>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
+        </td>
+    </tr>
+
     @{
         if (Model.FirstOrDefault().TutorReport.IsProblem == true)
         {
@@ -27,14 +33,6 @@
             </div>
         }
     }
-    <tr>
-        
-
-        <td>
-            @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
-        </td>
-            
-    </tr>
 
     <table class="table">
         <tr>
