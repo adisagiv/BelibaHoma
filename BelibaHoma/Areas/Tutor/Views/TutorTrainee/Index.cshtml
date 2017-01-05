@@ -27,8 +27,11 @@
                     @item.Status.ToDescription()
                 </td>
                 <td>
-                    @Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)|
-                    @Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)
+                    @*@Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)*@
+                    <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@item.Id" target="_blank">צפייה דיווחים</a>
+                    @Html.Raw("|")
+                    <a class="btn btn-default" href="/Tutor/TutorReport/Create/?tutorTraineeId=@item.Id" target="_blank">הוסף דיווח</a>
+                    @*@Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)*@
                 </td>
             </tr>
         }

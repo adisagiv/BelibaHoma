@@ -20,7 +20,8 @@
 <h2>חונכים</h2>
 
 <p>
-    @Html.ActionLink("הוסף חונך", "Create", "Tutor", new { Area = "Rackaz" }, new object { })
+    @*@Html.ActionLink("הוסף חונך", "Create", "Tutor", new { Area = "Rackaz" }, new object { })*@
+    <a class="btn btn-default" href="/Rackaz/Tutor/Create">הוסף חונך</a>
 </p>
 <input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 4 : 5)" />
 <table class="table" id="tutor-table">
@@ -84,7 +85,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(@item.FullName, "Details", new { Area = "Tutor", id = item.User.Id })
+                @Html.ActionLink(@item.FullName, "Details", new { Area = "Tutor", id = item.User.Id }, new { target = "_blank"})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AcademicInstitution.Name)

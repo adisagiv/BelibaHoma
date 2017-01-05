@@ -1,4 +1,5 @@
 ﻿@using System.Runtime.InteropServices
+@using BelibaHoma.BLL.Enums
 @model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
 
 @{
@@ -9,7 +10,8 @@
 <div class="well">
     <h2>דיווחים</h2>
     <p>
-        @Html.ActionLink("הוסף דיווח", "Create", new {tutorTraineeId = tutorTraineeId})
+        @*@Html.ActionLink("הוסף דיווח", "Create", new {tutorTraineeId = tutorTraineeId})*@
+        <a class="btn btn-default" href="/Tutor/TutorReport/Create/?tutorTraineeId=@tutorTraineeId">הוסף דיווח</a>
     </p>
     <table class="table">
         <tr>
@@ -43,10 +45,29 @@
             <tr>
                 @*TODO:FIX it*@
                 <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
+                    @{
+                        if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
+                        {
+                            @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FullName)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id }, new { target = "_blank" })
+                        }
+}              
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FirstName)
+                    @{
+            if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
+            {
+                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
+            }
+            else
+            {
+                @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id }, new { target = "_blank" })
+            }
+                    }
+                    
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TutorHours)
@@ -62,11 +83,16 @@
                     @Html.DisplayFor(modelItem => item.CreationTime)
                 </td>
                 <td>
-                    @Html.ActionLink("עריכה", "Edit", new {id = item.Id})|
-                    @Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new {id = item.Id}, null)|
+                    @*@Html.ActionLink("עריכה", "Edit", new {id = item.Id})*@
+                    <a class="btn btn-default btn-xs" href="/Tutor/TutorReport/Edit/@item.Id">עריכת דיווח</a>
+                    @Html.Raw("|")
+                    @*@Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new {id = item.Id}, null)*@
+                    <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Create/@item.Id">הוסף מפגש</a>
                     @if (item.TutorHours > 0)
                     {
-                        @Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)
+                        @Html.Raw("|")
+                        @*@Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)*@
+                        <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.Id">פרטים</a>
                     }
 
                 </td>
@@ -76,11 +102,11 @@
     @{
         if (ViewBag.IsTutor == false)
         {
-            <a href="/Rackaz/TutorTrainee/Index">חזור לקשרי חונכות</a>
+            <a class ="btn btn-default" href="/Rackaz/TutorTrainee/Index">חזור לקשרי חונכות</a>
         }
         else
         {
-            <a href="/Tutor/TutorTrainee/Index/@ViewBag.TutorId">חזור לקשרי חונכות</a>
+            <a class="btn btn-default" href="/Tutor/TutorTrainee/Index/@ViewBag.TutorId">חזור לקשרי חונכות</a>
         }
 }
 </div>
