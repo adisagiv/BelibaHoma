@@ -11,62 +11,85 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-horizontal" style="direction: rtl">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    <div class="form-group">
-        <label class="control-label col-md-2">תאריך המפגש:</label>
-        <div class="col-md-3">
-                <div class="form-group">
-                    <div class='input-group date datetimepicker-style' id='datetimepicker1'>
+        <div class="form-horizontal" style="direction: rtl">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @*<div class="form-group">
+                    <label class="control-label col-md-2">,תיאור המפגשים:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.TutorReport.MeetingsDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TutorReport.MeetingsDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            @*<div class="form-group">
+                <label class="control-label col-md-2">תאריך המפגש:</label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker-style' id='datetimepicker1'>
                         <input type='text' class="form-control" value="@Model.MeetingDate" id="TutorReport_MeetingDate" name="TutorReport.MeetingDate" data-val="true" data-val-date="השדה תאריך מפגש צריך להיות תאריך חוקי." data-val-required="זהו שדה חובה" />
-                        <span class="input-group-addon">
+                            <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
+                        </div>
                     </div>
+                    @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MeetingDate, "", new {@class = "text-danger"})
                 </div>
-                @Html.ValidationMessageFor(model => model.MeetingDate, "", new {@class = "text-danger"})
+            </div>*@
+            <div class="form-group">
+                <label class="control-label col-md-2">תאריך מפגש :</label>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker-style' id='datetimepicker1'>
+                            <input type='text' class="form-control" value="@Model.MeetingDate" id="MeetingDate" name="MeetingDate" data-val-date="השדה תאריך מפגש צריך להיות תאריך חוקי." data-val-required="זהו שדה חובה" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    @*@Html.EditorFor(model => model.Trainee.Birthday, new {htmlAttributes = new {@class = "form-control"}, @type = "date"})*@
+                    @Html.ValidationMessageFor(model => model.MeetingDate, "", new { @class = "text-danger", @type = "date" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">זמן תחילת המפגש :</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.StartTime,  new { htmlAttributes = new { @class = "form-control" }})
-                @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">זמן תחילת המפגש :</label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.StartTime,  new { htmlAttributes = new { @class = "form-control" }})
+                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">זמן סיום המפגש : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">זמן סיום המפגש : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-2">מספר שעות חברותה : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NumBondingHours, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NumBondingHours, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">מספר שעות חברותה : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NumBondingHours, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NumBondingHours, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId" />
+            <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId" />
 
-        @Html.HiddenFor(model => model.TutorReport.TutorTraineeId)
+            @Html.HiddenFor(model => model.TutorReport.TutorTraineeId)
 
-        @*TODO: add this to the model by the given parameters from tutorReport*@
-        <div class="form-group">
-            <label class="control-label col-md-2">מקום המפגש : </label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MeetingPlace, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.MeetingPlace, "", new { @class = "text-danger" })
-        </div>
-    </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="שמור מפגש" class="btn btn-default" />
+            @*TODO: add this to the model by the given parameters from tutorReport*@
+            <div class="form-group">
+                <label class="control-label col-md-2">מקום המפגש : </label>
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MeetingPlace, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MeetingPlace, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="שמור מפגש" class="btn btn-default" />
+                </div>
             </div>
         </div>
-    </div>
 }
 
 <div>

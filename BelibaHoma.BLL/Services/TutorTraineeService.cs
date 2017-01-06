@@ -424,11 +424,11 @@ namespace BelibaHoma.BLL.Services
 
                     //Trainee Major match
                     int calc1 = 0;
-                    if (trainee.AcademicMajor == tutor.AcademicMajor)
+                    if (trainee.AcademicMajor.Id == tutor.AcademicMajor.Id)
                     {
                         calc1 += majorWeight;
                     }
-                    else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor == tutor.AcademicMajor1)
+                    else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor.Id == tutor.AcademicMajor1.Id)
                     {
                         calc1 += majorWeight - (int)(0.1 * majorWeight);
                     }
@@ -437,11 +437,11 @@ namespace BelibaHoma.BLL.Services
                     int calc2 = 0;
                     if (trainee.AcademicMajor1 != null)
                     {
-                        if (tutor.AcademicMajor1 != null && trainee.AcademicMajor1 == tutor.AcademicMajor1)
+                        if (tutor.AcademicMajor1 != null && trainee.AcademicMajor1.Id == tutor.AcademicMajor1.Id)
                         {
                             calc2 += minorWeight;
                         }
-                        else if (trainee.AcademicMajor1 == tutor.AcademicMajor)
+                        else if (trainee.AcademicMajor1.Id == tutor.AcademicMajor.Id)
                         {
                             calc2 += minorWeight - (int)(0.1 * minorWeight);
                         }
@@ -454,11 +454,11 @@ namespace BelibaHoma.BLL.Services
                     //Trainee needed help exsists
                     if (trainee.AcademicMajor2 != null)
                     {
-                        if (trainee.AcademicMajor2 == tutor.AcademicMajor)
+                        if (trainee.AcademicMajor2.Id == tutor.AcademicMajor.Id)
                         {
                             calc1 += (int)(majorWeight * 0.5);
                         }
-                        else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor2 == tutor.AcademicMajor1)
+                        else if (tutor.AcademicMajor1 != null && trainee.AcademicMajor2.Id == tutor.AcademicMajor1.Id)
                         {
                             calc1 += (int)(majorWeight * 0.5);
                         }
@@ -556,7 +556,7 @@ namespace BelibaHoma.BLL.Services
             int matSize = 0;
             matSize = numTrainees >= numTutors ? numTrainees : numTutors;
             int[,] costMatrix = new int[matSize, matSize];
-            int bigM = maxUtil * 100;
+            int bigM = maxUtil * 1000;
 
             for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
             {
@@ -588,7 +588,7 @@ namespace BelibaHoma.BLL.Services
                     {
                         if (finalmatch[traineeIdx, tutorIdx] == 5)
                         {
-                            if (costMatrix[traineeIdx, traineeIdx] != bigM)
+                            if (utilityMat[traineeIdx, tutorIdx] != -1)
                             {
                                 //Create Match
                                 var result = TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
