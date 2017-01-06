@@ -7,16 +7,39 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2>פרטי החניך</h2>
+    <h2><b>פרטי החניך</b></h2>
     <div>
-        <hr />
+        <hr/>
+        
+
+        @{
+            if (ViewBag.IsTrainee == false)
+            {
+                var id = Model.UserId;
+                var action = "Edit/" + id;
+                     <a class="btn btn-info" href="/Rackaz/Trainee/index" align="left">לרשימת כל החניכים</a>
+                    @Html.Raw("|")
+                    <a class="btn btn-default" href="/Rackaz/TutorReport/index/@Model.UserId" target="_blank"> היסטוריית דיווחים</a>
+                    @*@Html.ActionLink("ערוך", action, new {Area = "Rackaz"})*@
+                    @Html.Raw("|") 
+                    <a class="btn btn-default" href="/Rackaz/Trainee/@action">עריכה</a>
+                    @Html.Raw("|")
+                   }
+            <a class="btn btn-default" href="/Trainee/Grade/index/@Model.UserId">ציונים</a>
+
+}
         <dl class="dl-horizontal">
+
             <dd>
                 <h3>פרטים אישיים</h3>
+                
             </dd>
+
             <dt>
+
                 @Html.DisplayNameFor(model => model.User.IdNumber)
             </dt>
+
             <dd>
                 @Html.DisplayFor(model => model.User.IdNumber)
             </dd>
@@ -176,16 +199,6 @@
     </div>
     <p>
         @*//TODO: verify how to route this only if Rackaz / Admin*@
-        @{
-            if (ViewBag.IsTrainee == false)
-            {
-                var id = Model.UserId;
-                var action = "Edit/" + id;
-                @Html.ActionLink("ערוך", action, new { Area = "Rackaz" })
-                <br>
-                @Html.ActionLink("חזור לרשימה", "Index", new { Area = "Rackaz" })
-            }
 
-        }
     </p>
 </div>

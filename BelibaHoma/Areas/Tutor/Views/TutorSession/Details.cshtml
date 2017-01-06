@@ -7,23 +7,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2 align="center">מפגשים</h2>
-
+    <h2 align="">מפגשים</h2>
+    <hr/>
     <p>
-        @*@Html.ActionLink("לדיווחים", "Index", "TutorReport")*@
         <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.FirstOrDefault().TutorReport.TutorTraineeId">חזור לעמוד דיווחים</a>
-
     </p>
     <br/>
-    <h4>
-        @*@Html.DisplayNameFor(model => model.TutorReport.MeetingsDescription)*@
-        תיאור המפגשים
-    </h4>
-
-
-            @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
-        </td>
-    </tr>
 
     @{
         if (Model.FirstOrDefault().TutorReport.IsProblem == true)
@@ -37,11 +26,16 @@
         }
     }
     <br/>
-    <br/>
     <h4>
-         :פירוט המפגשים
+     תיאור המפגשים:
     </h4>
 
+            @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
+    <br/>
+    <br />
+    <h4>
+         פירוט:
+    </h4>
     <table class="table">
         <tr>
             <th>

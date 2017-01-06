@@ -16,11 +16,10 @@
     <script src="~/Scripts/tutortrainee-index.js"></script>
 }
 <div class="well">
-<h2>קשרי חונכות</h2>
+    <h2 align="center"><b>קשרי חונכות</b></h2>
 
-<p>
-    @*@Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")*@
-    <a class="btn btn-default" href="/Rackaz/TutorTrainee/ManualMatch">עבור לציוות ידני</a>
+<p align="right">
+    <a class="btn btn-default" href="/Rackaz/TutorTrainee/ManualMatch">ציוות ידני</a>
 </p>
 <input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
 <table class="table" id="tutortrainee-table">
