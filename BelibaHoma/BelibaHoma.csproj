@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-rtl.css" />
+    <Content Include="Content\direction.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\אולירקע.jpg" />
     <Content Include="Content\לוגו.jpg" />
@@ -297,8 +298,6 @@
     <Content Include="Areas\Trainee\Views\JobOffer\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\JobOffer\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\Index.cshtml" />
-    <Content Include="Areas\Rackaz\Views\TutorTrainee\Edit.cshtml" />
-    <Content Include="Areas\Rackaz\Views\TutorTrainee\_TutorTraineeForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatches.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTraineeSelect.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTutorSelect.cshtml" />
@@ -610,6 +609,7 @@
     <Content Include="Scripts\Highchart\code\themes\grid.js" />
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
+    <Content Include="Scripts\reports\AlertsStatistics.js" />
     <Content Include="Scripts\tutor-session.js" />
     <Content Include="Scripts\joboffer-index.js" />
     <Content Include="Scripts\JobOfferIndex.js" />
@@ -675,6 +675,7 @@
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Menu\Index.cshtml" />
     <Content Include="Views\ChangePassword\Index.cshtml" />
+    <Content Include="Views\Shared\_Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

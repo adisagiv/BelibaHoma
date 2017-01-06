@@ -23,7 +23,6 @@ namespace BelibaHoma.DAL
         public int TutorId { get; set; }
         public int TraineeId { get; set; }
         public int Status { get; set; }
-        public bool IsException { get; set; }
         public int Id { get; set; }
     
         public virtual Trainee Trainee { get; set; }

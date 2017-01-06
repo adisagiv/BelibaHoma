@@ -166,9 +166,14 @@ namespace BelibaHoma.Controllers
             }
         }
 
-        public ActionResult Error(StatusModel status)
+        public ActionResult Error(StatusModel status, bool isPartial = false)
         {
-            return View("~/Views/Shared/Error.cshtml", status);
+            if (!isPartial)
+            {
+                return View("~/Views/Shared/Error.cshtml", status);    
+            }
+
+            return PartialView("~/Views/Shared/_Error.cshtml",status);
         }
     }
 }

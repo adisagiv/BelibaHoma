@@ -164,7 +164,6 @@
           <Property Name="TutorId" Type="int" Nullable="false" />
           <Property Name="TraineeId" Type="int" Nullable="false" />
           <Property Name="Status" Type="int" Nullable="false" />
-          <Property Name="IsException" Type="bit" Nullable="false" />
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
@@ -810,7 +809,6 @@
           <Property Name="TutorId" Type="Int32" Nullable="false" />
           <Property Name="TraineeId" Type="Int32" Nullable="false" />
           <Property Name="Status" Type="Int32" Nullable="false" />
-          <Property Name="IsException" Type="Boolean" Nullable="false" />
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="Trainee" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Trainee" FromRole="TutorTrainee" ToRole="Trainee" />
           <NavigationProperty Name="Tutor" Relationship="BelibaHomaDBModel.FK_TutorTrainee_Tutor" FromRole="TutorTrainee" ToRole="Tutor" />
@@ -1246,7 +1244,6 @@
             <EntityTypeMapping TypeName="BelibaHomaDBModel.TutorTrainee">
               <MappingFragment StoreEntitySet="TutorTrainee">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IsException" ColumnName="IsException" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="TraineeId" ColumnName="TraineeId" />
                 <ScalarProperty Name="TutorId" ColumnName="TutorId" />

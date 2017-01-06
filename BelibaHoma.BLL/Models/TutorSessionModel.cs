@@ -35,7 +35,7 @@ namespace BelibaHoma.BLL.Models
         
         public int TutorReportId { get; set; }
 
-        public TutorReport TutorReport { get; set; }
+        public TutorReportModel TutorReport { get; set; }
 
 
         [Display(Name = "מקום המפגש")]

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using BelibaHoma.DAL.Repositories;
 using Generic.Models;
 using Services.Log;
 
@@ -108,19 +109,33 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     model.CreationTime = DateTime.Now;
-                    var TutorReportRepository = unitOfWork.GetRepository<ITutorReportRepository>();
+                    var tutorReportRepository = unitOfWork.GetRepository<ITutorReportRepository>();
                     var entity = model.MapTo<TutorReport>();
 
-                    //add repositories for academic major and exstact by key according to form
-
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var tutorTrainee = tutorTraineeRepository.GetByKey(model.TutorTraineeId);
 
-                    var TutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
-                    var TutorTrainee = TutorTraineeRepository.GetByKey(model.TutorTraineeId);
+                    //Server Side Validations
+                    bool isNotLate =
+                            tutorReportRepository.GetAll()
+                                .ToList()
+                                .Any(tr => tr.TutorTrainee.Status == (int)TTStatus.Active && tr.TutorTrainee.TutorId == tutorTrainee.Tutor.UserId && tr.CreationTime > DateTime.Now.AddDays(-21));
+                    bool isReport = tutorReportRepository.GetAll()
+                                .ToList()
+                                .Any(tr => tr.TutorTrainee.Status == (int)TTStatus.Active && tr.TutorTrainee.TutorId == tutorTrainee.Tutor.UserId);
+
+                    if (isNotLate == false && isReport)
+                    {
+                        status.Message = "לא הוזן דיווח כבר למעלה מ-3 שבועות.\nאנא פנה אל הרכז האזורי לעזרה.";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
+
                     //Linking the Complexed entities to the retrieved ones
-                    entity.TutorTrainee = TutorTrainee;
+                    entity.TutorTrainee = tutorTrainee;
+                    
                     //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
-                    TutorReportRepository.Add(entity);
+                    tutorReportRepository.Add(entity);
 
                     unitOfWork.SaveChanges();
 
@@ -132,7 +147,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הזנת הדיווח");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הזנת הדיווח");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 

@@ -1,4 +1,4 @@
-﻿$(function() {
+﻿$(function () {
     $('#tutortrainee-table')
          .DataTable({
              initComplete: function () {
@@ -38,12 +38,25 @@
                                      select.append(option);
                                  });
 
-                             }
-                         });
+                         }
+                     });
                  var val = 'פעיל';
                  var column = $("#column-value").val();
                  this.api().columns(4).search('^' + val + '$', true, false)
                                          .draw();
              }
          });
+    $("#tutortrainee-table").on('click', '.change-tutor-trainee-status' , function (event) {
+        var ttId = $(this).data("tutortraineeid");
+        $.post("/Rackaz/TutorTrainee/ChangeStatus", { tutorTraineeId: ttId }, function (status) {
+            if (status.Success) {
+                window.location.reload();
+            } else {
+                alert(status.Message);
+            }
+        }).fail(function (data) {
+            // Make sure that the data is now a html of the error page
+            $('div.container.body-content').html(data.responseText);
+        });;
+    });
 });

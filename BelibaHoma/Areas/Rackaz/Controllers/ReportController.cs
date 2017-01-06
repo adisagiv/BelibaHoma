@@ -207,9 +207,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     {
 
                         min= new int {},  
-                        title = new Title3
+                        title = new Title2()
                         {
-                            text = "כמות מצטרפים ונושרים"
+                            text = "כמות מצטרפים ונושרים",
+                            //useHTML = false
                         },
                     
                     },
@@ -246,7 +247,134 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             return null;
         }
 
-        
+
+
+
+        /// 
+        /// 
+        /// ///////  /// Alerts
+        /// 
+        /// 
+
+
+        // return the view of the report
+        [HttpPost]
+        public ActionResult AlertsStatistics()
+        {
+            var result = _reportService.GeAlertStatisticsProssibleYears();
+
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            return Error(result);
+        }
+
+        //return the data for the report
+        [HttpPost]
+        public ActionResult GetAlertsStatistics(Area? area, int? year)
+        {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
+            if (!year.HasValue)
+            {
+                year = DateTime.Now.Year;
+            }
+
+            var startTime = new DateTime(year.Value, 10, 1);
+            var endTime = new DateTime(year.Value + 1, 10, 1);
+
+            var result = _reportService.GetAlertsStatistics(area, startTime, endTime);
+
+            if (result.Success)
+            {
+                var chartModel1 = new HighChartJDModel
+                {
+                    chart = new Chart1
+                    {
+                        type = "column"
+                    },
+                    title = new Title2
+                    {
+                        text = "דוח סטטיסטיקת התרעות",
+                        //useHTML = false
+                    },
+                    xAxis = new Xaxis1
+                    {
+                        // we will take the years from the dictionary
+                        
+                    categories = new string[]
+                        {
+                            "Oct",
+                            "Nov",
+                            "Dec",
+                            "Jan",
+                            "Feb",
+                            "Mar",
+                            "Apr",
+                            "May",
+                            "Jun",
+                            "Jul",
+                            "Aug",
+                            "Sep"
+                        },                      
+
+                    crosshair= true
+                    
+                        
+                    },
+                    yAxis = new Yaxis1
+                    {
+
+                        min= new int {},  
+                        title = new Title2()
+                        {
+                            text = "כמות התרעות",
+                            //useHTML = false
+                        },
+                    
+                    },
+                    series = result.Data.Series.ToArray(),
+            tooltip = new Tooltip1()
+            {
+                headerFormat= "<span style='font-size:10px'>{point.key}</span><table>",
+                pointFormat= "<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y}</b></td></tr>",
+                footerFormat = "</table>",
+                shared= true,
+                useHTML= true
+
+            },
+             plotOptions= new Plotoptions1()
+                {
+                 column= new Column2()
+                 {
+                    pointPadding= new float(),
+                    borderWidth= new int()
+                 }
+
+                },
+                    exporting = new Exporting1
+                    {
+                        enabled = false
+                    }  
+
+
+                };
+
+                return Json(chartModel1);
+            }
+
+            return null;
+        }
+
+
+
+
+
+
+
         /// //////////////////////////InvestedHoursStatistics
 
 
@@ -490,10 +618,5 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
 
 
-        [HttpPost]
-        public ActionResult AlertsStatistics()
-        {
-            return View();
-        }
     }
 }

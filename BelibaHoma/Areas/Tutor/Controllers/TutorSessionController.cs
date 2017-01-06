@@ -47,7 +47,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
                 var model = new TutorSessionModel
                 {
                     TutorReportId = id,
-                    TutorReport = new TutorReport
+                    TutorReport = new TutorReportModel
                     {
                         TutorTraineeId = status.Data.TutorTraineeId
                     },

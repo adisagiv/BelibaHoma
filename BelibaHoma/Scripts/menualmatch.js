@@ -21,7 +21,6 @@
                         TutorId: undefined,
                         TraineeId: undefined,
                         Status: undefined,
-                        IsException: undefined,
                         Trainee: undefined,
                         Tutor: undefined
                     }

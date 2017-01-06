@@ -20,7 +20,7 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         private readonly IGradeService _gradeService;
         private readonly ITraineeService _traineeService;
         private readonly IAlertService _alertService;
-        private readonly int GradeThreshold = 60;
+        private readonly int GradeThreshold = 70;
 
         public GradeController(IGradeService gradeService,ITraineeService traineeService, IAlertService alertService)
         {
