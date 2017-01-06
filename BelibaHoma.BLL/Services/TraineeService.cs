@@ -270,19 +270,25 @@ namespace BelibaHoma.BLL.Services
                             throw new System.ArgumentException(status.Message,"updatedModel");
                         }
                         if (updatedModel.User.IsActive == false && trainee.User.IsActive == true)
-                        //{
-                        //    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
-                        //    var tutortrainees =
-                        //        tutortraineeRepository.GetAll().Where(tt => tt.TraineeId == trainee.UserId && tt.Status == (int)TTStatus.Active).ToList();
-                        //    if (tutortrainees[0] != null)
-                        //    {
-                        //        foreach (var tt in tutortrainees)
-                        //        {
+                        {
+                            var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                            var tutortrainees =
+                                tutortraineeRepository.GetAll().Where(tt => tt.TraineeId == trainee.UserId && tt.Status == (int)TTStatus.Active).ToList();
+                            if (tutortrainees[0] != null)
+                            {
+                                foreach (var tt in tutortrainees)
+                                {
+                                    var result = new StatusModel<TutorTraineeModel>(false, String.Empty, new TutorTraineeModel());
+                                    result = _tutorTraineeService.ChangeStatus(tt.Id);
+                                    if (result.Success == false)
+                                    {
+                                        status.Message = "בעיה בהפיכת קשרי החונכות של החניך ללא פעילים";
+                                        throw new System.ArgumentException(status.Message, "updatedModel");
+                                    }
+                                }
+                            }
 
-                        //        }
-                        //    }
-
-                        //}
+                        }
                         //Updating the entity from the model received by the form
                         trainee.User.FirstName = updatedModel.User.FirstName;
                         trainee.User.LastName = updatedModel.User.LastName;
