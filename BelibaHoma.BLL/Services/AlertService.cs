@@ -179,7 +179,7 @@ namespace BelibaHoma.BLL.Services
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    int Thresh = -20;
+                    int Thresh = -15;
                     var DateThresh = DateTime.Now.AddDays(Thresh);
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     var tutorList = tutorRepository.GetAll().ToList().Where(t => t.User.IsActive == true && t.TutorTrainee.Any(tt => tt.Status == (int)TTStatus.Active)).ToList();

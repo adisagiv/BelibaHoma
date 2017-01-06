@@ -2925,3 +2925,21 @@ System.ArgumentException: לא הוזן דיווח כבר למעלה מ-3 שבועות.
 אנא פנה אל הרכז האזורי לעזרה.
 Parameter name: model
    at BelibaHoma.BLL.Services.TutorReportService.Add(TutorReportModel model) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Services\TutorReportService.cs:line 127
+2017-01-06 16:38:10,933 [14] ERROR Services.Log.LogService - לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+System.ArgumentException: לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 70
+2017-01-06 16:41:09,287 [21] ERROR Services.Log.LogService - לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+System.ArgumentException: לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 70
+2017-01-06 16:52:14,501 [11] ERROR Services.Log.LogService - לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+System.ArgumentException: לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.
+אנא פנה אל הרכז האזורי לעזרה.
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 70
