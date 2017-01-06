@@ -269,7 +269,7 @@ namespace BelibaHoma.BLL.Services
                             status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
                             throw new System.ArgumentException(status.Message,"updatedModel");
                         }
-                        //if (updatedModel.User.IsActive == false && trainee.User.IsActive == true)
+                        if (updatedModel.User.IsActive == false && trainee.User.IsActive == true)
                         //{
                         //    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
                         //    var tutortrainees =

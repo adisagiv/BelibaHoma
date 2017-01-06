@@ -588,7 +588,7 @@ namespace BelibaHoma.BLL.Services
                     {
                         if (finalmatch[traineeIdx, tutorIdx] == 5)
                         {
-                            if (costMatrix[traineeIdx, traineeIdx] != bigM)
+                            if (costMatrix[traineeIdx, tutorIdx] != bigM)
                             {
                                 //Create Match
                                 var result = TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
