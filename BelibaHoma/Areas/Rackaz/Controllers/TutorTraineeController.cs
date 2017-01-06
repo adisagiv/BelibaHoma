@@ -112,7 +112,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 //traineeStatus.Message = traineeStatus.Message;
                 Response.StatusCode = 404;
-                return Error(traineeStatus);
+                return Error(traineeStatus, true);
             }
            // add tutor list
             var tutorStatus = _tutorService.GetUnMatchedTutors(area, false);
@@ -124,7 +124,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 //tutorStatus.Message = tutorStatus.Message;
                 Response.StatusCode = 404;
-                return Error(tutorStatus);
+                return Error(tutorStatus, true);
             }
             return View(model);
         }
@@ -138,7 +138,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             //traineeStatus.Message = traineeStatus.Message;
             Response.StatusCode = 404;
-            return Error(traineeStatus);
+            return Error(traineeStatus, true);
         }
 
         public ActionResult ManualMatchTutorSelect(bool showMatched, Area area)
@@ -151,7 +151,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             }
             //tutorStatus.Message = tutorStatus.Message;
             Response.StatusCode = 404;
-            return Error(tutorStatus);
+            return Error(tutorStatus, true);
         }
 
         [HttpPost]
@@ -199,7 +199,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             else
             {
                 Response.StatusCode = 404;
-                return Error(tutorTraineeStatus);
+                return Error(tutorTraineeStatus, true);
             }
             return View("ApproveMatchesAreaSelected", model);
         }
@@ -218,10 +218,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     return ApproveMatchesAreaSelected(selectedArea);
                 }
                 Response.StatusCode = 404;
-                return Error(status);
+                return Error(status, true);
             }
             Response.StatusCode = 404;
-            return Error(unApprovedMatch);
+            return Error(unApprovedMatch, true);
         }
 
         [HttpPost]
@@ -237,10 +237,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     return ApproveMatchesAreaSelected(selectedArea);
                 }
                 Response.StatusCode = 404;
-                return Error(unApprovedMatch);
+                return Error(unApprovedMatch, true);
             }
             Response.StatusCode = 404;
-            return Error(status);
+            return Error(status, true);
         }
 
         public ActionResult RunAlgorithm()
@@ -303,10 +303,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     return Json(changeResult);
                 }
                 Response.StatusCode = 404;
-                return Error(changeResult);
+                return Error(changeResult, true);
             }
             Response.StatusCode = 404;
-            return Error(status);
+            return Error(status, true);
         }
     }
 }
