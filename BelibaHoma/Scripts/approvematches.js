@@ -7,7 +7,7 @@
             //Catch the form submition -
         }).fail(function (data) {
             // Make sure that the data is now a html of the error page
-            $('html').html(data.responseText);
+            $('div.container.body-content').html(data.responseText);
         });
     }
 

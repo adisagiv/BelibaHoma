@@ -58,12 +58,17 @@ namespace BelibaHoma.BLL.Services
                     var TutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
                     var entity = model.MapTo<TutorSession>();
 
-                    //add repositories for academic major and exstact by key according to form
-
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
 
                    var TutorReportRepository = unitOfWork.GetRepository<ITutorReportRepository>();
                    var TutorReport = TutorReportRepository.GetByKey(model.TutorReportId);
+
+                    //Server side validations
+                   if (TutorReport.CreationTime > model.MeetingDate.AddDays(21))
+                    {
+                        status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
 
                     if (entity.StartTime > entity.EndTime)
                     {
@@ -85,7 +90,7 @@ namespace BelibaHoma.BLL.Services
                     entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to trainee
                     entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to tutor
 
-                    
+
                     
                     //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
                     TutorSessionRepository.Add(entity);
@@ -98,7 +103,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
+                if (status.Message == String.Empty)
+                {
                 status.Message = String.Format("שגיאה במהלך הזנת המפגש");
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -136,6 +144,13 @@ namespace BelibaHoma.BLL.Services
 
                         entity.TutorReport = TutorReport;
 
+                        //Server side validations
+                        if (TutorReport.CreationTime > updatedModel.MeetingDate.AddDays(21))
+                        {
+                            status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך יצירת הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
+                        }
+
                         var TutorHoursTemp = entity.StartTime - entity.EndTime;
                         var Tht = TutorHoursTemp.TotalHours;
                         //updating Report bonding and tutor hours
@@ -159,7 +174,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
+                if (status.Message == String.Empty)
+                {
                 status.Message = String.Format("שגיאה במהלך עדכון המפגש");
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 

@@ -14,12 +14,8 @@ namespace BelibaHoma.BLL.Models
 
         public int TraineeId { get; set; }
 
-        //TODO: Consider adding required for Status +/ IsException
         [Display(Name = "סטטוס")]
         public TTStatus Status { get; set; }
-
-        [Display(Name = "?קשר חריג")]
-        public bool IsException { get; set; }
 
         [Display(Name = "חניך")]
         public TraineeModel Trainee { get; set; }

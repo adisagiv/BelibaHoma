@@ -16,10 +16,11 @@
 {
     @Scripts.Render("~/bundles/datatable/js")
     <script src="~/Scripts/trainee-index.js"></script>
+    <script src="~/Scripts/zero-password.js"></script>
+
 }
 <div class="well">
-<h2>חניכים</h2>
-
+    <h1 align="center"><b>חניכים</b></h1>
 <p>
     @*@Html.ActionLink("הוסף חניך", "Create", "Trainee", new { Area = "Rackaz" }, new object { })*@
     <a class="btn btn-default" href="/Rackaz/Trainee/Create">הוסף חניך</a>
@@ -129,7 +130,9 @@
                 }
             </td>
             <td>
-                @Html.ActionLink("עריכת חניך", "Edit", new {Area = "Rackaz", id = item.User.Id})
+                <a class="btn btn-default btn-xs" href="/Rackaz/Trainee/Edit/@item.UserId">עריכה</a>
+                @Html.Raw("|")
+                <a class="btn btn-default btn-xs zero-password" data-userid="@item.UserId">אפס סיסמא</a>
             </td>
         </tr>
     }
