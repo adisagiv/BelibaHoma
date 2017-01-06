@@ -70,6 +70,13 @@ namespace BelibaHoma.BLL.Services
                         throw new System.ArgumentException(status.Message, "model");
                     }
 
+                    if (entity.StartTime > entity.EndTime)
+                    {
+                        status.Message = String.Format("זמן תחילת המפגש חייב להיות לפני זמן סיום המפגש");
+                        throw new System.ArgumentException(status.Message, "model");
+
+                    }
+
                     //Linking the Complexed entities to the retrieved ones
                     entity.TutorReport = TutorReport;
                     var TutorHoursTemp = entity.EndTime - entity.StartTime;
@@ -98,7 +105,7 @@ namespace BelibaHoma.BLL.Services
             {
                 if (status.Message == String.Empty)
                 {
-                    status.Message = String.Format("שגיאה במהלך הזנת המפגש");    
+                status.Message = String.Format("שגיאה במהלך הזנת המפגש");
                 }
                 LogService.Logger.Error(status.Message, ex);
             }
@@ -169,7 +176,7 @@ namespace BelibaHoma.BLL.Services
             {
                 if (status.Message == String.Empty)
                 {
-                    status.Message = String.Format("שגיאה במהלך עדכון המפגש");
+                status.Message = String.Format("שגיאה במהלך עדכון המפגש");
                 }
                 LogService.Logger.Error(status.Message, ex);
             }
