@@ -15,7 +15,6 @@ namespace BelibaHoma.BLL.Models
         public int SemesterNumber { get; set; }
 
 
-        //TODO: how to define it as PK and FK??
         public int TraineeId { get; set; }
 
         public Trainee Trainee { get; set; }

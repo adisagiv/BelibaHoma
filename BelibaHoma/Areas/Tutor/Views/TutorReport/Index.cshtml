@@ -6,24 +6,17 @@
 }
 <div class="well">
     <h2>דיווחים</h2>
-    @*<p>
-        @Html.ActionLink("הוסף דיווח", "Create")
-    </p>*@
+
     <table class="table">
         <tr>
-            @*<th>
-                @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
-            </th>*@
-
+     
             <th>
                 שם חניך
             </th>
             <th>
                 שם חונך
             </th>
-            @*<th>
-                @Html.DisplayNameFor(model => model.TutorTrainee.Tutor.User.FirstName)
-            </th>*@
+            
             <th>
                 @Html.DisplayNameFor(model => model.TutorHours)
             </th>
@@ -42,7 +35,6 @@
         @foreach (var item in Model)
         {
             <tr>
-                @*TODO:FIX it*@
                 @if (item.TutorTrainee.Trainee.User.FirstName != null)
                     {
                         <td>

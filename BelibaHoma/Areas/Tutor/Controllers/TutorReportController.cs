@@ -38,7 +38,6 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         }
 
 
-        //TODO: how to create index of only one specific TutorTraineeId
         public ActionResult TutorTraineeReports(int id)
         {
             var result = _tutorReportService.GetById(id);
@@ -75,8 +74,6 @@ namespace BelibaHoma.Areas.Tutor.Controllers
                         return Error(status);
                     }
                 }
-                //return RedirectToAction("Index");
-                ////TODO: Send tutorTraineeId back to index
                 return RedirectToAction("TutorTraineeReports", new { id = id });
             }
             return Error(result);

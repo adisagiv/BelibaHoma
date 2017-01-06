@@ -41,6 +41,7 @@ namespace BelibaHoma.BLL.Models.Reports
 
     public class Xaxis
     {
+        public Title1 title { get; set; }
         public List<string> categories { get; set; }
     }
 

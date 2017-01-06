@@ -12,10 +12,7 @@
 </p>
 <table class="table">
     <tr>
-        @*TODO: Fix it*@
-        @*<th>
-                @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
-            </th>*@
+       
         <th>
                 שם חניך
         </th>
@@ -40,7 +37,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            @*TODO:FIX it*@
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FirstName)
             </td>

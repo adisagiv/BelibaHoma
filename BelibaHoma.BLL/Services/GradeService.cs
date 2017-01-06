@@ -39,7 +39,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting Grades from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
             return result;
@@ -119,7 +119,6 @@ namespace BelibaHoma.BLL.Services
                         grade.Grade1 = (int)updatedModel.Grade1;
                         grade.SemesterType = (int)updatedModel.SemesterType;
 
-                        //TODO: remove comment after year will be added to the data base
                         grade.Year = (int) updatedModel.Year;
 
                         

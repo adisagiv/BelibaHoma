@@ -65,11 +65,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             return Error(academicM);
             //model.AcademicMajors = _academicMajorService.Get();
 
-            //TODO: Done! after Adi's changes to academic major that returns status model object!
-            //if (model.AcademicMajors.Success) 
-            //{return View(model);}
-            //return Error(result);
-            //return View(model);
+           
         }
 
         [HttpPost]
@@ -115,9 +111,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, JobOfferViewModel model) //TODO: viewmodel
+        public ActionResult Edit(int id, JobOfferViewModel model) 
         {
-            var result = _JobofferService.Update(id, model.JobOffer); // TODO: model.jobOffer
+            var result = _JobofferService.Update(id, model.JobOffer); 
 
             if (result.Success)
             {

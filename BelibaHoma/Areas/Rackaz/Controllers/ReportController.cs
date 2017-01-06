@@ -36,8 +36,13 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         //return the data for the report
         [HttpPost]
-        public ActionResult GetHourStatistics(HourStatisticsType hourStatisticsType ,int? year)
+        public ActionResult GetHourStatistics(HourStatisticsType hourStatisticsType ,int? year, Area?area)
         {
+            
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
             if (!year.HasValue)
             {
                 year = DateTime.Now.Year;
@@ -46,7 +51,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             var startTime = new DateTime(year.Value, 10, 1);
             var endTime = new DateTime(year.Value + 1, 10, 1);
 
-            var result = _reportService.GetHourStatistics(null, startTime, endTime, hourStatisticsType);
+            var result = _reportService.GetHourStatistics(area, startTime, endTime, hourStatisticsType);
 
             if (result.Success)
             {
@@ -55,7 +60,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 for (var i = 1; i <= 12; i++)
                 {
                     var hours = 0.0;
-                    var month = (i + 10)%12 + 1;
+                    var month = (i + 8)%12 + 1;
 
                     if (result.Data.HourStatistics.ContainsKey(month))
                     {
@@ -81,6 +86,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     {
                         categories = new List<string>
                         {
+                            "Oct",
+                            "Nov",
+                            "Dec",
                             "Jan",
                             "Feb",
                             "Mar",
@@ -89,10 +97,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                             "Jun",
                             "Jul",
                             "Aug",
-                            "Sep",
-                            "Oct",
-                            "Nov",
-                            "Dec"
+                            "Sep"
+                        },
+                        title = new Title1
+                        {
+                            text = "אוקטובר שנה נבחרת עד ספטמבר שנה לאחר מכן"
                         }
                     },
                     yAxis = new Yaxis
@@ -166,30 +175,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult GetJoinDropStatistics(Area? area)
         {
-            //if (!year.HasValue)
-            //{
-            //    year = DateTime.Now.Year;
-            //}
-
-            ///// start time begining of time, first creation time, end time, this year 
-            //var startTime = new DateTime(2016);
-            //var endTime = new DateTime(year.Value + 1, 10, 1);
-            //var area1 = null;
-            
-            
-            //if (CurrentUser.UserRole == UserRole.Rackaz)
-            //{
-            //    var area1 = CurrentUser.Area;
-            //    var result1 = _reportService.GetJoinDropStatistics(area1);
-
-            //}
-
-            //else
-            //{
-            //    var result1 = _reportService.GetJoinDropStatistics(null);
-            //}
-
-            /// TODO: if Rackaz send his area
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
                 var result = _reportService.GetJoinDropStatistics(area);
             if (result.Success)
             {
@@ -202,7 +191,6 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     title = new Title2
                     {
                         text = "דוח סטטיסטיקה הצטרפות ונשירת חניכים",
-                        //x = -20
                     },
                     xAxis = new Xaxis1
                     {
@@ -210,9 +198,6 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         
                         categories = result.Data.YearList.ToArray(),
                       
-
-                        //categories1 = yearList;
-
 
                     crosshair= true
                     
@@ -277,7 +262,6 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         [HttpPost]
         public ActionResult GetInvestedHoursStatistics(Area? area)
         {
-            //TODO: if rackaz send area, done, check if works
             if (CurrentUser.UserRole == UserRole.Rackaz)
             {
                 area = CurrentUser.Area;
@@ -292,10 +276,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 var maxYearT = _reportService.GetMaxPazam();
                 var max = maxYearT.Data;
 
-                for (var i = 0; i <= max; i++)
+                for (var i = max; i >= 0; i--)
                 {
                     var investedHours = 0.0;
-                    //var month = (i + 10) % 12 + 1;
 
                     if (result.Data.InvestedHoursStatistics.ContainsKey(i))
                     {
@@ -328,8 +311,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     xAxis = new Xaxis
                     {
-                        categories = pazamList  // new List<string>
-                        
+                        categories = pazamList,  // new List<string>
+                        title = new Title1
+                        {
+                            text = "שנת הצטרפות החניך"
+                        }
                         
                     },
                     yAxis = new Yaxis
@@ -396,21 +382,18 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         //return the data for the report
         [HttpPost]
-        //TODO: add area, function should get area but nullble
         public ActionResult GetAvrGradeStatistics(Area? area)
         {
-            
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
             var result = _reportService.GetAvrGradeStatistics(area);
-
-            //function that findes the most pazam trainee!!!TODO: maybe we'll change it to oldest Grade, when we'll have that parameter
-            var maxYearT = _reportService.GetMaxPazam();
-            var max = maxYearT.Data;
 
 
             if (result.Success)
             {
                 var series = new List<double>();
-                ///TODO: at the moment we have only 4 semester types, when we'll add years we'll change it..
 
                 foreach (var ts in result.Data.AvrGradeStatistics)
                 {
@@ -419,19 +402,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     series.Add(avrGrade);
 
                 }
-                //for (var i = 0; i <= 3; i++)
-                //{
-                //    var avrGrade = 0.0;
-                //    //var month = (i + 10) % 12 + 1;
-
-                //    if (result.Data.AvrGradeStatistics.ContainsKey(i))
-                //    {
-                //        avrGrade = result.Data.AvrGradeStatistics[i];
-                //    }
-
-                //    series.Add(avrGrade);
-                //}
-                //TODO: we'll have to change it to the number of year and semester, now it is just semester type
+            
                 var yearAndSemesterList = new List<string>();
 
                 foreach (var ts in result.Data.AvrGradeStatistics)
@@ -440,10 +411,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     yearAndSemesterList.Add(i);
                 }
 
-                //for (var i = 0; i <= 3; i++)
-                //{
-                //    yearAndSemesterList.Add(i.ToString());
-                //}
+                
 
                 var chartModel = new HighChartModel
                 {
@@ -458,7 +426,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     xAxis = new Xaxis
                     {
-                        categories = yearAndSemesterList                        
+                        categories = yearAndSemesterList,
+                        title = new Title1
+                        {
+                            text = "שנה_סמסטר"
+                        }
                     },
                     yAxis = new Yaxis
                     {

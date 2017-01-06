@@ -28,7 +28,6 @@ namespace BelibaHoma.BLL.Services
                         t => t.User.IsActive && t.User.UserRole == (int) UserRole.Tutor && 
                                 (!area.HasValue || t.User.Area == (int?) area));
 
-//                    var tutors = users.Select(u => u.Tutor);
                     
                     var tutorSessions = tutors.SelectMany(t => t.TutorTrainee)
                         .SelectMany(tt => tt.TutorReport)
@@ -56,7 +55,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting Hour Statistics from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
@@ -161,7 +160,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting Join Drop Statistics from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
@@ -216,13 +215,14 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                
+                result.Message = String.Format("Error getting Hours Statistics from DB"); 
                 LogService.Logger.Error(result.Message, ex);
             }
 
 
             return result;
-
+            
 
 
         }
@@ -244,13 +244,6 @@ namespace BelibaHoma.BLL.Services
                     var grades = gradeRepository.GetAll().Where(
                         t =>(!area.HasValue || t.Trainee.User.Area == (int?)area)).ToList();
 
-                    // TODO: grouping by year and semester type, mean while (till we'll add year to the database:
-                    //TODO: now only by semester type
-                    //var groupedGrades =
-                    //    grades.GroupBy(ts => (ts.Year)).GroupBy(tr=> tr.SemesterType);
-                    //var groupedGrades = grades.GroupBy((ts => (ts.Year)) && (tr=> tr.SemesterType));
-                    ///only for now
-                    //var partGroupedGrades = grades.GroupBy(ts => ts.SemesterType);
                     var groupedGrades = grades.GroupBy(tr => tr.Year);
                     
                     var dict = new Dictionary<string, double>(); // dictionary of vetek, avg of that vetek.
@@ -260,21 +253,15 @@ namespace BelibaHoma.BLL.Services
                         foreach (var tr in groupedGrades2)
                         {
                             var avrSumOfGradesInYearSemester = tr.Average(t => t.Grade1);
-                            var key = String.Format("{0}_{1}", tt.Key.GetType(), tr.Key);
+                            //todo: Atalia and Manor
+                            var key = String.Format("{0}_{1}", tt.Key, tr.Key);
                             dict.Add(key, avrSumOfGradesInYearSemester);
 
                         }
                     }
 
                     var thisYear = DateTime.Now.Year;
-                    //var dic = new Dictionary<int, double>(); // dictionary of vetek, avg of that vetek.
-                    //foreach (var tr in groupedGrades)
-                    //{
-                    //    var avrSumOfGradesInSemester= tr.Average(t => t.Grade1);
-                    //    ////TODO: we'll have to change it after adding the year
-                    //    dic.Add(tr.First().SemesterType, avrSumOfGradesInSemester);
-                    //}
-
+                    
 
                     result.Data = new AvrGradeStatisticsModel
                     {
@@ -286,8 +273,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                ///TODO: not a job offer, change in all places...
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting avarage grades from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
@@ -329,7 +315,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting years from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
@@ -366,7 +352,7 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting job offers from DB");
+                result.Message = String.Format("Error getting seniorest trainee from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
