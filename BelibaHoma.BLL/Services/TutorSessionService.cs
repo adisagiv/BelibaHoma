@@ -64,18 +64,19 @@ namespace BelibaHoma.BLL.Services
                    var TutorReport = TutorReportRepository.GetByKey(model.TutorReportId);
 
                     //Server side validations
+                   if (entity.StartTime > entity.EndTime)
+                   {
+                       status.Message = String.Format("זמן תחילת המפגש חייב להיות לפני זמן סיום המפגש");
+                       throw new System.ArgumentException(status.Message, "model");
+
+                   }
                    if (TutorReport.CreationTime > model.MeetingDate.AddDays(21))
                     {
                         status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
                         throw new System.ArgumentException(status.Message, "model");
                     }
 
-                    if (entity.StartTime > entity.EndTime)
-                    {
-                        status.Message = String.Format("זמן תחילת המפגש חייב להיות לפני זמן סיום המפגש");
-                        throw new System.ArgumentException(status.Message, "model");
 
-                    }
 
                     //Linking the Complexed entities to the retrieved ones
                     entity.TutorReport = TutorReport;

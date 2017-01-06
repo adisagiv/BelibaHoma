@@ -42,6 +42,10 @@ namespace BelibaHoma.Areas.Trainee.Controllers
             }
 
             var result = _JobofferService.Get();
+            if (!result.Success)
+            {
+                return Error(result);
+            }
             return View(result.Data);
         }
 
@@ -50,6 +54,10 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         public ActionResult Details(int id)
         {
             var result = _JobofferService.Get(id);
+            if (!result.Success)
+            {
+                return Error(result);
+            }
             if (CurrentUser.UserRole == UserRole.Admin)
             {
                 ViewBag.IsTrainee = false;

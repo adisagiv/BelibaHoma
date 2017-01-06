@@ -59,6 +59,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             var academicM = _academicMajorService.Get();
             if (academicM.Success)
             {
+                academicM.Data.Insert(0, null);
                 model.AcademicMajors = academicM.Data;
                 return View(model);
             }
@@ -104,7 +105,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return Error(result2); //this is an example for redirect to error page!
             }
             //  Validate that the requierd job offer was pulled from the DB (result.Success)
-              model.JobOffer = result1.Data;
+
+            model.JobOffer = result1.Data;
+            result2.Data.Insert(0, null);
               model.AcademicMajors = result2.Data; 
               return View(model);
 

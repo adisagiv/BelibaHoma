@@ -8,7 +8,9 @@ using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Models.Reports;
 using BelibaHoma.Controllers;
+using Extensions.Enums;
 using Microsoft.Ajax.Utilities;
+using WebGrease.Css.Extensions;
 
 namespace BelibaHoma.Areas.Rackaz.Controllers
 {
@@ -34,6 +36,28 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             return Error(result);
         }
 
+        private List<double> RemoveLastsZeros(List<double> series)
+        {
+            var newlist = new List<double>(series);
+            var j = newlist.Count;
+            while (j-- > 0 && newlist[j] == 0.0)
+            {
+                newlist.RemoveAt(j);
+            }
+            return newlist;
+        }
+
+        private List<int> RemoveLastsZeros(List<int> series)
+        {
+            var newlist = new List<int>(series);
+            var j = newlist.Count;
+            while (j-- > 0 && newlist[j] == 0)
+            {
+                newlist.RemoveAt(j);
+            }
+            return newlist;
+        }
+
         //return the data for the report
         [HttpPost]
         public ActionResult GetHourStatistics(HourStatisticsType hourStatisticsType ,int? year, Area?area)
@@ -53,6 +77,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
             var result = _reportService.GetHourStatistics(area, startTime, endTime, hourStatisticsType);
 
+            //TODO: dont show if no data exists:
+            //if (result.Data == null)
+            //{
+            //    return Error(result);
+            //}
+
             if (result.Success)
             {
                 var series = new List<double>();
@@ -70,6 +100,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     series.Add(hours);
                 }
 
+                series = RemoveLastsZeros(series);
 
                 var chartModel = new HighChartModel
                 {
@@ -79,29 +110,31 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title
                     {
-                        text = "דוח סטטיסטיקה שעות חניכה",
+                        
+                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה שעות חניכה באיזור {0}",area.Value.ToDescription() ) : "דוח סטטיסטיקה שעות חניכה"),
                         x = -20
                     },
                     xAxis = new Xaxis
                     {
                         categories = new List<string>
                         {
-                            "Oct",
-                            "Nov",
-                            "Dec",
-                            "Jan",
-                            "Feb",
-                            "Mar",
-                            "Apr",
-                            "May",
-                            "Jun",
-                            "Jul",
-                            "Aug",
-                            "Sep"
+                            "אוקטובר",
+                            "נובמבר",
+                            "דצמבר",
+                            "ינואר",
+                            "פברואר",
+                            "מרץ",
+                            "אפריל",
+                            "מאי",
+                            "יוני",
+                            "יולי",
+                            "אוגוסט",
+                            "ספטמבר"
                         },
                         title = new Title1
                         {
-                            text = "אוקטובר שנה נבחרת עד ספטמבר שנה לאחר מכן"
+                            text = string.Format("אוקטובר {0} - ספטמבר {1}", year, year+1)
+                            //text = "אוקטובר שנה נבחרת עד ספטמבר שנה לאחר מכן"
                         }
                     },
                     yAxis = new Yaxis
@@ -124,7 +157,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         new Series
                         {
                             data = series,
-                            name = "סכום שעות חניכה"
+                            name= (hourStatisticsType==0? string.Format("סכום שעות חניכה"): "ממוצע שעות חניכה" ),
+                            
                         }
                         
                     },
@@ -153,8 +187,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
                 return Json(chartModel);
             }
+            return Error(result);
 
-            return null;
+            //return null;
         }
 
 
@@ -182,6 +217,12 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 var result = _reportService.GetJoinDropStatistics(area);
             if (result.Success)
             {
+                foreach (var serie in result.Data.Series)
+                {
+                    serie.data = RemoveLastsZeros(serie.data.ToList()).ToArray();
+                }
+                
+
                 var chartModel1 = new HighChartJDModel
                 {
                     chart = new Chart1
@@ -190,7 +231,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title2
                     {
-                        text = "דוח סטטיסטיקה הצטרפות ונשירת חניכים",
+                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה הצטרפות ונשירת חניכים באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקה הצטרפות ונשירת חניכים"),
+                        //text = "דוח סטטיסטיקה הצטרפות ונשירת חניכים",
                     },
                     xAxis = new Xaxis1
                     {
@@ -243,8 +285,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
                 return Json(chartModel1);
             }
-
-            return null;
+            return Error(result);
+            //return null;
         }
 
 
@@ -290,6 +332,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
             if (result.Success)
             {
+                foreach (var serie in result.Data.Series)
+                {
+                    serie.data = RemoveLastsZeros(serie.data.ToList()).ToArray();
+                }
+                
                 var chartModel1 = new HighChartJDModel
                 {
                     chart = new Chart1
@@ -298,7 +345,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title2
                     {
-                        text = "דוח סטטיסטיקת התרעות",
+                        text = (area.HasValue ? string.Format("דוח סטטיסטיקת התרעות באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקת התרעות"),
+
+                        //text = "דוח סטטיסטיקת התרעות",
                         //useHTML = false
                     },
                     xAxis = new Xaxis1
@@ -307,18 +356,18 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         
                     categories = new string[]
                         {
-                            "Oct",
-                            "Nov",
-                            "Dec",
-                            "Jan",
-                            "Feb",
-                            "Mar",
-                            "Apr",
-                            "May",
-                            "Jun",
-                            "Jul",
-                            "Aug",
-                            "Sep"
+                            "אוקטובר",
+                            "נובמבר",
+                            "דצמבר",
+                            "ינואר",
+                            "פברואר",
+                            "מרץ",
+                            "אפריל",
+                            "מאי",
+                            "יוני",
+                            "יולי",
+                            "אוגוסט",
+                            "ספטמבר"
                         },                      
 
                     crosshair= true
@@ -337,6 +386,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     
                     },
                     series = result.Data.Series.ToArray(),
+
             tooltip = new Tooltip1()
             {
                 headerFormat= "<span style='font-size:10px'>{point.key}</span><table>",
@@ -365,8 +415,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
                 return Json(chartModel1);
             }
-
-            return null;
+            return Error(result);
+            //return null;
         }
 
 
@@ -414,7 +464,9 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     }
 
                     series.Add(investedHours);
+
                 }
+                series = RemoveLastsZeros(series);
                 //int[] pazamList = new int[max];
                 var pazamList = new List<string>();
                 
@@ -434,7 +486,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title
                     {
-                        text = "דוח סטטיסטיקה שעות חניכה כתלות בותק",
+                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה שעות חניכה כתלות בותק באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקה שעות חניכה כתלות בותק"),
+                        //text = "דוח סטטיסטיקה שעות חניכה כתלות בותק",
                         x = -20
                     },
                     xAxis = new Xaxis
@@ -495,8 +548,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
                 return Json(chartModel);
             }
-
-            return null;
+            return Error(result);
+            //return null;
         }
 
         /// //////////////////////////  for AvrGrade
@@ -530,7 +583,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     series.Add(avrGrade);
 
                 }
-            
+                series = RemoveLastsZeros(series);
                 var yearAndSemesterList = new List<string>();
 
                 foreach (var ts in result.Data.AvrGradeStatistics)
@@ -549,7 +602,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title
                     {
-                        text = "דוח ממוצע חניכים במהלך הסמסטרים",
+                        text = (area.HasValue ? string.Format("דוח ממוצע חניכים במהלך הסמסטרים באיזור {0}", area.Value.ToDescription()) : "דוח ממוצע חניכים במהלך הסמסטרים"),
+                        //text = "דוח ממוצע חניכים במהלך הסמסטרים",
                         x = -20
                     },
                     xAxis = new Xaxis
@@ -610,8 +664,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
                 return Json(chartModel);
             }
-
-            return null;
+            return Error(result);
+            //return null;
         }
 
 
