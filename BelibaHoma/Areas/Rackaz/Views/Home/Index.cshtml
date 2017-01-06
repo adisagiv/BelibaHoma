@@ -37,27 +37,25 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-warning">
-                <div class="panel-heading">
-                    <div>יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול
-                    </div>
-                </div>
-                <div class="panel-footer">
-                    <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
-                </div>
+            <div class="panel panel-warning" style="background-color: lightyellow">
+                <br/>
+                <center>
+                    <div><h4 style="color: darkgoldenrod">יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול</h4>
+                </div></center>
+                <br/>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <div>עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה
-                    </div>
-                </div>
-                <div class="panel-footer">עבור לקשרי החניכה</div>
+            <div class="panel panel-success" style="background-color: #e6ffe6">
+                <br/>
+                <center>
+                    <div><h4 style="color: darkgreen">עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה</h4>
+                    <br/>
+                </div></center>
             </div>
         </div>
-    </div>
-    <div class="row">
+        <br/>
+    <div class="row" align="right" style="margin-right: 10px">
         <select class="form-control" id="Report" name="Report">
             <option>אנא בחר בדו"ח הרצוי</option>
             @foreach (ReportType type in Enum.GetValues(typeof (ReportType)))

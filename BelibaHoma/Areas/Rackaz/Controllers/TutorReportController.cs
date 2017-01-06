@@ -27,6 +27,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
         public ActionResult Index(int id)
         {
             var result = _TutorReportService.GetByTraineeId(id);
+            //if (CurrentUser.UserRole.ToString() == "Rakaz" || CurrentUser.UserRole.ToString() == "Adim")
             if (result.Success)
             {
                 return View(result.Data);

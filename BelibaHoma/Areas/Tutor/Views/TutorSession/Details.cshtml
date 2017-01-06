@@ -7,23 +7,30 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2>מפגשים</h2>
+    <h2 align="center">מפגשים</h2>
 
     <p>
-        @Html.ActionLink("חזור לעמוד דיווחים", "Index", "TutorReport")
+        @Html.ActionLink("לדיווחים", "Index", "TutorReport")
+        @*@{
+            if ()
+            {<text>|</text>
+                @Html.ActionLink("חזור לעמוד דיווחים", "Index", "TutorReport");
+            }
+        }*@
     </p>
-    <p>
-        @Html.DisplayNameFor(model => model.TutorReport.MeetingsDescription)
-    </p>
+    <br/>
+    <h4>
+        @*@Html.DisplayNameFor(model => model.TutorReport.MeetingsDescription)*@
+        תיאור המפגשים
+    </h4>
 
-    <tr>
-        
 
-        <td>
             @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
-        </td>
-            
-    </tr>
+    <br/>
+    <br/>
+    <h4>
+         :פירוט המפגשים
+    </h4>
 
     <table class="table">
         <tr>

@@ -42,19 +42,7 @@
                     @Html.DisplayNameFor(model => model.JobArea)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Requirements)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcademicMajor.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
+                    מסלולי לימוד רלוונטים
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Organization)
@@ -79,20 +67,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.JobArea)
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Requirements)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
+
                 <th>
                     @Html.DisplayNameFor(model => model.AcademicMajor.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Organization)
@@ -192,30 +169,30 @@
                             <td>
                                 @item.JobArea.ToDescription()
                             </td>
+
                             <td>
-                                @item.Requirements.ToString()
-                            </td>
-                            <td>
-                                @item.Description.ToString()
-                            </td>
-                            <td>
-                                @item.AcademicMajor.Name
-                            </td>
-                            <td>
+
+
+
                                 @{
-                        if (item.AcademicMajor1 != null)
-                        {
-                            @item.AcademicMajor1.Name
-                        }
-                                }
-                            </td>
-                            <td>
-                                @{
-                        if (item.AcademicMajor2 != null)
-                        {
-                            @item.AcademicMajor2.Name
-                        }
-                                }
+                                    var string1 = "";
+                                    var string2 = "";
+                                    if (item.AcademicMajor1 != null)
+                                    {
+                                        string1 = ", " + @item.AcademicMajor1.Name;
+                                    }
+
+                                    if (item.AcademicMajor2 != null)
+                                    {
+
+                                         string2 = ", " + @item.AcademicMajor2.Name;
+
+                                    }
+
+                                    @String.Format("{0}{1}{2}",@item.AcademicMajor.Name, @string1, @string2)
+                                    
+}
+
                             </td>
                             <td>
                                 @item.Organization.ToString()
