@@ -15,7 +15,7 @@
 }
 
 <div class="well">
-    <h2>מוסדות אקדמאים</h2>
+    <h2 align="center"><b>מוסדות אקדמאים</b></h2>
 
     <p>
         @*@Html.ActionLink("הוסף מוסד אקדמי", "Create", new { @class = "btn"})*@
@@ -64,7 +64,7 @@
                     @item.Area.ToDescription()
                 </td>
                 <td>
-                    @Html.ActionLink("עריכה", "Edit", new {id = item.Id})
+                    <a class="btn btn-default btn-xs" href="/Rackaz/AcademicInstitution/Edit/@item.Id">עריכה</a>
                 </td>
             </tr>
         }
