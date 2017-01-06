@@ -15,14 +15,16 @@
             <tbody>
                 <tr>
                     <td class="table-danger">
-                        משתמשים הצבועים באדום הם בעלי קשרי חניכה פעילים במערכת -
-                        @Html.ActionLink("להצגת קשרי חונכות", "Index", "TutorTrainee", new { Area = "Rackaz" })
+                        @*@Html.ActionLink("להצגת קשרי חונכות", "", "", new { Area = "Rackaz" })*@
+                        <a class="btn btn-danger btn-sm" href="/Rackaz/TutorTrainee/Index">להצגת קשרי חונכות</a>
+                        משתמשים הצבועים באדום הם בעלי קשרי חניכה פעילים במערכת
                     </td>
                 </tr>
                 <tr>
                     <td class="table-warning">
-                        משתמשים הצבועים בצהוב הם בעלי המלצה לציוות -
-                        @Html.ActionLink("להצגת המלצות לציוות", "ApproveMatches", "TutorTrainee", new { Area = "Rackaz" })
+                        @*@Html.ActionLink("להצגת המלצות לציוות", "ApproveMatches", "TutorTrainee", new { Area = "Rackaz" })*@
+                        <a class="btn btn-warning btn-sm" href="/Rackaz/TutorTrainee/ApproveMatches">להצגת המלצות לציוות</a>
+                        משתמשים הצבועים בצהוב הם בעלי המלצה קיימת לציוות
                     </td>
                 </tr>
             </tbody>

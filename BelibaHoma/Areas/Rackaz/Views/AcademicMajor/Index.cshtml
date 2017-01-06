@@ -19,7 +19,8 @@
     <h2>מסלולי לימוד</h2>
 
     <p>
-        @Html.ActionLink("הוסף מסלול אקדמי", "Create")
+        @*@Html.ActionLink("הוסף מסלול אקדמי", "Create")*@
+        <a class="btn btn-default" href="/Rackaz/AcademicMajor/Create">הוסף מסלול אקדמי</a>
     </p>
     <table class="table" id="academic-major-table">
         <thead>
@@ -55,7 +56,8 @@
                     @item.AcademicCluster.ToDescription()
                 </td>
                 <td>
-                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id })
+                    @*@Html.ActionLink("עריכה", "Edit", new { id = item.Id })*@
+                    <a class="btn btn-default btn-xs" href="/Rackaz/AcademicMajor/Edit/@item.Id">עריכה</a>
                 </td>
             </tr>
         }

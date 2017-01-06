@@ -10,13 +10,9 @@
     <h2 align="center">מפגשים</h2>
 
     <p>
-        @Html.ActionLink("לדיווחים", "Index", "TutorReport")
-        @*@{
-            if ()
-            {<text>|</text>
-                @Html.ActionLink("חזור לעמוד דיווחים", "Index", "TutorReport");
-            }
-        }*@
+        @*@Html.ActionLink("לדיווחים", "Index", "TutorReport")*@
+        <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.FirstOrDefault().TutorReport.TutorTraineeId">חזור לעמוד דיווחים</a>
+
     </p>
     <br/>
     <h4>
@@ -26,6 +22,20 @@
 
 
             @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
+        </td>
+    </tr>
+
+    @{
+        if (Model.FirstOrDefault().TutorReport.IsProblem == true)
+        {
+            <div class="panel panel-danger">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-flag pull-right" aria-hidden="true"></span>
+                    <b>שים לב!</b> דיווח זה סומן כדיווח דורש התערבות
+                </div>
+            </div>
+        }
+    }
     <br/>
     <br/>
     <h4>
@@ -76,7 +86,8 @@
                         @item.NumBondingHours.ToDescription()
                     </td>*@
                 <td>
-                    @Html.ActionLink("עריכה", "Edit", new { id = item.Id })
+                    @*@Html.ActionLink("עריכה", "Edit", new { id = item.Id })*@
+                    <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Edit/?id=@item.Id">ערוך מפגש</a>
                 </td>
             </tr>
         }

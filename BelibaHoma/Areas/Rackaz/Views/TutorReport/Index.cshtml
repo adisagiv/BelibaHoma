@@ -77,7 +77,8 @@
 
                         @if (item.TutorHours > 0)
                         {
-                            @Html.ActionLink("פרטים נוספים", "Details", "TutorSession",new { Area = "Tutor", id = item.Id }, new { target = "_blank" })
+                            @*@Html.ActionLink("פרטים נוספים", "Details", "TutorSession",new { Area = "Tutor", id = item.Id }, new { target = "_blank" })*@
+                            <a class="btn btn-default" href="/Tutor/TutorSession/Details/@item.Id" target="_blank">צפייה במפגשים</a>
                         }
 
                     </td>
@@ -85,7 +86,7 @@
             }
         </tbody>
     </table>
-            <a href="/Rackaz/TutorTrainee/Index"> קשרי חונכות</a>
+    <a class="btn btn-default" href="/Rackaz/TutorTrainee/Index">קשרי חונכות</a>
 
 </div>
  

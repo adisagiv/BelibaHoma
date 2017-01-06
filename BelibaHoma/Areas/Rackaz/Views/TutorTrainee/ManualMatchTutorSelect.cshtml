@@ -30,9 +30,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
                 </th>
-                <th>
-                    פרטים נוספים
-                </th>
                 <th class="hidden"></th>
             </tr>
         </thead>
@@ -53,7 +50,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Tutor.AcademicMajor1)
                 </th>
-                <th></th>
                 <th class="hidden"></th>
             </tr>
         </tfoot>
@@ -67,7 +63,7 @@
                         </label>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Tutor.FullName)
+                        @Html.ActionLink(@item.Tutor.FullName, "Details", "Tutor", new { Area = "Tutor", id = @item.Tutor.UserId }, new { target = "_blank" })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Tutor.AcademicInstitution.Name)
@@ -77,9 +73,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor1.Name)
-                    </td>
-                    <td>
-                        @Html.ActionLink("פרטים", "Details", "Tutor", new { Area = "Tutor", id = @item.Tutor.UserId }, new { target = "_blank" })
                     </td>
                     <td class="hidden">
                         <input name="tutor-matched-count-@item.Tutor.UserId" id="tutor-matched-count-@item.Tutor.UserId" value=@item.IsMatchedCount />

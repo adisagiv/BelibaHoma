@@ -27,9 +27,10 @@
 
             if (ViewBag.IsTrainee != true)
             {
-                @Html.ActionLink("הוסף משרה", "Create", new { Area = "Rackaz" })
+                @*@Html.ActionLink("הוסף משרה", "Create", new { Area = "Rackaz" })*@
+                <a class="btn btn-default" href="/Rackaz/JobOffer/Create">הוסף משרה</a>
             }
-        }
+}
     </p>
 
     <table class="table" id="job-offer-table">
@@ -136,22 +137,8 @@
                                     @item.JobStatus.ToDescription()
                                 </td>
                                 <td>
-
-                                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-
-                                    @{
-                            if (ViewBag.IsTrainee != true)
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { Area = "Rackaz", id = item.Id })
-                            }
-                                    }
-
-                                    @*@{
-                                            if (ViewBag.IsTrainee != true)
-                                            {
-                                                @Html.ActionLink("Delete", "Delete", new { Area = "Rackaz", id = item.Id })
-                                            }
-                                        }*@
+                                    @*@Html.ActionLink("Details", "Details", new {id = item.Id})*@
+                                    <a class="btn btn-default btn-xs" href="/Tutor/JobOffer/Details/?id=@item.Id">פרטים</a>
                                 </td>
                             </tr>
                         }
@@ -205,21 +192,17 @@
                             </td>
                             <td>
 
-                                @Html.ActionLink("פרטים נוספים", "Details", new { id = item.Id }) |
+                                @*@Html.ActionLink("פרטים נוספים", "Details", new { id = item.Id })*@
+                                <a class="btn btn-default btn-xs" href="/Tutor/JobOffer/Details/?id=@item.Id">פרטים</a>
+                                @Html.Raw("|")
 
                                 @{
                         if (ViewBag.IsTrainee != true)
                         {
-                            @Html.ActionLink("עריכה", "Edit", new { Area = "Rackaz", id = item.Id })
+                            @*@Html.ActionLink("עריכה", "Edit", new { Area = "Rackaz", id = item.Id })*@
+                            <a class="btn btn-default btn-xs" href="/Tutor/JobOffer/Edit/?id=@item.Id">עריכה</a>
                         }
-                                }
-
-                                @*@{
-                                        if (ViewBag.IsTrainee != true)
-                                        {
-                                            @Html.ActionLink("Delete", "Delete", new { Area = "Rackaz", id = item.Id })
-                                        }
-                                    }*@
+}
                             </td>
                         </tr>
                     }

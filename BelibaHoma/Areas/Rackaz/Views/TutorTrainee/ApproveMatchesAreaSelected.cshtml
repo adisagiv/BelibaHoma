@@ -8,12 +8,9 @@
 
 <script src="~/Scripts/tutor-trainee-approve.js"></script>
 
-<div class="well">
-
-    <h2>קשרי חונכות</h2>
     <p>
-        @*//TODO: Make this the actual link to the manual matching interface*@
-        @Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")
+        @*@Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")*@
+        <a class="btn btn-default" href="/Rackaz/TutorTrainee/ManualMatch">עבור לציוות ידני</a>
     </p>
 <table class="table" id="tutortrainee-unapproved-table">
     <thead>
@@ -31,8 +28,6 @@
             עזרה נדרשת
         </th>
         <th>
-        </th>
-        <th>
 
         </th>
     </tr>
@@ -42,20 +37,18 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)
+                @*@Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)*@
+                @Html.ActionLink(@item.TutorTrainee.Tutor.FullName, "Details", new { Area = "Tutor", id = item.TutorTrainee.TutorId }, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.AcademicMajor.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)
+                @*@Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)*@
+                @Html.ActionLink(@item.TutorTrainee.Trainee.FullName, "Details", new { Area = "Trainee", id = item.TutorTrainee.TraineeId}, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.NeededHelpDescription)
-            </td>
-            <td>
-                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})|
-                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id}, new {target = "_blank"})
             </td>
             <td>
                 <a class="btn btn-success btn-sm approve-match" data-tutortraineeid="@item.TutorTrainee.Id">אשר</a> |
@@ -65,4 +58,3 @@
     }
     </tbody>
 </table>
-    </div>

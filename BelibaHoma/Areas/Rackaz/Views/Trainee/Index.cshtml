@@ -21,7 +21,8 @@
 <h2>חניכים</h2>
 
 <p>
-    @Html.ActionLink("הוסף חניך", "Create", "Trainee", new { Area = "Rackaz" }, new object { })
+    @*@Html.ActionLink("הוסף חניך", "Create", "Trainee", new { Area = "Rackaz" }, new object { })*@
+    <a class="btn btn-default" href="/Rackaz/Trainee/Create">הוסף חניך</a>
 </p>
 <input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)"/>
 <table class="table" id="trainee-table">
@@ -91,7 +92,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(@item.FullName, "Details", new { Area = "Trainee", id = item.User.Id }, new {target=""})
+                @Html.ActionLink(@item.FullName, "Details", new { Area = "Trainee", id = item.User.Id }, new {target="_blank"})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NeededHelpDescription)
