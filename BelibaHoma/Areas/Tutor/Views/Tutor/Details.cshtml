@@ -9,7 +9,7 @@
 <div class="well">
     <h2><b>פרטי החונך</b></h2>
     <div>
-        <hr/>
+        <hr />
         @{
             if (ViewBag.IsTutor == false)
             {
@@ -17,10 +17,16 @@
                 var action = "Edit/" + id;
                 <a class="btn btn-info" herf="/Rackaz/Tutor/index">לרשימת החונכים</a>
                 @Html.Raw("|")
-                <a class="btn btn-default" herf="/Rackaz/Tutor/@action">עריכה</a>   
+                <a class="btn btn-default" herf="/Rackaz/Tutor/@action">עריכה</a>
             }
-
-}
+        }
+    </div>
+    <br />
+    <div class="panel panel-success" style="background-color: #e6ffe6">
+        <center>
+            <h4 style="color: darkgreen">עד כה נרשמו עבור @Model.FullName <b>@Model.TutorHours</b> שעות חניכה, מתוכן <b>@Model.TutorHoursBonding</b> שעות חברותא</h4>
+        </center>
+    </div>
 
         <dl class="dl-horizontal">
             <dd>
@@ -147,9 +153,3 @@
                 @Html.DisplayFor(model => model.TutorHoursBonding)
             </dd>
         </dl>
-    </div>
-    <p>
-        @*//TODO: verify how to route this only if Rackaz / Admin*@
-
-    </p>
-</div>
