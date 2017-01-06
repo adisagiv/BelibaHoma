@@ -20,11 +20,13 @@ namespace BelibaHoma.BLL.Services
     {
         private readonly IPredictionTrainingService _predictionTrainingService;
         private readonly IUserService _userService;
+        private readonly ITutorTraineeService _tutorTraineeService;
 
-        public TraineeService(IUserService userService, IPredictionTrainingService predictionTrainingService)
+        public TraineeService(IUserService userService, IPredictionTrainingService predictionTrainingService,ITutorTraineeService tutorTraineeService)
         {
             _predictionTrainingService = predictionTrainingService;
             _userService = userService;
+            _tutorTraineeService = tutorTraineeService;
         }
 
 
@@ -267,7 +269,20 @@ namespace BelibaHoma.BLL.Services
                             status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
                             throw new System.ArgumentException(status.Message,"updatedModel");
                         }
+                        //if (updatedModel.User.IsActive == false && trainee.User.IsActive == true)
+                        //{
+                        //    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                        //    var tutortrainees =
+                        //        tutortraineeRepository.GetAll().Where(tt => tt.TraineeId == trainee.UserId && tt.Status == (int)TTStatus.Active).ToList();
+                        //    if (tutortrainees[0] != null)
+                        //    {
+                        //        foreach (var tt in tutortrainees)
+                        //        {
 
+                        //        }
+                        //    }
+
+                        //}
                         //Updating the entity from the model received by the form
                         trainee.User.FirstName = updatedModel.User.FirstName;
                         trainee.User.LastName = updatedModel.User.LastName;
@@ -320,6 +335,7 @@ namespace BelibaHoma.BLL.Services
                         {
                             trainee.AcademicMajorNeededHelpId = null;
                         }
+
 
                         //traineeRepository.Update(trainee);
                         unitOfWork.SaveChanges();
