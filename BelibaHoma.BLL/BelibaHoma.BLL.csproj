@@ -104,6 +104,7 @@
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
     <Compile Include="Interfaces\IPredictionTrainingService.cs" />
+    <Compile Include="Models\AlertsStatisticsModel.cs" />
     <Compile Include="Models\AvrGradeStatisticsModel.cs" />
     <Compile Include="Models\InvestedHoursStatisticsModel.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />

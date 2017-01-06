@@ -1,5 +1,6 @@
 ﻿
 using BelibaHoma.BLL.Models;
+using BelibaHoma.BLL.Models.Reports;
 
 public class HighChartJDModel
 {
@@ -27,6 +28,7 @@ public class Chart1
 public class Title2
 {
     public string text { get; set; }
+    //public bool useHTML { get; set; }
 }
 
 public class Subtitle1
@@ -43,7 +45,7 @@ public class Xaxis1
 public class Yaxis1
 {
     public int min { get; set; }
-    public Title3 title { get; set; }
+    public Title2 title { get; set; }
 }
 
 public class Title3

@@ -74,6 +74,7 @@ namespace BelibaHoma.BLL.Models.Reports
         public string align { get; set; }
         public string verticalAlign { get; set; }
         public int borderWidth { get; set; }
+        public bool rtl { get; set; }
     }
 
     public class Series

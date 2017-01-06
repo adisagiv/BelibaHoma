@@ -198,6 +198,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\css\bootstrap-rtl.css" />
+    <Content Include="Content\direction.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\אולירקע.jpg" />
     <Content Include="Content\לוגו.jpg" />
@@ -610,6 +611,7 @@
     <Content Include="Scripts\Highchart\code\themes\grid.js" />
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
+    <Content Include="Scripts\reports\AlertsStatistics.js" />
     <Content Include="Scripts\tutor-session.js" />
     <Content Include="Scripts\joboffer-index.js" />
     <Content Include="Scripts\JobOfferIndex.js" />

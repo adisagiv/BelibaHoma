@@ -166,7 +166,190 @@ namespace BelibaHoma.BLL.Services
 
 
             return result;
+        } 
+
+        //////////// Alerts
+
+        /// //////////////// 
+
+
+        public StatusModel<AlertsStatisticsModel> GetAlertsStatistics(Area? area, DateTime startTime, DateTime endTime)
+        {
+            var result = new StatusModel<AlertsStatisticsModel>();
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertsRepository = unitOfWork.GetRepository<IAlertRepository>();
+
+                    var JoinedAlerts = alertsRepository.GetAll().Where(
+                        t => (!area.HasValue || t.Area == (int?)area));
+
+                    var JoinedAlertsCurYear = JoinedAlerts.Where(ts => ts.CreationTime >= startTime && ts.CreationTime <= endTime);
+
+
+
+                    var groupedAlertsType = JoinedAlertsCurYear.GroupBy(ts => ts.AlertType);
+
+                    var dict0 = new Dictionary<string, int>(); // dictionary of AlertType, Alerts count.
+                    var dict1 = new Dictionary<string, int>(); // dictionary of AlertType, Alerts count.
+                    var dict2 = new Dictionary<string, int>(); // dictionary of AlertType, Alerts count.
+
+
+                    var alertType0 = new Series1
+                    {
+                        name = "ציון חניך"
+                    };
+
+                    var alertType1 = new Series1
+                    {
+                        name = "דרושה התערבות"
+                    };
+
+                    var alertType2 = new Series1
+                    {
+                        name = "איחור בדיווח"
+                    };
+
+
+
+                    var Type0Series = new List<int>();
+                    var Type1Series = new List<int>();
+                    var Type2Series = new List<int>();
+
+                 
+                    
+                    foreach (var tt in groupedAlertsType)
+                    {
+                        var groupedAlerts = tt.GroupBy(tr => tr.CreationTime.Month);
+
+                        var key = tt.Key;
+                        foreach (var alert in tt)
+                        {
+                            var month = alert.CreationTime.Month.ToString();
+                            switch (key)
+                            {
+                                case 0 :
+                                    
+                                    if (!dict0.ContainsKey(month))
+                                    {
+                                        dict0.Add(month, 1);
+                                    }
+                                    else
+                                    {
+                                        dict0[month]++;
+                                    }
+                                    break;
+                                case 1 :
+                                    if (!dict1.ContainsKey(month))
+                                    {
+                                        dict1.Add(month, 1);
+                                    }
+                                    else
+                                    {
+                                        dict1[month]++;
+                                    }
+                                    break;
+                                 case 2 :
+                                    if (!dict2.ContainsKey(month))
+                                    {
+                                        dict2.Add(month, 1);
+                                    }
+                                    else
+                                    {
+                                        dict2[month]++;
+                                    }
+                                    break;
+                            }   
+                        }
+
+                        //var key = tt.Key;
+                        //var value = tt.Where();
+                        
+
+                        //if (tt.Key==0)
+                        //{
+                        //    //dict0.Add(groupedAlerts.First().Key.ToString(),groupedAlerts.Count());
+                        //    if (dict0.ContainsKey(tt))
+                            
+                        //}
+                        //if (tt.Key==1)
+                        //{
+                        //    dict1.Add(groupedAlerts.First().Key.ToString(),groupedAlerts.Count());
+                        //}
+                        //if (tt.Key==2)
+                        //{
+                        //    dict2.Add(groupedAlerts.First().Key.ToString(),groupedAlerts.Count());
+                        //}
+
+                    }
+
+                   
+
+                  //  result.Data.AlertsStatistics = dict;
+                    var monthListInt = new List<int>();
+                    for (var month = 9; month <= 20; month++)
+                    {
+                        monthListInt.Add(month%12 + 1);
+                       
+                    }
+
+                    foreach (var month in monthListInt)
+                    {
+                        if (dict0.ContainsKey(month.ToString()))
+                        {
+                            Type0Series.Add(dict0[month.ToString()]);
+                        }
+                        else
+                        {
+                            Type0Series.Add(0);
+                        }
+
+                        if (dict1.ContainsKey(month.ToString()))
+                        {
+                            Type1Series.Add(dict1[month.ToString()]);
+                        }
+                        else
+                        {
+                            Type1Series.Add(0);
+                        }
+
+                        if (dict2.ContainsKey(month.ToString()))
+                        {
+                            Type2Series.Add(dict2[month.ToString()]);
+                        }
+                        else
+                        {
+                            Type2Series.Add(0);
+                        }
+
+                    }
+
+                    alertType0.data = Type0Series.ToArray();
+                    alertType1.data = Type1Series.ToArray();
+                    alertType2.data = Type2Series.ToArray();
+
+                    result.Data = new AlertsStatisticsModel();
+                    result.Data.Series = new List<Series1> { alertType0, alertType1, alertType2 };
+
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting Alerts Statistics from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
         }
+
+
+
+        //////////
 
         public StatusModel<InvestedHoursStatisticsModel> GetInvestedHoursStatistics(Area? area)
         {
@@ -299,17 +482,60 @@ namespace BelibaHoma.BLL.Services
                 {
                     var tutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
 
-                    var possibleYears =
-                        tutorSessionRepository.GetAll()
-                            .GroupBy(ts => ts.MeetingDate.Year)
-                            .Select(ts => ts.Key)
-                            .OrderBy(ts => ts)
-                            .ToList();
+                    var minPossibleYears =
+                        tutorSessionRepository.GetAll().Select(ts=>ts.MeetingDate.Year).Min(ts => ts);
+                    var maxPossibleYears =
+                        tutorSessionRepository.GetAll().Select(ts => ts.MeetingDate.Year).Max(ts => ts);
+
+                    var possibleYears = new List<int>();
+
+                    for (int i = minPossibleYears - 1; i <= maxPossibleYears; i++)
+                    {
+                        possibleYears.Add(i);
+                    }
+
+                    
 
                     result.Data = possibleYears;
 
                     
 
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting years from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
+        }
+
+        public StatusModel<List<int>> GeAlertStatisticsProssibleYears()
+        {
+            var result = new StatusModel<List<int>>();
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
+
+                    var minPossibleYears =
+                        alertRepository.GetAll().Select(a => a.CreationTime.Year).Min(ts => ts);
+                    var maxPossibleYears =
+                        alertRepository.GetAll().Select(a => a.CreationTime.Year).Max(ts => ts);
+
+                    var possibleYears = new List<int>();
+
+                    for (int i = minPossibleYears - 1; i <= maxPossibleYears; i++)
+                    {
+                        possibleYears.Add(i);
+                    }
+
+                    result.Data = possibleYears;
                     result.Success = true;
                 }
             }
