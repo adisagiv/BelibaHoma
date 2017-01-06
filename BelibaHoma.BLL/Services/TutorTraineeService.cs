@@ -219,7 +219,7 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel<List<TutorTraineeModel>> GetById(int id)
+        public StatusModel<List<TutorTraineeModel>> GetById(int tutorId)
         {
             var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
 
@@ -227,16 +227,17 @@ namespace BelibaHoma.BLL.Services
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var TutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
 
-                    result.Data = TutorTraineeRepository.GetAll().ToList().Where(tid => tid.TutorId == id).Select(ai => new TutorTraineeModel(ai)).ToList();
+                    var tutorTrainees = tutorTraineeRepository.GetAll();
+                    result.Data = tutorTrainees.Where(tt => tt.TutorId == tutorId && tt.Status == (int)TTStatus.Active).ToList().Select(ai => new TutorTraineeModel(ai)).ToList();
 
                     result.Success = true;
                 }
             }
             catch (Exception ex)
             {
-                result.Message = String.Format("Error getting TutorTrainee from DB");
+                result.Message = String.Format("שגיאה בשליפת קשרי החונכות ממסד הנתונים");
                 LogService.Logger.Error(result.Message, ex);
             }
             return result;
@@ -347,7 +348,7 @@ namespace BelibaHoma.BLL.Services
                     int clusterWeight = 20;
                     int institutionWeight = 50;
 
-                    bool isMechina = trainee.AcademicInstitution.InstitutionType == InstitutionType.Mechina;
+                    bool isMechina = (trainee.EnglishLevel > 0 || trainee.MathLevel > 0 || trainee.PhysicsLevel > 0);
                     if (isMechina)
                     {
                         majorWeight = majorWeight / 5;

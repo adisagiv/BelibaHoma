@@ -35,6 +35,8 @@ namespace BelibaHoma.BLL.Models
 
         [Display(Name = "זמן יצירה")]
         [Required(ErrorMessage = "זמן יצירה זה שדה חובה")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CreationTime { get; set; }
 
         public TutorReportModel(TutorReport entity)

@@ -10,16 +10,15 @@
 
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm(null,null,FormMethod.Post, new { id = "trainee-form", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal" style="direction: rtl">
-        <form autocomplete="off">
-        <hr/>
+    <div class="form-horizontal" style="direction: rtl" >
+            <hr />
             <h3>פרטים אישיים</h3>  
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <input type="hidden" name="UserId" id="UserId" value="@Model.Trainee.UserId"/>
+            <input type="hidden" name="UserId" id="UserId" value="@Model.Trainee.UserId" />
         <input id="is-create" type="hidden" name="IsCreate" value=@(ViewBag.IsCreate ? "true" : "false")>
             <div class="form-group">
                 <label class="control-label col-md-2">תעודת זהות :</label>
@@ -72,15 +71,15 @@
                     object attr;
                     if (ViewBag.IsRackaz)
                     {
-                        attr = new {@class = "form-control", @disabled = "disabled"};
+        attr = new { @class = "form-control", @disabled = "disabled" };
                     }
                     else
                     {
-                        attr = new {@class = "form-control"};
+        attr = new { @class = "form-control" };
                     }
                 }
                 @Html.EnumDropDownListFor(model => model.Trainee.User.Area, attr)
-                @Html.ValidationMessageFor(model => model.Trainee.User.Area, "", new {@class = "text-danger"})
+                    @Html.ValidationMessageFor(model => model.Trainee.User.Area, "", new { @class = "text-danger" })
             </div>
         </div>
             <h3>פרטי התקשרות</h3>
@@ -103,7 +102,6 @@
                     </div>
                 }
             }
-
             <div class="form-group">
                 <label class="control-label col-md-2">כתובת מייל :</label>
                 <div class="col-md-10">
@@ -113,9 +111,17 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">תאריך לידה :</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Trainee.Birthday, new { htmlAttributes = new { @class = "form-control" }, @type = "date" })
-                    @Html.ValidationMessageFor(model => model.Trainee.Birthday, "", new { @class = "text-danger", @type = "date" })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker-style' id='datetimepicker1'>
+                            <input type='text' class="form-control" value="@Model.Trainee.Birthday" id="Trainee_Birthday" name="Trainee.Birthday" data-val-required="זהו שדה חובה" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                        @*@Html.EditorFor(model => model.Trainee.Birthday, new {htmlAttributes = new {@class = "form-control"}, @type = "date"})*@
+                        @Html.ValidationMessageFor(model => model.Trainee.Birthday, "", new { @class = "text-danger", @type = "date" })
                 </div>
             </div>
             <div class="form-group">
@@ -125,18 +131,15 @@
                     @Html.ValidationMessageFor(model => model.Trainee.PhoneNumber, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <h3>מידע אקדמי</h3>
         <div class="form-group">
                 <label class="control-label col-md-2">מוסד אקדמי : </label>
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.Trainee.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name", Model.Trainee.AcademicInstitution != null ? Model.Trainee.AcademicInstitution.Id : (int?)null), "אנא בחר מוסד אקדמי מהרשימה", new {@class = "form-control"})
-                    @Html.ValidationMessageFor(model => model.Trainee.AcademicInstitution, "", new {@class = "text-danger"})
+                    @Html.DropDownListFor(model => model.Trainee.AcademicInstitution, new SelectList(Model.AcademicInstitutionList, "Id", "Name", Model.Trainee.AcademicInstitution != null ? Model.Trainee.AcademicInstitution.Id : (int?)null), "אנא בחר מוסד אקדמי מהרשימה", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicInstitution, "", new { @class = "text-danger" })
                     @*<button class="btn" id="create-new-academic">הוסף מוסד אקדמי</button>*@
                 </div>
             </div>
-
-            
 
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד ראשי : </label>
@@ -145,51 +148,47 @@
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד משני : </label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.Trainee.AcademicMajor1, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Trainee.AcademicMajor1 != null ? Model.Trainee.AcademicMajor1.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor1, "", new {@class = "text-danger"})
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor1, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">מסלול לימוד נוסף בו נדרשת חניכה : </label>
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.Trainee.AcademicMajor2, new SelectList(Model.AcademicMajorList, "Id", "Name", Model.Trainee.AcademicMajor2 != null ? Model.Trainee.AcademicMajor2.Id : (int?)null), "אנא בחר מסלול לימוד מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor2, "", new {@class = "text-danger"})
+                    @Html.ValidationMessageFor(model => model.Trainee.AcademicMajor2, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">תיאור מילולי למקצוע בו נדרשת עזרה :</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Trainee.NeededHelpDescription, new {htmlAttributes = new {@class = "form-control"}})
-                    @Html.ValidationMessageFor(model => model.Trainee.NeededHelpDescription, "", new {@class = "text-danger"})
+                    @Html.EditorFor(model => model.Trainee.NeededHelpDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.NeededHelpDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
-        <h4>הסעיפים הבאים מתייחסים לרמת החניכה (יח"ל) במקצעות ליבה עבור חניכי מכינה</h4>
+        <h4>הסעיפים הבאים מתייחסים לרמת חניכה נדרשת במקצעות ליבה (יח"ל)  </h4>
             <div class="form-group">
                 <label class="control-label col-md-2">רמת חניכה נדרשת בפיזיקה : </label>
                 <div class="col-md-10">
                     @Html.EnumDropDownListFor(model => model.Trainee.PhysicsLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Trainee.PhysicsLevel, "", new {@class = "text-danger"})
+                    @Html.ValidationMessageFor(model => model.Trainee.PhysicsLevel, "", new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">רמת חניכה נדרשת במתמטיקה : </label>
                 <div class="col-md-10">
                     @Html.EnumDropDownListFor(model => model.Trainee.MathLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Trainee.MathLevel, "", new {@class = "text-danger"})
+                    @Html.ValidationMessageFor(model => model.Trainee.MathLevel, "", new { @class = "text-danger" })
                 </div>
             </div>
-
             <div class="form-group">
                 <label class="control-label col-md-2">רמת חניכה נדרשת באנגלית : </label>
                 <div class="col-md-10">
-                    @Html.EnumDropDownListFor(model => model.Trainee.EnglishLevel,  "אנא בחר רמה נדרשת מהרשימה", new {@class = "form-control"})
-                    @Html.ValidationMessageFor(model => model.Trainee.EnglishLevel, "", new {@class = "text-danger"})
+                    @Html.EnumDropDownListFor(model => model.Trainee.EnglishLevel, "אנא בחר רמה נדרשת מהרשימה", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Trainee.EnglishLevel, "", new { @class = "text-danger" })
                 </div>
             </div>
             <h4>הערה: עבור חניכי מכינה יש לסמן 0 בשדות הבאים</h4>
@@ -200,12 +199,11 @@
                     @Html.ValidationMessageFor(model => model.Trainee.AcademicYear, "", new { @class = "text-danger" })
                 </div>
             </div>
-
         <div class="form-group">
             <label class="control-label col-md-2">מספר סמסטרים מתחילת התואר (ותק) :</label>
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Trainee.SemesterNumber, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Trainee.SemesterNumber, "", new {@class = "text-danger"})
+                    @Html.EditorFor(model => model.Trainee.SemesterNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Trainee.SemesterNumber, "", new { @class = "text-danger" })
             </div>
         </div>
             @{
@@ -214,65 +212,35 @@
         <h3>סטטוס בתוכנית</h3>
         <div class="form-group">
             <h5>שדה זה מציין האם המשתמש פעיל בתוכנית החונכות</h5>
-            @Html.LabelFor(model => model.Trainee.User.IsActive, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Trainee.User.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.Trainee.User.IsActive, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Trainee.User.IsActive, "", new {@class = "text-danger"})
+                        @Html.CheckBoxFor(model => model.Trainee.User.IsActive, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Trainee.User.IsActive, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">
             <h5>שדה זה מציין האם המשתמש נשר מתוכנית החונכות</h5>
-            @Html.LabelFor(model => model.Trainee.DroppedOut, htmlAttributes: new {@class = "control-label col-md-2"})
+                    @Html.LabelFor(model => model.Trainee.DroppedOut, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.CheckBoxFor(model => model.Trainee.DroppedOut, new {htmlAttributes = new {@class = "form-control"}})
-                @Html.ValidationMessageFor(model => model.Trainee.DroppedOut, "", new {@class = "text-danger"})
+                        @Html.CheckBoxFor(model => model.Trainee.DroppedOut, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Trainee.DroppedOut, "", new { @class = "text-danger" })
             </div>
         </div>
     }
 }
 
-        </form>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="trainee-submit" type="submit" value="שמור" class="btn btn-default" />
+                <input id="trainee-submit" type="submit" value="שמור חניך" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("חזור לרשימה", "לתפריט")
+    @*@Html.ActionLink("חזור לרשימה", "Index")*@
+    <a class="btn btn-default" href="/Rackaz/Trainee/Index">חזור לרשימת החניכים</a>
 </div>
-
-
-@*
-    Work In progress - Creating a pop up to create a new academic institution from the form
-    <div id="academmic-institution-modal" class="modal fade" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                @{
-                    if (ViewBag.CurrentUser.UserRole == UserRole.Admin)
-                    {
-                        ViewBag.IsRackaz = false;
-                    }
-                    else
-                    {
-                        ViewBag.IsRackaz = true;
-                    }
-                    @Html.Partial("~/Areas/Rackaz/Views/AcademicInstitution/_AcademicInstitutionForm.cshtml", new AcademicInstitutionModel());
-                }
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->*@
 
 

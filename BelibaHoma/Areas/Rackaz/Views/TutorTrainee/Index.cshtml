@@ -19,8 +19,8 @@
 <h2>קשרי חונכות</h2>
 
 <p>
-    @*//TODO: Make this the actual link to the manual matching interface*@ 
-    @Html.ActionLink("ציוות ידני", "Create", "MATCH", new {Area = "Rackaz"}, new object {})
+    @*@Html.ActionLink("עבור לציוות ידני", "ManualMatch", "TutorTrainee")*@
+    <a class="btn btn-default" href="/Rackaz/TutorTrainee/ManualMatch">עבור לציוות ידני</a>
 </p>
 <input type="hidden" id="column-value" value="@(ViewBag.IsRackaz ? 5 : 6)" />
 <table class="table" id="tutortrainee-table">
@@ -30,13 +30,13 @@
             שם החונך
         </th>
         <th>
-            ת.ז חונך
+            מסלול ראשי
         </th>
         <th>
             שם החניך
         </th>
         <th>
-            ת.ז חניך
+            פירוט העזרה הנדרשת
         </th>
         <th id="is-active">
             @Html.DisplayNameFor(model => model.Status)
@@ -50,9 +50,6 @@
                 </th>
             }
         }
-        <th>
-            ציוות חריג
-        </th>
         <th id="actions">
             פעולות
         </th>
@@ -64,13 +61,13 @@
             @Html.DisplayNameFor(model => model.Tutor.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Tutor.User.IdNumber)
+            @Html.DisplayNameFor(model => model.Tutor.AcademicMajor.Name)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Trainee.FullName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+            @Html.DisplayNameFor(model => model.Trainee.NeededHelpDescription)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Status)
@@ -84,9 +81,6 @@
                 </th>
             }
         }
-        <th>
-            @Html.DisplayNameFor(model => model.IsException)
-        </th>
         <th></th>
     </tr>
     </tfoot>
@@ -95,16 +89,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Tutor.FullName)
+                @Html.ActionLink(@item.Tutor.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.Tutor.User.Id }, new { target = "_blank" })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Tutor.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainee.FullName)
+                @Html.ActionLink(@item.Trainee.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.Trainee.User.Id }, new { target = "_blank" })
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+                @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
             </td>
             <td>
                 @item.Status.ToDescription()
@@ -114,11 +108,11 @@
                 if (ViewBag.IsRackaz != true && item.Trainee.User.Area != null)
                 {
                     <td>
-                        @Html.DisplayNameFor(model => model.Trainee.User.Area)
+                        @item.Trainee.User.Area.ToDescription()
                     </td>
                 }
             }
-            <td>
+            @*<td>
                 @{
                     if (item.IsException == true)
                     {
@@ -131,12 +125,13 @@
                         ;
                     }
                 }
-            </td>
+            </td>*@
             <td>
-                @Html.ActionLink("ערוך פרטי קשר", "Edit", new {Area = "Rackaz", id = item.Id}) |
-                @Html.ActionLink("פרטי חניך ", "Details", "Trainee", new {Area = "Trainee", id = item.Trainee.User.Id}, null)|
-                @Html.ActionLink("פרטי חונך ", "Details", "Tutor", new {Area = "Tutor", id = item.Tutor.User.Id}, null)|
-                @Html.ActionLink("דוחות חניך - חונך", "TutorTraineeReports", "TutorReport", new {Area = "Tutor", id = item.Id}, null)
+                @*@Html.ActionLink("עריכת קשר", "Edit", new {Area = "Rackaz", id = item.Id})*@
+                <a class="btn btn-default btn-xs" href="/Rackaz/TutorTrainee/Edit/?id=@item.Id">עריכה</a>
+                @Html.Raw("|")
+                <a class="btn btn-default btn-xs" href="/Tutor/TutorReport/TutorTraineeReports/?id=@item.Id" target="_blank">דיווחים</a>
+                @*@Html.ActionLink("צפייה בדיווחים", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})*@
 
 
             </td>

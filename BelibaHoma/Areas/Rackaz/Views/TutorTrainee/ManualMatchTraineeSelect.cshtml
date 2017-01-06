@@ -10,19 +10,19 @@
     <link href="~/Content/Site.css" rel="stylesheet" />
 }
 <script src="~/Scripts/ManualMatchTraineeSelect.js"></script>
-<div class="">
+
     <h2>חניכים</h2>
     <table class="table" id="trainees-partial-table">
         <thead>
             <tr>
                 <th>
-                    בחר חניך
+                    חניך
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+                    פירוט עזרה נדרשת
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
@@ -32,9 +32,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicMajor1)
-                </th>
-                <th>
-                    פרטים נוספים
                 </th>
                 <th class="hidden"></th>
             </tr>
@@ -42,13 +39,13 @@
         <tfoot>
             <tr>
                 <th>
-                    בחר חניך
+                    חניך
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Trainee.User.IdNumber)
+                    פירוט עזרה נדרשת
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicInstitution)
@@ -59,7 +56,6 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Trainee.AcademicMajor1)
                 </th>
-                <th></th>
                 <th class="hidden"></th>
             </tr>
         </tfoot>
@@ -73,10 +69,11 @@
                         </label>
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Trainee.FullName)
+                        @*@Html.DisplayFor(modelItem => item.Trainee.FullName)*@
+                        @Html.ActionLink(@item.Trainee.FullName, "Details", new { Area = "Trainee", id = item.Trainee.User.Id }, new { target = "_blank" })
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Trainee.User.IdNumber)
+                        @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Trainee.AcademicInstitution.Name)
@@ -87,9 +84,6 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Trainee.AcademicMajor1.Name)
                     </td>
-                    <td>
-                        @Html.ActionLink("פרטים", "Details", "Trainee", new { Area = "Trainee", id = @item.Trainee.UserId }, new { target = "_blank" })
-                    </td>
                     <td class="hidden">
                         <input name="trainee-matched-count-@item.Trainee.UserId" id="trainee-matched-count-@item.Trainee.UserId" value=@item.IsMatchedCount />
                         <input name="trainee-unapproved-@item.Trainee.UserId" id="trainee-unapproved-@item.Trainee.UserId" value=@item.IsUnAuthMatch />
@@ -98,4 +92,3 @@
             }
         </tbody>
     </table>
-</div>

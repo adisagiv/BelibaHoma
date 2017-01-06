@@ -6,10 +6,11 @@
     var isRackaz = ViewBag.IsRackaz; //change to addministrator aswell later on
 }
 
+
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="well">
         <div class="form-horizontal" style="direction: rtl">
             @*<h4>משרה</h4>*@
             <hr />
@@ -23,15 +24,23 @@
                 </div>*@
             <div class="form-group">
                 <label class="control-label col-md-2">תאריך המפגש:</label>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.MeetingDate, "", new { @class = "text-danger" })
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class='input-group date datetimepicker-style' id='datetimepicker1'>
+                            <input type='text' class="form-control" value="@Model.MeetingDate" id="TutorReport_MeetingDate" name="TutorReport.MeetingDate" data-val="true" data-val-date="השדה תאריך מפגש צריך להיות תאריך חוקי." data-val-required="זהו שדה חובה"/>
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        </div>
+                    </div>
+                    @*@Html.EditorFor(model => model.MeetingDate, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.MeetingDate, "", new {@class = "text-danger"})
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-2">זמן תחילת המפגש :</label>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.StartTime, new { @class = "form-control" })
+                    @Html.EditorFor(model => model.StartTime,  new { htmlAttributes = new { @class = "form-control" }})
                     @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -72,13 +81,13 @@
             </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="שמור מפגש" class="btn btn-default" />
                 </div>
             </div>
         </div>
-    </div>
 }
 
-@*<div>
-        @Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })
-    </div>*@
+<div>
+        @*@Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })*@
+    <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.TutorReport.TutorTraineeId">חזור לדיווחים</a>
+</div>

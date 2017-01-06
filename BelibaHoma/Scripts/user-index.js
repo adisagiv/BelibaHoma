@@ -41,7 +41,7 @@
 
                     });
                 var val = 'פעיל';
-                this.api().columns(5).search('^' + val + '$', true, false)
+                this.api().columns(4).search('^' + val + '$', true, false)
                                         .draw();
             }
         });

@@ -1,4 +1,5 @@
-﻿@using BelibaHoma.BLL.Models
+﻿@using BelibaHoma.BLL.Enums
+@using BelibaHoma.BLL.Models
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,7 @@
     @Styles.Render("~/Content/css")
     @RenderSection("styles", false)
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/datetimepicker/css")
     @{
         UserModel user = ViewBag.CurrentUser;
     }
@@ -20,50 +22,58 @@
 
     <div class="navbar navbar-inverse navbar-fixed-top"  id="nav1">
         <div class="container">
-
             <div class="navbar-header">
-
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-
+                @*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-
-                </button>
+                </button>*@
                 @*@Html.ActionLink("בליבה חומה", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})*@
                 <div>
-                    <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;" />
+                    @{
+                        var route = "";
+                        if (user != null)
+                        {
+                            if (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz)
+                            {
+                                route = "/Rackaz/Home";
+                            }
+                            else if (user.UserRole == UserRole.Trainee)
+                            {
+                                route = "";
+                            }
+                            else
+                            {
+                                route = "";
+                            }
+                        }
+                        <a href=@route>
+                            <img src="~/Content/לוגו.jpg" alt="לוגו" style="width: 50px; height: 50px; margin-left: 30px;"/>
+                        </a>
+                    }
                 </div>
             </div>
             @* This is the menu per user role below.. *@
             @Html.Action("Index",new { controller = "Menu" , area = "" })
 
-            <div class="pull-left">
-
-                @if (user != null)
-                {
-                    <span class="label label-inverse">@String.Format("שלום {0}", user.FullName)</span>
-                    <a href="/Login/Logout">התנתק</a>
-                   // @Html.ActionLink("התנתק", "Logout", "Login", new { id=string.Empty }, null)
-                }
-                else
-                {
-                    @Html.ActionLink("התחבר", "Index", "Login")
-                }
-                
-            </div>
+            
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - ציוני דרך - פרויקט בליבה חומה</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    @RenderBody()
+    <hr/>
+    <footer>
+        <p>&copy; @DateTime.Now.Year - ציוני דרך - פרויקט בליבה חומה</p>
+    </footer>
+</div>
 
-    @Scripts.Render("~/bundles/jquery")
+
+
+@Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+<script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    @Scripts.Render("~/bundles/datetimepicker/js")
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/datatable.settings.js"></script>
     @RenderSection("scripts", required: false)

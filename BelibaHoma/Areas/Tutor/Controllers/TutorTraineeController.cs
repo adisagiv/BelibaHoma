@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using BelibaHoma.Areas.Rackaz.Models;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.Controllers;
@@ -26,9 +27,19 @@ namespace BelibaHoma.Areas.Tutor.Controllers
 
         public ActionResult Index(int id)
         {
+            if (CurrentUser.UserRole == UserRole.Tutor)
+            {
+                id = CurrentUser.Id;
+            }
             var result = _tutorTraineeService.GetById(id);
             if (result.Success)
             {
+                if (result.Data.Count == 1)
+                {
+                    var tutorTraineeId = result.Data.First().Id;
+                    return RedirectToAction("TutorTraineeReports", "TutorReport",
+                        new {Area = "Tutor", id = tutorTraineeId});
+                }
                 return View(result.Data);
             }
             var status = new StatusModel(false, result.Message);

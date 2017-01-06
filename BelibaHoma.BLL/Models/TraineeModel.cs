@@ -28,8 +28,8 @@ namespace BelibaHoma.BLL.Models
         public AcademicInstitutionModel AcademicInstitution { get; set; }
 
         [Display(Name = "תאריך לידה")]
-        [DataType(DataType.Date), ]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public System.DateTime Birthday { get; set; }
 
@@ -61,15 +61,15 @@ namespace BelibaHoma.BLL.Models
         public EmploymentStatus? EmploymentStatus { get; set; }
         
         [Display(Name = "שעות חברותא (השנה)")]
-        public int TutorHoursBonding { get; set; }
+        public double TutorHoursBonding { get; set; }
         
         [Display(Name = "שעות חניכה (השנה)")]
-        public int TutorHours { get; set; }
+        public double TutorHours { get; set; }
         
         [Display(Name = "מסלול לימוד נוסף בו נדרשת חניכה")]
         public AcademicMajorModel AcademicMajor2 { get; set; }
         
-        [Display(Name = "תיאור מילולי למקצוע בו נדרשת עזרה")]
+        [Display(Name = "תיאור העזרה הנדרשת")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public string NeededHelpDescription { get; set; }
         

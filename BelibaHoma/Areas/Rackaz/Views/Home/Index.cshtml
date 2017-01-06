@@ -13,36 +13,49 @@
     <script src="~/Scripts/rackaz-reports.js"></script>
 }
 
-<h1>ברוכים הבאים</h1>
-
 <div class="well">
+   
+     @*<br/>
+    <h1 align="center">ברוכים הבאים</h1>*@
+    <br/>
+
     <div class="row">
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div>התרעות חדשות</div>
-                </div>
-                <div class="panel-footer">עבור להתרעות</div>
+            <div class="panel panel-danger" style="background-color: #f2dede">
+                @*       <div class="panel-heading">*@
+                <br/>
+                <center>
+                    <div style="color: brown"><h4>יש לך <b>@Model.newAlertsCount</b> התרעות חדשות </h4>
+                    </div>
+                </center>
+                @*</div>*@
+                @*<div class="panel-footer">
+                     <a href="/Rackaz/Alert/Index">עבור להתרעות</a>
+                         <a class="btn btn-info" href="/Home/About">על התוכנית &raquo; </a>
+                    </div>*@
+                <br/>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div>התרעות בטיפול</div>
-                </div>
-                <div class="panel-footer">עבור להתרעות</div>
+            <div class="panel panel-warning" style="background-color: lightyellow">
+                <br/>
+                <center>
+                    <div><h4 style="color: darkgoldenrod">יש לך <b>@Model.OnGoingAlertsCount</b> התרעות בטיפול</h4>
+                </div></center>
+                <br/>
             </div>
         </div>
         <div class="col-lg-4 col-md-4">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <div>שעות חניכה</div>
-                </div>
-                <div class="panel-footer">עבור לדיווחים</div>
+            <div class="panel panel-success" style="background-color: #e6ffe6">
+                <br/>
+                <center>
+                    <div><h4 style="color: darkgreen">עד כה בוצעו <b>@Model.TutorHoursCount</b> שעות חניכה</h4>
+                    <br/>
+                </div></center>
             </div>
         </div>
-    </div>
-    <div class="row">
+        <br/>
+    <div class="row" align="right" style="margin-right: 10px">
         <select class="form-control" id="Report" name="Report">
             <option>אנא בחר בדו"ח הרצוי</option>
             @foreach (ReportType type in Enum.GetValues(typeof (ReportType)))
@@ -53,4 +66,5 @@
     </div>
     <div class="row" id="report-partial"></div>
 </div>
+
 

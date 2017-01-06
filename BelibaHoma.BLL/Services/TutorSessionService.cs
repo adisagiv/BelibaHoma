@@ -70,13 +70,13 @@ namespace BelibaHoma.BLL.Services
                     var TutorHoursTemp = entity.EndTime - entity.StartTime;
                     var Tht = TutorHoursTemp.TotalHours;
                     entity.TutorReport.TutorHours += Tht; ///adding the total tutoring hours to tutorReport 
-                    entity.TutorReport.TutorTrainee.Trainee.TutorHours += (int)Tht; ///adding the total tutoring hours to trainee
-                    entity.TutorReport.TutorTrainee.Tutor.TutorHours += (int)Tht; ///adding the total tutoring hours to tutor
+                    entity.TutorReport.TutorTrainee.Trainee.TutorHours += Tht; ///adding the total tutoring hours to trainee
+                    entity.TutorReport.TutorTrainee.Tutor.TutorHours += Tht; ///adding the total tutoring hours to tutor
 
 
                     entity.TutorReport.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to tutorReport
-                    entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding += (int)entity.NumBondingHours;//adding the total bonding hour to trainee
-                    entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding += (int)entity.NumBondingHours;//adding the total bonding hour to tutor
+                    entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to trainee
+                    entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to tutor
 
 
                     
@@ -131,9 +131,17 @@ namespace BelibaHoma.BLL.Services
 
                         var TutorHoursTemp = entity.StartTime - entity.EndTime;
                         var Tht = TutorHoursTemp.TotalHours;
+                        //updating Report bonding and tutor hours
                         entity.TutorReport.TutorHours += Tht - OldTht;
-
                         entity.TutorReport.TutorHoursBonding += entity.NumBondingHours - OldBondingHours;
+
+                        //updating Tutor bonding and tutor hours
+                        entity.TutorReport.TutorTrainee.Tutor.TutorHours += Tht - OldTht;
+                        entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding = entity.NumBondingHours - OldBondingHours;
+
+                        //updating Trainee bonding and tutor hours
+                        entity.TutorReport.TutorTrainee.Trainee.TutorHours += Tht - OldTht;
+                        entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding = entity.NumBondingHours - OldBondingHours;
 
                         unitOfWork.SaveChanges();
 

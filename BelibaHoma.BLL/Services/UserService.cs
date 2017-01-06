@@ -56,21 +56,36 @@ namespace BelibaHoma.BLL.Services
                 {
                     if (model.UserRole.ToString() == "Rackaz" && model.Area == null)
                     {
-                        throw new System.ArgumentException("User is Rackaz but Area is not initialized", "model");
+                        status.Message = "המשתמש המוזן הינו רכז אך לא הוזן עבורו אזור פעילות";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (model.UserRole.ToString() == "Admin" && model.Area != null)
                     {
-                        throw new System.ArgumentException("User is Admin but Area is initialized", "model");
+                        status.Message = "המשתמש המוזן הינו אדמין אך הוזן עבורו אזור פעילות";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
+                    if ((model.UserRole == UserRole.Trainee || model.UserRole == UserRole.Tutor) && model.Area == null)
+                    {
+                        status.Message = "המשתמש המוזן הינו מסוג חניך / חונך אך לא הוזן עבורו אזור פעילות";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (model.IdNumber.Length != 9)
                     {
-                        throw new System.ArgumentException("User Id Number is invalid", "model");
+                        status.Message = "נא להזין תעודת זהות תקינה בעלת 9 ספרות (כולל ספרת ביקורת)";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
+                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+                    var IsIdExist = userRepository.GetAll().FirstOrDefault(u => u.IdNumber == model.IdNumber);
+                    if (IsIdExist != null)
+                    {
+                        status.Message = "על תעודת הזהות להיות ערך ייחודי, קיים משתמש במסד בעל תעודת זהות זהה";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     model.CreationTime = DateTime.Now;
                     model.UpdateTime = DateTime.Now;
                     model.LastPasswordUpdate = DateTime.Now.Utc();
                     model.IsActive = true;
-                    var userRepository = unitOfWork.GetRepository<IUserRepository>();
+                    
                     var entity = model.MapTo<User>();
                     userRepository.Add(entity);
 
@@ -83,7 +98,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הוספת המשתמש");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הוספת המשתמש");    
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -111,19 +129,35 @@ namespace BelibaHoma.BLL.Services
                     {
                         if (updatedModel.UserRole.ToString() == "Rackaz" && updatedModel.Area == null)
                         {
-                            throw new System.ArgumentException("User is Rackaz but Area is not initialized", "model");
+                            status.Message = "המשתמש המוזן הינו רכז אך לא הוזן עבורו אזור פעילות";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (updatedModel.UserRole.ToString() == "Admin" && updatedModel.Area != null)
                         {
-                            throw new System.ArgumentException("User is Admin but Area is initialized", "model");
+                            status.Message = "המשתמש המוזן הינו אדמין אך הוזן עבורו אזור פעילות";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
+                        }
+                        if ((updatedModel.UserRole == UserRole.Trainee || updatedModel.UserRole == UserRole.Tutor) && updatedModel.Area == null)
+                        {
+                            status.Message = "המשתמש המוזן הינו מסוג חניך / חונך אך לא הוזן עבורו אזור פעילות";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (updatedModel.IdNumber.Length != 9)
                         {
-                            throw new System.ArgumentException("User Id Number is invalid", "model");
+                            status.Message = "נא להזין תעודת זהות תקינה בעלת 9 ספרות (כולל ספרת ביקורת)";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
+                        }
+                        if (user.IdNumber != updatedModel.IdNumber)
+                        {
+                            var IsIdExist = userRepository.GetAll().FirstOrDefault(u => u.IdNumber == updatedModel.IdNumber);
+                            if (IsIdExist != null && IsIdExist.Id != id)
+                            {
+                                status.Message = "תקלה בעת ניסיון לשנות את ערך תעודת הזהות של המשתמש הקיים.\nבמסד הנתונים משתמש נוסף בעל אותו מספר תעודת זהות.";
+                                throw new System.ArgumentException(status.Message, "updatedModel");
+                            }   
                         }
                         user.FirstName = updatedModel.FirstName;
                         user.LastName = updatedModel.LastName;
-                        //TODO: ask Roey if needed here - user.Password = updatedModel.Password;
                         user.UserRole = (int)updatedModel.UserRole;
                         user.Email = updatedModel.Email;
                         user.IdNumber = updatedModel.IdNumber;
@@ -141,7 +175,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך עדכון פרטי המתשתמש");
+                if (status.Message == string.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך עדכון פרטי המתשתמש");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 

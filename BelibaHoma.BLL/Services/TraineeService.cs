@@ -18,10 +18,12 @@ namespace BelibaHoma.BLL.Services
 {
     public class TraineeService : ITraineeService
     {
+        private readonly IPredictionTrainingService _predictionTrainingService;
         private readonly IUserService _userService;
 
-        public TraineeService(IUserService userService)
+        public TraineeService(IUserService userService, IPredictionTrainingService predictionTrainingService)
         {
+            _predictionTrainingService = predictionTrainingService;
             _userService = userService;
         }
 
@@ -84,17 +86,30 @@ namespace BelibaHoma.BLL.Services
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
 
                     //Running some server side validations
+                    if (model.User.IdNumber.Length != 9)
+                    {
+                        status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
                     if (model.Birthday > DateTime.Now.AddYears(-15))
                     {
-                        throw new System.ArgumentException("Trainee Birthday doesn't make sense", "model");
+                        status.Message = "תאריך הלידה של החניך צריך להיות לפחות לפני 15 שנים";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (academicInstitution.InstitutionType == (int) InstitutionType.Mechina && model.AcademicYear != 0 && model.SemesterNumber != 0)
                     {
-                        throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
+                        status.Message = "החניך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (model.AcademicYear == 0 || model.SemesterNumber == 0))
                     {
-                        throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
+                        status.Message = "אם החניך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
+                    if (model.User.Area != null && academicInstitution.Area != (int)model.User.Area)
+                    {
+                        status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
 
                     //Adding the User Model to the DB (By using the Add function in UserService)
@@ -140,11 +155,18 @@ namespace BelibaHoma.BLL.Services
                         status.Success = true;
                         status.Message = String.Format("חניך {0} הוזן בהצלחה", model.User.FullName);
                     }
+                    else
+                    {
+                        status.Message = userStatus.Message;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הוספת חניך");
+                if (status.Message == string.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הוספת חניך");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -217,23 +239,33 @@ namespace BelibaHoma.BLL.Services
                         //Running some server side validations
                         if (updatedModel.User.IdNumber.Length != 9)
                         {
-                            throw new System.ArgumentException("User Id Number is invalid", "updatedModel");
+                            status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (updatedModel.Birthday > DateTime.Now.AddYears(-15))
                         {
-                            throw new System.ArgumentException("Trainee Birthday doesn't make sense", "updatedModel");
+                            status.Message = "תאריך הלידה של החניך צריך להיות לפחות לפני 15 שנים";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && updatedModel.AcademicYear != 0 && updatedModel.SemesterNumber != 0)
                         {
-                            throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            status.Message = "החניך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (updatedModel.AcademicYear == 0 || updatedModel.SemesterNumber == 0))
                         {
-                            throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            status.Message = "אם החניך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (updatedModel.User.IsActive != false && updatedModel.DroppedOut == true)
                         {
-                            throw new System.ArgumentException("Trainee dropped out so he is no longer updated", "updatedModel");
+                            status.Message = "במידה והחניך נשר מהתוכנית, הסטטוס שלו לא יכול להיות פעיל";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
+                        }
+                        if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
+                        {
+                            status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
+                            throw new System.ArgumentException(status.Message,"updatedModel");
                         }
 
                         //Updating the entity from the model received by the form
@@ -259,6 +291,10 @@ namespace BelibaHoma.BLL.Services
                         trainee.PhysicsLevel = (int) updatedModel.PhysicsLevel;
                         trainee.MathLevel = (int) updatedModel.MathLevel;
                         trainee.EnglishLevel = (int) updatedModel.EnglishLevel;
+                        if (trainee.DroppedOut == false && updatedModel.DroppedOut == true)
+                        {
+                            _predictionTrainingService.AddFromDropping(trainee.UserId);
+                        }
                         trainee.DroppedOut = updatedModel.DroppedOut;
                         
                         //Linked Entities - need to verify Academic Institutions and Majors
@@ -295,7 +331,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך עדכון פרטי החניך");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך עדכון פרטי החניך");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 

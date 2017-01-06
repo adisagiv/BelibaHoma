@@ -70,7 +70,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 AcademicInstitutionList = academicInstitutionResult.Data,
                 AcademicMajorList = academicMajorResult.Data,
-                Trainee = new TraineeModel(),
+                Trainee = new TraineeModel()
+                {
+                    Birthday = DateTime.Now
+                }
             };
             model.Trainee.User = new UserModel();
             if (CurrentUser.UserRole == UserRole.Admin)

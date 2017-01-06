@@ -88,17 +88,30 @@ namespace BelibaHoma.BLL.Services
                     var userRepository = unitOfWork.GetRepository<IUserRepository>();
 
                     //Running some server side validations
+                    if (model.User.IdNumber.Length != 9)
+                    {
+                        status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
                     if (model.Birthday > DateTime.Now.AddYears(-15))
                     {
-                        throw new System.ArgumentException("Tutor Birthday doesn't make sense", "model");
+                        status.Message = "תאריך הלידה של החונך צריך להיות לפחות לפני 15 שנים";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && model.AcademicYear != 0 && model.SemesterNumber != 0)
                     {
-                        throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "model");
+                        status.Message = "החונך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
                     if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (model.AcademicYear == 0 || model.SemesterNumber == 0))
                     {
-                        throw new System.ArgumentException("Trainee is in Mechina, Academic Year and Semester should be 0", "model");
+                        status.Message = "אם החונך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
+                        throw new System.ArgumentException(status.Message, "model");
+                    }
+                    if (model.User.Area != null && academicInstitution.Area != (int)model.User.Area)
+                    {
+                        status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
+                        throw new System.ArgumentException(status.Message, "model");
                     }
 
                     //Adding the User Model to the DB (By using the Add function in UserService)
@@ -138,11 +151,18 @@ namespace BelibaHoma.BLL.Services
                         status.Success = true;
                         status.Message = String.Format("חונך {0} הוזן בהצלחה", model.User.FullName);
                     }
+                    else
+                    {
+                        status.Message = userStatus.Message;
+                    }
                 }
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך הוספת החונך");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך הוספת החונך");
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -212,19 +232,28 @@ namespace BelibaHoma.BLL.Services
                         //Running some server side validations
                         if (updatedModel.User.IdNumber.Length != 9)
                         {
-                            throw new System.ArgumentException("User Id Number is invalid", "updatedModel");
+                            status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (updatedModel.Birthday > DateTime.Now.AddYears(-15))
                         {
-                            throw new System.ArgumentException("Tutor Birthday doesn't make sense", "updatedModel");
+                            status.Message = "תאריך הלידה של החונך צריך להיות לפחות לפני 15 שנים";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && updatedModel.AcademicYear != 0 && updatedModel.SemesterNumber != 0)
                         {
-                            throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            status.Message = "החונך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                         if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (updatedModel.AcademicYear == 0 || updatedModel.SemesterNumber == 0))
                         {
-                            throw new System.ArgumentException("Tutor is in Mechina, Academic Year and Semester should be 0", "updatedModel");
+                            status.Message = "אם החונך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
+                        }
+                        if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
+                        {
+                            status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
+                            throw new System.ArgumentException(status.Message, "updatedModel");
                         }
                    
 
@@ -274,7 +303,10 @@ namespace BelibaHoma.BLL.Services
             }
             catch (Exception ex)
             {
-                status.Message = String.Format("שגיאה במהלך עדכון פרטי החונך");
+                if (status.Message == String.Empty)
+                {
+                    status.Message = String.Format("שגיאה במהלך עדכון פרטי החונך");   
+                }
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -307,6 +339,29 @@ namespace BelibaHoma.BLL.Services
 
             return result;
         }
-        
+
+        public StatusModel<float> GetTutorHours(Area? area)
+        {
+            var result = new StatusModel<float>(false, String.Empty, new float());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorList = tutorRepository.GetAll().Where(t => t.User.IsActive == true && (area == null || t.User.Area == (int?)area));
+                    var tutorHours = (tutorList.Count() != 0 ? tutorList.Sum(t => t.TutorHours) : 0);
+
+                    //If we got here - Yay! :)
+                    result = new StatusModel<float>(true, String.Empty, (float)tutorHours);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת שעות החונכות ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
     }
 }

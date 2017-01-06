@@ -33,8 +33,8 @@ namespace BelibaHoma.DAL
         public string PhoneNumber { get; set; }
         public int MaritalStatus { get; set; }
         public Nullable<int> EmploymentStatus { get; set; }
-        public int TutorHoursBonding { get; set; }
-        public int TutorHours { get; set; }
+        public double TutorHoursBonding { get; set; }
+        public double TutorHours { get; set; }
         public string NeededHelpDescription { get; set; }
         public int PhysicsLevel { get; set; }
         public int MathLevel { get; set; }

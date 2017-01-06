@@ -35,6 +35,8 @@ namespace BelibaHoma.BLL.Models
         public string Password { get; set; }
         
         [Display(Name = "זמן יצירה")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime CreationTime { get; set; }
         
         [Display(Name = "סוג משתמש")]
@@ -42,6 +44,8 @@ namespace BelibaHoma.BLL.Models
         public UserRole UserRole { get; set; }
         
         [Display(Name = "זמן עדכון")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime UpdateTime { get; set; }
         
         [Display(Name = "זמן עדכון סיסמא")]

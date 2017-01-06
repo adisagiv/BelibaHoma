@@ -50,7 +50,8 @@ namespace BelibaHoma.Areas.Tutor.Controllers
                     TutorReport = new TutorReport
                     {
                         TutorTraineeId = status.Data.TutorTraineeId
-                    }
+                    },
+                    MeetingDate = DateTime.Now
                 };
                 return View(model);
             }

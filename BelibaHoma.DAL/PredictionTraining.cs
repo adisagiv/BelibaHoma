@@ -12,12 +12,17 @@ namespace BelibaHoma.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class PredictionTraining
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int Id { get; set; }
+        public double Gender { get; set; }
+        public double AcademicMajor { get; set; }
+        public double AcademicMinor { get; set; }
+        public double AcademicInstitution { get; set; }
+        public double SemesterNumber { get; set; }
+        public double LastSemesterGrade { get; set; }
+        public double AlertCount { get; set; }
+        public double IsDroppedOut { get; set; }
+        public int TraineeId { get; set; }
     }
 }

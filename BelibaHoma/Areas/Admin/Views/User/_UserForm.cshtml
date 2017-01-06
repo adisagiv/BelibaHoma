@@ -11,7 +11,7 @@
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    <div class="well">
+    
         <div class="form-horizontal" style="direction: rtl">
             <form autocomplete="off">
                 <hr />
@@ -90,13 +90,13 @@
             </form>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="שמור" class="btn btn-default" />
+                    <input type="submit" value="שמור משתמש" class="btn btn-default" />
                 </div>
             </div>
         </div>
         }
 
         <div>
-            @Html.ActionLink("חזור", "Index", new {Area = "Rackaz"})
+            @*@Html.ActionLink("חזור", "Index", new {Area = "Rackaz"})*@
+            <a class="btn btn-default" href="/Rackaz/User/Index">חזור לרשימת המשתמשים</a>
         </div>
-</div>

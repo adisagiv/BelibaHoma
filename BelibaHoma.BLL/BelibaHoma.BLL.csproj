@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="alglibnet2">
+      <HintPath>Dll\alglibnet2.dll</HintPath>
+    </Reference>
     <Reference Include="Catel.Core, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Catel.Core.4.5.2\lib\net45\Catel.Core.dll</HintPath>
       <Private>True</Private>
@@ -100,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Interfaces\IPredictionTrainingService.cs" />
     <Compile Include="Models\AvrGradeStatisticsModel.cs" />
     <Compile Include="Models\InvestedHoursStatisticsModel.cs" />
     <Compile Include="Interfaces\IAlertService.cs" />
@@ -107,6 +111,7 @@
     <Compile Include="Models\JoinDropStatisticsModel.cs" />
     <Compile Include="Models\Reports\HighChartJDModel.cs" />
     <Compile Include="Services\AlertService.cs" />
+    <Compile Include="Services\PredictionTrainingService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Models\HourStatisticsModel.cs" />
     <Compile Include="Interfaces\IGradeService.cs" />

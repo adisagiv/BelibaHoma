@@ -23,7 +23,8 @@
         if (ViewBag.IsRackaz == false)
         {
             <p>
-                @Html.ActionLink("הוסף משתמש", "Create", "User", new { Area = "Admin" }, new object { })
+                @*@Html.ActionLink("הוסף משתמש", "Create", "User", new { Area = "Admin" }, new object { })*@
+                <a class="btn btn-default" href="/Admin/User/Create">הוסף משתמש</a>
             </p>
         }
     }
@@ -32,9 +33,6 @@
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => model.FullName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.IdNumber)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UserRole)
@@ -57,9 +55,6 @@
                     @Html.DisplayNameFor(model => model.FullName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.IdNumber)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.UserRole)
                 </th>
                 <th>
@@ -80,9 +75,6 @@
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.FullName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IdNumber)
                     </td>
                     <td>
                         @item.UserRole.ToDescription()
@@ -116,9 +108,11 @@
                         @{
                 if (ViewBag.IsRackaz != true)
                 {
-                    @Html.ActionLink("ערוך פרטי משתמש", "Edit", new { Area = "Admin", id = item.Id }) @Html.Raw(" |")
+                    @*@Html.ActionLink("עריכת משתמש", "Edit", new { Area = "Admin", id = item.Id })*@
+                    <a class="btn btn-default btn-xs" href="/Admin/User/Edit/@item.Id">עריכת משתמש</a>
+                    @Html.Raw(" |")
                 }
-                <a class="zero-password" data-userid="@item.Id">אפס סיסמא</a>
+                <a class="btn btn-default btn-xs zero-password" data-userid="@item.Id">אפס סיסמא</a>
                         }
                     </td>
                 </tr>

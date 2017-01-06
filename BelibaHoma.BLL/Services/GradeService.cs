@@ -17,6 +17,12 @@ namespace BelibaHoma.BLL.Services
 {
     public class GradeService : IGradeService
     {
+        private readonly IPredictionTrainingService _predictionTrainingService;
+
+        public GradeService(IPredictionTrainingService predictionTrainingService)
+        {
+            this._predictionTrainingService = predictionTrainingService;
+        }
 
         /// <summary>
         /// Get all job offers from the db
@@ -78,6 +84,8 @@ namespace BelibaHoma.BLL.Services
                     GradeRepository.Add(entity);
 
                     unitOfWork.SaveChanges();
+
+                    _predictionTrainingService.AddFromGrade(model.TraineeId, model.SemesterNumber);
 
                     status.Success = true;
                     status.Message = String.Format("הציון {0} הוזן בהצלחה", model.Grade1);

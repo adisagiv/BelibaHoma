@@ -26,8 +26,8 @@ namespace BelibaHoma.BLL.Models
         public AcademicInstitutionModel AcademicInstitution { get; set; }
 
         [Display(Name = "תאריך לידה")]
-        [DataType(DataType.Date),]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         [Required(ErrorMessage = "זהו שדה חובה")]
         public System.DateTime Birthday { get; set; }
 
@@ -54,10 +54,10 @@ namespace BelibaHoma.BLL.Models
         public string PhoneNumber { get; set; }
 
         [Display(Name = "שעות חברותא (השנה)")]
-        public int TutorHoursBonding { get; set; }
+        public double TutorHoursBonding { get; set; }
 
         [Display(Name = "שעות חניכה (השנה)")]
-        public int TutorHours { get; set; }
+        public double TutorHours { get; set; }
 
 
         [Display(Name = "רמת חניכה בפיזיקה")]

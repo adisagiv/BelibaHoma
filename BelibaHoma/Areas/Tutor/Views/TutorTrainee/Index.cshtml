@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorTraineeModel>
+@using Extensions.Enums
 
 @{
     ViewBag.Title = "Index";
@@ -14,9 +15,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsException)
-            </th>
             <th></th>
         </tr>
         @foreach (var item in Model)
@@ -26,14 +24,14 @@
                     @Html.DisplayFor(modelItem => item.Trainee.FullName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Status)
+                    @item.Status.ToDescription()
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.IsException)
-                </td>
-                <td>
-                    @Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)|
-                    @Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)
+                    @*@Html.ActionLink("דיווחי חונכות", "TutorTraineeReports", "TutorReport", new { id = item.Id }, null)*@
+                    <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@item.Id" target="_blank">צפייה דיווחים</a>
+                    @Html.Raw("|")
+                    <a class="btn btn-default" href="/Tutor/TutorReport/Create/?tutorTraineeId=@item.Id" target="_blank">הוסף דיווח</a>
+                    @*@Html.ActionLink("הוסף דיווח", "Create", "TutorReport", new { tutorTraineeId = item.Id }, null)*@
                 </td>
             </tr>
         }

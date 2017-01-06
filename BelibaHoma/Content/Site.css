@@ -46,12 +46,29 @@ ul#main-menu li a:hover {
     /*padding-bottom: 10px;*/
     /*padding-left: 14px;*/
     border-left-width: 5px;
-    color: #5FB0E4;
+    color: black;
     /*padding-left: 10px;*/
+}
+
+ul#main-menu.logon-link {
+    color: #5FB0E4;
 }
 
 .well {
     /*background: #FFFEF9;*/
    background-color: rgba(255, 254, 249, 0.8);
 
+}
+
+div.datetimepicker-style {
+    margin-right: 15px;
+    margin-left: -12px;
+}
+
+.glyphicon-chevron-left:before {
+    content: "\e080" !important;
+    }
+
+.glyphicon-chevron-right:before {
+    content: "\e079" !important;
 }

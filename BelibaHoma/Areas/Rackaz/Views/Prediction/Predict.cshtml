@@ -1,0 +1,84 @@
+﻿@using BelibaHoma.BLL.Enums
+@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
+@{
+    ViewBag.Title = "Predict";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="well">
+    <h2>חיזוי חניכים בסיכון לנשירה</h2>
+
+    @section scripts{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/Predict.js"></script>
+    }
+    <table class="table" id="endangered">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NeededHelpDescription)
+                </th>
+
+                @{
+                    if (ViewBag.IsRackaz != true)
+                    {
+                        <th id="is-area">
+                            @Html.DisplayNameFor(model => model.User.Area)
+                        </th>
+                    }
+                }
+
+                <th id="actions"></th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NeededHelpDescription)
+                </th>
+
+                @{
+                    if (ViewBag.IsRackaz != true)
+                    {
+                        <th id="is-area">
+                            @Html.DisplayNameFor(model => model.User.Area)
+                        </th>
+                    }
+                }
+                <th id="actions"></th>
+            </tr>
+        </tfoot>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NeededHelpDescription)
+                    </td>
+
+                  @{
+                if (ViewBag.IsRackaz != true && item.User.Area != null)
+                {
+                    <td>
+                        @item.User.Area.ToDescription()
+                    </td>
+                }
+                    }
+                    <td>
+                        @Html.ActionLink("פרטים", "Details", "Trainee", new { Area = "Trainee", id = @item.UserId }, new { target = "_blank" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
