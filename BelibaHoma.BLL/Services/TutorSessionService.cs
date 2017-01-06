@@ -65,6 +65,13 @@ namespace BelibaHoma.BLL.Services
                    var TutorReportRepository = unitOfWork.GetRepository<ITutorReportRepository>();
                    var TutorReport = TutorReportRepository.GetByKey(model.TutorReportId);
 
+                    if (entity.StartTime > entity.EndTime)
+                    {
+                        status.Message = String.Format("זמן תחילת המפגש חייב להיות לפני זמן סיום המפגש");
+                        throw new System.ArgumentException(status.Message, "model");
+
+                    }
+
                     //Linking the Complexed entities to the retrieved ones
                     entity.TutorReport = TutorReport;
                     var TutorHoursTemp = entity.EndTime - entity.StartTime;
@@ -78,7 +85,7 @@ namespace BelibaHoma.BLL.Services
                     entity.TutorReport.TutorTrainee.Trainee.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to trainee
                     entity.TutorReport.TutorTrainee.Tutor.TutorHoursBonding += entity.NumBondingHours;//adding the total bonding hour to tutor
 
-
+                    
                     
                     //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
                     TutorSessionRepository.Add(entity);
