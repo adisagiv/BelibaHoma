@@ -24,7 +24,7 @@
     </h1> </center>
     <hr/>
 <div class="row">
-    <div class="panel panel-default col-md-6">
+    <div class="panel panel-default col-md-6 panel-height">
         <div class="panel-heading">
             <h4>חונכים מאחרים בדיווח</h4>
         </div>
@@ -111,89 +111,89 @@
         </table>
     </div>
 
-    <div class="panel panel-default col-md-6">
+    <div class="panel panel-default col-md-6 panel-height">
         <div class="panel-heading">
             <h4>דרושה התערבות</h4>
         </div>
-        <br/>
+        <br />
         <table class="table" id="Intervention-Table">
             <thead>
-            <tr>
-                <th>
-                    שם החניך
-                </th>
-                <th>
-                    עבור לדיווח
-                </th>
-                @{
-                    if (ViewBag.IsRackaz == false)
-                    {
-                        <th>
-                            אזור
-                        </th>
+                <tr>
+                    <th>
+                        שם החניך
+                    </th>
+                    <th>
+                        עבור לדיווח
+                    </th>
+                    @{
+                        if (ViewBag.IsRackaz == false)
+                        {
+                            <th>
+                                אזור
+                            </th>
+                        }
                     }
-                }
-                <th id="actions">הערות</th>
-                <td id="actions"></td>
-            </tr>
+                    <th id="actions">הערות</th>
+                    <td id="actions"></td>
+                </tr>
             </thead>
             <tfoot>
-            <tr>
-                <th>
-                    שם החניך
-                </th>
-                <th>
-                    עבור לדיווח
-                </th>
-                @{
-                    if (ViewBag.IsRackaz == false)
-                    {
-                        <th>
-                            אזור
-                        </th>
+                <tr>
+                    <th>
+                        שם החניך
+                    </th>
+                    <th>
+                        עבור לדיווח
+                    </th>
+                    @{
+                        if (ViewBag.IsRackaz == false)
+                        {
+                            <th>
+                                אזור
+                            </th>
+                        }
                     }
-                }
-                <th id="actions">הערות</th>
-                <td id="actions"></td>
-            </tr>
+                    <th id="actions">הערות</th>
+                    <td id="actions"></td>
+                </tr>
             </tfoot>
             <tbody>
-            @foreach (var item in Model.TutorReport)
-            {
-                <tr class="@(item.Status == AlertStatus.New ? "table-warning" : "")">
-                    <td>
-                        <a href="/Trainee/Trainee/Details/@item.TutorReport.TutorTrainee.TraineeId" target="_blank">@item.TutorReport.TutorTrainee.Trainee.User.FullName</a>
-                    </td>
-                    <td>
-                        <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.TutorReport.Id" target="_blank">עבור לדיווח</a>
-                    </td>
-                    @if (ViewBag.IsRackaz == false)
+                @foreach (var item in Model.TutorReport)
+                {
+                    <tr class="@(item.Status == AlertStatus.New ? "table-warning" : "")">
+                        <td>
+                            <a href="/Trainee/Trainee/Details/@item.TutorReport.TutorTrainee.TraineeId" target="_blank">@item.TutorReport.TutorTrainee.Trainee.User.FullName</a>
+                        </td>
+                        <td>
+                            <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.TutorReport.Id" target="_blank">עבור לדיווח</a>
+                        </td>
+                        @if (ViewBag.IsRackaz == false)
+                        {
+                            <td>
+                                @item.Area.ToDescription()
+                            </td>
+                        }
+
+                        @{
+                    if (item.Status == AlertStatus.New)
                     {
                         <td>
-                            @item.Area.ToDescription()
+                            <a class="btn btn-warning btn-xs show-notes" data-id="@item.Id" data-toggle="modal" data-target="#myModal" href="/Rackaz/Alert/GetAlert?alertId=@item.Id">צפה בהערות</a>
                         </td>
-                    }
-
-                    @{
-                        if (item.Status == AlertStatus.New)
-                        {
-                            <td>
-                                <a class="btn btn-warning btn-xs show-notes" data-id="@item.Id" data-toggle="modal" data-target="#myModal" href="/Rackaz/Alert/GetAlert?alertId=@item.Id">צפה בהערות</a>
-                            </td>
                             <td></td>
-                        }
-                        else if (item.Status == AlertStatus.Ongoing)
-                        {
-                            <td>
-                                <a class="btn btn-warning btn-xs show-notes" data-id="@item.Id" data-toggle="modal" data-target="#myModal" href="/Rackaz/Alert/GetAlert?alertId=@item.Id">צפה בהערות</a>
-                            </td>
+                    }
+                    else if (item.Status == AlertStatus.Ongoing)
+                    {
+                        <td>
+                            <a class="btn btn-warning btn-xs show-notes" data-id="@item.Id" data-toggle="modal" data-target="#myModal" href="/Rackaz/Alert/GetAlert?alertId=@item.Id">צפה בהערות</a>
+                        </td>
                             <td>
                                 <a class="btn btn-success btn-xs" href="/Rackaz/Alert/CloseAlert/@item.Id">סיים טיפול</a>
                             </td>
-                        }
                     }
-                </tr>
-            }
+                        }
+                    </tr>
+                }
             </tbody>
         </table>
     </div>
