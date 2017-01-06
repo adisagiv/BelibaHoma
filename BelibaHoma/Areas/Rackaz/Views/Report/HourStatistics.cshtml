@@ -12,7 +12,7 @@
                     @{
                         foreach (var year in Model)
                         {
-                            <option value="@year">@year.ToString()</option>
+                            <option value="@year">@String.Format("אוקטובר {0} - ספטמבר {1}",year, year + 1)</option>
                         }
                     }
 

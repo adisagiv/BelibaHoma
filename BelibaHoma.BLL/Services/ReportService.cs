@@ -7,6 +7,7 @@ using BelibaHoma.BLL.Models;
 using BelibaHoma.DAL;
 using BelibaHoma.DAL.Interfaces;
 using Catel.Data;
+using Extensions.Enums;
 using Generic.Models;
 using Services.Log;
 
@@ -23,10 +24,16 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+
+
+                    var numOfActiveTrainees = traineeRepository.GetAll().Count(t => t.User.IsActive && t.User.UserRole == (int) UserRole.Trainee && 
+                     (!area.HasValue || t.User.Area == (int?) area));
 
                     var tutors = tutorRepository.GetAll().Where(
                         t => t.User.IsActive && t.User.UserRole == (int) UserRole.Tutor && 
                                 (!area.HasValue || t.User.Area == (int?) area));
+
 
                     
                     var tutorSessions = tutors.SelectMany(t => t.TutorTrainee)
@@ -47,7 +54,9 @@ namespace BelibaHoma.BLL.Services
                     else
                     {
                         result.Data.HourStatistics = groupedMonth.ToDictionary(ts => ts.Key,
-                            tss => tss.Average(ts => (ts.EndTime - ts.StartTime).TotalHours));
+                            tss => tss.Sum(ts => ((ts.EndTime - ts.StartTime).TotalHours)/(numOfActiveTrainees)));
+                        //result.Data.HourStatistics = groupedMonth.ToDictionary(ts => ts.Key,
+                        //    tss => tss.Average(ts => (ts.EndTime - ts.StartTime).TotalHours));
                     }
 
                     result.Success = true;
@@ -437,7 +446,7 @@ namespace BelibaHoma.BLL.Services
                         {
                             var avrSumOfGradesInYearSemester = tr.Average(t => t.Grade1);
                             //todo: Atalia and Manor
-                            var key = String.Format("{0}_{1}", tt.Key, tr.Key);
+                            var key = String.Format("{0}_{1}", tt.Key, ((SemesterType)tr.Key).ToDescription());
                             dict.Add(key, avrSumOfGradesInYearSemester);
 
                         }

@@ -144,6 +144,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Details(int id)
         {
+            ViewBag.HasReports = false;
+
             var result = _tutorService.Get(id);
             if (result.Success)
             {

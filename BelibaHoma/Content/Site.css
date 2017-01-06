@@ -15,6 +15,7 @@
 */
 .dl-horizontal dt {
     white-space: normal;
+    text-align: right;
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -47,6 +48,8 @@ ul#main-menu li a:hover {
     /*padding-left: 14px;*/
     border-left-width: 5px;
     color: black;
+    cursor: pointer;
+    background-color: lightgrey;
     /*padding-left: 10px;*/
 }
 
@@ -71,4 +74,8 @@ div.datetimepicker-style {
 
 .glyphicon-chevron-right:before {
     content: "\e079" !important;
+}
+
+.panel-height {
+    height: 520px; 
 }

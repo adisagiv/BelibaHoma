@@ -88,6 +88,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             {
                 return Error(new StatusModel(false, result.Message));
             }
+            
             return View(result.Data);
         }
 

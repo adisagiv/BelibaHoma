@@ -69,7 +69,10 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         {
             ViewBag.IsCreate = true;
             var result = _gradeService.Add(model);
-
+            if (!result.Success)
+            {
+                return Error(result);
+            }
             if (result.Success)
             {
                 if (model.Grade1 < GradeThreshold)
@@ -106,6 +109,7 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         {
             ViewBag.IsCreate = false;
             var result = _gradeService.Update(id, model);
+
             if (result.Success)
             {
                 if (model.Grade1 < GradeThreshold)
@@ -124,8 +128,11 @@ namespace BelibaHoma.Areas.Trainee.Controllers
         [HttpGet]
         public ActionResult Delete(int id, int semesterNumber)
         {
-            _gradeService.Delete(id, semesterNumber);
-            // TODO  : result.Success
+            var result = _gradeService.Delete(id, semesterNumber);
+            if (!result.Success)
+            {
+                return Error(result);
+            }
             return RedirectToAction("Index", new { id = id });
         }
 

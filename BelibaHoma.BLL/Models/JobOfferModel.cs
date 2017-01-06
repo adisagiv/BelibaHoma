@@ -46,6 +46,7 @@ namespace BelibaHoma.BLL.Models
        // public AcademicMajorModel  { get; set; }
         //public AcademicMajorModel AcademicMajorModel { get; set; }
 
+        [Required(ErrorMessage = "מסלול לימודים זהו שדה חובה")]
         public int RelevantMajorId1 { get; set; }
         public int? RelevantMajorId2 { get; set; }
         public int? RelevantMajorId3 { get; set; }

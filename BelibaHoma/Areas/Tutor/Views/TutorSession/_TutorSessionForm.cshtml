@@ -12,7 +12,6 @@
 {
     @Html.AntiForgeryToken()
         <div class="form-horizontal" style="direction: rtl">
-            @*<h4>משרה</h4>*@
             <hr />
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @*<div class="form-group">
@@ -27,7 +26,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <div class='input-group date datetimepicker-style' id='datetimepicker1'>
-                            <input type='text' class="form-control" value="@Model.MeetingDate.Date" id="TutorReport_MeetingDate" name="TutorReport.MeetingDate" data-val="true" data-val-date="השדה תאריך מפגש צריך להיות תאריך חוקי." data-val-required="זהו שדה חובה"/>
+                        <input type='text' class="form-control" value="@Model.MeetingDate" id="TutorReport_MeetingDate" name="TutorReport.MeetingDate" data-val="true" data-val-date="השדה תאריך מפגש צריך להיות תאריך חוקי." data-val-required="זהו שדה חובה" />
                             <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -73,20 +72,11 @@
                     @Html.ValidationMessageFor(model => model.NumBondingHours, "", new { @class = "text-danger" })
                 </div>
             </div>
-            @*<input type="hidden"
-                value="TutorReportId">*@
             <input type="hidden" name="TutorReportId" id="TutorReportId" value="@Model.TutorReportId" />
 
             @Html.HiddenFor(model => model.TutorReport.TutorTraineeId)
 
             @*TODO: add this to the model by the given parameters from tutorReport*@
-            @*<div class="form-group">
-                    <label class="control-label col-md-2">תז דוח חונך : </label>
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.TutorReportId, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.TutorReportId, "", new { @class = "text-danger" })
-                    </div>
-                </div>*@
             <div class="form-group">
                 <label class="control-label col-md-2">מקום המפגש : </label>
                 <div class="col-md-10">
@@ -103,6 +93,5 @@
 }
 
 <div>
-        @*@Html.ActionLink("Back to List", "Index", new { Area = "Trainee" })*@
     <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.TutorReport.TutorTraineeId">חזור לדיווחים</a>
 </div>

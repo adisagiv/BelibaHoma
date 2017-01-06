@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2 align="center"><b>הרצת אלגוריתם השידוך</b></h2>
-
+    <h2 align="center"><b>ייצור המלצות לציוות</b></h2>
+    <br/>
     @section scripts{
         <script src="~/Scripts/RunAlgorithm.js"></script>
 
@@ -23,7 +23,7 @@
         object attr;
         if (ViewBag.IsRackaz)
         {
-            attr = new { @class = "form-control", @disabled = "disabled"};
+            attr = new { @class = "form-control", @disabled = "disabled" };
         }
         else
         {
@@ -31,14 +31,17 @@
         }
                     }
                     @Html.EnumDropDownListFor(model => model.Area, attr)
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="בחר" class="btn btn-default" id="submit-and-run" />
+                    <br/>
+                    <br/>
+                      <div class="form-group">
+                        <div align="right">
+                            <input type="submit" value="הרץ אלגוריתם" class="btn btn-danger" id="submit-and-run" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     }
     <div class="row hidden" id="after-run">
         <div>
