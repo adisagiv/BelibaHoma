@@ -112,28 +112,12 @@
                     </td>
                 }
             }
-            @*<td>
-                @{
-                    if (item.IsException == true)
-                    {
-                        @String.Format("ציוות חריג")
-                        ;
-                    }
-                    else
-                    {
-                        @String.Format("")
-                        ;
-                    }
-                }
-            </td>*@
             <td>
                 @*@Html.ActionLink("עריכת קשר", "Edit", new {Area = "Rackaz", id = item.Id})*@
-                <a class="btn btn-default btn-xs" href="/Rackaz/TutorTrainee/Edit/?id=@item.Id">עריכה</a>
+                <a class="btn btn-default btn-xs change-tutor-trainee-status" data-tutortraineeid="@item.Id">שנה סטטוס</a>
                 @Html.Raw("|")
                 <a class="btn btn-default btn-xs" href="/Tutor/TutorReport/TutorTraineeReports/?id=@item.Id" target="_blank">דיווחים</a>
                 @*@Html.ActionLink("צפייה בדיווחים", "TutorTraineeReports", "TutorReport", new { Area = "Tutor", id = item.Id}, new {target = "_blank"})*@
-
-
             </td>
         </tr>
     }

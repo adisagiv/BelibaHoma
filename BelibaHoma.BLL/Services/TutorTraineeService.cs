@@ -77,45 +77,45 @@ namespace BelibaHoma.BLL.Services
             return status;
         }
 
-        /// <summary>
-        /// Change tutortrainee Status and IsException in DB
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="updatedModel"></param>
-        /// <returns></returns>
-        public StatusModel Update(int id, TutorTraineeModel updatedModel)
-        {
-            var status = new StatusModel(false, String.Empty);
+        ///// <summary>
+        ///// Change tutortrainee Status and IsException in DB
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <param name="updatedModel"></param>
+        ///// <returns></returns>
+        //public StatusModel Update(int id, TutorTraineeModel updatedModel)
+        //{
+        //    var status = new StatusModel(false, String.Empty);
 
-            try
-            {
-                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
-                {
-                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
-                    //var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-                    //var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+        //    try
+        //    {
+        //        using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+        //        {
+        //            var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+        //            //var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+        //            //var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
 
-                    var tutortrainee = tutortraineeRepository.GetByKey(id);
-                    //var tutor = tutortraineeRepository.GetByKey(tutortrainee.TutorId);
-                    //var trainee = tutortraineeRepository.GetByKey(tutortrainee.TraineeId);
+        //            var tutortrainee = tutortraineeRepository.GetByKey(id);
+        //            //var tutor = tutortraineeRepository.GetByKey(tutortrainee.TutorId);
+        //            //var trainee = tutortraineeRepository.GetByKey(tutortrainee.TraineeId);
 
-                    //Updating the entity from the model received by the form
-                    tutortrainee.Status = (int)updatedModel.Status;
-                    tutortrainee.IsException = updatedModel.IsException;
-                    unitOfWork.SaveChanges();
+        //            //Updating the entity from the model received by the form
+        //            tutortrainee.Status = (int)updatedModel.Status;
+        //            tutortrainee.IsException = updatedModel.IsException;
+        //            unitOfWork.SaveChanges();
 
-                    status.Success = true;
-                    status.Message = String.Format("מצב הקשר עודכן בהצלחה");
-                }
-            }
-            catch (Exception ex)
-            {
-                status.Message = String.Format("שגיאה במהלך עדכון מצב הקשר");
-                LogService.Logger.Error(status.Message, ex);
-            }
+        //            status.Success = true;
+        //            status.Message = String.Format("מצב הקשר עודכן בהצלחה");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        status.Message = String.Format("שגיאה במהלך עדכון מצב הקשר");
+        //        LogService.Logger.Error(status.Message, ex);
+        //    }
 
-            return status;
-        }
+        //    return status;
+        //}
 
         /// <summary>
         /// Add new TutorTrainee
@@ -158,7 +158,6 @@ namespace BelibaHoma.BLL.Services
 
                     //Updating the status in the model
                     model.Status = TTStatus.Active;
-                    model.IsException = false;
 
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
@@ -269,6 +268,45 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("התרחשה שגיאה בזיהוי חניכים וחונכים ללא שיבוץ");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        public StatusModel<TutorTraineeModel> ChangeStatus(int id)
+        {
+            var status = new StatusModel<TutorTraineeModel>(false,String.Empty, new TutorTraineeModel());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                    var tutortrainee = tutortraineeRepository.GetByKey(id);
+
+                    if (tutortrainee.Status == (int) TTStatus.Active)
+                    {
+                        tutortrainee.Status = (int) TTStatus.InActive;
+                    }
+                    else if (tutortrainee.Status == (int)TTStatus.InActive)
+                    {
+                        tutortrainee.Status = (int)TTStatus.Active;
+                    }
+                    else if (tutortrainee.Status == (int) TTStatus.UnApproved)
+                    {
+                        tutortrainee.Status = (int) TTStatus.Active;
+                    }
+
+                    status.Data = new TutorTraineeModel(tutortrainee);
+
+                    unitOfWork.SaveChanges();
+                    status.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך שינוי סטטוס קשר החונכות");
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -601,7 +639,6 @@ namespace BelibaHoma.BLL.Services
                     entity.TutorId = tutor.UserId;
                     entity.Trainee = _trainee;
                     entity.TraineeId = _trainee.UserId;
-                    entity.IsException = false;
 
                     //Finally Adding the entity to DB
                     tutortraineeRepository.Add(entity);

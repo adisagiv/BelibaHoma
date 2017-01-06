@@ -297,8 +297,6 @@
     <Content Include="Areas\Trainee\Views\JobOffer\Details.cshtml" />
     <Content Include="Areas\Trainee\Views\JobOffer\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\Index.cshtml" />
-    <Content Include="Areas\Rackaz\Views\TutorTrainee\Edit.cshtml" />
-    <Content Include="Areas\Rackaz\Views\TutorTrainee\_TutorTraineeForm.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ApproveMatches.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTraineeSelect.cshtml" />
     <Content Include="Areas\Rackaz\Views\TutorTrainee\ManualMatchTutorSelect.cshtml" />

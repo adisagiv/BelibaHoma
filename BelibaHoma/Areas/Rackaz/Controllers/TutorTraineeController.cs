@@ -49,28 +49,29 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             var status = new StatusModel(false, result.Message);
             return Error(status);
         }
-        public ActionResult Edit(int id)
-        {
-            var result = _tutorTraineeService.Get(id);
-            if (!result.Success)
-            {
-                return Error(new StatusModel(false, result.Message));
-            }
-            return View(result.Data);
 
-            return new HttpNotFoundResult();
-        }
+        //public ActionResult Edit(int id)
+        //{
+        //    var result = _tutorTraineeService.Get(id);
+        //    if (!result.Success)
+        //    {
+        //        return Error(new StatusModel(false, result.Message));
+        //    }
+        //    return View(result.Data);
 
-        [HttpPost]
-        public ActionResult Edit(int id, TutorTraineeModel model)
-        {
-            var result = _tutorTraineeService.Update(id, model);
-            if (result.Success)
-            {
-                return RedirectToAction("Index");
-            }
-            return Error(new StatusModel(false, result.Message));
-        }
+        //    return new HttpNotFoundResult();
+        //}
+
+        //[HttpPost]
+        //public ActionResult Edit(int id, TutorTraineeModel model)
+        //{
+        //    var result = _tutorTraineeService.Update(id, model);
+        //    if (result.Success)
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    return Error(new StatusModel(false, result.Message));
+        //}
 
         public ActionResult ManualMatch()
         {
@@ -210,10 +211,10 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             if (unApprovedMatch.Success)
             {
                 unApprovedMatch.Data.Status = TTStatus.Active;
-                var status = _tutorTraineeService.Update(id, unApprovedMatch.Data);
+                var status = _tutorTraineeService.ChangeStatus(id);
                 if (status.Success)
                 {
-                    var selectedArea = unApprovedMatch.Data.Trainee.User.Area.Value;
+                    var selectedArea = status.Data.Trainee.User.Area.Value;
                     return ApproveMatchesAreaSelected(selectedArea);
                 }
                 Response.StatusCode = 404;
@@ -288,6 +289,24 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 return Json(status);
             }
             return Json(status);
+        }
+
+        [HttpPost]
+        public ActionResult ChangeStatus(int tutorTraineeId)
+        {
+            var status = _tutorTraineeService.Get(tutorTraineeId);
+            if (status.Success)
+            {
+                var changeResult = _tutorTraineeService.ChangeStatus(tutorTraineeId);
+                if (changeResult.Success)
+                {
+                    return Json(changeResult);
+                }
+                Response.StatusCode = 404;
+                return Error(changeResult);
+            }
+            Response.StatusCode = 404;
+            return Error(status);
         }
     }
 }

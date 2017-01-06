@@ -25,13 +25,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel<TutorTraineeModel> Get(int id);
 
-        /// <summary>
-        /// Update TutirTrainee's Status in DB
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="updatedModel"></param>
-        /// <returns></returns>
-        StatusModel Update(int id, TutorTraineeModel updatedModel);
+        ///// <summary>
+        ///// Update TutirTrainee's Status in DB
+        ///// </summary>
+        ///// <param name="id"></param>
+        ///// <param name="updatedModel"></param>
+        ///// <returns></returns>
+        //StatusModel Update(int id, TutorTraineeModel updatedModel);
 
         /// <summary>
         /// Add new TutorTrainee relation
@@ -96,6 +96,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="area"></param>
         /// <returns></returns>
         StatusModel<bool> IsUnRecommended(Area area);
+
+        /// <summary>
+        /// Changes the TutorTrainee relation Status Active <=> Inactive
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        StatusModel<TutorTraineeModel> ChangeStatus(int id);
     }
 
 }

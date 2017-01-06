@@ -46,4 +46,14 @@
                                          .draw();
              }
          });
+    $('.change-tutor-trainee-status').click(function (event) {
+        var ttId = $(this).data("tutortraineeid");
+        $.post("/Rackaz/TutorTrainee/ChangeStatus", { tutorTraineeId: ttId }, function (status) {
+            if (status.Success) {
+                window.location.replace("/Rackaz/TutorTrainee/Index");
+            } else {
+                alert(status.Message);
+            }
+        });
+    });
 });
