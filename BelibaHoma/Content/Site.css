@@ -48,6 +48,8 @@ ul#main-menu li a:hover {
     /*padding-left: 14px;*/
     border-left-width: 5px;
     color: black;
+    cursor: pointer;
+    background-color: lightgrey;
     /*padding-left: 10px;*/
 }
 
