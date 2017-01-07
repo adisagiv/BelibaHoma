@@ -4,6 +4,7 @@
             scrollY: '50vh',
             scrollCollapse: true,
             paging: false,
+            "order": [[4, "asc"]],
             initComplete: function () {
                 this.api()
                     .columns()
@@ -43,9 +44,6 @@
                         }
 
                     });
-                var val = 'פעיל';
-                this.api().columns(5).search('^' + val + '$', true, false)
-                                        .draw();
             }
         });
     $('#Intervention-Table')
@@ -53,6 +51,7 @@
             scrollY: '40vh',
             scrollCollapse: true,
             paging: false,
+            "order": [[4, "asc"]],
             initComplete: function () {
                 this.api()
                     .columns()
@@ -92,9 +91,6 @@
                         }
 
                     });
-                var val = 'פעיל';
-                this.api().columns(5).search('^' + val + '$', true, false)
-                                        .draw();
             }
         });
     $('#Trainee-Grade-Table')
@@ -102,6 +98,7 @@
         scrollY: '40vh',
         scrollCollapse: true,
         paging: false,
+        "order": [[4, "asc"]],
         initComplete: function () {
             this.api()
                 .columns()
@@ -141,9 +138,6 @@
                     }
 
                 });
-            var val = 'פעיל';
-            this.api().columns(5).search('^' + val + '$', true, false)
-                                    .draw();
         }
     });
 
