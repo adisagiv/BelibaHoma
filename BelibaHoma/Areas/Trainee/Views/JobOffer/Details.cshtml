@@ -8,260 +8,147 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2>פירוט משרה</h2>
+
+<h2>פירוט משרה</h2>
 
 
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal row">
 
         @*<table class="table">*@
         @*<tr>*@
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.JobTitle)
-        </dt>
-        <dd>
-            @Html.DisplayFor(modelItem => Model.JobTitle)
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.UpdateTime)
-        </dt>
-        <dd>
-            @Model.UpdateTime.ToLongDateString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </dt>
-        <dd>
-            @Model.CreationTime.ToLongDateString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.JobArea)
-        </dt>
-        <dd>
-            @Model.JobArea.ToDescription()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.Requirements)
-        </dt>
-        <dd>
-            @Model.Requirements.ToString()
-        </dd>
+        <div class="col-md-6">
+            <div class="row">
 
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd>
-            @Model.Description.ToString()
-        </dd>
-
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.AcademicMajor.Name)
-        </dt>
-        <dd>
-            @Model.AcademicMajor.Name
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
-            @*@Html.DisplayNameFor(model => model.RelevantMajorId2)*@
-        </dt>
-        <dd>
-            @Model.AcademicMajor1.Name
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
-            @*@Html.DisplayNameFor(model => model.RelevantMajorId3)*@
-        </dt>
-        <dd>
-            @Model.AcademicMajor2.Name
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.Organization)
-        </dt>
-        <dd>
-            @Model.Organization.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.JobType)
-        </dt>
-        <dd>
-            @Model.JobType.ToDescription()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Model.Address.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.NumEmployees)
-        </dt>
-        <dd>
-            @Model.NumEmployees.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.ContactName)
-        </dt>
-        <dd>
-            @Model.ContactName.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.ContactMail)
-        </dt>
-        <dd>
-            @Model.ContactMail.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.ContactPhone)
-        </dt>
-        <dd>
-            @Model.ContactPhone.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.ContactJobPosition)
-        </dt>
-        <dd>
-            @Model.ContactJobPosition.ToString()
-        </dd>
-        <dt class="col-md-6">
-            @Html.DisplayNameFor(model => model.JobStatus)
-        </dt>
-        <dd>
-            @Model.JobStatus.ToDescription()
-        </dd>
-        @*<dt class="col-md-6"></dt>*@
-
-        @*</tr>
-            <tr>*@
-        @*<dd>
-                @Html.DisplayFor(modelItem => Model.JobTitle)
-            </dd>
-            <dd>
-                @Model.UpdateTime.ToLongDateString()
-            </dd>
-            <dd>
-                @Model.CreationTime.ToLongDateString()
-            </dd>
-            <dd>
-                @Model.JobArea.ToDescription()
-            </dd>
-            <dd>
-                @Model.Requirements.ToString()
-            </dd>
-            <dd>
-                @Model.Description.ToString()
-            </dd>
-            <dd>
-                @Model.AcademicMajor.Name
-            </dd>
-            <dd>
-                @Model.AcademicMajor1.Name
-            </dd>
-            <dd>
-                @Model.AcademicMajor2.Name
-            </dd>
-            <dd>
-                @Model.Organization.ToString()
-            </dd>
-            <dd>
-                @Model.JobType.ToDescription()
-            </dd>
-            <dd>
-                @Model.Address.ToString()
-            </dd>
-            <dd>
-                @Model.NumEmployees.ToString()
-            </dd>
-            <dd>
-                @Model.ContactName.ToString()
-            </dd>
-            <dd>
-                @Model.ContactMail.ToString()
-            </dd>
-            <dd>
-                @Model.ContactPhone.ToString()
-            </dd>
-            <dd>
-                @Model.ContactJobPosition.ToString()
-            </dd>
-            <dd>
-                @Model.JobStatus.ToDescription()
-            </dd>*@
-        <dd>
-            @Html.ActionLink("חזור לרשימה", "לתפריט") |
-            @{
-                if (ViewBag.IsTrainee != true)
-                {
-                    @Html.ActionLink("עריכה", "Edit", new { Area = "Rackaz", id = Model.Id })
-                }
-            }
-
-        </dd>
-        @*</tr>*@
-
-
-        @*@foreach (var item in Model)
-            {
-                <tr>
-                    <dd>
-                        @Html.DisplayFor(modelItem => item.JobTitle)
-                    </dd>
-                    <dd>
-                        @item.UpdateTime.ToLongDateString()
-                    </dd>
-                    <dd>
-                        @item.CreationTime.ToLongDateString()
-                    </dd>
-                    <dd>
-                        @item.JobArea.ToDescription()
-                    </dd>
-                    <dd>
-                        @item.Requirements.ToString()
-                    </dd>
-                    <dd>
-                        @item.Description.ToString()
-                    </dd>
-                    <dd>
-                        @item.AcademicMajor.Name
-                    </dd>
-                    <dd>
-                        @item.RelevantMajorId2.ToString()
-                    </dd>
-                    <dd>
-                        @item.RelevantMajorId3.ToString()
-                    </dd>
-                    <dd>
-                        @item.Organization.ToString()
-                    </dd>
-                    <dd>
-                        @item.JobType.ToDescription()
-                    </dd>
-                    <dd>
-                        @item.Address.ToString()
-                    </dd>
-                    <dd>
-                        @item.NumEmployees.ToString()
-                    </dd>
-                    <dd>
-                        @item.ContactName.ToString()
-                    </dd>
-                    <dd>
-                        @item.ContactMail.ToString()
-                    </dd>
-                    <dd>
-                        @item.ContactPhone.ToString()
-                    </dd>
-                    <dd>
-                        @item.ContactJobPosition.ToString()
-                    </dd>
-                    <dd>
-                        @item.JobStatus.ToDescription()
-                    </dd>
-                    <dd>*@
-        @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Back to List", "Index") |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-        @*</dd>*@
-        @*</tr>*@
-       
-
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.JobTitle)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(modelItem => Model.JobTitle)
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.UpdateTime)
+                </dt>
+                <dd>
+                    @Model.UpdateTime.ToLongDateString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.CreationTime)
+                </dt>
+                <dd>
+                    @Model.CreationTime.ToLongDateString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.JobArea)
+                </dt>
+                <dd>
+                    @Model.JobArea.ToDescription()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.AcademicMajor.Name)
+                </dt>
+                <dd>
+                    @Model.AcademicMajor.Name
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.AcademicMajor1.Name)
+                    @*@Html.DisplayNameFor(model => model.RelevantMajorId2)*@
+                </dt>
+                <dd>
+                    @Model.AcademicMajor1.Name
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
+                    @*@Html.DisplayNameFor(model => model.RelevantMajorId3)*@
+                </dt>
+                <dd>
+                    @Model.AcademicMajor2.Name
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.Organization)
+                </dt>
+                <dd>
+                    @Model.Organization.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.JobType)
+                </dt>
+                <dd>
+                    @Model.JobType.ToDescription()
+                </dd>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                
+                
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd>
+                    @Model.Address.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.NumEmployees)
+                </dt>
+                <dd>
+                    @Model.NumEmployees.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </dt>
+                <dd>
+                    @Model.ContactName.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.ContactMail)
+                </dt>
+                <dd>
+                    @Model.ContactMail.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.ContactPhone)
+                </dt>
+                <dd>
+                    @Model.ContactPhone.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.ContactJobPosition)
+                </dt>
+                <dd>
+                    @Model.ContactJobPosition.ToString()
+                </dd>
+                <dt class="col-md-6">
+                    @Html.DisplayNameFor(model => model.JobStatus)
+                </dt>
+                <dd>
+                    @Model.JobStatus.ToDescription()
+                </dd>
+            </div>
+        </div>
     </dl>
+<div class="panel panel-default">
+    <div class="panel-heading">@Html.DisplayNameFor(model => model.Requirements)</div>
+    <div class="panel-body">
+        @Model.Requirements
+    </div>
+</div>
+    <div class="panel panel-default">
+        <div class="panel-heading">@Html.DisplayNameFor(model => model.Description)</div>
+        <div class="panel-body">
+           @Model.Description
+        </div>
+    </div>
+
+<dd>
+    @Html.ActionLink("חזור לרשימה", "לתפריט") |
+    @{
+        if (ViewBag.IsTrainee != true)
+        {
+            @Html.ActionLink("עריכה", "Edit", new {Area = "Rackaz", id = Model.Id})
+        }
+    }
+
+</dd>
+
+
 </div>

@@ -1,6 +1,9 @@
 ﻿$(function () {
     $('#Late-Tutors-a-table')
         .DataTable({
+            scrollY: '50vh',
+            scrollCollapse: true,
+            paging: false,
             initComplete: function () {
                 this.api()
                     .columns()
@@ -47,6 +50,9 @@
         });
     $('#Intervention-a-Table')
         .DataTable({
+            scrollY: '50vh',
+            scrollCollapse: true,
+            paging: false,
             initComplete: function () {
                 this.api()
                     .columns()
@@ -93,6 +99,9 @@
         });
     $('#Trainee-Grade-a-Table')
     .DataTable({
+        scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
         initComplete: function () {
             this.api()
                 .columns()
