@@ -3,11 +3,12 @@
 @{
     Layout = null;
 }
+
 <div class="navbar-default">
     @*<span class="icon-bar"></span>*@
     <ul id="main-menu" class="nav navbar-nav">
         @*<li>@Html.ActionLink("על התוכנית", "About", "Home")</li>
-        <li>@Html.ActionLink("פרטי קשר", "Contact", "Home")</li>*@
+            <li>@Html.ActionLink("פרטי קשר", "Contact", "Home")</li>*@
         @if (Model != null)
         {
             // Add Admin & Rackaz related links here
@@ -38,14 +39,14 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                   <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ניהול התרעות<span class="caret"></span></a>
-                   <ul class="dropdown-menu">
-                       <li><a href="/Rackaz/Alert">לוח התרעות</a></li>
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ניהול התרעות<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Rackaz/Alert">לוח התרעות</a></li>
                         <li><a href="/Rackaz/Alert/AlertArchive">ארכיון התרעות</a></li>
                     </ul>
                 </li>
-                <li>@Html.ActionLink("ניהול משרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
-                <li>@Html.ActionLink("חיזוי נשירה", "Predict", "Prediction", new {Area = "Rackaz"}, new object {})</li>
+                <li>@Html.ActionLink("ניהול משרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>
+                <li>@Html.ActionLink("חיזוי נשירה", "Predict", "Prediction", new { Area = "Rackaz" }, new object { })</li>
             }
 
             // Add Tutor related links here
@@ -53,8 +54,8 @@
             {
                 var id = Model.Id;
                 var action = "Details/" + id;
-                <li>@Html.ActionLink("פרטים אישיים", "Details/" + id, "Tutor", new {Area = "Tutor"}, new object {})</li>
-                <li>@Html.ActionLink("קשרי חניכה", "Index/" + id, "TutorTrainee", new {Area = "Tutor"}, new object {})</li>
+                <li>@Html.ActionLink("פרטים אישיים", "Details/" + id, "Tutor", new { Area = "Tutor" }, new object { })</li>
+                <li>@Html.ActionLink("קשרי חניכה", "Index/" + id, "TutorTrainee", new { Area = "Tutor" }, new object { })</li>
             }
 
             // Add Trainee related links here
@@ -62,9 +63,9 @@
             {
                 var id = Model.Id;
                 var action = "Details/" + id;
-                <li>@Html.ActionLink("פרטים אישיים", action, "Trainee", new {Area = "Trainee"}, new object {})</li>
-                <li>@Html.ActionLink("חיפוש משרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
-                <li>@Html.ActionLink("ציונים", "Index", "Grade",new { id = @Model.Id }, null)</li>
+                <li>@Html.ActionLink("פרטים אישיים", action, "Trainee", new { Area = "Trainee" }, new object { })</li>
+                <li>@Html.ActionLink("חיפוש משרות", "Index", "JobOffer", new { Area = "Trainee" }, new object { })</li>
+                <li>@Html.ActionLink("ציונים", "Index", "Grade", new { id = @Model.Id }, null)</li>
             }
 
         }
