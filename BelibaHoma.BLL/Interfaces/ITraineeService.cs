@@ -47,5 +47,12 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="showMatched"></param>
         /// <returns></returns>
         StatusModel<List<TraineeMatchViewModel>> GetUnMatchedTrainees(Area area, bool showMatched);
+
+        /// <summary>
+        /// Update the trainne pazam
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        StatusModel UpdateTraineePazam(int userId);
     }
 }

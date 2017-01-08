@@ -7,10 +7,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-    <h2><b>פרטי החניך</b></h2>
+<h2><b>פרטי החניך</b>
+</h2>
 <div>
     <hr/>
-
 
     @{
         if (ViewBag.IsTrainee == false)
@@ -28,6 +28,7 @@
         <a class="btn btn-default" href="/Trainee/Grade/index/@Model.UserId">ציונים</a>
 
     }
+
 </div>
 <br/>
     @{
@@ -49,11 +50,14 @@
             </div>
         }
     }
-   
-    <dl class="dl-horizontal">
-        <dd>
-            <h3>פרטים אישיים</h3>
-        </dd>
+
+
+<dl class="dl-horizontal">
+    <dd>
+        <h3>פרטים אישיים</h3>
+
+    </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.User.IdNumber)
         </dt>
@@ -209,9 +213,13 @@
         <dt>
             @Html.DisplayNameFor(model => model.DroppedOut)
         </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DroppedOut)
-        </dd>
+    <dd>
+        @Html.DisplayFor(model => model.DroppedOut)
+    </dd>
     </dl>
-
+    <div class="panel panel-info" align="center">
+        <div class="panel-heading">
+            @String.Format("{0:F2} שנים בתוכנית", Model.PazamInYears)
+        </div>
+    </div>
 </div>

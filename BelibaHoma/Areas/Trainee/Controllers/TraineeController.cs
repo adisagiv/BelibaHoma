@@ -31,20 +31,33 @@ namespace BelibaHoma.Areas.Trainee.Controllers
 
         public ActionResult Details(int id)
         {
-            if (CurrentUser.UserRole == UserRole.Trainee)
+            var updateResult = _traineeService.UpdateTraineePazam(id);
+            string message;
+            if (updateResult.Success)
             {
-                ViewBag.IsTrainee = true;
+                if (CurrentUser.UserRole == UserRole.Trainee)
+                {
+                    ViewBag.IsTrainee = true;
+                }
+                else
+                {
+                    ViewBag.IsTrainee = false;
+                }
+                var result = _traineeService.Get(id);
+                if (result.Success)
+                {
+                    return View(result.Data);
+                }
+                else
+                {
+                    message = result.Message;
+                }
             }
             else
             {
-                ViewBag.IsTrainee = false;
+                message = updateResult.Message;
             }
-            var result = _traineeService.Get(id);
-            if (result.Success)
-            {
-                return View(result.Data);
-            }
-            var status = new StatusModel(false, result.Message);
+            var status = new StatusModel(false, message);
             return Error(status);
         }
     }

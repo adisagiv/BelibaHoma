@@ -43,7 +43,7 @@ namespace BelibaHoma.BLL.Models.Reports
     {
         public Title1 title { get; set; }
         public List<string> categories { get; set; }
-    }
+     }
 
     public class Yaxis
     {
@@ -61,6 +61,7 @@ namespace BelibaHoma.BLL.Models.Reports
         public int value { get; set; }
         public int width { get; set; }
         public string color { get; set; }
+        public string dashStyle { get; set; }
     }
 
     public class Tooltip

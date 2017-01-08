@@ -4,14 +4,19 @@
     ViewBag.Title = "Predict";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
 
-<div class="well">
-    <h2>חיזוי חניכים בסיכון לנשירה</h2>
-
-    @section scripts{
+@section scripts{
     @Scripts.Render("~/bundles/datatable/js")
     <script src="~/Scripts/Predict.js"></script>
-    }
+}
+<div class="well">
+    <h2 align="center"><b>חיזוי חניכים בסיכון לנשירה</b></h2>
+
+   
     <table class="table" id="endangered">
         <thead>
             <tr>

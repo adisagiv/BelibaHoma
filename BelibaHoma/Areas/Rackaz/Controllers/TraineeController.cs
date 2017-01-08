@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services.Description;
 using BelibaHoma.Areas.Rackaz.Models;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.Controllers;
@@ -103,12 +104,27 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
 
         public ActionResult Details(int id)
         {
-            var result = _traineeService.Get(id);
-            if (result.Success)
+            var updateResult = _traineeService.UpdateTraineePazam(id);
+            string message;
+            if (updateResult.Success)
             {
-                return View(result.Data);
+
+
+                var result = _traineeService.Get(id);
+                if (result.Success)
+                {
+                    return View(result.Data);
+                }
+                else
+                {
+                    message = result.Message;
+                }
             }
-            var status = new StatusModel(false,result.Message);
+            else
+            {
+                message = updateResult.Message;
+            }
+            var status = new StatusModel(false,message);
             return Error(status);
         }
 

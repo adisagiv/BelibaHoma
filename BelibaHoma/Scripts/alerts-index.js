@@ -3,6 +3,7 @@
         .DataTable({
             scrollY: '50vh',
             scrollCollapse: true,
+            "bInfo" : false,
             paging: false,
             "order": [[4, "asc"]],
             initComplete: function () {
@@ -51,6 +52,7 @@
             scrollY: '40vh',
             scrollCollapse: true,
             paging: false,
+            "bInfo": false,
             "order": [[4, "asc"]],
             initComplete: function () {
                 this.api()
@@ -98,6 +100,7 @@
         scrollY: '40vh',
         scrollCollapse: true,
         paging: false,
+        "bInfo": false,
         "order": [[4, "asc"]],
         initComplete: function () {
             this.api()

@@ -106,6 +106,14 @@ namespace BelibaHoma.BLL.Models
         //public ICollection<Grade> Grade { get; set; }
         //public ICollection<TutorTrainee> TutorTrainee { get; set; }
 
+        public double Pasam { get; set; }
+        public DateTime LastPasamCalculation { get; set; }
+
+        public double PazamInYears
+        {
+            get { return Pasam/365.0; }
+        }
+
         public TraineeModel(Trainee entity)
             :base(entity)
         {

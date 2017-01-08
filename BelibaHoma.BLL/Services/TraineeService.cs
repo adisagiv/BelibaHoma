@@ -74,6 +74,8 @@ namespace BelibaHoma.BLL.Services
                     //Updating the User Role in the model
                     model.User.UserRole = UserRole.Trainee;
 
+
+
                     //Retrieving Related Entities by using the repositories and GetById function (all but User which was not yet created)
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
                     var academicInstitution = academicInstitutionRepository.GetByKey(model.AcademicInstitution.Id);
@@ -120,6 +122,10 @@ namespace BelibaHoma.BLL.Services
                     {
                         //Get the new user entity from DB (also linked to Trainee)
                         var user = userRepository.GetByKey(userStatus.Data);
+
+
+                        model.Pasam = 0;
+                        model.LastPasamCalculation = user.CreationTime;
 
                         //Updating "not input" fields in Trainee model
                         model.TutorHours = 0;
@@ -294,7 +300,7 @@ namespace BelibaHoma.BLL.Services
                         trainee.User.LastName = updatedModel.User.LastName;
                         trainee.User.Email = updatedModel.User.Email;
                         trainee.User.IdNumber = updatedModel.User.IdNumber;
-                        trainee.User.IsActive = updatedModel.User.IsActive;
+                        
                         trainee.User.UpdateTime = DateTime.Now;
                         if (updatedModel.User.Area != null)
                         {
@@ -342,7 +348,19 @@ namespace BelibaHoma.BLL.Services
                             trainee.AcademicMajorNeededHelpId = null;
                         }
 
+                        // Pazm
+                        // if we change the trainee to be inactive
+                        if (!updatedModel.User.IsActive && trainee.User.IsActive)
+                        {
+                            UpdateTraineePazam(trainee.UserId);
+                        }
+                        // if we change the trainee to be active 
+                        else if (updatedModel.User.IsActive && !trainee.User.IsActive)
+                        {
+                            trainee.LastPasamCalculation = DateTime.Now;
+                        }
 
+                        trainee.User.IsActive = updatedModel.User.IsActive;
                         //traineeRepository.Update(trainee);
                         unitOfWork.SaveChanges();
 
@@ -389,6 +407,37 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 result.Message = String.Format("שגיאה בשליפת חניכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
+        public StatusModel UpdateTraineePazam(int userId)
+        {
+            var result = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var trainee = traineeRepository.GetAll().FirstOrDefault(t=>t.UserId == userId && t.User.IsActive);
+
+                    if (trainee != null)
+                    {
+                        trainee.Pasam += (DateTime.Now - trainee.LastPasamCalculation).TotalDays;
+                        trainee.LastPasamCalculation = DateTime.Now;
+
+                        unitOfWork.SaveChanges();
+                    }
+                     
+                    result = new StatusModel(true, String.Empty);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בעדכון זמן פזאם ");
                 LogService.Logger.Error(result.Message, ex);
             }
 

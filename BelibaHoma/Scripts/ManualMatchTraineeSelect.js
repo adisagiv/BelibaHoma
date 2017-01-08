@@ -1,5 +1,9 @@
 ﻿$('#trainees-partial-table')
         .DataTable({
+            scrollY: '50vh',
+            scrollCollapse: true,
+            paging: false,
+            "bInfo" : false,
             "scrollX": true,
             responsive: true,
             initComplete: function () {

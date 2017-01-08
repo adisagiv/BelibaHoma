@@ -4,7 +4,7 @@
             scrollY: '50vh',
             scrollCollapse: true,
             paging: false,
-            "order": [[4, "asc"]],
+            "bInfo": false,
             initComplete: function () {
                 this.api()
                     .columns()
@@ -52,7 +52,7 @@
             scrollY: '50vh',
             scrollCollapse: true,
             paging: false,
-            "order": [[4, "asc"]],
+            "bInfo": false,
             initComplete: function () {
                 this.api()
                     .columns()
@@ -100,7 +100,7 @@
         scrollY: '50vh',
         scrollCollapse: true,
         paging: false,
-        "order": [[ 4, "asc" ]],
+        "bInfo": false,
         initComplete: function () {
             this.api()
                 .columns()

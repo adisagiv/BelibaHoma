@@ -97,7 +97,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         hours = result.Data.HourStatistics[month];
                     }
 
-                    series.Add(hours);
+                    series.Add(Math.Round(hours, 2));
                 }
 
                 series = RemoveLastsZeros(series);
@@ -146,9 +146,11 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         plotLines = new List<Plotline> {
                             new Plotline
                             {
-                                color = "#808080",
-                                value = 0,
-                                width = 1
+                                color = "red",
+                                dashStyle = "Solid",
+                                // TODO : Change to real values from or
+                                value = hourStatisticsType == HourStatisticsType.Sum ? 5 : 1,
+                                width = 3
                             }
                         }
                     },
@@ -463,7 +465,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         investedHours = result.Data.InvestedHoursStatistics[i];
                     }
 
-                    series.Add(investedHours);
+                    series.Add(Math.Round(investedHours, 2));
 
                 }
                 series = RemoveLastsZeros(series);
@@ -580,7 +582,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 {
                     var avrGrade = 0.0;
                     avrGrade = ts.Value;
-                    series.Add(avrGrade);
+                    series.Add(Math.Round(avrGrade,2));
 
                 }
                 series = RemoveLastsZeros(series);

@@ -42,6 +42,8 @@ namespace BelibaHoma.DAL
         public Nullable<int> AcademicMajorNeededHelpId { get; set; }
         public int SemesterNumber { get; set; }
         public bool DroppedOut { get; set; }
+        public double Pasam { get; set; }
+        public System.DateTime LastPasamCalculation { get; set; }
     
         public virtual AcademicInstitution AcademicInstitution { get; set; }
         public virtual AcademicMajor AcademicMajor { get; set; }
