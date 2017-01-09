@@ -70,6 +70,14 @@ namespace BelibaHoma.BLL.Services
                        throw new System.ArgumentException(status.Message, "model");
 
                    }
+                   var meetingDuration = entity.EndTime - entity.StartTime;
+                   double meetingDurationDouble = (meetingDuration.Hours + meetingDuration.Minutes / 100.0 + meetingDuration.Seconds / 10000.0) * (meetingDuration > TimeSpan.Zero ? 1 : -1);
+                   if (entity.NumBondingHours < meetingDurationDouble)
+                   {
+                       status.Message = String.Format("מספר שעות חברותא לא יכול להיות גדול מזמן המפגש");
+                       throw new System.ArgumentException(status.Message, "model");
+
+                   }
                    if (TutorReport.CreationTime > model.MeetingDate.AddDays(21))
                     {
                         status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
@@ -146,6 +154,21 @@ namespace BelibaHoma.BLL.Services
                         entity.TutorReport = TutorReport;
 
                         //Server side validations
+                        if (entity.StartTime > entity.EndTime)
+                        {
+                            status.Message = String.Format("זמן תחילת המפגש חייב להיות לפני זמן סיום המפגש");
+                            throw new System.ArgumentException(status.Message, "model");
+
+                        }
+                        var meetingDuration = entity.EndTime - entity.StartTime;
+                        double meetingDurationDouble = (meetingDuration.Hours + meetingDuration.Minutes / 100.0 + meetingDuration.Seconds / 10000.0) * (meetingDuration > TimeSpan.Zero ? 1 : -1);
+
+                        if (entity.NumBondingHours < meetingDurationDouble)
+                        {
+                            status.Message = String.Format("מספר שעות חברותא לא יכול להיות גדול מזמן המפגש");
+                            throw new System.ArgumentException(status.Message, "model");
+
+                        }
                         if (TutorReport.CreationTime > updatedModel.MeetingDate.AddDays(21))
                         {
                             status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך יצירת הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";

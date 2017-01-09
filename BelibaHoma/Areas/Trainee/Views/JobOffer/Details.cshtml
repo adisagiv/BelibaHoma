@@ -185,16 +185,16 @@
             <dd>
                 @Model.JobStatus.ToDescription()
             </dd>*@
-        <dd>
-            @Html.ActionLink("חזור לרשימה", "לתפריט") |
-            @{
-                if (ViewBag.IsTrainee != true)
-                {
-                    @Html.ActionLink("עריכה", "Edit", new { Area = "Rackaz", id = Model.Id })
-                }
+    <dd>
+        @Html.ActionLink("חזור לרשימה", "index") |
+        @{
+            if (ViewBag.IsTrainee != true)
+            {
+                @Html.ActionLink("עריכה", "Edit", new {Area = "Rackaz", id = Model.Id})
             }
+        }
 
-        </dd>
+    </dd>
         @*</tr>*@
 
 
