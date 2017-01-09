@@ -38,14 +38,14 @@
         <tr>
             <td>
                 @*@Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)*@
-                @Html.ActionLink(@item.TutorTrainee.Tutor.FullName, "Details", new { Area = "Tutor", id = item.TutorTrainee.TutorId }, new { target = "_blank" })
+                @Html.ActionLink(@item.TutorTrainee.Tutor.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorTrainee.TutorId }, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.AcademicMajor.Name)
             </td>
             <td>
                 @*@Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)*@
-                @Html.ActionLink(@item.TutorTrainee.Trainee.FullName, "Details", new { Area = "Trainee", id = item.TutorTrainee.TraineeId}, new { target = "_blank" })
+                @Html.ActionLink(@item.TutorTrainee.Trainee.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TutorTrainee.TraineeId}, new { target = "_blank" })
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.NeededHelpDescription)
