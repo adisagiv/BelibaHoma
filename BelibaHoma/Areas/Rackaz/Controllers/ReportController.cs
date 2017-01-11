@@ -149,7 +149,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                                 color = "red",
                                 dashStyle = "Solid",
                                 // TODO : Change to real values from or
-                                value = hourStatisticsType == HourStatisticsType.Sum ? 5 : 1,
+                                value = hourStatisticsType == HourStatisticsType.Sum ? 100000 : 12,
                                 width = 3
                             }
                         }

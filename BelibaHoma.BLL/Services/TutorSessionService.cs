@@ -72,7 +72,7 @@ namespace BelibaHoma.BLL.Services
                    }
                    var meetingDuration = entity.EndTime - entity.StartTime;
                    double meetingDurationDouble = (meetingDuration.Hours + meetingDuration.Minutes / 100.0 + meetingDuration.Seconds / 10000.0) * (meetingDuration > TimeSpan.Zero ? 1 : -1);
-                   if (entity.NumBondingHours < meetingDurationDouble)
+                   if (entity.NumBondingHours > meetingDurationDouble)
                    {
                        status.Message = String.Format("מספר שעות חברותא לא יכול להיות גדול מזמן המפגש");
                        throw new System.ArgumentException(status.Message, "model");
