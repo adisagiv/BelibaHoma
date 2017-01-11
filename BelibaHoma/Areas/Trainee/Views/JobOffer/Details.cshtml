@@ -140,14 +140,16 @@
     </div>
 
             <dd>
-    @Html.ActionLink("בחזרה לרשימה", "Index", "JobOffer", new {Area = "Trainee"})
+    @*@Html.ActionLink("בחזרה לרשימה", "Index", "JobOffer", new {Area = "Trainee"})*@
+                <a class="btn btn-default" href="/Trainee/JobOffer/Index">בחזרה ללוח המשרות</a>
             @{
                 if (ViewBag.IsTrainee != true)
                 {
                 @Html.Raw("|")
-                @Html.ActionLink("עריכה", "Edit", new {Area = "Rackaz", id = Model.Id})
+                @*@Html.ActionLink("עריכה", "Edit", new {Area = "Rackaz", id = Model.Id})*@
+    <a class="btn btn-default" href="/Rackaz/JobOffer/Edit/@Model.Id">ערוך משרה</a>
                 }
-            }
+}
 
         </dd>
 
