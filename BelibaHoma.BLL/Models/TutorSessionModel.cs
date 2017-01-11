@@ -21,13 +21,16 @@ namespace BelibaHoma.BLL.Models
 
         [Display(Name = "זמן תחילת המפגש")]
         [Required(ErrorMessage = "זמן תחילת המפגש זה שדה חובה")]
+        //TODO: Atalia and manor Time Validation
         public TimeSpan StartTime { get; set; }
 
         [Display(Name = "זמן סיום המפגש")]
+        //TODO: Atalia and manor Time Validation
         [Required(ErrorMessage = "זמן סיום המפגש זה שדה חובה")]
         public TimeSpan EndTime { get; set; }
 
         [Display(Name = "מספר שעות חברותה")]
+        //TODO: Atalia and manor Time (or other relevant) Validation
         [Required(ErrorMessage = "מספר שעות חברותה זה שדה חובה")]
         [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
         public double NumBondingHours { get; set; }

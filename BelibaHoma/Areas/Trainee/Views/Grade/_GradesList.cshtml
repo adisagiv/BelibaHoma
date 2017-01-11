@@ -4,7 +4,7 @@
 @{
     var user = ViewBag.CurrentUser as UserModel;
 }
-<div class="well">
+
 <table class="table">
     <tr>
         <th>
@@ -22,10 +22,6 @@
         <th>
             @Html.DisplayNameFor(model => model.SemesterType)
         </th>
-
-
-        
-
         <th>
             
         </th>
@@ -51,20 +47,18 @@
             @Html.DisplayFor(modelItem => item.SemesterType)
         </td>
         <td>
-            
+            @*@Html.ActionLink("עריכה", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })*@
+            <a class="btn btn-default btn-xs" href="/Trainee/Grade/Edit/?id=@item.TraineeId&semesterNumber=@item.SemesterNumber">עריכה</a>
             @{
-
                 if (user != null && (user.UserRole == UserRole.Admin || user.UserRole == UserRole.Rackaz))
                 {
-                @Html.ActionLink("מחיקה", "Delete", new { id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */}) @Html.Raw(" |")
-
-
+                    @*@Html.ActionLink("מחיקה", "Delete", new { id = item.TraineeId, semesterNumber = item.SemesterNumber /* id=item.PrimaryKey */})*@
+                    @Html.Raw(" |")
+                    <a class="btn btn-default btn-xs" href="/Trainee/Grade/Delete/?id=@item.TraineeId&semesterNumber=@item.SemesterNumber">מחיקה</a>
                 }
             }
-                    @Html.ActionLink("עריכה", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })
         </td>
     </tr>
 }
 
 </table>
-</div>

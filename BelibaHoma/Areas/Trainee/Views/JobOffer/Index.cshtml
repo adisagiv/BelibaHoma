@@ -3,7 +3,7 @@
 @using Extensions.Enums
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "לוח משרות";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -200,7 +200,7 @@
                         if (ViewBag.IsTrainee != true)
                         {
                             @*@Html.ActionLink("עריכה", "Edit", new { Area = "Rackaz", id = item.Id })*@
-    <a class="btn btn-default btn-xs" href="/Trainee/JobOffer/Edit/?id=@item.Id">עריכה</a>
+                            <a class="btn btn-default btn-xs" href="/Rackaz/JobOffer/Edit/?id=@item.Id">עריכה</a>
                         }
 }
                             </td>
