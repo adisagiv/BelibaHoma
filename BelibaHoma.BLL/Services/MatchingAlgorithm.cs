@@ -274,8 +274,20 @@ namespace BelibaHoma.BLL.Services
                     }
                 }
 
+                //var rows = new int[_size];
+                //var cols = new int[_size];
                 if (minRowLoc == -1 && minColLoc == -1)
                 {
+                    //for (int row = 0; row < _size; row++)
+                    //{
+                    //    for (int col = 0; col < _size; col++)
+                    //    {
+                    //        if (zeroes[row, col] == 5)
+                    //        {
+                                
+                    //        }
+                    //    }
+                    //}
                     break;
                 }
 
