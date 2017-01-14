@@ -11,7 +11,10 @@
 @using (Html.BeginForm(null,null,FormMethod.Post, new { id = "tutor-form", autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
-
+    <div>
+        @*@Html.ActionLink("חזור לרשימה", "Index")*@
+        <a class="btn btn-info" href="/Rackaz/Tutor/Index">חזור לרשימת החונכים</a>
+    </div>
     <div class="form-horizontal" style="direction: rtl">
             <hr />
             <h3>פרטים אישיים</h3>
@@ -203,16 +206,13 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="tutor-submit" type="submit" value="שמור חונך" class="btn btn-default" />
+                <input id="tutor-submit" type="submit" value="שמור חונך" class="btn btn-info" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @*@Html.ActionLink("חזור לרשימה", "Index")*@
-    <a class="btn btn-default" href="/Rackaz/Tutor/Index">חזור לרשימת החונכים</a>
-</div>
+
 
 
 

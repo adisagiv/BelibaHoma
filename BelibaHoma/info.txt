@@ -2856,3 +2856,39 @@ Invalid column name 'LinkedReportId'.
 2016-12-30 11:17:57,943 [6] ERROR Services.Log.LogService - ????? ????? ????? ?????? ???? ???? ???? ??????
 System.Exception: ????? ????? ????? ?????? ???? ???? ???? ??????
    at BelibaHoma.BLL.Services.AlertService.GenerateLateTutorsAlerts() in c:\Users\Shir\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\AlertService.cs:line 191
+2017-01-11 19:42:57,261 [9] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:43:06,856 [9] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:43:15,944 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:43:30,181 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:43:51,552 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:44:26,157 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:44:41,886 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:44:55,397 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78
+2017-01-11 19:45:24,159 [7] ERROR Services.Log.LogService - מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+System.ArgumentException: מספר שעות חברותא לא יכול להיות גדול מזמן המפגש
+Parameter name: model
+   at BelibaHoma.BLL.Services.TutorSessionService.Add(TutorSessionModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorSessionService.cs:line 78

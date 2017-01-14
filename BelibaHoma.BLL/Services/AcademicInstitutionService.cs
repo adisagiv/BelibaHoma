@@ -31,7 +31,7 @@ namespace BelibaHoma.BLL.Services
                 {
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
 
-                    var academicInstitutions = academicInstitutionRepository.GetAll();
+                    var academicInstitutions = academicInstitutionRepository.GetAll().OrderBy(a => a.Name);
 
                     result.Data = academicInstitutions.Where(ai => !area.HasValue || ai.Area == (int)area.Value).ToList()
                         .Select(ai => new AcademicInstitutionModel(ai)).ToList();

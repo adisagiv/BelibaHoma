@@ -29,7 +29,7 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
-                    result.Data = academicMajorRepository.GetAll().Where(am => true).ToList().Select(am => new AcademicMajorModel(am)).ToList();
+                    result.Data = academicMajorRepository.GetAll().Where(am => true).OrderBy(am => am.Name).ToList().Select(am => new AcademicMajorModel(am)).ToList();
                     result.Success = true;
                 }
             }
