@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using BelibaHoma.DAL.Repositories;
 using Generic.Models;
 using Services.Log;
 
@@ -217,6 +218,33 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+
+        public StatusModel ResetRecommended(Area area)
+        {
+            var result = new StatusModel(false, String.Empty);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    var tutorTrainees = tutorTraineeRepository.GetAll().Where(tt => tt.Status == (int)TTStatus.UnApproved).ToList();
+                    result.Success = true;
+                    foreach (var tt in tutorTrainees)
+                    {
+                        tutorTraineeRepository.Delete(tt);
+                    }
+                    unitOfWork.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה באיפוס המלצות קודמות");
+                LogService.Logger.Error(result.Message, ex);
+            }
+            return result;
+        }
 
         public StatusModel<List<TutorTraineeModel>> GetById(int tutorId)
         {
@@ -580,6 +608,10 @@ namespace BelibaHoma.BLL.Services
             int[,] finalmatch = alg.Run();
 
             //Translate Matrix to actual matches
+            var unmatchedTrainees = new List<int>();
+            var isMatchedTrainees = new int[numTrainees];
+            var unmatchedTutors = new List<int>();
+            var isMatchedTutors = new int[numTutors];
             try
             {
                 for (int traineeIdx = 0; traineeIdx < numTrainees; traineeIdx++)
@@ -592,6 +624,8 @@ namespace BelibaHoma.BLL.Services
                             {
                                 //Create Match
                                 var result = TutorTraineeAdd(model.TutorList[tutorIdx], model.TraineeList[traineeIdx]);
+                                isMatchedTutors[tutorIdx] = 1;
+                                isMatchedTrainees[traineeIdx] = 1;
                                 if (!result.Success)
                                 {
                                     throw new Exception(result.Message);
@@ -600,6 +634,66 @@ namespace BelibaHoma.BLL.Services
                         }
                     }
                 }
+
+                for (int i = 0; i < numTrainees; i++)
+                {
+                    if (isMatchedTrainees[i] == 0) unmatchedTrainees.Add(i);
+                }
+                for (int i = 0; i < numTutors; i++)
+                {
+                    if (isMatchedTutors[i] == 0) unmatchedTutors.Add(i);
+                }
+
+
+                if (unmatchedTutors.Count < unmatchedTrainees.Count)
+                {
+                    foreach (var tutor in unmatchedTutors)
+                    {
+                        var maxValue = -1;
+                        int loc = -1;
+                        foreach (var trainee in unmatchedTrainees)
+                        {
+                            if (utilityMat[trainee, tutor] > maxValue)
+                            {
+                                maxValue = utilityMat[trainee, tutor];
+                                loc = trainee;
+                            }
+                        }
+                        if (maxValue > -1 && loc > -1)
+                        {
+                            TutorTraineeAdd(model.TutorList[tutor], model.TraineeList[loc]);
+                            unmatchedTrainees.Remove(loc);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var trainee in unmatchedTrainees)
+                    {
+                        var maxValue = -1;
+                        int loc = -1;
+                        foreach (var tutor in unmatchedTutors)
+                        {
+                            if (utilityMat[trainee, tutor] > maxValue)
+                            {
+                                maxValue = utilityMat[trainee, tutor];
+                                loc = tutor;
+                            }
+                        }
+                        if (maxValue > -1 && loc > -1)
+                        {
+                            TutorTraineeAdd(model.TutorList[loc], model.TraineeList[trainee]);
+                            unmatchedTrainees.Remove(loc);
+                        }
+                    }
+                }
+
+                
+                
+
+
+
+                
                 status.Success = true;    
             }
             catch (Exception ex)

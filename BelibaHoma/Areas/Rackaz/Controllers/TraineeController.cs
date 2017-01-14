@@ -73,7 +73,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 AcademicMajorList = academicMajorResult.Data,
                 Trainee = new TraineeModel()
                 {
-                  //  Birthday = DateTime.Now
+                    Birthday = DateTime.Now
                 }
             };
             model.Trainee.User = new UserModel();

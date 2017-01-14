@@ -84,6 +84,13 @@ namespace BelibaHoma.BLL.Interfaces
         StatusModel ResetTutorTrainee(Area area);
 
         /// <summary>
+        /// Reset Recommended TutorTrainee relations in a given area
+        /// </summary>
+        /// <param name="area"></param>
+        /// <returns></returns>
+        StatusModel ResetRecommended(Area area);
+
+        /// <summary>
         /// Get all TutorTrainee relations by tutor Id from DB
         /// </summary>
         /// <param name="id"></param>
