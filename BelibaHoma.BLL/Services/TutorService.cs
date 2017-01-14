@@ -363,6 +363,35 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+        public StatusModel<List<TutorModel>> GetUnMatchedAlg(Area area)
+        {
+            var result = new StatusModel<List<TutorModel>>(false, String.Empty, new List<TutorModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorList = tutorRepository.GetAll()
+                        .Where(
+                            t =>
+                                t.User.IsActive && t.User.Area == (int)area &&
+                                t.User.UserRole == (int)UserRole.Tutor &&
+                                (t.TutorTrainee.All(tt => tt.Status == (int)TTStatus.InActive))).ToList().Select(t => new TutorModel(t)).ToList();
+
+
+                    result = new StatusModel<List<TutorModel>>(true, String.Empty, tutorList);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת חונכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
         public StatusModel<float> GetTutorHours(Area? area)
         {
             var result = new StatusModel<float>(false, String.Empty, new float());

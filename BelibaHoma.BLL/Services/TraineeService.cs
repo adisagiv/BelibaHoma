@@ -413,6 +413,36 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+        public StatusModel<List<TraineeModel>> GetUnMatchedAlg(Area area)
+        {
+            var result = new StatusModel<List<TraineeModel>>(false, String.Empty, new List<TraineeModel>());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var traineeList = traineeRepository.GetAll()
+                        .Where(
+                            t =>
+                                t.User.IsActive && t.User.Area == (int) area &&
+                                t.User.UserRole == (int) UserRole.Trainee &&
+                                (t.TutorTrainee.All(tt => tt.Status == (int) TTStatus.InActive))).ToList().
+                                Select(t => new TraineeModel(t)).ToList();
+                     
+
+                    result = new StatusModel<List<TraineeModel>>(true, String.Empty, traineeList);
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה בשליפת חניכים ממסד הנתונים");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
         public StatusModel UpdateTraineePazam(int userId)
         {
             var result = new StatusModel(false, String.Empty);
