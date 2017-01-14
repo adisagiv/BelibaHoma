@@ -71,7 +71,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 AcademicMajorList = academicMajorResult.Data,
                 Tutor = new TutorModel()
                 {
-                    Birthday = DateTime.Now
+                   // Birthday = DateTime.Now
                 }
             };
             model.Tutor.User = new UserModel();

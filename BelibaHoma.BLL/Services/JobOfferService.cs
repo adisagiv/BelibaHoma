@@ -64,23 +64,19 @@ namespace BelibaHoma.BLL.Services
 
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
                     var academicMajor = academicMajorRepository.GetByKey(model.RelevantMajorId1);
-                    var academicMajor1 = new AcademicMajor();
-                    var academicMajor2 = new AcademicMajor();
                     if (model.RelevantMajorId2 != null)
                     {
                         int Id2 = (int) model.RelevantMajorId2;
-                        academicMajor1 = academicMajorRepository.GetByKey(Id2);   
+                        entity.AcademicMajor1 = academicMajorRepository.GetByKey(Id2);   
                     }
                     if (model.RelevantMajorId3 != null)
                     {
                         int Id3 = (int)model.RelevantMajorId3;
-                        academicMajor2 = academicMajorRepository.GetByKey(Id3);    
+                        entity.AcademicMajor2 = academicMajorRepository.GetByKey(Id3);    
                     }
                     
                     //Linking the Complexed entities to the retrieved ones
                     entity.AcademicMajor = academicMajor;
-                    entity.AcademicMajor1 = academicMajor1;
-                    entity.AcademicMajor2 = academicMajor2;
 
                     //entity.relevantmajor= מה ששמרתי מהרפוסיטורים
                     JobOfferRepository.Add(entity);
