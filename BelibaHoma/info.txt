@@ -2923,3 +2923,27 @@ System.IndexOutOfRangeException: Index was outside the bounds of the array.
 2017-01-14 19:36:21,527 [6] ERROR Services.Log.LogService - שגיאה במהלך הרצת האלגוריתם
 System.IndexOutOfRangeException: Index was outside the bounds of the array.
    at BelibaHoma.BLL.Services.TutorTraineeService.RunAlgorithm(AlgorithmModel model) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorTraineeService.cs:line 644
+2017-01-16 18:37:43,023 [7] ERROR Services.Log.LogService - Error getting years from DB
+System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   at System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   at System.Collections.Generic.List`1.Add(T item)
+   at BelibaHoma.BLL.Services.ReportService.GetHourStatisticsProssibleYears() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\ReportService.cs:line 490
+2017-01-16 18:38:01,792 [5] ERROR Services.Log.LogService - Error getting years from DB
+System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   at System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   at System.Collections.Generic.List`1.Add(T item)
+   at BelibaHoma.BLL.Services.ReportService.GetHourStatisticsProssibleYears() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\ReportService.cs:line 490
+2017-01-16 18:38:11,877 [5] ERROR Services.Log.LogService - Error getting years from DB
+System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Collections.Generic.List`1.set_Capacity(Int32 value)
+   at System.Collections.Generic.List`1.EnsureCapacity(Int32 min)
+   at System.Collections.Generic.List`1.Add(T item)
+   at BelibaHoma.BLL.Services.ReportService.GetHourStatisticsProssibleYears() in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\ReportService.cs:line 490
+2017-01-16 18:39:04,592 [9] ERROR Services.Log.LogService - Error getting Hour Statistics from DB
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.ReportService.GetHourStatistics(Nullable`1 area, DateTime startTime, DateTime endTime, HourStatisticsType hourStatisticsType) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\ReportService.cs:line 40
+2017-01-16 18:39:15,972 [6] ERROR Services.Log.LogService - Error getting Hour Statistics from DB
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.ReportService.GetHourStatistics(Nullable`1 area, DateTime startTime, DateTime endTime, HourStatisticsType hourStatisticsType) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\ReportService.cs:line 40
