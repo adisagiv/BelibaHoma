@@ -23,7 +23,7 @@ namespace BelibaHoma
                       "~/Scripts/bootstrap-rtl.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
+            bundles.Add(new StyleBundle("~/bundles/css").Include(
                       "~/Content/css/bootstrap-rtl.css",
                       "~/Content/site.css"));
 

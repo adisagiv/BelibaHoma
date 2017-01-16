@@ -200,10 +200,9 @@
     <Content Include="Content\css\bootstrap-rtl.css" />
     <Content Include="Content\direction.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\אולירקע.jpg" />
-    <Content Include="Content\לוגו.jpg" />
-    <Content Include="Content\סתםרקע.jpg" />
-    <Content Include="Content\פרויקט בליבה חומה פותח.jpg" />
+    <Content Include="Content\BelibaHoma.jpg" />
+    <Content Include="Content\logo.jpg" />
+    <Content Include="Content\background.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
