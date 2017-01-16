@@ -35,5 +35,5 @@
 
     // defualt call to get hour statitics 
     var year = $('#year').val();
-    getHourStaistics(0, year);
+    getHourStaistics(1, year);
 });

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
+﻿@using BelibaHoma.BLL.Enums
+@model IEnumerable<BelibaHoma.BLL.Models.TutorReportModel>
 
 @{
     ViewBag.Title = "דיווחי חניך";
@@ -20,6 +21,13 @@
 <div class="well">
     <h2> דיווחים אודות החניך</h2>
 
+    <div class="panel-danger">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-flag pull-right" aria-hidden="true"></span>
+            <b>שים לב!</b> דיווחים המסומנים באדום הינם דיווחים שסומנו כדורשים התערבות
+        </div>
+    </div>
+    <br>
     <table class="table" id="tutor-reports">
         <thead>
         <tr>
@@ -39,10 +47,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.TutorHoursBonding)
             </th>
-
-            <th>
-                @Html.DisplayNameFor(model => model.IsProblem)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreationTime)
             </th>
@@ -52,23 +56,37 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
+                <tr class=@(item.IsProblem ? "table-danger" : "")>
                     @*TODO:FIX it*@
                     <td>
-                        @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FullName)
+                        @{
+                if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
+                {
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.User.FullName)
+                }
+                else
+                {
+                    @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id }, new { target = "_blank" })
+                }
+                        }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
+                        @{
+                if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
+                {
+                    @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
+                }
+                else
+                {
+                    @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id }, new { target = "_blank" })
+                }
+                        }
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TutorHours)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.TutorHoursBonding)
-                    </td>
-
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsProblem)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreationTime)
@@ -78,7 +96,7 @@
                         @if (item.TutorHours > 0)
                         {
                             @*@Html.ActionLink("פרטים נוספים", "Details", "TutorSession",new { Area = "Tutor", id = item.Id }, new { target = "_blank" })*@
-                            <a class="btn btn-default" href="/Tutor/TutorSession/Details/@item.Id" target="_blank">צפייה במפגשים</a>
+                            <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.Id" target="_blank">פרטי דיווח</a>
                         }
 
                     </td>

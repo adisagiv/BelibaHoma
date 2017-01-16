@@ -53,7 +53,7 @@
             <div class="panel panel-success" style="background-color: #e6ffe6">
                 <br/>
                 <center>
-                    <div><h4 style="color: darkgreen">עד כה בוצעו <b>@String.Format("{0:F2}", Model.TutorHoursCount)</b> שעות חניכת</h4>
+                    <div><h4 style="color: darkgreen">עד כה בוצעו <b>@String.Format("{0:F2}", Model.TutorHoursCount)</b> שעות חניכה</h4>
 
                     <br/>
                 </div></center>
@@ -62,7 +62,6 @@
         <br/>
     <div class="row" align="right" style="margin-right: 10px">
         <select class="form-control" id="Report" name="Report" style="max-width: 350px">
-            <option>אנא בחר בדו"ח הרצוי</option>
             @foreach (ReportType type in Enum.GetValues(typeof (ReportType)))
             {
                 <option value="@type.ToString()">@type.ToDescription()</option>

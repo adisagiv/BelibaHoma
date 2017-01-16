@@ -259,7 +259,8 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 Area = area
             };
-            var trainees = _traineeService.GetTrainees(model.Area);
+            var status = _tutorTraineeService.ResetRecommended(model.Area);
+            var trainees = _traineeService.GetUnMatchedAlg(model.Area);
             if (trainees.Success)
             {
                 model.TraineeList = trainees.Data;
@@ -268,7 +269,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return Json(trainees);
             }
-            var tutors = _tutorService.GetTutors(model.Area);
+            var tutors = _tutorService.GetUnMatchedAlg(model.Area);
             if (tutors.Success)
             {
                 model.TutorList = tutors.Data;
@@ -277,7 +278,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             {
                 return Json(tutors);
             }
-            var status = _tutorTraineeService.ResetTutorTrainee(model.Area);
+
             if (status.Success)
             {
                 status = _tutorTraineeService.RunAlgorithm(model);

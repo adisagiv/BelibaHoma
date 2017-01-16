@@ -37,8 +37,6 @@
                         </th>
                     }
                 }
-
-                <th id="actions"></th>
             </tr>
         </thead>
         <tfoot>
@@ -58,7 +56,6 @@
                         </th>
                     }
                 }
-                <th id="actions"></th>
             </tr>
         </tfoot>
         <tbody>
@@ -66,7 +63,8 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.FullName)
+                        @*@Html.DisplayFor(modelItem => item.FullName)*@
+                        @Html.ActionLink(@item.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.User.Id }, new { target = "_blank" })
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.NeededHelpDescription)
@@ -80,9 +78,6 @@
                     </td>
                 }
                     }
-                    <td>
-                        @Html.ActionLink("פרטים", "Details", "Trainee", new { Area = "Trainee", id = @item.UserId }, new { target = "_blank" })
-                    </td>
                 </tr>
             }
         </tbody>

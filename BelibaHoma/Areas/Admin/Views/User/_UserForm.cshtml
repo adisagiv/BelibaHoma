@@ -49,8 +49,9 @@
                     <label class="control-label col-md-2">סוג משתמש :</label>
                     <div class="col-md-10">
                         <select class="form-control" data-val="true" data-val-required="נא לבחור את סוג המשתמש" id="UserRole" name="UserRole">
-                            <option selected="selected" value="0">אדמין</option>
-                            <option value="1">רכז אזורי</option>
+                            <option @(Model.UserRole == UserRole.Admin ?  "selected='selected'" : "") value="0">אדמין</option>
+                            <option @(Model.UserRole == UserRole.Rackaz ? "selected='selected'" : "") value="1">רכז אזורי</option>
+
                         </select>
                         <span class="field-validation-valid text-danger" data-valmsg-for="UserRole" data-valmsg-replace="true"></span>
                     </div>

@@ -101,6 +101,7 @@ namespace BelibaHoma.Areas.Trainee.Controllers
             {
                 return Error(new StatusModel(false, result.Message));
             }
+            ViewBag.TraineeId = result.Data.TraineeId;
             return View(result.Data);
         }
 
