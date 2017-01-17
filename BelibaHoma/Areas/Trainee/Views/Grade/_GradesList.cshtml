@@ -1,5 +1,6 @@
 ﻿@using BelibaHoma.BLL.Enums
 @using BelibaHoma.BLL.Models
+@using Extensions.Enums
 @model IEnumerable<BelibaHoma.BLL.Models.GradeModel>
 @{
     var user = ViewBag.CurrentUser as UserModel;
@@ -44,7 +45,8 @@
             @Html.DisplayFor(modelItem => item.UpdateDate)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SemesterType)
+            @*@Html.DisplayFor(modelItem => item.SemesterType)*@
+            @item.SemesterType.ToDescription()
         </td>
         <td>
             @*@Html.ActionLink("עריכה", "Edit", new { id = item.TraineeId, semesterNumber = item.SemesterNumber/* id=item.PrimaryKey */ })*@

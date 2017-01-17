@@ -218,9 +218,9 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var TutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
-
+                    
                     result.Data = TutorSessionRepository.GetAll().ToList().Where(TR => TR.TutorReportId == id).Select(ai => new TutorSessionModel(ai)).ToList();
-
+                    
                     result.Success = true;
                 }
             }
