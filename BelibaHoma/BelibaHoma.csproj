@@ -637,6 +637,7 @@
     <Content Include="Scripts\RunAlgorithm.js" />
     <Content Include="Scripts\trainee-index.js" />
     <Content Include="Scripts\tutor-index.js" />
+    <Content Include="Scripts\tutor-trainee-reports.js" />
     <Content Include="Scripts\TutorReport.js" />
     <Content Include="Scripts\tutortrainee-index.js" />
     <Content Include="Scripts\user-index.js" />

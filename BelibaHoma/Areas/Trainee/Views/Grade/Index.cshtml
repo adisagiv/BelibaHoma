@@ -11,6 +11,7 @@
     <p>
         @*@Html.ActionLink("הוסף ציון בסמסטר", "Create", new { traineeId = Model.Trainee.UserId }, null)*@
         <a class="btn btn-default" href="/Trainee/Grade/Create/?traineeId=@Model.Trainee.UserId">הוסף ציון</a>
+        <a class="btn btn-default" href="/Trainee/Trainee/Details/@Model.Trainee.UserId">חזור לפרטי החניך</a>
     </p>
     @Html.Partial("_GradesList", Model.Grades)
 </div>

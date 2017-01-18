@@ -7,6 +7,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int tutorTraineeId = ViewBag.TutorTraineeId;
 }
+
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/tutor-trainee-reports.js"></script>
+}
+
 <div class="well">
 <h2>דיווחים</h2>
     <p>
@@ -21,29 +33,51 @@
         </div>
     </div>
 
-    <table class="table">
-    <tr>
-        <th>
-            שם חניך
-        </th>
-        <th>
-            שם חונך
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHours)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TutorHoursBonding)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreationTime)
-        </th>
-        <th></th>
-    </tr>
-    @foreach (var item in Model)
-    {
-        <tr class=@(item.IsProblem ? "table-danger" : "")>
-            <td>
+    <table class="table" id="tutor-trainee-reports-table">
+        <thead>
+        <tr>
+            <th>
+                שם חניך
+            </th>
+            <th>
+                שם חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHoursBonding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationTime)
+            </th>
+            <th id="actions"></th>
+        </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>
+                    שם חניך
+                </th>
+                <th>
+                    שם חונך
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorHoursBonding)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreationTime)
+                </th>
+                <th id="actions"></th>
+            </tr>
+        </tfoot>
+        @foreach (var item in Model)
+        {
+            <tr class=@(item.IsProblem ? "table-danger" : "")>
+                <td>
                     @{
                         if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
                         {
@@ -51,49 +85,51 @@
                         }
                         else
                         {
-                            @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id }, new { target = "_blank" })
+                            @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})
                         }
-}              
-            </td>
-            <td>
-                    @{
-            if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
-            {
-                @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
-            }
-            else
-            {
-                @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id }, new { target = "_blank" })
-            }
                     }
-                    
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHours)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TutorHoursBonding)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreationTime)
-            </td>
-            <td>
+                </td>
+                <td>
+                    @{
+                        if (ViewBag.CurrentUser.UserRole == UserRole.Tutor)
+                        {
+                            @Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.User.FullName)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new {Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id}, new {target = "_blank"})
+                        }
+                    }
+
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.TutorHours)*@
+                    @String.Format("{0:F2}", item.TutorHours)
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.TutorHoursBonding)*@
+                    @String.Format("{0:F2}", item.TutorHoursBonding)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreationTime)
+                </td>
+                <td>
                     @*@Html.ActionLink("עריכה", "Edit", new {id = item.Id})*@
                     <a class="btn btn-default btn-xs" href="/Tutor/TutorReport/Edit/@item.Id">עריכה</a>
                     @Html.Raw("|")
                     @*@Html.ActionLink("הוסף מפגש", "Create", "TutorSession", new {id = item.Id}, null)*@
                     <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Create/@item.Id">הוסף מפגש</a>
-                @if (item.TutorHours > 0)
-                {
+                    @if (item.TutorHours > 0)
+                    {
                         @Html.Raw("|")
                         @*@Html.ActionLink("פרטים נוספים", "Details", "TutorSession", new {id = item.Id}, null)*@
                         <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Details/@item.Id">פרטים</a>
-                }
+                    }
 
-            </td>
-        </tr>
-    }
-</table>
+                </td>
+            </tr>
+        }
+    </table>
     @{
         if (ViewBag.IsTutor == false)
         {

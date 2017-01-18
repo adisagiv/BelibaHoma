@@ -17,9 +17,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Year)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.UpdateDate)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.SemesterType)
         </th>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Year)
         </td>
         
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.UpdateDate)
-        </td>
+        </td>*@
         <td>
             @*@Html.DisplayFor(modelItem => item.SemesterType)*@
             @item.SemesterType.ToDescription()

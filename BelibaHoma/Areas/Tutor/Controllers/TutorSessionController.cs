@@ -103,7 +103,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
             var result = _TutorSessionService.Update(id, model, CurrentUser.UserRole);
             if (result.Success)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("TutorTraineeReports","TutorReport", new { id = model.TutorReport.TutorTraineeId });
             }
             return Error(new StatusModel(false, result.Message));
         }

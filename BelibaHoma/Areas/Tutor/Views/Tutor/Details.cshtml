@@ -29,7 +29,7 @@
         {
             <div class="panel panel-danger" style="background-color:#f2dede">
                 <center>
-                    <h4 style="color: brown">עד כה נרשמו עבור @Model.FullName <b>@Model.TutorHours</b> שעות חניכה, מתוכן <b>@Model.TutorHoursBonding</b> שעות חברותא</h4>
+                    <h4 style="color: brown">עד כה נרשמו עבור @Model.FullName <b>@String.Format("{0:F2}",Model.TutorHours)</b> שעות חניכה</h4>
                 </center>
             </div>
         }
@@ -37,7 +37,7 @@
         {
             <div class="panel panel-success" style="background-color: #e6ffe6">
                 <center>
-                    <h4 style="color: darkgreen">עד כה נרשמו עבור @Model.FullName <b>@Model.TutorHours</b> שעות חניכה, מתוכן <b>@Model.TutorHoursBonding</b> שעות חברותא</h4>
+                    <h4 style="color: darkgreen">עד כה נרשמו עבור @Model.FullName <b>@String.Format("{0:F2}",Model.TutorHours)</b> שעות חניכה, מתוכן <b>@String.Format("{0:F2}",Model.TutorHoursBonding)</b> שעות חברותא</h4>
                 </center>
             </div>
         }

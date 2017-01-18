@@ -14,12 +14,11 @@
 @section scripts
 {
     @Scripts.Render("~/bundles/datatable/js")
-   
-<script src="~/Scripts/TutorReport.js"></script>
+    <script src="~/Scripts/tutor-trainee-reports.js"></script>
 }
 
 <div class="well">
-    <h2> דיווחים אודות החניך</h2>
+    <h2>דיווחים אודות החניך</h2>
 
     <div class="panel-danger">
         <div class="panel-heading">
@@ -28,7 +27,7 @@
         </div>
     </div>
     <br>
-    <table class="table" id="tutor-reports">
+    <table class="table" id="tutor-trainee-reports-table">
         <thead>
         <tr>
             @*TODO: Fix it*@
@@ -50,9 +49,33 @@
             <th>
                 @Html.DisplayNameFor(model => model.CreationTime)
             </th>
-            <th>פעולות</th>
+            <th id="actions">פעולות</th>
         </tr>
         </thead>
+        <tfoot>
+            <tr>
+                @*TODO: Fix it*@
+                @*<th>
+                    @Html.DisplayNameFor(model => model.TutorTrainee.Trainee.User.FirstName)
+                </th>*@
+                <th>
+                    שם חניך
+                </th>
+                <th>
+                    שם חונך
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorHoursBonding)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreationTime)
+                </th>
+                <th id="actions">פעולות</th>
+            </tr>
+        </tfoot>
         <tbody>
             @foreach (var item in Model)
             {
@@ -83,10 +106,12 @@
                         }
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TutorHours)
+                        @*@Html.DisplayFor(modelItem => item.TutorHours)*@
+                        @String.Format("{0:F2}", item.TutorHours)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+                        @*@Html.DisplayFor(modelItem => item.TutorHoursBonding)*@
+                        @String.Format("{0:F2}", item.TutorHoursBonding)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.CreationTime)
