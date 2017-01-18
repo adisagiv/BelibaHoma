@@ -77,4 +77,5 @@ public class Series1
 {
     public string name { get; set; }
     public int[] data { get; set; }
+    public string color { get; set; }
 }

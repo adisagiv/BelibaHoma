@@ -670,7 +670,109 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
             //return null;
         }
 
+        // return the view of the report
+        [HttpPost]
+        public ActionResult HourHistogram()
+        {
+            return View();
+        }
 
+        //return the data for the report
+        [HttpPost]
+        public ActionResult GetHourHistogram(Area? area)
+        {
+            if (CurrentUser.UserRole == UserRole.Rackaz)
+            {
+                area = CurrentUser.Area;
+            }
+            var result = _reportService.GetHourHistogram(area);
+
+            if (result.Success)
+            {
+                foreach (var serie in result.Data)
+                {
+                    serie.data = RemoveLastsZeros(serie.data.ToList()).ToArray();
+                }
+                var highChart = new HighChartJDModel
+                {
+                    chart = new Chart1
+                    {
+                        type = "column"
+                    },
+                    title = new Title2
+                    {
+                        text = (area.HasValue ? string.Format("התפלגות חונכים לפי שעות באיזור {0}", area.Value.ToDescription()) : "התפלגות חונכים לפי שעות"),
+
+                        //text = "דוח סטטיסטיקת התרעות",
+                        //useHTML = false
+                    },
+                    xAxis = new Xaxis1
+                    {
+                        // we will take the years from the dictionary
+
+                        categories = new string[]
+                        {
+                            "אוקטובר",
+                            "נובמבר",
+                            "דצמבר",
+                            "ינואר",
+                            "פברואר",
+                            "מרץ",
+                            "אפריל",
+                            "מאי",
+                            "יוני",
+                            "יולי",
+                            "אוגוסט",
+                            "ספטמבר"
+                        },
+
+                        crosshair = true
+
+
+                    },
+                    yAxis = new Yaxis1
+                    {
+
+                        min = new int { },
+                        title = new Title2()
+                        {
+                            text = "מספר חונכים",
+                            //useHTML = false
+                        },
+
+                    },
+                    series = result.Data.ToArray(),
+
+                    tooltip = new Tooltip1()
+                    {
+                        headerFormat = "<span style='font-size:10px'>{point.key}</span><table>",
+                        pointFormat = "<tr><td style='color:{series.color};padding:0'>{series.name}: </td><td style='padding:0'><b>{point.y}</b></td></tr>",
+                        footerFormat = "</table>",
+                        shared = true,
+                        useHTML = true
+
+                    },
+                    plotOptions = new Plotoptions1()
+                    {
+                        column = new Column2()
+                        {
+                            pointPadding = new float(),
+                            borderWidth = new int()
+                        }
+
+                    },
+                    exporting = new Exporting1
+                    {
+                        enabled = false
+                    }
+
+
+                };
+
+                return Json(highChart);
+            }
+            return Error(result);
+        }
 
 
 

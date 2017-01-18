@@ -17,5 +17,6 @@ namespace BelibaHoma.BLL.Interfaces
         StatusModel<int> GetMaxPazam();
         StatusModel<List<int>> GeAlertStatisticsProssibleYears();
 
+        StatusModel<List<Series1>> GetHourHistogram(Area? area);
     }
 }

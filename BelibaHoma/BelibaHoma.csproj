@@ -454,6 +454,7 @@
     <Content Include="Areas\Rackaz\Views\Prediction\Predict.cshtml" />
     <Content Include="Content\AboutPDF.pdf" />
     <Content Include="Areas\Rackaz\Views\TutorReport\Index.cshtml" />
+    <Content Include="Areas\Rackaz\Views\Report\HourHistogram.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -609,6 +610,7 @@
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
     <Content Include="Scripts\reports\AlertsStatistics.js" />
+    <Content Include="Scripts\reports\hour-histogram.js" />
     <Content Include="Scripts\tutor-session.js" />
     <Content Include="Scripts\joboffer-index.js" />
     <Content Include="Scripts\JobOfferIndex.js" />

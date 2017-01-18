@@ -6,6 +6,7 @@ using BelibaHoma.BLL.Interfaces;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.DAL;
 using BelibaHoma.DAL.Interfaces;
+using Catel.Collections;
 using Catel.Data;
 using Extensions.Enums;
 using Generic.Models;
@@ -542,6 +543,85 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 result.Message = String.Format("Error getting years from DB");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+
+            return result;
+        }
+
+        public StatusModel<List<Series1>> GetHourHistogram(Area? area)
+        {
+            var result = new StatusModel<List<Series1>>();
+            var startTime = new DateTime(DateTime.Now.Year, 10, 1);
+            if (DateTime.Now.Month < 10)
+            {
+                startTime = new DateTime(DateTime.Now.Year - 1, 10, 1);
+            }
+
+            var endTime = new DateTime(startTime.Year + 1, 10, 1);
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var series = new List<Series1>
+                    {
+                        new Series1
+                        {
+                            name = "מתחת ל 6 שעות",
+                            color = "violet"
+                        },
+                        new Series1
+                        {
+                            name = "בין 6 - 12",
+                            
+                        },
+                        new Series1
+                        {
+                            name = "מעל ל 12 שעות",
+                            color = "lightgreen"
+                        }
+                    };
+
+                    var tutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
+
+                    var tutorSessionMonth =
+                        tutorSessionRepository.GetAll()
+                            .Where(ts => ts.MeetingDate >= startTime && ts.MeetingDate < endTime)
+                            .GroupBy(ts => ts.MeetingDate.Month);
+
+                    var below6 = new List<int>  { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+                    var below12 = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }; 
+                    var above12 = new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+
+                    tutorSessionMonth.ForEach(m =>
+                    {
+                        var index = (m.Key + 2) % 12;
+
+                        var byTutors = m.GroupBy(ts => ts.TutorReport.TutorTrainee.TutorId);
+
+                        var tutorHourSum = byTutors.ToDictionary(t => t, t => t.Sum(ts => (ts.EndTime - ts.StartTime).TotalHours));
+
+
+
+                        below6[index] = tutorHourSum.Count(t => t.Value < 6);
+                        below12[index] = tutorHourSum.Count(t => t.Value >= 6 && t.Value < 12);
+                        above12[index] = tutorHourSum.Count(t => t.Value > 12);
+                    });
+
+                    series[0].data = below6.ToArray();
+                    series[1].data = below12.ToArray();
+                    series[2].data = above12.ToArray();
+                    result.Data = series;
+
+
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("Error getting Alerts Statistics from DB");
                 LogService.Logger.Error(result.Message, ex);
             }
 
