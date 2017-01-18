@@ -11,6 +11,18 @@
 <h2>דיווחים</h2>
     <p>
         @*@Html.ActionLink("הוסף דיווח", "Create", new {tutorTraineeId = tutorTraineeId})*@
+        @{
+            if (ViewBag.IsTutor == false)
+            {
+                <a class="btn btn-info" href="/Rackaz/TutorTrainee/Index">חזור לקשרי חונכות</a>
+            @Html.Raw("|")
+            }
+            else
+            {
+                <a class="btn btn-info" href="/Tutor/TutorTrainee/Index/@ViewBag.TutorId">חזור לקשרי חונכות</a>
+            @Html.Raw("|")
+            }
+}
         <a class="btn btn-default" href="/Tutor/TutorReport/Create/?tutorTraineeId=@tutorTraineeId">הוסף דיווח</a>
     </p>
 
@@ -94,15 +106,6 @@
         </tr>
     }
 </table>
-    @{
-        if (ViewBag.IsTutor == false)
-        {
-            <a class ="btn btn-default" href="/Rackaz/TutorTrainee/Index">חזור לקשרי חונכות</a>
-        }
-        else
-        {
-            <a class="btn btn-default" href="/Tutor/TutorTrainee/Index/@ViewBag.TutorId">חזור לקשרי חונכות</a>
-        }
-}
+
 </div>
 
