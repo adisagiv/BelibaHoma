@@ -22,16 +22,18 @@ namespace BelibaHoma.BLL.Interfaces
         /// Add new Tutor Session to db
         /// </summary>
         /// <param name="model"></param>
+        /// <param name="userRole"></param>
         /// <returns></returns>
-        StatusModel Add(TutorSessionModel model);
+        StatusModel Add(TutorSessionModel model, UserRole userRole);
 
         /// <summary>
         /// Update Tutor Session in db
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
+        /// <param name="userRole"></param>
         /// <returns></returns>
-        StatusModel Update(int id, TutorSessionModel updatedModel);
+        StatusModel Update(int id, TutorSessionModel updatedModel, UserRole userRole);
 
         /// <summary>
         /// Get the TutorSessionModel according to the given id

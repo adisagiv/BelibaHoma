@@ -46,7 +46,7 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel Add(TutorSessionModel model)
+        public StatusModel Add(TutorSessionModel model, UserRole userRole)
         {
             var status = new StatusModel(false, String.Empty);
 
@@ -78,7 +78,7 @@ namespace BelibaHoma.BLL.Services
                        throw new System.ArgumentException(status.Message, "model");
 
                    }
-                   if (TutorReport.CreationTime > model.MeetingDate.AddDays(21))
+                   if (userRole == UserRole.Trainee && TutorReport.CreationTime > model.MeetingDate.AddDays(21))
                     {
                         status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
                         throw new System.ArgumentException(status.Message, "model");
@@ -123,7 +123,7 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel Update(int id, TutorSessionModel updatedModel)
+        public StatusModel Update(int id, TutorSessionModel updatedModel, UserRole userRole)
         {
             var status = new StatusModel(false, String.Empty);
 
@@ -169,7 +169,7 @@ namespace BelibaHoma.BLL.Services
                             throw new System.ArgumentException(status.Message, "model");
 
                         }
-                        if (TutorReport.CreationTime > updatedModel.MeetingDate.AddDays(21))
+                        if (userRole == UserRole.Trainee && TutorReport.CreationTime > updatedModel.MeetingDate.AddDays(21))
                         {
                             status.Message = "לא ניתן להזין מפגש שהתרחש יותר מ-3 שבועות לפני תאריך יצירת הדיווח.\nאנא פנה אל הרכז האזורי לעזרה.";
                             throw new System.ArgumentException(status.Message, "updatedModel");

@@ -635,58 +635,58 @@ namespace BelibaHoma.BLL.Services
                     }
                 }
 
-                for (int i = 0; i < numTrainees; i++)
-                {
-                    if (isMatchedTrainees[i] == 0) unmatchedTrainees.Add(i);
-                }
-                for (int i = 0; i < numTutors; i++)
-                {
-                    if (isMatchedTutors[i] == 0) unmatchedTutors.Add(i);
-                }
+                //for (int i = 0; i < numTrainees; i++)
+                //{
+                //    if (isMatchedTrainees[i] == 0) unmatchedTrainees.Add(i);
+                //}
+                //for (int i = 0; i < numTutors; i++)
+                //{
+                //    if (isMatchedTutors[i] == 0) unmatchedTutors.Add(i);
+                //}
 
 
-                if (unmatchedTutors.Count < unmatchedTrainees.Count)
-                {
-                    foreach (var tutor in unmatchedTutors)
-                    {
-                        var maxValue = -1;
-                        int loc = -1;
-                        foreach (var trainee in unmatchedTrainees)
-                        {
-                            if (utilityMat[trainee, tutor] > maxValue)
-                            {
-                                maxValue = utilityMat[trainee, tutor];
-                                loc = trainee;
-                            }
-                        }
-                        if (maxValue > -1 && loc > -1)
-                        {
-                            TutorTraineeAdd(model.TutorList[tutor], model.TraineeList[loc]);
-                            unmatchedTrainees.Remove(loc);
-                        }
-                    }
-                }
-                else
-                {
-                    foreach (var trainee in unmatchedTrainees)
-                    {
-                        var maxValue = -1;
-                        int loc = -1;
-                        foreach (var tutor in unmatchedTutors)
-                        {
-                            if (utilityMat[trainee, tutor] > maxValue)
-                            {
-                                maxValue = utilityMat[trainee, tutor];
-                                loc = tutor;
-                            }
-                        }
-                        if (maxValue > -1 && loc > -1)
-                        {
-                            TutorTraineeAdd(model.TutorList[loc], model.TraineeList[trainee]);
-                            unmatchedTrainees.Remove(loc);
-                        }
-                    }
-                }
+                //if (unmatchedTutors.Count < unmatchedTrainees.Count)
+                //{
+                //    foreach (var tutor in unmatchedTutors)
+                //    {
+                //        var maxValue = -1;
+                //        int loc = -1;
+                //        foreach (var trainee in unmatchedTrainees)
+                //        {
+                //            if (utilityMat[trainee, tutor] > maxValue)
+                //            {
+                //                maxValue = utilityMat[trainee, tutor];
+                //                loc = trainee;
+                //            }
+                //        }
+                //        if (maxValue > -1 && loc > -1)
+                //        {
+                //            TutorTraineeAdd(model.TutorList[tutor], model.TraineeList[loc]);
+                //            unmatchedTrainees.Remove(loc);
+                //        }
+                //    }
+                //}
+                //else
+                //{
+                //    foreach (var trainee in unmatchedTrainees)
+                //    {
+                //        var maxValue = -1;
+                //        int loc = -1;
+                //        foreach (var tutor in unmatchedTutors)
+                //        {
+                //            if (utilityMat[trainee, tutor] > maxValue)
+                //            {
+                //                maxValue = utilityMat[trainee, tutor];
+                //                loc = tutor;
+                //            }
+                //        }
+                //        if (maxValue > -1 && loc > -1)
+                //        {
+                //            TutorTraineeAdd(model.TutorList[loc], model.TraineeList[trainee]);
+                //            unmatchedTrainees.Remove(loc);
+                //        }
+                //    }
+                //}
 
                 
                 

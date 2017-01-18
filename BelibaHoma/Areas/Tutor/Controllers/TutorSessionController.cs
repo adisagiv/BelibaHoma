@@ -62,7 +62,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Create(TutorSessionModel model)
         {
-            var result = _TutorSessionService.Add(model);
+            var result = _TutorSessionService.Add(model, CurrentUser.UserRole);
             var tutorTraineeId = model.TutorReport.TutorTraineeId;
             
             if (result.Success)
@@ -100,7 +100,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Edit(int id, TutorSessionModel model)
         {
-            var result = _TutorSessionService.Update(id, model);
+            var result = _TutorSessionService.Update(id, model, CurrentUser.UserRole);
             if (result.Success)
             {
                 return RedirectToAction("Index");

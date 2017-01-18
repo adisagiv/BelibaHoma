@@ -100,7 +100,7 @@ namespace BelibaHoma.BLL.Services
         }
 
 
-        public StatusModel<int> Add(TutorReportModel model)
+        public StatusModel<int> Add(TutorReportModel model, UserRole userRole)
         {
             var status = new StatusModel<int>(false, String.Empty,0);
 
@@ -125,7 +125,7 @@ namespace BelibaHoma.BLL.Services
                                 .ToList()
                                 .Any(tr => tr.TutorTrainee.Status == (int)TTStatus.Active && tr.TutorTrainee.TutorId == tutorTrainee.Tutor.UserId);
 
-                    if (isNotLate == false && isReport)
+                    if (userRole == UserRole.Trainee && isNotLate == false && isReport)
                     {
                         status.Message = "לא הוזן דיווח כבר למעלה מ-3 שבועות.\nאנא פנה אל הרכז האזורי לעזרה.";
                         throw new System.ArgumentException(status.Message, "model");

@@ -64,7 +64,7 @@ namespace BelibaHoma.Areas.Tutor.Controllers
         [HttpPost]
         public ActionResult Create(TutorReportModel model)
         {
-            var result = _tutorReportService.Add(model);
+            var result = _tutorReportService.Add(model, CurrentUser.UserRole);
             var id = model.TutorTraineeId;
             if (result.Success)
             {
