@@ -1,4 +1,5 @@
 ﻿@using BelibaHoma.BLL.Enums
+@using Extensions.Enums
 @model BelibaHoma.BLL.Models.GradeModel
 
 @{
@@ -18,6 +19,7 @@
             @*//TODO: validate that semester number does not exist with same trainee id*@
             <div class="form-group">
                 <label class="control-label col-md-2">מספר סמסטר </label>
+                   הזנת סמסטר 0 משמע הסטודנט במכינה   
                 <div class="col-md-10">
                     @{
     object htmlAttributes = new { @class = "form-control", @disabled = "disabled" };
@@ -50,7 +52,7 @@
 
             <div class="form-group">
                 <label class="control-label col-md-2">שנה</label>
-                מדובר בשנה הלועזית המקושרת לממוצע הציונים
+                יש להזין את השנה הלועזית בה התחיל הסמסטר
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })

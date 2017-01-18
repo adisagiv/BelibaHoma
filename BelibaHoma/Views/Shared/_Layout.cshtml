@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/bundles/css")
     @RenderSection("styles", false)
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/bundles/datetimepicker/css")
@@ -17,14 +17,11 @@
     <style>
     </style>
 </head>
-<body background="~/Content/סתםרקע.jpg">
+<body class="background-image">
 
 
-   
     @* This is the menu per user role below.. *@
     @Html.Action("Index", new { controller = "Menu", area = "" })
-
-
 
     <div class="container body-content">
         @RenderBody()
@@ -34,8 +31,6 @@
         </footer>
     </div>
 
-
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/moment.min.js"></script>
@@ -44,6 +39,5 @@
     <script src="~/Scripts/datatable/js/jquery.dataTables.min.js"></script>
     <script src="~/Scripts/datatable.settings.js"></script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

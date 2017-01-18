@@ -11,7 +11,7 @@ namespace BelibaHoma.BLL.Models
 {
     public class GradeModel : GenericModel
     {
-        [Display(Name = " (מספר סמסטר (הזנת סמסטר 0 משמע הסטודנט במכינה")]
+        [Display(Name = " מספר סמסטר, סמסטר 0 משמע מכינה")]
         //TODO: manor ant atalia: validations dont work
         [Range(0, 20, ErrorMessage = "מספר סמסטר חייב להיות חיובי וקטן מ 20")]
         [Required(ErrorMessage = "מספר סמסטר זה שדה חובה")]

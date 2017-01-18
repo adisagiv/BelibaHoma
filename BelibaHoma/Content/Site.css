@@ -1,4 +1,8 @@
-﻿body {
+﻿body.background-image {
+    background-image: url("/Content/background.jpg");
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
     direction: rtl;

@@ -1,4 +1,4 @@
-using System;
+ο»Ώusing System;
 using System.Globalization;
 using System.Linq;
 using System.Web;
@@ -20,7 +20,7 @@ namespace BelibaHoma.BLL.Services
 
         public StatusModel<UserModel> Authenticate(LoginModel model)
         {
-            var result = new StatusModel<UserModel>(false, "ων ξωϊξω ΰε ριρξΰ μΰ πλεπιν", null);
+            var result = new StatusModel<UserModel>(false, "Χ©Χ ΧΧ©ΧªΧΧ© ΧΧ• Χ΅Χ™Χ΅ΧΧ ΧΧ Χ Χ›Χ•Χ Χ™Χ", null);
 
             try
             {

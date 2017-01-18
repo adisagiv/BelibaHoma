@@ -17,46 +17,33 @@ namespace BelibaHoma.BLL.Services
     {
         public StatusModel<HourStatisticsModel> GetHourStatistics(Area? area, DateTime startTime, DateTime endTime, HourStatisticsType hourStatisticsType)
         {
-            var result = new StatusModel<HourStatisticsModel>();
+            var result = new StatusModel<HourStatisticsModel>(false,String.Empty, new HourStatisticsModel());
 
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-                    var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
+                    var tutorRepoistory = unitOfWork.GetRepository<ITutorRepository>();
+                    var tutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
 
+                    var tutors = tutorRepoistory.GetAll().Where(t => !area.HasValue || t.User.Area == (int) area.Value);
 
-                    var numOfActiveTrainees = traineeRepository.GetAll().Count(t => t.User.IsActive && t.User.UserRole == (int) UserRole.Trainee && 
-                     (!area.HasValue || t.User.Area == (int?) area));
-
-                    var tutors = tutorRepository.GetAll().Where(
-                        t => t.User.IsActive && t.User.UserRole == (int) UserRole.Tutor && 
-                                (!area.HasValue || t.User.Area == (int?) area));
-
-
-                    
                     var tutorSessions = tutors.SelectMany(t => t.TutorTrainee)
                         .SelectMany(tt => tt.TutorReport)
                         .SelectMany(tr => tr.TutorSession)
                         .Where(ts => ts.MeetingDate >= startTime && ts.MeetingDate <= endTime);
 
-
-                   result.Data = new HourStatisticsModel();
-
-                    var groupedMonth = tutorSessions.GroupBy(ts => ts.MeetingDate.Month);
+                    var traineesCount = tutorSessions.GroupBy(ts => ts.TutorReport.TutorTrainee.Trainee).Count();
 
                     if (hourStatisticsType == HourStatisticsType.Sum)
                     {
-                        result.Data.HourStatistics = groupedMonth.ToDictionary(ts => ts.Key,
+                        result.Data.HourStatistics = tutorSessions.GroupBy(ts => ts.MeetingDate.Month).ToDictionary(ts => ts.Key,
                             tss => tss.Sum(ts => (ts.EndTime - ts.StartTime).TotalHours));
                     }
                     else
                     {
-                        result.Data.HourStatistics = groupedMonth.ToDictionary(ts => ts.Key,
-                            tss => tss.Sum(ts => ((ts.EndTime - ts.StartTime).TotalHours)/(numOfActiveTrainees)));
-                        //result.Data.HourStatistics = groupedMonth.ToDictionary(ts => ts.Key,
-                        //    tss => tss.Average(ts => (ts.EndTime - ts.StartTime).TotalHours));
+                        result.Data.HourStatistics = tutorSessions.GroupBy(ts => ts.MeetingDate.Month).ToDictionary(ts => ts.Key,
+                            tss => tss.Sum(ts => (ts.EndTime - ts.StartTime).TotalHours)/traineesCount);
                     }
 
                     result.Success = true;
@@ -491,14 +478,19 @@ namespace BelibaHoma.BLL.Services
                 {
                     var tutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
 
-                    var minPossibleYears =
-                        tutorSessionRepository.GetAll().Select(ts=>ts.MeetingDate.Year).Min(ts => ts);
-                    var maxPossibleYears =
-                        tutorSessionRepository.GetAll().Select(ts => ts.MeetingDate.Year).Max(ts => ts);
+                    
+                     var minDate = tutorSessionRepository.GetAll().Select(ts=>ts.MeetingDate).Min(ts => ts);
+
+                     var minPossibleYears = minDate.Month >= 10 ? minDate.Year : minDate.Year - 1;
+
+                     var maxDate = tutorSessionRepository.GetAll().Select(ts => ts.MeetingDate).Max(ts => ts);
+                    
+                    var maxPossibleYears = maxDate.Month >= 10 ? maxDate.Year : maxDate.Year - 1;
+
 
                     var possibleYears = new List<int>();
 
-                    for (int i = minPossibleYears - 1; i <= maxPossibleYears; i++)
+                    for (int i = maxPossibleYears; i >= minPossibleYears; i--)
                     {
                         possibleYears.Add(i);
                     }
