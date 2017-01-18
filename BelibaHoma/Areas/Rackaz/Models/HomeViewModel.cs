@@ -6,7 +6,7 @@ namespace BelibaHoma.Areas.Rackaz.Models
     {
         public int newAlertsCount;
         public int OnGoingAlertsCount;
-        public float TutorHoursCount;
+        public double TutorHoursCount;
         public ReportType ReportType { get; set; }
     }
 }

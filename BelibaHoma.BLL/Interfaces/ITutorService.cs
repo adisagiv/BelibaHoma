@@ -61,7 +61,7 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="area"></param>
         /// <returns></returns>
-        StatusModel<float> GetTutorHours(Area? area);
+        StatusModel<double> GetTutorHours(Area? area);
 
     }
 

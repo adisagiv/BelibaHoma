@@ -24,7 +24,6 @@ namespace BelibaHoma.BLL.Services
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
                     var tutorRepoistory = unitOfWork.GetRepository<ITutorRepository>();
-                    var tutorSessionRepository = unitOfWork.GetRepository<ITutorSessionRepository>();
 
                     var tutors = tutorRepoistory.GetAll().Where(t => !area.HasValue || t.User.Area == (int) area.Value);
 

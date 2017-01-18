@@ -392,19 +392,35 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
-        public StatusModel<float> GetTutorHours(Area? area)
+        public StatusModel<double> GetTutorHours(Area? area)
         {
-            var result = new StatusModel<float>(false, String.Empty, new float());
+            var result = new StatusModel<double>(false, String.Empty, new float());
             try
             {
                 using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
                 {
-                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-                    var tutorList = tutorRepository.GetAll().Where(t => t.User.IsActive == true && (area == null || t.User.Area == (int?)area));
-                    var tutorHours = (tutorList.Count() != 0 ? tutorList.Sum(t => t.TutorHours) : 0);
+                    var tutorRepoistory = unitOfWork.GetRepository<ITutorRepository>();
 
+                    var tutors = tutorRepoistory.GetAll().Where(t =>!area.HasValue || t.User.Area == (int)area.Value);
+
+                    var startTime = new DateTime(DateTime.Now.Year, 10, 1);
+                    if (DateTime.Now.Month < 10)
+                    {
+                        startTime = new DateTime(DateTime.Now.Year - 1, 10, 1);
+                    }
+                    
+                    var endTime = new DateTime(startTime.Year + 1, 10, 1);
+
+                    var tutorSessions = tutors.SelectMany(t => t.TutorTrainee)
+                        .SelectMany(tt => tt.TutorReport)
+                        .SelectMany(tr => tr.TutorSession)
+                        .Where(ts => ts.MeetingDate >= startTime && ts.MeetingDate < endTime);
+
+
+                    var tutorHours = tutorSessions.ToList().Sum(ts => (ts.EndTime - ts.StartTime).TotalHours);
+                    
                     //If we got here - Yay! :)
-                    result = new StatusModel<float>(true, String.Empty, (float)tutorHours);
+                    result = new StatusModel<double>(true, String.Empty, (double)tutorHours);
                 }
             }
             catch (Exception ex)
