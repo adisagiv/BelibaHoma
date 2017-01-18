@@ -1,11 +1,14 @@
 ﻿$(function () {
+    var tutorLateCol = $('#late-tutors-last-col').val();
+    var interventionCol = $('#intervention-last-col').val();
+    var traineeGradeCol = $('#trainee-grade-last-col').val();
     $('#Late-Tutors-table')
         .DataTable({
             scrollY: '50vh',
             scrollCollapse: true,
-            "bInfo" : false,
+            "bInfo": false,
             paging: false,
-            "order": [[4, "asc"]],
+            "order": [[tutorLateCol, "asc"]],
             initComplete: function () {
                 this.api()
                     .columns()
@@ -53,7 +56,7 @@
             scrollCollapse: true,
             paging: false,
             "bInfo": false,
-            "order": [[4, "asc"]],
+            "order": [[interventionCol, "asc"]],
             initComplete: function () {
                 this.api()
                     .columns()
@@ -101,7 +104,7 @@
         scrollCollapse: true,
         paging: false,
         "bInfo": false,
-        "order": [[4, "asc"]],
+        "order": [[traineeGradeCol, "asc"]],
         initComplete: function () {
             this.api()
                 .columns()

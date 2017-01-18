@@ -7,7 +7,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="well">
-<h2><b>פרטי החניך</b>
+<h2>
+    <b>פרטי החניך</b>
 </h2>
 <div>
     <hr/>
@@ -20,7 +21,7 @@
             <a class="btn btn-info" href="/Rackaz/Trainee/index" align="left">לרשימת כל החניכים</a>
             @Html.Raw("|")
             <a class="btn btn-default" href="/Rackaz/TutorReport/index/@Model.UserId" target="_blank"> היסטוריית דיווחים</a>
-                    @*@Html.ActionLink("ערוך", action, new {Area = "Rackaz"})*@
+                @*@Html.ActionLink("ערוך", action, new {Area = "Rackaz"})*@
             @Html.Raw("|")
             <a class="btn btn-default" href="/Rackaz/Trainee/@action">עריכה</a>
             @Html.Raw("|")
@@ -31,195 +32,200 @@
 
 </div>
 <br/>
-    @{
+@{
 
-        if (Model.TutorHours == 0)
-        {
-            <div class="panel panel-danger" style="background-color:#f2dede">
-                <center>
-                    <h4 style="color: brown">עד כה נרשמו עבור @Model.FullName <b>@Model.TutorHours</b> שעות חניכה, מתוכן <b>@Model.TutorHoursBonding</b> שעות חברותא</h4>
-                </center>
-            </div>
-        }
-        else
-        {
-            <div class="panel panel-success" style="background-color: #e6ffe6">
-                <center>
-                    <h4 style="color: darkgreen">עד כה נרשמו עבור @Model.FullName <b>@Model.TutorHours</b> שעות חניכה, מתוכן <b>@Model.TutorHoursBonding</b> שעות חברותא</h4>
-                </center>
-            </div>
-        }
+    if (Model.TutorHours == 0)
+    {
+        <div class="panel panel-danger" style="background-color: #f2dede">
+            <center>
+                <h4 style="color: brown">עד כה נרשמו עבור @Model.FullName <b>@String.Format("{0:F2}", Model.TutorHours)</b> שעות חניכה</h4>
+            </center>
+        </div>
     }
+    else
+    {
+        <div class="panel panel-success" style="background-color: #e6ffe6">
+            <center>
+                <h4 style="color: darkgreen">עד כה נרשמו עבור @Model.FullName <b>@String.Format("{0:F2}", Model.TutorHours)</b> שעות חניכה, מתוכן <b>@String.Format("{0:F2}", Model.TutorHoursBonding)</b> שעות חברותא</h4>
+            </center>
+        </div>
+    }
+}
 
 
 <dl class="dl-horizontal">
     <dd>
         <h3>פרטים אישיים</h3>
-
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.User.IdNumber)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.User.IdNumber)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.User.FirstName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.User.FirstName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.User.LastName)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.User.LastName)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Gender)
+    </dt>
+    <dd>
+        @Model.Gender.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Birthday)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Birthday)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MaritalStatus)
+    </dt>
+    <dd>
+        @Model.MaritalStatus.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.EmploymentStatus)
+    </dt>
+    <dd>
+        @{
+            EmploymentStatus empstat;
+            empstat = Model.EmploymentStatus.Value;
+            if (empstat != null)
+            {
+                @empstat.ToDescription()
+                ;
+            }
+        }
+    </dd>
+    <dd>
+        <h3>פרטי התקשרות</h3>
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.Address)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.Address)
+    </dd>
+    <dt>
+        @Model.User.Area.ToDescription()
+    </dt>
+    <dd>
+        @Model.User.Area.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.PhoneNumber)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.User.Email)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.User.Email)
     </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.User.IdNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.IdNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.FirstName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.FirstName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.LastName)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.LastName)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Gender)
-        </dt>
-        <dd>
-            @Model.Gender.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Birthday)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Birthday)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MaritalStatus)
-        </dt>
-        <dd>
-            @Model.MaritalStatus.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EmploymentStatus)
-        </dt>
-        <dd>
-            @{
-                EmploymentStatus empstat;
-                empstat = Model.EmploymentStatus.Value;
-                if (empstat != null)
-                {
-                    @empstat.ToDescription()
-                    ;
-                }
-            }
-        </dd>
-        <dd>
-            <h3>פרטי התקשרות</h3>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt>
-            @Model.User.Area.ToDescription()
-        </dt>
-        <dd>
-            @Model.User.Area.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhoneNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.PhoneNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.User.Email)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.User.Email)
-        </dd>
-        <dd>
-            <h3>מידע אקדמי</h3>
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicInstitution)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicInstitution.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicMajor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicMajor.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicMajor1)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicMajor1.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicYear)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicYear)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.SemesterNumber)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.SemesterNumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.EnglishLevel)
-        </dt>
-        <dd>
-            @Model.EnglishLevel.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MathLevel)
-        </dt>
-        <dd>
-            @Model.MathLevel.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.PhysicsLevel)
-        </dt>
-        <dd>
-            @Model.PhysicsLevel.ToDescription()
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.AcademicMajor2)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.AcademicMajor2.Name)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.NeededHelpDescription)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.NeededHelpDescription)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TutorHours)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TutorHours)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.TutorHoursBonding)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TutorHoursBonding)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DroppedOut)
-        </dt>
+
+    <dd>
+        <h3>מידע אקדמי</h3>
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.AcademicInstitution)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AcademicInstitution.Name)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.AcademicMajor)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AcademicMajor.Name)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.AcademicMajor1)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AcademicMajor1.Name)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.AcademicYear)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AcademicYear)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.SemesterNumber)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.SemesterNumber)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.EnglishLevel)
+    </dt>
+    <dd>
+        @Model.EnglishLevel.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.MathLevel)
+    </dt>
+    <dd>
+        @Model.MathLevel.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.PhysicsLevel)
+    </dt>
+    <dd>
+        @Model.PhysicsLevel.ToDescription()
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.AcademicMajor2)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.AcademicMajor2.Name)
+    </dd>
+    <dt>
+        @Html.DisplayNameFor(model => model.NeededHelpDescription)
+    </dt>
+    <dd>
+        @Html.DisplayFor(model => model.NeededHelpDescription)
+    </dd>
+    @*<dt>
+                        @Html.DisplayNameFor(model => model.TutorHours)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TutorHours)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TutorHoursBonding)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TutorHoursBonding)
+                    </dd>*@
+    <dt>
+        @Html.DisplayNameFor(model => model.DroppedOut)
+    </dt>
     <dd>
         @Html.DisplayFor(model => model.DroppedOut)
     </dd>
-    </dl>
+</dl>
+
+
+<div class="row">
     <div class="panel panel-info" align="center">
         <div class="panel-heading">
             @String.Format("{0:F2} שנים בתוכנית", Model.PazamInYears)
         </div>
     </div>
 </div>
+</div>
+

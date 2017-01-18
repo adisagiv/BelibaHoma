@@ -7,6 +7,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     int tutorTraineeId = ViewBag.TutorTraineeId;
 }
+
+@section styles
+{
+    @Styles.Render("~/bundles/datatable/css")
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/datatable/js")
+    <script src="~/Scripts/tutor-trainee-reports.js"></script>
+}
+
 <div class="well">
 <h2>דיווחים</h2>
     <p>
@@ -33,7 +45,28 @@
         </div>
     </div>
 
-    <table class="table">
+    <table class="table" id="tutor-trainee-reports-table">
+        <thead>
+        <tr>
+            <th>
+                שם חניך
+            </th>
+            <th>
+                שם חונך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHours)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TutorHoursBonding)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreationTime)
+            </th>
+            <th id="actions"></th>
+        </tr>
+        </thead>
+        <tfoot>
     <tr>
         <th>
             שם חניך
@@ -50,8 +83,9 @@
         <th>
             @Html.DisplayNameFor(model => model.CreationTime)
         </th>
-        <th></th>
+                <th id="actions"></th>
     </tr>
+        </tfoot>
     @foreach (var item in Model)
     {
         <tr class=@(item.IsProblem ? "table-danger" : "")>
@@ -63,7 +97,7 @@
                         }
                         else
                         {
-                            @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id }, new { target = "_blank" })
+                            @Html.ActionLink(@item.TutorTrainee.Trainee.User.FullName, "Details", "Trainee", new {Area = "Trainee", id = item.TutorTrainee.Trainee.User.Id}, new {target = "_blank"})
                         }
 }              
             </td>
@@ -75,16 +109,18 @@
             }
             else
             {
-                @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id }, new { target = "_blank" })
+                            @Html.ActionLink(@item.TutorTrainee.Tutor.User.FullName, "Details", "Tutor", new {Area = "Tutor", id = item.TutorTrainee.Tutor.User.Id}, new {target = "_blank"})
             }
                     }
                     
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorHours)
+                    @*@Html.DisplayFor(modelItem => item.TutorHours)*@
+                    @String.Format("{0:F2}", item.TutorHours)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TutorHoursBonding)
+                    @*@Html.DisplayFor(modelItem => item.TutorHoursBonding)*@
+                    @String.Format("{0:F2}", item.TutorHoursBonding)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreationTime)
