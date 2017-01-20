@@ -1,6 +1,6 @@
 ﻿$('#trainees-partial-table')
         .DataTable({
-            scrollY: '50vh',
+            scrollY: '32vh',
             scrollCollapse: true,
             paging: false,
             "bInfo" : false,

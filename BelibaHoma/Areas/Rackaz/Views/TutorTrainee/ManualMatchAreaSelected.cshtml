@@ -11,8 +11,8 @@
     <script src="~/Scripts/ManualMatchAreaSelected.js"></script>
     <div class="form-horizontal" style="direction: rtl">
         <br>
-        <table class="table" class="col-md-6">
-            <tbody>
+            <table class="table col-md-6">
+                <tbody>
                 <tr>
                     <td class="table-danger">
                         @*@Html.ActionLink("להצגת קשרי חונכות", "", "", new { Area = "Rackaz" })*@
@@ -27,33 +27,30 @@
                         משתמשים הצבועים בצהוב הם בעלי המלצה קיימת לציוות
                     </td>
                 </tr>
-            </tbody>
-        </table>
-
-            <div class="col">
-                <div class="panel panel-default col-md-6 panel-height">
-                    <div class="panel-heading">
-                        <div class="checkbox">
-                            <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
-                        </div>
-                    </div>
-                    <div id="trainees-partial">
-                        @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="panel panel-default col-md-6 panel-height">
-                        <div class="panel-heading">
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
-                            </div>
-                        </div>
-                        <div id="tutors-partial">
-                            @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
-                        </div>
-                    </div>
+                </tbody>
+            </table>
+        <div class="panel panel-default col-md-6 panel-height-match">
+            <div class="panel-heading">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" id="show-matched-trainees">הצג חניכים בעלי שיבוץ</label>
                 </div>
             </div>
+            <div id="trainees-partial" class="panel-body">
+                @Html.Partial("ManualMatchTraineeSelect", Model.Trainees)
+            </div>
+        </div>
+        <div class="panel panel-default col-md-6 panel-height-match">
+            <div class="panel-heading">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="" id="show-matched-tutors">הצג חונכים בעלי שיבוץ</label>
+                </div>
+            </div>
+            <div id="tutors-partial" class="panel-body">
+                @Html.Partial("ManualMatchTutorSelect", Model.Tutors)
+            </div>
+        </div>
+        </div>
+            
             <div class="form-group">
                 <div class="col-md-offset-6 col-md-6">
                     <br/>
@@ -62,4 +59,3 @@
                 </div>
             </div>
 
-</div>

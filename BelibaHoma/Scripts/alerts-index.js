@@ -4,7 +4,7 @@
     var traineeGradeCol = $('#trainee-grade-last-col').val();
     $('#Late-Tutors-table')
         .DataTable({
-            scrollY: '50vh',
+            scrollY: '32vh',
             scrollCollapse: true,
             "bInfo": false,
             paging: false,
@@ -52,7 +52,7 @@
         });
     $('#Intervention-Table')
         .DataTable({
-            scrollY: '40vh',
+            scrollY: '32vh',
             scrollCollapse: true,
             paging: false,
             "bInfo": false,
@@ -100,7 +100,7 @@
         });
     $('#Trainee-Grade-Table')
     .DataTable({
-        scrollY: '40vh',
+        scrollY: '32vh',
         scrollCollapse: true,
         paging: false,
         "bInfo": false,
