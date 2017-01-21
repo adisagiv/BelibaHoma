@@ -87,3 +87,24 @@ div.datetimepicker-style {
 .panel-height-match {
     height: 611px; 
 }
+
+.highcharts-menu {
+    box-shadow: rgb(136, 136, 136) 3px 3px 10px;
+    border: 1px solid rgb(153, 153, 153);
+    background: rgb(255, 255, 255);
+    padding: 5px 0px;
+}
+
+.highcharts-menu-item {
+    cursor: pointer;
+    padding: 0.5em 1em;
+    background: none;
+    color: rgb(51, 51, 51);
+    font-size: 11px;
+    transition: background 250ms, color 250ms;
+}
+
+.highcharts-menu-item:hover {
+    background: rgb(51,92,173);
+    color: rgb(255, 255, 255);
+}
