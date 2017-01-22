@@ -111,7 +111,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     title = new Title
                     {
                         
-                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה שעות חניכה באיזור {0}",area.Value.ToDescription() ) : "דוח סטטיסטיקה שעות חניכה"),
+                        text = (area.HasValue ? string.Format(" סטטיסטיקת שעות חניכה באיזור {0}",area.Value.ToDescription() ) : " סטטיסטיקת שעות חניכה"),
                         x = -20
                     },
                     xAxis = new Xaxis
@@ -233,7 +233,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title2
                     {
-                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה הצטרפות ונשירת חניכים באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקה הצטרפות ונשירת חניכים"),
+                        text = (area.HasValue ? string.Format(" סטטיסטיקת הצטרפות ונשירת חניכים באיזור {0}", area.Value.ToDescription()) : " סטטיסטיקת הצטרפות ונשירת חניכים"),
                         //text = "דוח סטטיסטיקה הצטרפות ונשירת חניכים",
                     },
                     xAxis = new Xaxis1
@@ -347,7 +347,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title2
                     {
-                        text = (area.HasValue ? string.Format("דוח סטטיסטיקת התרעות באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקת התרעות"),
+                        text = (area.HasValue ? string.Format(" סטטיסטיקת התרעות באיזור {0}", area.Value.ToDescription()) : " סטטיסטיקת התרעות"),
 
                         //text = "דוח סטטיסטיקת התרעות",
                         //useHTML = false
@@ -382,7 +382,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         min= new int {},  
                         title = new Title2()
                         {
-                            text = "כמות התרעות",
+                            text = "מספר התרעות",
                             //useHTML = false
                         },
                     
@@ -488,7 +488,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title
                     {
-                        text = (area.HasValue ? string.Format("דוח סטטיסטיקה שעות חניכה כתלות בותק באיזור {0}", area.Value.ToDescription()) : "דוח סטטיסטיקה שעות חניכה כתלות בותק"),
+                        text = (area.HasValue ? string.Format(" סטטיסטיקת שעות חניכה כתלות בותק באיזור {0}", area.Value.ToDescription()) : " סטטיסטיקת שעות חניכה כתלות בותק"),
                         //text = "דוח סטטיסטיקה שעות חניכה כתלות בותק",
                         x = -20
                     },
@@ -604,7 +604,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title
                     {
-                        text = (area.HasValue ? string.Format("דוח ממוצע חניכים במהלך הסמסטרים באיזור {0}", area.Value.ToDescription()) : "דוח ממוצע חניכים במהלך הסמסטרים"),
+                        text = (area.HasValue ? string.Format(" ממוצע חניכים במהלך הסמסטרים באיזור {0}", area.Value.ToDescription()) : " ממוצע חניכים במהלך הסמסטרים"),
                         //text = "דוח ממוצע חניכים במהלך הסמסטרים",
                         x = -20
                     },
@@ -701,7 +701,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     title = new Title2
                     {
-                        text = (area.HasValue ? string.Format("התפלגות חונכים לפי שעות באיזור {0}", area.Value.ToDescription()) : "התפלגות חונכים לפי שעות"),
+                        text = (area.HasValue ? string.Format("התפלגות שעות לפי חונכויות באיזור {0}", area.Value.ToDescription()) : "התפלגות  שעות לפני חונכויות"),
 
                         //text = "דוח סטטיסטיקת התרעות",
                         //useHTML = false
@@ -736,7 +736,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                         min = new int { },
                         title = new Title2()
                         {
-                            text = "מספר חונכים",
+                            text = "מספר חונכויות",
                             //useHTML = false
                         },
 

@@ -19,7 +19,7 @@ namespace BelibaHoma.Models
         [Description("סטטיסטיקת ממוצעי ציונים לאורך סמסטרים")]
         AvrGradeStatistics,
 
-        [Description("היסטגורמת חניכים חונכים לפי שעות")]
+        [Description("היסטוגרמת שעות חניכה לפי חונכויות")]
         HourHistogram
     }
 }
