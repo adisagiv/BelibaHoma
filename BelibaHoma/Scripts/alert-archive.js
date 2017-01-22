@@ -1,7 +1,7 @@
 ﻿$(function () {
     $('#Late-Tutors-a-table')
         .DataTable({
-            scrollY: '50vh',
+            scrollY: '32vh',
             scrollCollapse: true,
             paging: false,
             "bInfo": false,
@@ -49,7 +49,7 @@
         });
     $('#Intervention-a-Table')
         .DataTable({
-            scrollY: '50vh',
+            scrollY: '32vh',
             scrollCollapse: true,
             paging: false,
             "bInfo": false,
@@ -97,7 +97,7 @@
         });
     $('#Trainee-Grade-a-Table')
     .DataTable({
-        scrollY: '50vh',
+        scrollY: '32vh',
         scrollCollapse: true,
         paging: false,
         "bInfo": false,

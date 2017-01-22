@@ -182,7 +182,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     exporting = new Exporting
                     {
-                        enabled = false
+                        enabled = true
                     }
 
                 };
@@ -279,7 +279,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 },
                     exporting = new Exporting1
                     {
-                        enabled = false
+                        enabled = true
                     }  
 
 
@@ -409,7 +409,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                 },
                     exporting = new Exporting1
                     {
-                        enabled = false
+                        enabled = true
                     }  
 
 
@@ -543,7 +543,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     exporting = new Exporting
                     {
-                        enabled = false
+                        enabled = true
                     }
 
                 };
@@ -658,7 +658,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     exporting = new Exporting
                     {
-                        enabled = false
+                        enabled = true
                     }
                      
 
@@ -763,7 +763,7 @@ namespace BelibaHoma.Areas.Rackaz.Controllers
                     },
                     exporting = new Exporting1
                     {
-                        enabled = false
+                        enabled = true
                     }
 
 
