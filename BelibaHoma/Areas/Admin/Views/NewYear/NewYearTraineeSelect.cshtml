@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
+
+<h2>חניכים</h2>
+<table class="table" id="trainees-partial-table">
+    <thead>
+        <tr>
+            <th>
+                חניך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicInstitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor1)
+            </th>
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th>
+                חניך
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicInstitution)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AcademicMajor1)
+            </th>
+        </tr>
+    </tfoot>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="chooseTrainee" id="trainee_@item.UserId" value="@item.UserId">
+                    </label>
+                </td>
+                <td>
+                    @*@Html.DisplayFor(modelItem => item.Trainee.FullName)*@
+                    @Html.ActionLink(@item.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.User.Id }, new { target = "_blank" })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicInstitution.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicMajor.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AcademicMajor1.Name)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

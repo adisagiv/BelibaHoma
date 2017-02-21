@@ -41,6 +41,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Catel.Core, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Catel.Core.4.5.2\lib\net45\Catel.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Catel.Extensions.EntityFramework6, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Catel.Extensions.EntityFramework6.4.5.2\lib\net45\Catel.Extensions.EntityFramework6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
       <Private>True</Private>
@@ -139,7 +155,9 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewYearController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Models\TutorTraineeNewYearViewModel.cs" />
     <Compile Include="Areas\Rackaz\Controllers\AlertController.cs" />
     <Compile Include="Areas\Rackaz\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
@@ -185,7 +203,6 @@
     </Compile>
     <Compile Include="Models\ChangePasswordViewModel.cs" />
     <Compile Include="Models\ReportType.cs" />
-    <Compile Include="Models\Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -455,6 +472,12 @@
     <Content Include="Content\AboutPDF.pdf" />
     <Content Include="Areas\Rackaz\Views\TutorReport\Index.cshtml" />
     <Content Include="Areas\Rackaz\Views\Report\HourHistogram.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\NewYearAreaSelected.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\NewYearTraineeSelect.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\NewYearTutorSelect.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\SelecetMatches.cshtml" />
+    <Content Include="Areas\Admin\Views\NewYear\NewYearFinished.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\button.js" />
     <Content Include="Scripts\carousel-rtl.js" />
@@ -610,6 +633,8 @@
     <Content Include="Scripts\Highchart\code\themes\sand-signika.js" />
     <Content Include="Scripts\Highchart\code\themes\skies.js" />
     <Content Include="Scripts\Highchart\highchart-menu-fix.js" />
+    <Content Include="Scripts\NewYearAreaSelectedMatches.js" />
+    <Content Include="Scripts\NewYearAreaSelected.js" />
     <Content Include="Scripts\reports\AlertsStatistics.js" />
     <Content Include="Scripts\reports\hour-histogram.js" />
     <Content Include="Scripts\tutor-session.js" />
@@ -682,7 +707,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
     <Folder Include="Areas\Tutor\Models\" />

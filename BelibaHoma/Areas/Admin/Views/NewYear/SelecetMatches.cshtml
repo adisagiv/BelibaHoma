@@ -1,0 +1,86 @@
+﻿@model BelibaHoma.Areas.Admin.Models.TutorTraineeNewYearViewModel
+@using BelibaHoma.BLL.Enums
+@{
+    ViewBag.Title = "בחר קשרים לשנה הבאה";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section styles
+{
+    <link href="~/Scripts/datatable/css/jquery.dataTables.min.css" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/Scripts/bootstrap-confirmation.js"></script>
+<script src="~/Scripts/NewYearAreaSelectedMatches.js"></script>
+}
+<div class="well">
+    <h2 align="center">
+        <b>המלצות המערכת לציוות</b>
+    </h2>
+    <hr />
+    <div class="form-group">
+        <div class="row" id="area-partial">
+            @using (Html.BeginForm("SelecetMatches", "NewYear"))
+            {
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="Area" value="@Model.Area" />
+                <table class="table" id="tutortrainee-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                בחר קשר
+                            </th>
+                            <th>
+                                שם החונך
+                            </th>
+                            <th>
+                                מסלול ראשי
+                            </th>
+                            <th>
+                                שם החניך
+                            </th>
+                            <th>
+                                עזרה נדרשת
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.TutorTrainee)
+                        {
+                            <tr>
+                                <td>
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="chooseTutorTrainee" id="@String.Format("trainee_{0}", item.Id)" value="@item.Id">
+                                    </label>
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.TutorTrainee.Tutor.FullName)*@
+                                    @Html.ActionLink(@item.Tutor.FullName, "Details", "Tutor", new { Area = "Tutor", id = item.TutorId }, new { target = "_blank" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tutor.AcademicMajor.Name)
+                                </td>
+                                <td>
+                                    @*@Html.DisplayFor(modelItem => item.TutorTrainee.Trainee.FullName)*@
+                                    @Html.ActionLink(@item.Trainee.FullName, "Details", "Trainee", new { Area = "Trainee", id = item.TraineeId }, new { target = "_blank" })
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Trainee.NeededHelpDescription)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-offset-6 col-md-6">
+                        <br />
+                        <br />
+                        <input type="submit" value="העבר לשנה הבאה" class="btn btn-info" id="manual-match-submit" style="margin-top: 30px; height: 50px" width="70px" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

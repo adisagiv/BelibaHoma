@@ -221,14 +221,17 @@ namespace BelibaHoma.BLL.Services
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
         /// <returns></returns>
-        public StatusModel Update(int id, TraineeModel updatedModel)
+        public StatusModel Update(int id, TraineeModel updatedModel, UnitOfWork<BelibaHomaDBEntities> unitOfWork = null)
         {
             var status = new StatusModel(false, String.Empty);
-
+            var isNeedDisposing = false;
             try
             {
-                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                if (unitOfWork == null)
                 {
+                    isNeedDisposing = true;
+                    unitOfWork = new UnitOfWork<BelibaHomaDBEntities>();
+                }
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
                     var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
                     var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
@@ -362,12 +365,17 @@ namespace BelibaHoma.BLL.Services
 
                         trainee.User.IsActive = updatedModel.User.IsActive;
                         //traineeRepository.Update(trainee);
+                        if (isNeedDisposing)
+                    {
                         unitOfWork.SaveChanges();
+                        unitOfWork.Dispose();
+
+                    }
 
                         status.Success = true;
                         status.Message = String.Format("פרטי החניך {0} עודכנו בהצלחה", updatedModel.FullName);
                     }
-                }
+                
             }
             catch (Exception ex)
             {
@@ -472,6 +480,37 @@ namespace BelibaHoma.BLL.Services
             }
 
             return result;
+        }
+
+        public StatusModel MoveToNextYear(Area area, List<int> chooseTrainee)
+        {
+            var status = new StatusModel<List<TraineeModel>>(true, String.Empty, null);
+            status = GetTrainees(area);
+
+            if (status.Success)
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var allAreaTrainee = status.Data;
+                    foreach (var trainee in allAreaTrainee)
+                    {
+                        // if the trainee wasn't selected set isactive to false
+                        if (!chooseTrainee.Contains(trainee.UserId))
+                        {
+                            trainee.User.IsActive = false;
+
+                        }
+                        trainee.TutorHours = 0;
+                        trainee.TutorHoursBonding = 0;
+
+                        Update(trainee.UserId, trainee, unitOfWork);
+                    }
+
+                    unitOfWork.SaveChanges();
+                }
+            }
+
+            return status;
         }
     }
 }

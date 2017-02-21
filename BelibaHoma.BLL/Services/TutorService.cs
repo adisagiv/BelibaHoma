@@ -43,7 +43,7 @@ namespace BelibaHoma.BLL.Services
                     var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
                     result.Data =
                         tutorRepository.GetAll()
-                            .Where(t => (!area.HasValue || t.User.Area == (int) area.Value) && t.User.UserRole == 2)
+                            .Where(t => (!area.HasValue || t.User.Area == (int)area.Value) && t.User.UserRole == 2)
                             .OrderBy(t => t.User.Area)
                             .ThenBy(t => t.User.LastName)
                             .ThenBy(t => t.User.FirstName)
@@ -210,125 +210,134 @@ namespace BelibaHoma.BLL.Services
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
+        /// <param name="unitOfWork"></param>
         /// <returns></returns>
-        public StatusModel Update(int id, TutorModel updatedModel)
+        public StatusModel Update(int id, TutorModel updatedModel, UnitOfWork<BelibaHomaDBEntities> unitOfWork = null)
         {
             var status = new StatusModel(false, String.Empty);
-
+            var isNeedDisposing = false;
             try
             {
-                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                if (unitOfWork == null)
                 {
-                    var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
-                    var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
-                    var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
-                    var academicInstitution = academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
-                    var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
-                    var academicMajor1 = new AcademicMajor();
-                    academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
-                   
+                    isNeedDisposing = true;
+                    unitOfWork = new UnitOfWork<BelibaHomaDBEntities>();
+                }
+                var tutorRepository = unitOfWork.GetRepository<ITutorRepository>();
+                var academicInstitutionRepository = unitOfWork.GetRepository<IAcademicInstitutionRepository>();
+                var academicMajorRepository = unitOfWork.GetRepository<IAcademicMajorRepository>();
+                var academicInstitution = academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
+                var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
+                var academicMajor1 = new AcademicMajor();
+                academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
 
-                    var tutor = tutorRepository.GetByKey(id);
-                    if (tutor != null)
+
+                var tutor = tutorRepository.GetByKey(id);
+                if (tutor != null)
+                {
+                    //Running some server side validations
+                    if (updatedModel.User.IdNumber.Length != 9)
                     {
-                        //Running some server side validations
-                        if (updatedModel.User.IdNumber.Length != 9)
-                        {
-                            status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
-                            throw new System.ArgumentException(status.Message, "updatedModel");
-                        }
-                        if (updatedModel.Birthday > DateTime.Now.AddYears(-15))
-                        {
-                            status.Message = "תאריך הלידה של החונך צריך להיות לפחות לפני 15 שנים";
-                            throw new System.ArgumentException(status.Message, "updatedModel");
-                        }
-                        if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && updatedModel.AcademicYear != 0 && updatedModel.SemesterNumber != 0)
-                        {
-                            status.Message = "החונך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
-                            throw new System.ArgumentException(status.Message, "updatedModel");
-                        }
-                        if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (updatedModel.AcademicYear == 0 || updatedModel.SemesterNumber == 0))
-                        {
-                            status.Message = "אם החונך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
-                            throw new System.ArgumentException(status.Message, "updatedModel");
-                        }
-                        if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
-                        {
-                            status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
-                            throw new System.ArgumentException(status.Message, "updatedModel");
-                        }
+                        status.Message = "מספר תעודת הזהות צריך להכיל בדיוק 9 ספרות";
+                        throw new System.ArgumentException(status.Message, "updatedModel");
+                    }
+                    if (updatedModel.Birthday > DateTime.Now.AddYears(-15))
+                    {
+                        status.Message = "תאריך הלידה של החונך צריך להיות לפחות לפני 15 שנים";
+                        throw new System.ArgumentException(status.Message, "updatedModel");
+                    }
+                    if (academicInstitution.InstitutionType == (int)InstitutionType.Mechina && updatedModel.AcademicYear != 0 && updatedModel.SemesterNumber != 0)
+                    {
+                        status.Message = "החונך במכינה, שנת הלימודים ומספר הסמסטר צריכים להיות 0";
+                        throw new System.ArgumentException(status.Message, "updatedModel");
+                    }
+                    if (academicInstitution.InstitutionType != (int)InstitutionType.Mechina && (updatedModel.AcademicYear == 0 || updatedModel.SemesterNumber == 0))
+                    {
+                        status.Message = "אם החונך איננו ממוסד מסוג מכינה, על מספר הסמסטר והשנה האקדמית להיות שונים מ-0";
+                        throw new System.ArgumentException(status.Message, "updatedModel");
+                    }
+                    if (updatedModel.User.Area != null && academicInstitution.Area != (int)updatedModel.User.Area)
+                    {
+                        status.Message = "המוסד האקדמי של החונך נמצא באזור פעילות שונה מהאזור שהוזן לחונך";
+                        throw new System.ArgumentException(status.Message, "updatedModel");
+                    }
 
 
-                        if (updatedModel.User.IsActive == false && tutor.User.IsActive == true)
+                    if (updatedModel.User.IsActive == false && tutor.User.IsActive == true)
+                    {
+                        var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                        var tutortrainees =
+                            tutortraineeRepository.GetAll().Where(tt => tt.TutorId == tutor.UserId && tt.Status == (int)TTStatus.Active).ToList();
+                        if (tutortrainees[0] != null)
                         {
-                            var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
-                            var tutortrainees =
-                                tutortraineeRepository.GetAll().Where(tt => tt.TutorId == tutor.UserId && tt.Status == (int)TTStatus.Active).ToList();
-                            if (tutortrainees[0] != null)
+                            foreach (var tt in tutortrainees)
                             {
-                                foreach (var tt in tutortrainees)
+                                var result = new StatusModel<TutorTraineeModel>(false, String.Empty, new TutorTraineeModel());
+                                result = _tutorTraineeService.ChangeStatus(tt.Id);
+                                if (result.Success == false)
                                 {
-                                    var result = new StatusModel<TutorTraineeModel>(false, String.Empty, new TutorTraineeModel());
-                                    result = _tutorTraineeService.ChangeStatus(tt.Id);
-                                    if (result.Success == false)
-                                    {
-                                        status.Message = "בעיה בהפיכת קשרי החונכות של החונך ללא פעילים";
-                                        throw new System.ArgumentException(status.Message, "updatedModel");
-                                    }
+                                    status.Message = "בעיה בהפיכת קשרי החונכות של החונך ללא פעילים";
+                                    throw new System.ArgumentException(status.Message, "updatedModel");
                                 }
                             }
-
                         }
 
-                        //Updating the entity from the model received by the form
-                        tutor.User.FirstName = updatedModel.User.FirstName;
-                        tutor.User.LastName = updatedModel.User.LastName;
-                        tutor.User.Email = updatedModel.User.Email;
-                        tutor.User.IdNumber = updatedModel.User.IdNumber;
-                        tutor.User.IsActive = updatedModel.User.IsActive;
-                        tutor.User.UpdateTime = DateTime.Now;
-                        if (updatedModel.User.Area != null)
-                        {
-                            tutor.User.Area = (int?)updatedModel.User.Area;
-                        }
-                        tutor.Address = updatedModel.Address;
-                        tutor.Gender = (int)updatedModel.Gender;
-                        tutor.Birthday = updatedModel.Birthday;
-                        tutor.AcademicYear = updatedModel.AcademicYear;
-                        tutor.SemesterNumber = updatedModel.SemesterNumber;
-                        tutor.PhoneNumber = updatedModel.PhoneNumber;
-                        tutor.PhysicsLevel = (int)updatedModel.PhysicsLevel;
-                        tutor.MathLevel = (int)updatedModel.MathLevel;
-                        tutor.EnglishLevel = (int)updatedModel.EnglishLevel;
-                       
-
-                        //Linked Entities - need to verify Academic Institutions and Majors
-                        tutor.AcademicInstitution = academicInstitution;
-                        tutor.AcademicInstitutionId = academicInstitution.Id;
-                        tutor.AcademicMajor = academicMajor;
-                        tutor.AcademicMajorId = academicMajor.Id;
-                        tutor.AcademicMajor1 = academicMajor1;
-                        if (updatedModel.AcademicMajor1.Id != 0)
-                        {
-                            tutor.AcademicMinorId = academicMajor1.Id;
-                        }
-                        else
-                        {
-                            tutor.AcademicMinorId = null;
-                        }
-                     
-                        unitOfWork.SaveChanges();
-
-                        status.Success = true;
-                        status.Message = String.Format("פרטי החונך {0} עודכנו בהצלחה", updatedModel.FullName);
                     }
+
+                    //Updating the entity from the model received by the form
+                    tutor.User.FirstName = updatedModel.User.FirstName;
+                    tutor.User.LastName = updatedModel.User.LastName;
+                    tutor.User.Email = updatedModel.User.Email;
+                    tutor.User.IdNumber = updatedModel.User.IdNumber;
+                    tutor.User.IsActive = updatedModel.User.IsActive;
+                    tutor.User.UpdateTime = DateTime.Now;
+                    if (updatedModel.User.Area != null)
+                    {
+                        tutor.User.Area = (int?)updatedModel.User.Area;
+                    }
+                    tutor.Address = updatedModel.Address;
+                    tutor.Gender = (int)updatedModel.Gender;
+                    tutor.Birthday = updatedModel.Birthday;
+                    tutor.AcademicYear = updatedModel.AcademicYear;
+                    tutor.SemesterNumber = updatedModel.SemesterNumber;
+                    tutor.PhoneNumber = updatedModel.PhoneNumber;
+                    tutor.PhysicsLevel = (int)updatedModel.PhysicsLevel;
+                    tutor.MathLevel = (int)updatedModel.MathLevel;
+                    tutor.EnglishLevel = (int)updatedModel.EnglishLevel;
+
+
+                    //Linked Entities - need to verify Academic Institutions and Majors
+                    tutor.AcademicInstitution = academicInstitution;
+                    tutor.AcademicInstitutionId = academicInstitution.Id;
+                    tutor.AcademicMajor = academicMajor;
+                    tutor.AcademicMajorId = academicMajor.Id;
+                    tutor.AcademicMajor1 = academicMajor1;
+                    if (updatedModel.AcademicMajor1.Id != 0)
+                    {
+                        tutor.AcademicMinorId = academicMajor1.Id;
+                    }
+                    else
+                    {
+                        tutor.AcademicMinorId = null;
+                    }
+
+                    if (isNeedDisposing)
+                    {
+                        unitOfWork.SaveChanges();
+                        unitOfWork.Dispose();
+
+                    }
+
+
+                    status.Success = true;
+                    status.Message = String.Format("פרטי החונך {0} עודכנו בהצלחה", updatedModel.FullName);
                 }
             }
             catch (Exception ex)
             {
                 if (status.Message == String.Empty)
                 {
-                    status.Message = String.Format("שגיאה במהלך עדכון פרטי החונך");   
+                    status.Message = String.Format("שגיאה במהלך עדכון פרטי החונך");
                 }
                 LogService.Logger.Error(status.Message, ex);
             }
@@ -401,14 +410,14 @@ namespace BelibaHoma.BLL.Services
                 {
                     var tutorRepoistory = unitOfWork.GetRepository<ITutorRepository>();
 
-                    var tutors = tutorRepoistory.GetAll().Where(t =>!area.HasValue || t.User.Area == (int)area.Value);
+                    var tutors = tutorRepoistory.GetAll().Where(t => !area.HasValue || t.User.Area == (int)area.Value);
 
                     var startTime = new DateTime(DateTime.Now.Year, 10, 1);
                     if (DateTime.Now.Month < 10)
                     {
                         startTime = new DateTime(DateTime.Now.Year - 1, 10, 1);
                     }
-                    
+
                     var endTime = new DateTime(startTime.Year + 1, 10, 1);
 
                     var tutorSessions = tutors.SelectMany(t => t.TutorTrainee)
@@ -418,7 +427,7 @@ namespace BelibaHoma.BLL.Services
 
 
                     var tutorHours = tutorSessions.ToList().Sum(ts => (ts.EndTime - ts.StartTime).TotalHours);
-                    
+
                     //If we got here - Yay! :)
                     result = new StatusModel<double>(true, String.Empty, (double)tutorHours);
                 }
@@ -432,6 +441,35 @@ namespace BelibaHoma.BLL.Services
             return result;
         }
 
+        public StatusModel MoveToNextYear(Area area, List<int> chooseTutor)
+        {
+            var status = new StatusModel<List<TutorModel>>(true, String.Empty, null);
+            status = GetTutors(area);
 
+            if (status.Success)
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var allAreaTutors = status.Data;
+                    foreach (var tutor in allAreaTutors)
+                    {
+                        // if the tutor wasn't selected set isactive to false
+                        if (!chooseTutor.Contains(tutor.UserId))
+                        {
+                            tutor.User.IsActive = false;
+
+                        }
+                        tutor.TutorHours = 0;
+                        tutor.TutorHoursBonding = 0;
+
+                        Update(tutor.UserId, tutor, unitOfWork);
+                    }
+
+                    unitOfWork.SaveChanges();
+                }
+            }
+
+            return status;
+        }
     }
 }

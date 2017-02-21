@@ -45,6 +45,34 @@ namespace BelibaHoma.BLL.Services
         }
 
         /// <summary>
+        /// Get all TutorTrainee from DB by area and status
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        public StatusModel<List<TutorTraineeModel>> Get(Area? area, TTStatus status)
+        {
+            var result = new StatusModel<List<TutorTraineeModel>>(false, String.Empty, new List<TutorTraineeModel>());
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+
+                    result.Data = tutorTraineeRepository.GetAll().ToList().Where(t => (!area.HasValue || t.Trainee.User.Area == (int)area.Value) && t.Status == (int)status).OrderBy(t => t.Trainee.User.Area).ThenBy(t => t.Trainee.User.LastName).ThenBy(t => t.Trainee.User.FirstName).ToList().Select(t => new TutorTraineeModel(t)).ToList();
+                    result.Success = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                result.Message = String.Format("שגיאה במהלך שליפת קשרי החונכות מהמסד");
+                LogService.Logger.Error(result.Message, ex);
+            }
+
+            return result;
+        }
+
+        /// <summary>
         /// Get TutorTrainee by the Id
         /// </summary>
         /// <param name="id"></param>
@@ -304,7 +332,7 @@ namespace BelibaHoma.BLL.Services
 
         public StatusModel<TutorTraineeModel> ChangeStatus(int id)
         {
-            var status = new StatusModel<TutorTraineeModel>(false,String.Empty, new TutorTraineeModel());
+            var status = new StatusModel<TutorTraineeModel>(false, String.Empty, new TutorTraineeModel());
 
             try
             {
@@ -313,17 +341,17 @@ namespace BelibaHoma.BLL.Services
                     var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
                     var tutortrainee = tutortraineeRepository.GetByKey(id);
 
-                    if (tutortrainee.Status == (int) TTStatus.Active)
+                    if (tutortrainee.Status == (int)TTStatus.Active)
                     {
-                        tutortrainee.Status = (int) TTStatus.InActive;
+                        tutortrainee.Status = (int)TTStatus.InActive;
                     }
                     else if (tutortrainee.Status == (int)TTStatus.InActive)
                     {
                         tutortrainee.Status = (int)TTStatus.Active;
                     }
-                    else if (tutortrainee.Status == (int) TTStatus.UnApproved)
+                    else if (tutortrainee.Status == (int)TTStatus.UnApproved)
                     {
-                        tutortrainee.Status = (int) TTStatus.Active;
+                        tutortrainee.Status = (int)TTStatus.Active;
                     }
 
                     status.Data = new TutorTraineeModel(tutortrainee);
@@ -335,6 +363,44 @@ namespace BelibaHoma.BLL.Services
             catch (Exception ex)
             {
                 status.Message = String.Format("התרחשה שגיאה במהלך שינוי סטטוס קשר החונכות");
+                LogService.Logger.Error(status.Message, ex);
+            }
+
+            return status;
+        }
+
+        public StatusModel MoveToNextYear(Area area, List<int> chooseTutorTrainee)
+        {
+            var status = new StatusModel<TutorTraineeModel>(false, String.Empty, new TutorTraineeModel());
+
+            try
+            {
+                using (var unitOfWork = new UnitOfWork<BelibaHomaDBEntities>())
+                {
+                    var tutorTraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
+                        var tutortrainees =
+                            tutorTraineeRepository.GetAll()
+                                .ToList()
+                                .Where(
+                                    tt =>
+                                        (tt.Trainee.User.Area == (int) area) &&
+                                        tt.Status != (int) TTStatus.InActive);
+
+                        foreach (var tutortrainee in tutortrainees)
+                        {
+                            if (!chooseTutorTrainee.Contains(tutortrainee.Id))
+                            {
+                                tutortrainee.Status = (int)TTStatus.InActive;
+                            }
+                        }
+
+                        unitOfWork.SaveChanges();
+                        status.Success = true;
+                    }
+            }
+            catch (Exception ex)
+            {
+                status.Message = String.Format("התרחשה שגיאה במהלך העברה של קשר חונכות לשנה הבאה");
                 LogService.Logger.Error(status.Message, ex);
             }
 
@@ -688,13 +754,13 @@ namespace BelibaHoma.BLL.Services
                 //    }
                 //}
 
-                
-                
 
 
 
-                
-                status.Success = true;    
+
+
+
+                status.Success = true;
             }
             catch (Exception ex)
             {
