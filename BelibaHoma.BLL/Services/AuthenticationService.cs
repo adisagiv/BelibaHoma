@@ -58,7 +58,7 @@ namespace BelibaHoma.BLL.Services
 
                 FormsAuthenticationTicket authTicket = new FormsAuthenticationTicket(
                     user.Id,
-                    user.IdNumber,
+                    String.Format("{0}_{1}",user.Id,user.IdNumber),
                     DateTime.Now,
                     DateTime.MaxValue,
                     rememberMe,
