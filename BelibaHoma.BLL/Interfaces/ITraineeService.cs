@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using BelibaHoma.DAL;
+using Catel.Data;
 
 namespace BelibaHoma.BLL.Interfaces
 {
@@ -37,8 +39,9 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
+        /// <param name="unitOfWork"></param>
         /// <returns></returns>
-        StatusModel Update(int id, TraineeModel updatedModel);
+        StatusModel Update(int id, TraineeModel updatedModel, UnitOfWork<BelibaHomaDBEntities> unitOfWork = null);
 
         /// <summary>
         /// Get unmatched / mached trainees from DB by area
@@ -61,5 +64,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="userId"></param>
         /// <returns></returns>
         StatusModel UpdateTraineePazam(int userId);
+
+        /// <summary>
+        /// Move a list of trainees to next year 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="chooseTrainee">list of tutors id's</param>
+        /// <returns></returns>
+        StatusModel MoveToNextYear(Area area, List<int> chooseTrainee);
     }
 }

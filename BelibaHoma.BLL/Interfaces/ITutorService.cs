@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BelibaHoma.BLL.Models;
+using BelibaHoma.DAL;
+using BelibaHoma.DAL.Interfaces;
+using Catel.Data;
 
 namespace BelibaHoma.BLL.Interfaces
 {
@@ -38,8 +41,9 @@ namespace BelibaHoma.BLL.Interfaces
         /// </summary>
         /// <param name="id"></param>
         /// <param name="updatedModel"></param>
+        /// <param name="unitOfWork"></param>
         /// <returns></returns>
-        StatusModel Update(int id, TutorModel updatedModel);
+        StatusModel Update(int id, TutorModel updatedModel, UnitOfWork<BelibaHomaDBEntities> unitOfWork = null);
 
         /// <summary>
         /// Get tutors from DB based on area and only Unmatched
@@ -63,6 +67,13 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel<double> GetTutorHours(Area? area);
 
+        /// <summary>
+        /// Move a list of tutors to next year 
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="chooseTutor">list of tutors id's</param>
+        /// <returns></returns>
+        StatusModel MoveToNextYear(Area area, List<int> chooseTutor);
     }
 
     }

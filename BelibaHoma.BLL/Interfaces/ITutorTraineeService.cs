@@ -25,6 +25,14 @@ namespace BelibaHoma.BLL.Interfaces
         /// <returns></returns>
         StatusModel<TutorTraineeModel> Get(int id);
 
+        /// <summary>
+        /// Get all TutorTrainee from DB by area and status
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        StatusModel<List<TutorTraineeModel>> Get(Area? area, TTStatus status);
+
         ///// <summary>
         ///// Update TutirTrainee's Status in DB
         ///// </summary>
@@ -110,6 +118,14 @@ namespace BelibaHoma.BLL.Interfaces
         /// <param name="id"></param>
         /// <returns></returns>
         StatusModel<TutorTraineeModel> ChangeStatus(int id);
+        
+        /// <summary>
+        /// Mode all the given tutor trainee relations in the provided area to next year
+        /// </summary>
+        /// <param name="area"></param>
+        /// <param name="chooseTutorTrainee"></param>
+        /// <returns></returns>
+        StatusModel MoveToNextYear(Area area, List<int> chooseTutorTrainee);
     }
 
 }

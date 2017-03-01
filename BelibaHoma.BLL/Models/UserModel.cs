@@ -76,7 +76,11 @@ namespace BelibaHoma.BLL.Models
             {
                 string[] userDetails = ticket.UserData.Split(new char[] { ';' }, StringSplitOptions.None);
 
-                Id = ticket.Version;
+                var ids = ticket.Name.Split('_');
+
+                Id = int.Parse(ids[0]);
+                IdNumber = ids[1];
+
 
                 try
                 {
@@ -117,7 +121,7 @@ namespace BelibaHoma.BLL.Models
                     UpdateTime = DateTime.MinValue;
                 }
                 
-                IdNumber = ticket.Name;
+                
 
             }
             catch (Exception ex)
