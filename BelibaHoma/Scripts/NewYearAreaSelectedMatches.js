@@ -1,7 +1,7 @@
 ﻿$(function () {
     $('#tutortrainee-table')
         .DataTable({
-            scrollY: '32vh',
+            scrollY: '64vh',
             scrollCollapse: true,
             paging: false,
             "bInfo": false,

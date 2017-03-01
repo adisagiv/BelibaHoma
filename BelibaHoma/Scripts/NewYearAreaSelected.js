@@ -1,7 +1,7 @@
 ﻿$(function () {
     $('#trainees-partial-table')
             .DataTable({
-                scrollY: '32vh',
+                scrollY: '56vh',
                 scrollCollapse: true,
                 paging: false,
                 "bInfo": false,
@@ -36,7 +36,7 @@
 
     $('#tutors-partial-table')
             .DataTable({
-                scrollY: '32vh',
+                scrollY: '56vh',
                 scrollCollapse: true,
                 paging: false,
                 "bInfo": false,

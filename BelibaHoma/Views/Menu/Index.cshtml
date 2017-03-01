@@ -49,6 +49,10 @@
                                 <li><a href="/Rackaz/User">משתמשי אדמין ורכזים</a></li>
                                 <li><a href="/Rackaz/Trainee">חניכים</a></li>
                                 <li><a href="/Rackaz/Tutor">חונכים</a></li>
+                                @if (Model.UserRole == UserRole.Admin)
+                                {
+                                <li><a href="/Admin/NewYear/Index">אתחול שנה</a></li>
+                                }   
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -61,7 +65,7 @@
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ניהול קשרי חונכות <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/Rackaz/TutorTrainee"> קשרי חונכות</a></li>
+                                <li><a href="/Rackaz/TutorTrainee"> רשימת קשרי חונכות</a></li>
                                 <li><a href="/Rackaz/TutorTrainee/ManualMatch"> ציוות ידני</a></li>
                                 <li><a href="/Rackaz/TutorTrainee/RunAlgorithm">ציוות אוטומטי</a></li>
                                 <li><a href="/Rackaz/TutorTrainee/ApproveMatches">המלצות המערכת לקשרי חונכות</a></li>
@@ -75,8 +79,8 @@
                             </ul>
                         </li>
                         <li>@Html.ActionLink("ניהול משרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
-                        <li>@Html.ActionLink("חיזוי נשירה", "Predict", "Prediction", new {Area = "Rackaz"}, new object {})</li>
-                            }
+                        <li>@Html.ActionLink("חיזוי נשירה", "Predict", "Prediction", new {Area = "Rackaz"}, new object {})</li> 
+                        }
 
                             // Add Tutor related links here
                             if (Model.UserRole.ToString() == "Tutor")
@@ -94,7 +98,7 @@
                                 var action = "Details/" + id;
                         <li>@Html.ActionLink("פרטים אישיים", action, "Trainee", new {Area = "Trainee"}, new object {})</li>
                         <li>@Html.ActionLink("חיפוש משרות", "Index", "JobOffer", new {Area = "Trainee"}, new object {})</li>
-                        <li>@Html.ActionLink("ציונים", "Index", "Grade", new {id = @Model.Id}, null)</li>
+                        <li>@Html.ActionLink("ציונים", "Index", "Grade", new { id = @Model.Id, Area = "Trainee" }, null)</li>
                             }
 
                         }

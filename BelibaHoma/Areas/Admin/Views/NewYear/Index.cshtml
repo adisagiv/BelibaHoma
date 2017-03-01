@@ -17,7 +17,14 @@
     @Html.AntiForgeryToken()
     <div class="form-horizontal container well" style="direction: rtl">
         <div class="row  panel-body" align="right" style="margin-right: 10px">
-            
+
+            <div class="form-group">
+                <font color="red">
+                    <h1><b><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> שימו לב!</b></h1></font>
+                <h3>התהליך הבא נועד לאיפוס חניכים וחונכים בתחילת שנת פעילות. <br/>תהליך זה משפיע על כלל המידע במערכת.</h3>
+                <h4>אנא בחרו אזור אם ברצונכם להמשיך</h4>
+            </div>
+
             <div class="form-group">
                 <select class="form-control" id="Area" name="Area" style="max-width: 350px">
                     @foreach (Area type in Enum.GetValues(typeof(Area)))
@@ -26,12 +33,10 @@
                     }
                 </select>
             </div>
-            <div class="form-group">
-                שים לב - התהליך הבא נועד לאיפוס חניכים וחונכים בתחילת שנת פעילות. תהליך זה משפיע על כלל המידע במערכת. לחץ אם ברצונך להמשיך
-            </div>
+            
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="המשך" class="btn btn-default" />
+                    <input type="submit" value="המשך" class="btn btn-danger" />
                 </div>
             </div>
         </div>

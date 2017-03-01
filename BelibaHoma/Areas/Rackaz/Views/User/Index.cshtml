@@ -111,9 +111,9 @@
                     @*@Html.ActionLink("עריכת משתמש", "Edit", new { Area = "Admin", id = item.Id })*@
                     <a class="btn btn-default btn-xs" href="/Admin/User/Edit/@item.Id">עריכת משתמש</a>
                     @Html.Raw(" |")
+    <a class="btn btn-default btn-xs zero-password" data-userid="@item.Id">אפס סיסמא</a>
                 }
-                <a class="btn btn-default btn-xs zero-password" data-userid="@item.Id">אפס סיסמא</a>
-                        }
+}
                     </td>
                 </tr>
             }

@@ -10,7 +10,7 @@
     <script src="~/Scripts/login.js"></script>
 }
 <div class="well">
-<h2>כניסה למערכת</h2>
+<h2><b>כניסה למערכת</b></h2>
 
 @using (Html.BeginForm()) 
 {
@@ -46,9 +46,11 @@
         </div>
         @Html.HiddenFor(model => model.UrlRedirect)
 
+        <p>*במידה ואינכם זוכרים את הסיסמא, אנא צרו קשר עם הרכז</p>
+
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Login" id="submit" class="btn btn-default"/>
+                <input type="submit" value="התחבר" id="submit" class="btn btn-info"/>
             </div>
         </div>
     </div>

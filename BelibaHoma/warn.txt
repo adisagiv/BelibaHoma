@@ -3003,3 +3003,7 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at System.Data.Entity.Core.Objects.ObjectContext.TryGetObjectByKey(EntityKey key, Object& value)
    at Catel.Data.Repositories.EntityRepositoryBase`2.GetByKey(TPrimaryKey keyValue) in C:\CI_WS\Ws\93529\Source\Catel\src\Catel.Extensions.EntityFramework\Catel.Extensions.EntityFramework.Shared\Repositories\EntityRepositoryBase.cs:line 70
    at BelibaHoma.BLL.Services.AuthenticationService.GetLastUserUpdate(Int32 id) in c:\Users\Adi\Documents\Visual Studio 2013\Projects\BelibaHoma\BelibaHoma.BLL\Services\AuthenticationService.cs:line 151
+2017-03-01 19:14:05,254 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 82
+2017-03-01 19:14:05,355 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 82

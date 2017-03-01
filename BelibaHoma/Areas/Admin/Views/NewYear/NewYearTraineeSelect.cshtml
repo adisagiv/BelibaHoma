@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<BelibaHoma.BLL.Models.TraineeModel>
 
-<h2>חניכים</h2>
+<h1><b>חניכים</b></h1>
 <table class="table" id="trainees-partial-table">
     <thead>
         <tr>
@@ -21,7 +21,7 @@
             </th>
         </tr>
     </thead>
-    <tfoot>
+    @*<tfoot>
         <tr>
             <th>
                 חניך
@@ -39,7 +39,7 @@
                 @Html.DisplayNameFor(model => model.AcademicMajor1)
             </th>
         </tr>
-    </tfoot>
+    </tfoot>*@
     <tbody>
         @foreach (var item in Model)
         {
