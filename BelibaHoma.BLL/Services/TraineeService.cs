@@ -225,11 +225,13 @@ namespace BelibaHoma.BLL.Services
         {
             var status = new StatusModel(false, String.Empty);
             var isNeedDisposing = false;
+            var resetFlag = true;
             try
             {
                 if (unitOfWork == null)
                 {
                     isNeedDisposing = true;
+                    resetFlag = false;
                     unitOfWork = new UnitOfWork<BelibaHomaDBEntities>();
                 }
                     var traineeRepository = unitOfWork.GetRepository<ITraineeRepository>();
@@ -240,9 +242,9 @@ namespace BelibaHoma.BLL.Services
                         academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
                     var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
                     var academicMajor1 = new AcademicMajor();
-                    academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
+                    academicMajor1 = ((updatedModel.AcademicMajor1 != null && updatedModel.AcademicMajor1.Id != 0) ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null);
                     var academicMajor2 = new AcademicMajor();
-                    academicMajor2 = updatedModel.AcademicMajor2.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor2.Id) : null;
+                    academicMajor2 = ((updatedModel.AcademicMajor2 != null && updatedModel.AcademicMajor2.Id != 0) ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor2.Id) : null);
 
                     var trainee = traineeRepository.GetByKey(id);
                     if (trainee != null)
@@ -283,7 +285,7 @@ namespace BelibaHoma.BLL.Services
                             var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
                             var tutortrainees =
                                 tutortraineeRepository.GetAll().Where(tt => tt.TraineeId == trainee.UserId && tt.Status == (int)TTStatus.Active).ToList();
-                            if (tutortrainees[0] != null)
+                            if (tutortrainees.Count > 0)
                             {
                                 foreach (var tt in tutortrainees)
                                 {
@@ -326,6 +328,11 @@ namespace BelibaHoma.BLL.Services
                             _predictionTrainingService.AddFromDropping(trainee.UserId);
                         }
                         trainee.DroppedOut = updatedModel.DroppedOut;
+                        if (resetFlag)
+                        {
+                            trainee.TutorHours = updatedModel.TutorHours;
+                            trainee.TutorHoursBonding = updatedModel.TutorHoursBonding;
+                        }
                         
                         //Linked Entities - need to verify Academic Institutions and Majors
                         trainee.AcademicInstitution = academicInstitution;
@@ -333,7 +340,7 @@ namespace BelibaHoma.BLL.Services
                         trainee.AcademicMajor = academicMajor;
                         trainee.AcademicMajorId = academicMajor.Id;
                         trainee.AcademicMajor1 = academicMajor1;
-                        if (updatedModel.AcademicMajor1.Id != 0)
+                        if (academicMajor1 != null)
                         {
                             trainee.AcademicMinorId = academicMajor1.Id;
                         }
@@ -342,7 +349,7 @@ namespace BelibaHoma.BLL.Services
                             trainee.AcademicMinorId = null;
                         }
                         trainee.AcademicMajor2 = academicMajor2;
-                        if (updatedModel.AcademicMajor2.Id != 0)
+                        if (academicMajor2 != null)
                         {
                             trainee.AcademicMajorNeededHelpId = academicMajor2.Id;
                         }
@@ -495,10 +502,16 @@ namespace BelibaHoma.BLL.Services
                     foreach (var trainee in allAreaTrainee)
                     {
                         // if the trainee wasn't selected set isactive to false
-                        if (!chooseTrainee.Contains(trainee.UserId))
+                        if (chooseTrainee != null)
+                        {
+                            if (!chooseTrainee.Contains(trainee.UserId))
+                            {
+                                trainee.User.IsActive = false;
+                            }
+                        }
+                        else
                         {
                             trainee.User.IsActive = false;
-
                         }
                         trainee.TutorHours = 0;
                         trainee.TutorHoursBonding = 0;

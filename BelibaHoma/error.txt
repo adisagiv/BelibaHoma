@@ -3007,3 +3007,297 @@ System.Data.Entity.Core.EntityException: The underlying provider failed on Open.
    at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 82
 2017-03-01 19:14:05,355 [5] ERROR BelibaHoma.BLL.Models.UserModel - error creating login details model from authentication ticket: System.IndexOutOfRangeException: Index was outside the bounds of the array.
    at BelibaHoma.BLL.Models.UserModel..ctor(FormsAuthenticationTicket ticket) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Models\UserModel.cs:line 82
+2017-03-06 11:13:30,184 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,268 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,337 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,396 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,451 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,634 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,677 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,725 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,770 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,818 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,850 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,881 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,911 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:30,945 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:13:30,978 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:13:31,067 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,144 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,188 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,223 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:13:31,258 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,288 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,320 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:13:31,352 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,385 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,420 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,453 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:13:31,485 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,517 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,550 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,584 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,619 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,654 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:13:31,693 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 286
+2017-03-06 11:13:31,723 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,757 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:13:31,788 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:24:45,384 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:16,185 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:20,164 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,301 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,346 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,400 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,440 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,483 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,519 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,557 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,588 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,616 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,647 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:25:30,680 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 271
+2017-03-06 11:25:30,711 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 232
+2017-03-06 11:26:52,912 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:52,953 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:52,992 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,037 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:26:53,091 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,122 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,151 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:26:53,186 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,220 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,256 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,290 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:26:53,324 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,360 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,392 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,425 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,457 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,493 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 245
+2017-03-06 11:26:53,532 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+   at System.ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument argument, ExceptionResource resource)
+   at System.Collections.Generic.List`1.get_Item(Int32 index)
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 286
+2017-03-06 11:26:53,564 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,599 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:26:53,631 [5] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החניך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TraineeService.Update(Int32 id, TraineeModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TraineeService.cs:line 243
+2017-03-06 11:55:37,642 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 234
+2017-03-06 11:55:51,771 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 234
+2017-03-06 12:12:14,607 [9] ERROR Services.Log.LogService - התרחשה שגיאה במהלך העברה של קשר חונכות לשנה הבאה
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorTraineeService.MoveToNextYear(Area area, List`1 chooseTutorTrainee) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorTraineeService.cs:line 391
+2017-03-06 12:12:50,811 [8] ERROR Services.Log.LogService - התרחשה שגיאה במהלך העברה של קשר חונכות לשנה הבאה
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorTraineeService.MoveToNextYear(Area area, List`1 chooseTutorTrainee) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorTraineeService.cs:line 391
+2017-03-06 12:13:11,272 [9] ERROR Services.Log.LogService - התרחשה שגיאה במהלך העברה של קשר חונכות לשנה הבאה
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorTraineeService.MoveToNextYear(Area area, List`1 chooseTutorTrainee) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorTraineeService.cs:line 391
+2017-03-06 12:13:41,613 [9] ERROR Services.Log.LogService - התרחשה שגיאה במהלך העברה של קשר חונכות לשנה הבאה
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorTraineeService.MoveToNextYear(Area area, List`1 chooseTutorTrainee) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorTraineeService.cs:line 391
+2017-03-06 12:41:41,312 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 324
+2017-03-06 12:41:45,792 [7] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 324
+2017-03-06 12:42:51,755 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 324
+2017-03-06 12:45:36,090 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork) in c:\Users\Bar\Source\Repos\BelibaHoma\BelibaHoma.BLL\Services\TutorService.cs:line 324
+2017-03-06 12:49:17,479 [10] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork)
+2017-03-06 12:49:29,081 [6] ERROR Services.Log.LogService - שגיאה במהלך עדכון פרטי החונך
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at BelibaHoma.BLL.Services.TutorService.Update(Int32 id, TutorModel updatedModel, UnitOfWork`1 unitOfWork)

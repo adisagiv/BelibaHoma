@@ -216,10 +216,12 @@ namespace BelibaHoma.BLL.Services
         {
             var status = new StatusModel(false, String.Empty);
             var isNeedDisposing = false;
+            var resetFlag = true;
             try
             {
                 if (unitOfWork == null)
                 {
+                    resetFlag = false;
                     isNeedDisposing = true;
                     unitOfWork = new UnitOfWork<BelibaHomaDBEntities>();
                 }
@@ -229,7 +231,7 @@ namespace BelibaHoma.BLL.Services
                 var academicInstitution = academicInstitutionRepository.GetByKey(updatedModel.AcademicInstitution.Id);
                 var academicMajor = academicMajorRepository.GetByKey(updatedModel.AcademicMajor.Id);
                 var academicMajor1 = new AcademicMajor();
-                academicMajor1 = updatedModel.AcademicMajor1.Id != 0 ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null;
+                academicMajor1 = ((updatedModel.AcademicMajor1 != null && updatedModel.AcademicMajor1.Id != 0) ? academicMajorRepository.GetByKey(updatedModel.AcademicMajor1.Id) : null);
 
 
                 var tutor = tutorRepository.GetByKey(id);
@@ -268,7 +270,7 @@ namespace BelibaHoma.BLL.Services
                         var tutortraineeRepository = unitOfWork.GetRepository<ITutorTraineeRepository>();
                         var tutortrainees =
                             tutortraineeRepository.GetAll().Where(tt => tt.TutorId == tutor.UserId && tt.Status == (int)TTStatus.Active).ToList();
-                        if (tutortrainees[0] != null)
+                        if (tutortrainees.Count > 0)
                         {
                             foreach (var tt in tutortrainees)
                             {
@@ -304,6 +306,11 @@ namespace BelibaHoma.BLL.Services
                     tutor.PhysicsLevel = (int)updatedModel.PhysicsLevel;
                     tutor.MathLevel = (int)updatedModel.MathLevel;
                     tutor.EnglishLevel = (int)updatedModel.EnglishLevel;
+                    if (resetFlag)
+                    {
+                        tutor.TutorHours = updatedModel.TutorHours;
+                        tutor.TutorHoursBonding = updatedModel.TutorHoursBonding;
+                    }
 
 
                     //Linked Entities - need to verify Academic Institutions and Majors
@@ -312,7 +319,7 @@ namespace BelibaHoma.BLL.Services
                     tutor.AcademicMajor = academicMajor;
                     tutor.AcademicMajorId = academicMajor.Id;
                     tutor.AcademicMajor1 = academicMajor1;
-                    if (updatedModel.AcademicMajor1.Id != 0)
+                    if (academicMajor1 != null)
                     {
                         tutor.AcademicMinorId = academicMajor1.Id;
                     }
@@ -454,10 +461,16 @@ namespace BelibaHoma.BLL.Services
                     foreach (var tutor in allAreaTutors)
                     {
                         // if the tutor wasn't selected set isactive to false
-                        if (!chooseTutor.Contains(tutor.UserId))
+                        if (chooseTutor != null)
+                        {
+                            if (!chooseTutor.Contains(tutor.UserId))
+                            {
+                                tutor.User.IsActive = false;
+                            }
+                        }
+                        else
                         {
                             tutor.User.IsActive = false;
-
                         }
                         tutor.TutorHours = 0;
                         tutor.TutorHoursBonding = 0;
