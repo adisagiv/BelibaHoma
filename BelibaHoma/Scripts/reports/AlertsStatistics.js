@@ -32,6 +32,6 @@
         getAlertsStatistics(year);
     });
     //// defualt call to get hour statitics 
-    var year = new Date().getFullYear();
+    var year = $('#year').val();
     getAlertsStatistics(year);
 });

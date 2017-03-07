@@ -524,17 +524,22 @@ namespace BelibaHoma.BLL.Services
                 {
                     var alertRepository = unitOfWork.GetRepository<IAlertRepository>();
 
-                    var minPossibleYears =
-                        alertRepository.GetAll().Select(a => a.CreationTime.Year).Min(ts => ts);
-                    var maxPossibleYears =
-                        alertRepository.GetAll().Select(a => a.CreationTime.Year).Max(ts => ts);
+                    var minDate = alertRepository.GetAll().Select(a => a.CreationTime).Min(ts => ts);
+
+                    var minPossibleYears = minDate.Month >= 10 ? minDate.Year : minDate.Year - 1;
+
+                    var maxDate = alertRepository.GetAll().Select(a => a.CreationTime).Max(ts => ts);
+
+                    var maxPossibleYears = maxDate.Month >= 10 ? maxDate.Year : maxDate.Year - 1;
+                        
 
                     var possibleYears = new List<int>();
 
-                    for (int i = minPossibleYears - 1; i <= maxPossibleYears; i++)
+                    for (int i = minPossibleYears; i <= maxPossibleYears; i++)
                     {
                         possibleYears.Add(i);
                     }
+
 
                     result.Data = possibleYears;
                     result.Success = true;
