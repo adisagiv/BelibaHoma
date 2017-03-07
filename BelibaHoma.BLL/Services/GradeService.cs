@@ -224,8 +224,13 @@ namespace BelibaHoma.BLL.Services
                     {
                         GradeRepository.Delete(grade);
                         unitOfWork.SaveChanges();
+
+                        status = new StatusModel(true, String.Empty);
                     }
-                    // TODO : Add stsus if grade == null
+                    else
+                    {
+                        status.Message = String.Format("שגיאה במהלך הזנת הציון");
+                    }
                 }
             }
             catch (Exception ex)
