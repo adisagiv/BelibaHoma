@@ -68,14 +68,14 @@
             @*@Html.DisplayNameFor(model => model.RelevantMajorId2)*@
         </dt>
         <dd>
-            @Model.AcademicMajor1.Name
+            @(Model.AcademicMajor1 != null ? Model.AcademicMajor1.Name : String.Empty)
         </dd>
         <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.AcademicMajor2.Name)
             @*@Html.DisplayNameFor(model => model.RelevantMajorId3)*@
         </dt>
         <dd>
-            @Model.AcademicMajor2.Name
+            @(Model.AcademicMajor2 != null ? Model.AcademicMajor2.Name : String.Empty)
         </dd>
         <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.Organization)

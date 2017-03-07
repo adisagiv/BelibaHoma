@@ -76,7 +76,7 @@ namespace BelibaHoma.BLL.Models
         public string Address { get; set; }
 
         [Display(Name = "מספר עובדים הנדרשים למשרה")]
-        [Range(0, 9, ErrorMessage = "מספר עובדים יכול להיות בין 0 .. 9 בלבד")]
+        [Range(1, 9, ErrorMessage = "מספר עובדים יכול להיות בין 1 .. 9 בלבד")]
         //[Required]
         public int? NumEmployees { get; set; }
 

@@ -67,12 +67,20 @@ namespace BelibaHoma.BLL.Services
                     if (model.RelevantMajorId2 != null)
                     {
                         int Id2 = (int) model.RelevantMajorId2;
-                        entity.AcademicMajor1 = academicMajorRepository.GetByKey(Id2);   
+                        entity.AcademicMajor1 = academicMajorRepository.GetByKey(Id2);
+                    }
+                    else
+                    {
+                        entity.AcademicMajor1 = null;
                     }
                     if (model.RelevantMajorId3 != null)
                     {
-                        int Id3 = (int)model.RelevantMajorId3;
-                        entity.AcademicMajor2 = academicMajorRepository.GetByKey(Id3);    
+                        int Id3 = (int) model.RelevantMajorId3;
+                        entity.AcademicMajor2 = academicMajorRepository.GetByKey(Id3);
+                    }
+                    else
+                    {
+                        entity.AcademicMajor2 = null;
                     }
                     
                     //Linking the Complexed entities to the retrieved ones
