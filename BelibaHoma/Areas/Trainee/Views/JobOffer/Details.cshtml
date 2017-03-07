@@ -1,4 +1,5 @@
 ﻿@model BelibaHoma.BLL.Models.JobOfferModel
+@using System.Globalization
 @using BelibaHoma.BLL.Enums
 @using Extensions.Enums
 
@@ -6,6 +7,7 @@
 @{
     ViewBag.Title = "פרטי משרה";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    CultureInfo ci = new CultureInfo("he-IL");
 }
 <div class="well">
 
@@ -41,13 +43,13 @@
             @Html.DisplayNameFor(model => model.UpdateTime)
         </dt>
         <dd>
-            @Model.UpdateTime.ToLongDateString()
+            @Model.UpdateTime.ToString(ci)
         </dd>
         <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.CreationTime)
         </dt>
         <dd>
-            @Model.CreationTime.ToLongDateString()
+            @Model.CreationTime.ToString(ci)
         </dd>
         <dt class="col-md-6">
             @Html.DisplayNameFor(model => model.JobArea)
