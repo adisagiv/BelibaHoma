@@ -32,7 +32,7 @@ namespace BelibaHoma.BLL.Models
         [Display(Name = "מספר שעות חברותה")]
         //TODO: Atalia and manor Time (or other relevant) Validation
         [Required(ErrorMessage = "מספר שעות חברותה זה שדה חובה")]
-        [RegularExpression("^[0-9]*$", ErrorMessage = "נא להזין ספרות בלבד")]
+        [RegularExpression("^([0-9]*[.])?[0-9]+$", ErrorMessage = "נא להזין ספרות בלבד")]
         public double NumBondingHours { get; set; }
 
         
