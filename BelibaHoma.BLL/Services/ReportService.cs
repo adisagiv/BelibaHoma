@@ -423,7 +423,7 @@ namespace BelibaHoma.BLL.Services
                     var grades = gradeRepository.GetAll().Where(
                         t =>(!area.HasValue || t.Trainee.User.Area == (int?)area)).ToList();
 
-                    var groupedGrades = grades.GroupBy(tr => tr.Year);
+                    var groupedGrades = grades.OrderBy(tr=>tr.Year).ThenBy(tr=>tr.SemesterType).GroupBy(tr => tr.Year);
                     
                     var dict = new Dictionary<string, double>(); // dictionary of vetek, avg of that vetek.
                     foreach (var tt in groupedGrades)

@@ -201,18 +201,19 @@ namespace BelibaHoma.BLL.Enums
     }
     public enum SemesterType
     {
-        [Description("חורף")]
-        [Display(Name = "חורף")]
-        Winter = 0,
+        [Description("מכינה")]
+        [Display(Name = "מכינה")]
+        Mechina = 0,
         [Description("אביב")]
         [Display(Name = "אביב")]
         Spring = 1,
         [Description("קיץ")]
         [Display(Name = "קיץ")]
         Summer = 2,
-        [Description("מכינה")]
-        [Display(Name = "מכינה")]
-        Mechina = 3
+        [Description("חורף")]
+        [Display(Name = "חורף")]
+        Winter = 3
+        
     }
 
     public enum HourStatisticsType
