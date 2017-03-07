@@ -5,12 +5,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BelibaHoma.Areas.Tutor.Models;
 using BelibaHoma.BLL.Models;
 using BelibaHoma.BLL.Services;
 using Generic.GenericModel.Models;
 using BelibaHoma.Controllers;
 using BelibaHoma.DAL;
 using Generic.Models;
+using Microsoft.Win32;
 
 namespace BelibaHoma.Areas.Tutor.Controllers
 {
@@ -76,10 +78,30 @@ namespace BelibaHoma.Areas.Tutor.Controllers
 
         public ActionResult Details(int id)
         {
-            var result = _TutorSessionService.GetById(id);
+            var result = _tutorReportService.Get(id);
             if (result.Success)
             {
-                return View(result.Data);
+
+                var sessionResult = _TutorSessionService.GetById(id);
+                if (sessionResult.Success)
+                {
+                    var tutorRportViewModel = new TutorReportViewModel
+                    {
+                        TutorReport = result.Data,
+                        TutorSessios = sessionResult.Data
+                    };
+
+
+
+                    return View(tutorRportViewModel);
+                }
+                else
+                {
+                    return Error(sessionResult);
+                }
+
+
+                
 
             }
             var status = new StatusModel(false, result.Message);

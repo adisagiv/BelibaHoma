@@ -191,6 +191,7 @@
     <Compile Include="Areas\Tutor\Controllers\TutorReportController.cs" />
     <Compile Include="Areas\Tutor\Controllers\TutorSessionController.cs" />
     <Compile Include="Areas\Tutor\Controllers\TutorTraineeController.cs" />
+    <Compile Include="Areas\Tutor\Models\TutorReportViewModel.cs" />
     <Compile Include="Areas\Tutor\TutorAreaRegistration.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ChangePasswordController.cs" />
@@ -709,7 +710,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="Areas\Trainee\Views\Home\" />
-    <Folder Include="Areas\Tutor\Models\" />
     <Folder Include="Areas\Tutor\Views\Home\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>

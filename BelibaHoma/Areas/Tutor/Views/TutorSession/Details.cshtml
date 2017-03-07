@@ -1,6 +1,6 @@
 ﻿@using System.Runtime.ExceptionServices
 @using OfficeOpenXml.FormulaParsing.Excel.Functions.Logical
-@model IEnumerable<BelibaHoma.BLL.Models.TutorSessionModel>
+@model BelibaHoma.Areas.Tutor.Models.TutorReportViewModel
 
 @{
     ViewBag.Title = "פרטי הדיווח";
@@ -8,143 +8,86 @@
 }
 <div class="well">
     <h2 align="">מפגשים</h2>
-    <hr/>
-    @*@{
-        //TODO: Atalia & Manor - Add all content to if, add else in case no tutorSessions with a warning - No tutorSessions found.
-        if (Model.Count() > 0)
-        {
-        
-        }
-    }*@
+    <hr />
+
     <p>
-        <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.FirstOrDefault().TutorReport.TutorTraineeId">חזור לעמוד דיווחים</a>
+        <a class="btn btn-default" href="/Tutor/TutorReport/TutorTraineeReports/@Model.TutorReport.TutorTraineeId">חזור לעמוד דיווחים</a>
     </p>
-    <br/>
+    <br />
 
-    @{
-        if (Model.FirstOrDefault().TutorReport.IsProblem == true)
-        {
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-flag pull-right" aria-hidden="true"></span>
-                    <b>שים לב!</b> דיווח זה סומן כדיווח דורש התערבות
-                </div>
-            </div>
-        }
-    }
-    <br/>
-    <h4>
-     תיאור המפגשים:
-    </h4>
 
-            @Html.DisplayFor(model => model.First().TutorReport.MeetingsDescription)
-    <br/>
-    <br/>
-    @{
-    if (Model.Count() > 0)
+    @if (Model.TutorReport.IsProblem == true)
     {
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <span class="glyphicon glyphicon-flag pull-right" aria-hidden="true"></span>
+            <b>שים לב!</b> דיווח זה סומן כדיווח דורש התערבות
+        </div>
+    </div>
+    }
 
+    <br />
     <h4>
-        פירוט:
+        תיאור המפגשים:
     </h4>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MeetingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MeetingPlace)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumBondingHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MeetingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MeetingPlace)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumBondingHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
 
-                <td>
-                    <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Edit/?id=@item.Id">ערוך מפגש</a>
-                </td>
-            </tr>
-        }
-    </table>
-    }
-    else
+    @Html.DisplayFor(model => model.TutorReport.MeetingsDescription)
+    <br />
+    <br />
+
+    @if (Model.TutorSessios != null && Model.TutorSessios.Count > 0)
     {
-        <h3>
-            אין מפגשים על דיווח זה
-        </h3>
-    }
-}
-    @*<h4>
-         פירוט:
-    </h4>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MeetingDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MeetingPlace)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NumBondingHours)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
+        <h4>
+            פירוט:
+        </h4>
+        <table class="table">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MeetingDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MeetingPlace)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumBondingHours)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StartTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-            
-                <td>
-                    <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Edit/?id=@item.Id">ערוך מפגש</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorSessios[0].MeetingDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorSessios[0].MeetingPlace)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorSessios[0].NumBondingHours)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorSessios[0].StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TutorSessios[0].EndTime)
+                </th>
+                <th></th>
             </tr>
-        }
-    </table>*@
-    
+            @foreach (var item in Model.TutorSessios)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MeetingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MeetingPlace)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumBondingHours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndTime)
+                    </td>
+
+                    <td>
+                        <a class="btn btn-default btn-xs" href="/Tutor/TutorSession/Edit/?id=@item.Id">ערוך מפגש</a>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else {
+    <h3>
+        אין מפגשים על דיווח זה
+    </h3>
+    }
 </div>
