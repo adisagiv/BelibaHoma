@@ -1,20 +1,22 @@
-﻿$('#trainees-partial-table')
+﻿$(function() {
+    $('#trainees-partial-table')
         .DataTable({
-            scrollY: '32vh',
+            scrollY: '48vh',
+            responsive: true,
             scrollCollapse: true,
             paging: false,
-            "bInfo" : false,
+            "bInfo": false,
             "scrollX": true,
             responsive: true,
-            initComplete: function () {
+            initComplete: function() {
                 this.api()
                     .columns()
-                    .every(function () {
+                    .every(function() {
                         var column = this;
                         var select = $('<select class="form-control"><option value=""></option></select>')
                             .appendTo($(column.footer()).empty())
                             .on('change',
-                                function () {
+                                function() {
                                     var val = $.fn.dataTable.util.escapeRegex(
                                         $(this).val()
                                     );
@@ -26,9 +28,10 @@
                         column.data()
                             .unique()
                             .sort()
-                            .each(function (d, j) {
+                            .each(function(d, j) {
                                 select.append('<option value="' + d + '">' + d + '</option>');
                             });
                     });
             }
         });
+});

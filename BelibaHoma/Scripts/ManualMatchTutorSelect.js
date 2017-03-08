@@ -3,7 +3,8 @@
 
 $('#tutors-partial-table')
         .DataTable({
-            scrollY: '32vh',
+            scrollY: '48vh',
+            responsive: true,
             scrollCollapse: true,
             paging: false,
             "bInfo" : false,
